@@ -1,0 +1,426 @@
+@import "tailwindcss";
+
+/*
+ * The site's design tokens. docs/design-system/ explains what each is for
+ * (tokens.json, motion.md); this file is the source of truth.
+ *
+ * Radius/color/spacing/text keys below intentionally override Tailwind's
+ * built-in scale (rather than living alongside it under different names):
+ * this app has no other design system to protect, since these tokens are
+ * this site's entire visual language.
+ */
+@theme inline {
+  /* Typography — Plus Jakarta Sans variable comes from next/font in layout.tsx */
+  --font-sans: var(--font-jakarta), sans-serif;
+
+  --text-display: 80px;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.012em;
+  --text-display--font-weight: 400;
+
+  --text-h2: 56px;
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 400;
+
+  --text-h3: 32px;
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.005em;
+  --text-h3--font-weight: 500;
+
+  --text-h4: 28px;
+  --text-h4--line-height: 1.25;
+  --text-h4--letter-spacing: -0.005em;
+  --text-h4--font-weight: 500;
+
+  --text-h5: 20px;
+  --text-h5--line-height: 1.35;
+  --text-h5--letter-spacing: -0.005em;
+  --text-h5--font-weight: 500;
+
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-body--letter-spacing: 0;
+  --text-body--font-weight: 500;
+
+  --text-label: 16px;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: 0;
+  --text-label--font-weight: 500;
+
+  /* Colors — primary/secondary expressed in HSL, driven by CSS custom
+     properties (`--hue-primary`/`--hue-secondary`, `--l-primary`/
+     `--l-secondary`) so the hue picker (ColorPicker.tsx) can rotate them
+     live. The fallbacks below are the default look, the picker's gray
+     stop (hsl(240 0% 32%) = #525252 to hsl(240 0% 46.53%) = #777777, white
+     on-header, accent #525252 on white), matching what ColorPicker.tsx
+     applies so first paint matches post-hydration. The hues, including
+     the former default aqua (hue 197), set every token they differ on
+     explicitly, ink on-header among them. Hue grounds are light, so
+     `on-header` is ink there; the gray
+     and black stops use white. `accent` is primary as foreground on white
+     (kickers, button labels, focus rings), a deep shade at `--l-accent`,
+     except in the white stop, where primary is white and accent is ink. */
+  --color-primary: hsl(
+    var(--hue-primary, 240) var(--s-primary, 0%) var(--l-primary, 32%)
+  );
+  --color-secondary: hsl(
+    var(--hue-secondary, 240) var(--s-secondary, 0%)
+      var(--l-secondary, 46.53%)
+  );
+  --color-accent: var(
+    --accent,
+    hsl(var(--hue-primary, 240) var(--s-primary, 0%) var(--l-accent, 32%))
+  );
+  --color-ink: #1b1b1d;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f8f8fa;
+  --color-surface-muted: #f0f0f2;
+  --color-on-header: var(--on-header, #ffffff);
+  /* Edge for the surface-filled primary button — invisible (transparent)
+     on colored grounds, ink on the picker's white stop, where a white
+     button would otherwise vanish into a white-to-gray gradient. */
+  --color-button-edge: var(--button-edge, transparent);
+
+  /* Spacing */
+  --spacing-space-1: 8px;
+  --spacing-space-2: 16px;
+  --spacing-space-3: 24px;
+  --spacing-space-4: 32px;
+  --spacing-space-5: 40px;
+  --spacing-space-6: 60px;
+  --spacing-space-7: 80px;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 15px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 100px;
+  --radius-circle: 50%;
+
+  /* Motion timing (docs/design-system/motion.md). */
+  --ease-ripple: ease-out;
+  --duration-ripple: 800ms;
+  /* Page transition: cover fast, reveal a touch slower so the new page
+     arrives rather than pops. */
+  --duration-page-cover: 300ms;
+  --duration-page-reveal: 400ms;
+  /* Entrances: every section reveal on every page (RevealOnScroll).
+     Common guidance puts scroll reveals at 400–700ms with a 20–30px rise,
+     on a strong ease-out, so the move is mostly done by the time the eye
+     lands. */
+  --duration-entrance: 700ms;
+  --ease-entrance: cubic-bezier(0.23, 1, 0.32, 1);
+  --distance-entrance: 20px;
+  --duration-accordion: 1000ms;
+  --ease-accordion: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The site's gradients. Not a Tailwind theme namespace, so registered as
+   first-class utilities. All of them are built from the primary/secondary
+   tokens, so they follow the color picker; the header's ~90% alpha comes
+   from `color-mix()`. */
+@utility bg-header-gradient {
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-primary) 90%, transparent) 0%,
+    color-mix(in srgb, var(--color-secondary) 90%, transparent) 100%
+  );
+}
+
+/* The page's canvas: the header's gradient at full opacity, underneath
+   everything (see `body` below). */
+@utility bg-page-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+}
+
+/* Section entrances (RevealOnScroll). Hidden only while JS is running
+   (`html[data-reveal]`, set in <head>) and motion is welcome, so content
+   is never gated behind animation. `--reveal-delay` is the element's
+   place in its stagger batch, set by the component. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-reveal] .reveal {
+    opacity: 0;
+    translate: 0 var(--distance-entrance);
+    transition:
+      opacity var(--duration-entrance) var(--ease-entrance) var(--reveal-delay, 0ms),
+      translate var(--duration-entrance) var(--ease-entrance) var(--reveal-delay, 0ms);
+  }
+  html[data-reveal] .reveal[data-revealed] {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+/* The name on the page-transition overlay: on-header at 75%, the most
+   transparency that keeps ≥4.5:1 on every hue and on the white/black stops
+   (worst case 4.8:1). The gray stop's lighter end only just clears 4.5:1
+   with solid white, so it's fully opaque there: 100% is the fallback,
+   since gray is the default, and the other stops set 75%. */
+@utility text-on-header-fade {
+  color: color-mix(
+    in srgb,
+    var(--color-on-header) var(--fade-alpha, 100%),
+    transparent
+  );
+}
+
+@utility bg-page-transition-gradient {
+  background-image: linear-gradient(
+    174deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+}
+
+@layer base {
+  html {
+    /* Lenis drives smooth scroll; avoid the browser double-smoothing it. */
+    scroll-behavior: auto;
+    /* Keep whatever the browser scrolls into view (a control reached by
+       Tab or Shift+Tab, an anchor target) clear of the sticky header,
+       rather than just under it (WCAG 2.4.11 Focus Not Obscured). */
+    scroll-padding-top: 6rem;
+  }
+
+  /* Avoid a lone word on a paragraph's last line (headings balance
+     instead; see src/lib/type.ts). */
+  p {
+    text-wrap: pretty;
+  }
+
+  /*
+   * The page's canvas is the full-opacity gradient (`bg-page-gradient`,
+   * distinct from the header bar's 90%-alpha `bg-header-gradient` on top
+   * of it). Every white section is an opaque `surface` panel painted over
+   * it, not the absence of color.
+   *
+   * Concretely: any section meant to read as a white panel needs an
+   * explicit `bg-surface` (it can no longer rely on "no background =
+   * white"); any section meant to sit on the gradient needs no
+   * background at all (or an explicit `bg-page-gradient`/
+   * `bg-header-gradient` for self-containment regardless of what
+   * surrounds it).
+   */
+  body {
+    @apply text-ink font-sans text-body antialiased bg-page-gradient;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Ripple hover on EvidenceCard's gradient variant (motion.md). Tailwind's
+   default hover: variant is already gated to @media (hover: hover), so
+   touch devices never trigger it. */
+@theme inline {
+  --animate-ripple: ripple var(--duration-ripple) var(--ease-ripple) forwards;
+  /* Employer logo strip (EmployerMarquee.tsx): slow and linear, so it reads
+     as ambient drift rather than something to track. */
+  --animate-marquee: marquee 60s linear infinite;
+  /* `ease` both ways: half-covered ~45% of the way in, with a long soft
+     tail. */
+  --animate-page-transition-in: page-transition-in
+    var(--duration-page-cover) ease forwards;
+  --animate-page-transition-out: page-transition-out
+    var(--duration-page-reveal) ease forwards;
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0.22;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 3.5;
+  }
+}
+
+/* The strip holds two identical copies side by side, each padded by one
+   gap, so shifting the track by exactly half loops without a seam. */
+@keyframes marquee {
+  to {
+    translate: -50% 0;
+  }
+}
+
+@keyframes page-transition-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes page-transition-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Color picker (ColorPicker.tsx). The panel uses the same translucent
+   "glass" as the cards on gradients, but tinted with primary so it reads
+   as part of the header, plus a backdrop blur so the page behind it
+   doesn't read through. It grows out of its trigger on open (collapsed
+   to near-instant by the reduced-motion rule above). */
+.color-panel {
+  /* Frosted glass: a primary tint pushed away from the text color (primary
+     lightened with a little white under ink text, darkened with black on
+     the gray/black stops' white text — `--panel-shade`, black by default
+     since gray is), so on-header
+     keeps ≥4.5:1 once the page behind is blended in) under a faint white
+     sheen at the top edge, over a heavy blur. The blur is what makes a
+     translucent panel workable at all: detail behind it is smeared into
+     the surrounding color, not read through. Contrast here was measured
+     from rendered pixels, since axe can't see through backdrop-filter. */
+  background:
+    linear-gradient(
+      170deg,
+      color-mix(in srgb, #ffffff 10%, transparent) 0%,
+      transparent 40%
+    ),
+    color-mix(in srgb, color-mix(in srgb, var(--color-primary) 72%, var(--panel-shade, #000000)) 62%, transparent);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  backdrop-filter: blur(28px) saturate(140%);
+  border: 1px solid color-mix(in srgb, #ffffff 30%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #ffffff 40%, transparent),
+    0 24px 48px -16px rgb(0 0 0 / 0.4);
+}
+details[open] > .color-panel {
+  animation: color-panel-in 320ms var(--ease-accordion) both;
+}
+@keyframes color-panel-in {
+  from {
+    opacity: 0;
+    scale: 0.92;
+    translate: 0 -6px;
+  }
+}
+
+/* The hue track is palette-accurate (built by the component from each
+   hue's real clamped color) and passed in as `--track`, not an inline
+   `background` — see the component for why. */
+.color-slider {
+  appearance: none;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--track);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+  cursor: pointer;
+}
+.color-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background: var(--color-primary);
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+  transition: scale 200ms ease-out;
+}
+.color-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--color-primary);
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+}
+.color-slider:active::-webkit-slider-thumb {
+  scale: 1.15;
+}
+/* A neutral preset is active: the thumb stays where the last hue was, but
+   reads as "not selected" until it's dragged again. */
+.color-slider[data-inactive="true"]::-webkit-slider-thumb {
+  background: rgb(255 255 255 / 0.35);
+}
+.color-slider[data-inactive="true"]::-moz-range-thumb {
+  background: rgb(255 255 255 / 0.35);
+}
+.color-slider:focus-visible {
+  outline: 2px solid var(--color-on-header);
+  outline-offset: 4px;
+}
+
+.color-swatch {
+  background: var(--swatch);
+  box-shadow:
+    inset 0 0 0 1px rgb(0 0 0 / 0.15),
+    0 1px 3px rgb(0 0 0 / 0.25);
+  transition:
+    scale 200ms ease-out,
+    box-shadow 200ms ease-out;
+  cursor: pointer;
+}
+.color-swatch:hover {
+  scale: 1.08;
+}
+.color-swatch[aria-pressed="true"] {
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--color-primary) 90%, transparent),
+    0 0 0 4px var(--color-on-header);
+}
+.color-swatch:focus-visible {
+  outline: 2px solid var(--color-on-header);
+  outline-offset: 6px;
+}
+
+/* Header curve + mobile nav (Header.tsx, Nav.tsx). The clip lives here
+   rather than inline so that, while the mobile panel is open, the header
+   can drop its own curve and hand it to the panel's bottom edge instead —
+   one continuous sheet with one curve, not a notch between two. */
+.header-bg {
+  clip-path: url(#header-curve-clip);
+}
+.mobile-nav-panel {
+  clip-path: url(#mobile-nav-curve-clip);
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-primary) 90%, transparent) 0%,
+    color-mix(in srgb, var(--color-secondary) 90%, transparent) 100%
+  );
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  transition:
+    opacity 400ms var(--ease-accordion),
+    translate 400ms var(--ease-accordion);
+}
+.mobile-nav-panel:not([data-nav-open]) {
+  opacity: 0;
+  translate: 0 -12px;
+}
+@media (width < 64rem) {
+  header:has([data-nav-open]) .header-bg {
+    clip-path: none;
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+  }
+  header:has([data-nav-open]) .header-curve-line {
+    opacity: 0;
+  }
+}
