@@ -23,9 +23,12 @@ function getServerSnapshot() {
 }
 
 /**
- * Real behavior from motion.md: Lenis runs site-wide with no custom
- * duration/easing/wheelMultiplier override anywhere in the source bundle,
- * so this deliberately passes zero custom options — Lenis's own defaults.
+ * Real behavior from motion.md, corrected: the source's Lenis init is
+ * explicit, not "no options" — `new Lenis({ duration: 1.2, easing: (t) =>
+ * Math.min(1, 1.001 - Math.pow(2, -10 * t)), touchMultiplier: 2, ... })`,
+ * found inline on every page. `duration`/`easing` happen to match Lenis's
+ * own library defaults (so leaving them unset is equivalent), but
+ * `touchMultiplier: 2` is a real override — the library default is `1`.
  * This is the app's only reason to reach for a client component for scrolling.
  */
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
@@ -35,5 +38,9 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     return <>{children}</>;
   }
 
-  return <ReactLenis root>{children}</ReactLenis>;
+  return (
+    <ReactLenis root options={{ touchMultiplier: 2 }}>
+      {children}
+    </ReactLenis>
+  );
 }

@@ -1,0 +1,60 @@
+<!-- @dsCard group="Navigation" height=170 subtitle="Real header gradient + logo; click for the mobile panel" -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--surface);}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:linear-gradient(90deg, #236FC4E6 0%, #58C4E6E6 100%);}
+  .wordmark{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .wordmark img{width:26px;height:31px;display:block;}
+  .wordmark span{font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.02em;}
+  .primary{display:flex;gap:24px;list-style:none;margin:0;padding:0;}
+  .primary a{color:#FFFFFF99;text-decoration:none;font-size:16px;font-weight:500;letter-spacing:-0.03em;}
+  .primary a.active{color:#fff;}
+  .right{display:flex;align-items:center;gap:16px;}
+  .lang{border:1px solid #FFFFFF55;border-radius:100px;padding:4px 12px;font-size:13px;font-weight:600;color:#fff;background:transparent;cursor:pointer;}
+  .toggle{display:none;border:none;background:transparent;width:32px;height:32px;font-size:18px;cursor:pointer;color:#fff;}
+  .mobile-panel{display:none;flex-direction:column;background:linear-gradient(90deg, #236FC4E6 0%, #58C4E6E6 100%);}
+  .mobile-panel a{padding:12px 24px;color:#FFFFFF99;text-decoration:none;font-size:16px;font-weight:500;border-top:1px solid #FFFFFF33;}
+  .mobile-panel a.active{color:#fff;}
+  @media (max-width:640px){
+    .primary{display:none;}
+    .toggle{display:inline-block;}
+  }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <a class="wordmark" href="#">
+      <span>Christian Crawford</span>
+    </a>
+    <ul class="primary" style="display:flex">
+      <li><a class="active" href="#">Home</a></li>
+      <li><a href="#">About us</a></li>
+      <li><a href="#">Product</a></li>
+      <li><a href="#">Innovations</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">Contacts</a></li>
+    </ul>
+    <div class="right">
+      <div class="lang">EN</div>
+      <button class="toggle" id="toggle" aria-label="Menu">Menu</button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="panel">
+    <a class="active" href="#">Home</a>
+    <a href="#">About us</a>
+    <a href="#">Product</a>
+    <a href="#">Innovations</a>
+    <a href="#">News</a>
+    <a href="#">Contacts</a>
+  </div>
+  <script>
+    document.getElementById('toggle').addEventListener('click', function(){
+      var p = document.getElementById('panel');
+      p.style.display = (p.style.display === 'flex') ? 'none' : 'flex';
+    });
+  </script>
+</body>
+</html>

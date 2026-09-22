@@ -1,0 +1,58 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": { "v": 1, "at": "2026-09-22T14:23:28Z" },
+  "title": "Christian Crawford",
+  "namespace": "Christian Crawford",
+  "libraries": [],
+  "sections": {},
+  "groups": ["Logos", "Retailers"],
+  "assetGroups": {
+    "Logos": {
+      "name": "Logos",
+      "tile": "m",
+      "order": ["logo-mark.svg", "logo-pr.png"],
+      "files": {
+        "logo-mark.svg": { "name": "logo-mark.svg", "blob": "0b4b26f85b58dc484ab2b5722c421e51", "size": 4847, "type": "image/svg+xml" },
+        "logo-pr.png": { "name": "logo-pr.png", "blob": "0456491327b4522cce9ad52ffd22f10c", "size": 10678, "type": "image/png" }
+      }
+    },
+    "Retailers": {
+      "name": "Retailers",
+      "tile": "s",
+      "order": ["rozetka-00.png.webp", "silpo.png.webp", "atb-00.png.webp", "novus-00.png.webp", "epiczentr-00.png.webp", "tavriya-v-00.png.webp", "avrora-00.png.webp", "maudau-00.png.webp", "blyzenko-00.png.webp", "brejn-001.png.webp", "chystenko-00.png.webp", "dini-00.png.webp", "ekonom.png.webp", "kalyna-00.png.webp", "kasta-00.png.webp", "kopijochka-00.png.webp", "oldi-99.png.webp", "prom-00.png.webp", "shhodnya-00.png.webp", "tam-tam-00.png.webp", "tride-001.png.webp", "yeva-00.png.webp"],
+      "files": {
+        "rozetka-00.png.webp": { "name": "rozetka-00.png.webp", "blob": "15e9b0ecd2ec5f694c5e601fc934d25a", "size": 8114, "type": "image/webp" },
+        "silpo.png.webp": { "name": "silpo.png.webp", "blob": "e5f0ff238682250513a95a4ca37810cf", "size": 6112, "type": "image/webp" },
+        "atb-00.png.webp": { "name": "atb-00.png.webp", "blob": "9817e64421663083399a23ed646beb9e", "size": 14160, "type": "image/webp" },
+        "novus-00.png.webp": { "name": "novus-00.png.webp", "blob": "48bc4ce7b652f9157f95d2f5e6128b8a", "size": 3750, "type": "image/webp" },
+        "epiczentr-00.png.webp": { "name": "epiczentr-00.png.webp", "blob": "fad75cdc042b6ca94777e4305cfd832a", "size": 5628, "type": "image/webp" },
+        "tavriya-v-00.png.webp": { "name": "tavriya-v-00.png.webp", "blob": "7c0127e78987dd1d71b2612df0da24dd", "size": 2008, "type": "image/webp" },
+        "avrora-00.png.webp": { "name": "avrora-00.png.webp", "blob": "0144e74052365e12ef64ca0617865ebb", "size": 12224, "type": "image/webp" },
+        "maudau-00.png.webp": { "name": "maudau-00.png.webp", "blob": "50cd8ca0bf7a2eeba5e4009477dda603", "size": 185308, "type": "image/webp" },
+        "blyzenko-00.png.webp": { "name": "blyzenko-00.png.webp", "blob": "7afc64a0caf85a7d062ba9433c4cd574", "size": 51324, "type": "image/webp" },
+        "brejn-001.png.webp": { "name": "brejn-001.png.webp", "blob": "b180e676b5d26e178db27c1d7c92b493", "size": 174186, "type": "image/webp" },
+        "chystenko-00.png.webp": { "name": "chystenko-00.png.webp", "blob": "711e54950fcaf9acde092f34302e4880", "size": 184204, "type": "image/webp" },
+        "dini-00.png.webp": { "name": "dini-00.png.webp", "blob": "eac96997d4404edce97f49257f60ffe6", "size": 159148, "type": "image/webp" },
+        "ekonom.png.webp": { "name": "ekonom.png.webp", "blob": "610f05a58390b5818fed5fe40d739aba", "size": 4512, "type": "image/webp" },
+        "kalyna-00.png.webp": { "name": "kalyna-00.png.webp", "blob": "b147f99d8bc89405eafe80d9ce132a36", "size": 40694, "type": "image/webp" },
+        "kasta-00.png.webp": { "name": "kasta-00.png.webp", "blob": "1836f6bbc7e5c9edf62f7e87c6f0eeb7", "size": 20016, "type": "image/webp" },
+        "kopijochka-00.png.webp": { "name": "kopijochka-00.png.webp", "blob": "2fd6352647c127a919bc3959b7135f88", "size": 7372, "type": "image/webp" },
+        "oldi-99.png.webp": { "name": "oldi-99.png.webp", "blob": "72b914b2b3f49725f470ca60bd2474fa", "size": 3828, "type": "image/webp" },
+        "prom-00.png.webp": { "name": "prom-00.png.webp", "blob": "4eb472dabbe8080b143d7c5953ac62ca", "size": 9468, "type": "image/webp" },
+        "shhodnya-00.png.webp": { "name": "shhodnya-00.png.webp", "blob": "fbb5f53d7aa6d30601624d1f9c9f441b", "size": 187312, "type": "image/webp" },
+        "tam-tam-00.png.webp": { "name": "tam-tam-00.png.webp", "blob": "934315b319d9ef1f12644439d942f613", "size": 38832, "type": "image/webp" },
+        "tride-001.png.webp": { "name": "tride-001.png.webp", "blob": "70eb47fa0dcc3a26e4816264c6e729ec", "size": 159218, "type": "image/webp" },
+        "yeva-00.png.webp": { "name": "yeva-00.png.webp", "blob": "38feb91ff5b402d0a2a0678161af7e30", "size": 50782, "type": "image/webp" }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": { "readme": "project/README.md", "sections": [] },
+  "lastChange": {
+    "by": "Christian",
+    "via": "Cowork",
+    "at": "2026-09-22T15:30:00Z",
+    "note": "Renamed the brand throughout - title/namespace, wordmark, headings, and product/news copy now read Christian Crawford instead of iGel. The real logo asset was renamed logo-mark.svg (same file/blob, new name). Left real citation URLs, emails, and route slugs (igel.ua, info@igel.ua, the news-article slugs, the real facebook.com/iGel.tm.ua handle) untouched - rewriting those would fabricate broken/fake links rather than rename a brand mention. Dropped the iGel is German for hedgehog etymology line since it no longer applies, and resized the Cover wordmark for the longer name."
+  }
+}

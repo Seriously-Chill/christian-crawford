@@ -1,0 +1,47 @@
+<!-- @dsCard group="Marketing" height=220 subtitle="Real 24px radius + the real ripple hover (hover a card, fine pointer only)" -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--surface);padding:24px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:760px;}
+  .card{background:var(--surface-raised);border-radius:24px;padding:24px;position:relative;overflow:hidden;}
+  .card h3{font-size:20px;line-height:1.5em;font-weight:500;letter-spacing:-0.02em;color:var(--ink);margin:0 0 8px 0;}
+  .card p{font-size:14px;line-height:1.4em;color:var(--ink);opacity:.72;margin:0 0 16px 0;}
+  .card a{font-size:16px;font-weight:500;letter-spacing:-0.03em;color:var(--primary);text-decoration:none;}
+  /* Real ripple spec from the site's CSS. The exact ripple.png texture wasn't captured with the
+     saved page (it's a CSS background-image, not an <img>), so this approximates it with a radial
+     gradient at the same blend mode, scale and timing rather than inventing a different effect. */
+  @media (hover:hover) and (pointer:fine){
+    .card::after{
+      content:"";position:absolute;z-index:1;top:50%;left:50%;translate:-50% -50%;
+      width:100%;aspect-ratio:1;border-radius:50%;
+      background:radial-gradient(circle, var(--primary) 0%, transparent 70%);
+      mix-blend-mode:multiply;will-change:transform,opacity;scale:0;opacity:0;pointer-events:none;
+    }
+    .card:hover::after{ animation: ripple .8s ease-out forwards; }
+  }
+  @keyframes ripple{ 0%{opacity:.6;scale:1;} 100%{opacity:0;scale:3;} }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="card">
+      <h3>Washing gels</h3>
+      <p>Intelligent formulas for impeccable cleanliness, color protection and fabric care</p>
+      <a href="#">More details</a>
+    </div>
+    <div class="card">
+      <h3>Dishwashing gels</h3>
+      <p>Effective fat removal and gentle contact with skin</p>
+      <a href="#">More details</a>
+    </div>
+    <div class="card">
+      <h3>Toilet bowl cleaners</h3>
+      <p>Thick formulas with precise application for hygienic cleanliness</p>
+      <a href="#">More details</a>
+    </div>
+  </div>
+</body>
+</html>

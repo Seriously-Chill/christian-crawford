@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
+import { PageTransition } from "@/components/motion/PageTransition";
 
 // Self-hosted: the local device shell's egress allowlist doesn't reach
 // fonts.googleapis.com, and self-hosting is the more production-correct
@@ -55,34 +56,41 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${montserrat.variable} min-h-full flex flex-col`}>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[10001] focus:top-4 focus:left-4 focus:rounded-sm focus:bg-surface focus:px-space-2 focus:py-2 focus:text-primary focus:shadow-lg"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-10001 focus:top-4 focus:left-4 focus:rounded-sm focus:bg-surface focus:px-space-2 focus:py-2 focus:text-primary focus:shadow-lg"
         >
           Skip to main content
         </a>
 
         {/*
           Entrance preloader — the real page-transition treatment from the
-          Design System (motion.md): the same header gradient at a steeper
-          angle and full opacity, the white logo mark, a 0.5s fade. The
-          source shows this on route change; this app is a single scrolling
-          page, so it's replayed once per browser session as the opening
-          moment instead. Plain inline script, not a client component — it
-          never touches the hydrated JS bundle, and motion-reduce:hidden
+          Design System (motion.md), corrected: a flat overlay (no
+          gradient — that was wrong in an earlier pass) and a 700ms fade
+          (was 500ms), matching PageTransition's own real timing. Uses
+          `bg-primary` rather than the source's literal white background —
+          see PageTransition.tsx for why (the real white-fill logo mark is
+          invisible on the source's own white overlay). The source shows
+          this on route change; this app is a single scrolling page for
+          its first paint, so it's replayed once per browser session as
+          the opening moment instead, then PageTransition takes over for
+          real navigations. Plain inline script, not a client component —
+          it never touches the hydrated JS bundle, and motion-reduce:hidden
           keeps it from ever rendering for reduced-motion users.
         */}
         <div
           id="cc-preloader"
           aria-hidden="true"
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-page-transition-gradient motion-reduce:hidden"
+          className="fixed inset-0 z-10000 flex items-center justify-center bg-primary motion-reduce:hidden"
         >
-          <Image src="/logo-mark.svg" alt="" width={51} height={60} priority />
+          <Image src="/logo-mark.svg" alt="" width={70} height={82} priority />
         </div>
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var k='cc-entered';if(sessionStorage.getItem(k)){var el=document.getElementById('cc-preloader');if(el)el.style.display='none';}else{sessionStorage.setItem(k,'1');window.addEventListener('load',function(){var el=document.getElementById('cc-preloader');if(!el)return;el.style.transition='opacity 500ms ease';el.style.opacity='0';setTimeout(function(){el.style.display='none';},520);});}}catch(e){}})();",
+              "(function(){try{var k='cc-entered';if(sessionStorage.getItem(k)){var el=document.getElementById('cc-preloader');if(el)el.style.display='none';}else{sessionStorage.setItem(k,'1');window.addEventListener('load',function(){var el=document.getElementById('cc-preloader');if(!el)return;el.style.transition='opacity 700ms ease';el.style.opacity='0';setTimeout(function(){el.style.display='none';},720);});}}catch(e){}})();",
           }}
         />
+
+        <PageTransition />
 
         <SmoothScrollProvider>
           <Header />

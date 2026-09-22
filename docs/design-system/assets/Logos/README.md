@@ -1,0 +1,3 @@
+Real files copied from the site's saved page, not redrawn. `logo-mark.svg` is the one mark used everywhere — header, page-transition preloader, footer — drawn `fill="white"`, so it only reads correctly on the header's blue gradient or another colored/dark ground; never place it directly on plain `surface`. `logo-pr.png` is the manufacturer's own PR GROUP mark, shown on About and Contacts linking to prgroup.ua.
+
+These same two files are already committed to this repo at `../../../../public/logo-mark.svg` and `../../../../public/logo-pr.png` — the copies here are for design-system completeness, not a second source of truth.

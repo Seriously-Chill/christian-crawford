@@ -24,12 +24,12 @@ export function SelectedWork() {
     <section id="work" className="mx-auto max-w-5xl px-space-3 py-space-7">
       <RevealOnScroll>
         <p className="text-label text-primary">Selected work</p>
-        <h2 className={`mt-space-2 max-w-2xl text-ink ${textH2}`}>
+        <h1 className={`mt-space-2 max-w-2xl text-ink ${textH2}`}>
           A white-label pharmacy platform, one shared codebase.
-        </h2>
+        </h1>
       </RevealOnScroll>
 
-      <RevealOnScroll delayMs={80} className="mt-space-4 max-w-2xl space-y-space-3 text-body text-ink/72">
+      <RevealOnScroll delayMs={100} className="mt-space-4 max-w-2xl space-y-space-3 text-body text-ink/72">
         <p>
           At HealthWarehouse.com, the platform serves multiple pharmacy brands. The obvious
           path — and the one it deliberately avoided — was splitting each brand into its own
@@ -50,8 +50,8 @@ export function SelectedWork() {
         </p>
       </RevealOnScroll>
 
-      <RevealOnScroll delayMs={120} className="mt-space-5">
-        <h3 className={`text-ink ${textH4}`}>The architecture underneath it</h3>
+      <RevealOnScroll delayMs={200} className="mt-space-5">
+        <h2 className={`text-ink ${textH4}`}>The architecture underneath it</h2>
         <div className="mt-space-3">
           <DetailGrid items={architecture} />
         </div>

@@ -1,0 +1,3 @@
+# ContactForm
+
+Contacts page. Four fields in order — Name, Phone, Email, Message — one submit action; on success the form is replaced in place by "Our team will contact you shortly" (no modal, no redirect). The kit's real input/label style only makes sense on a colored ground — label text is `surface` white, inputs have transparent fill, a translucent white border (`#FFFFFF33`) and `radius-sm` (12px) — so this component's section background is the same blue gradient used in `Header`, not a plain white card. Submit is a `Button` in its bordered (white-on-blue) variant, since the filled-white/primary-label default would nearly disappear against this ground.

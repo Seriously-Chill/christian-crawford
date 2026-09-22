@@ -28,7 +28,7 @@ export function Complexity() {
         </p>
       </RevealOnScroll>
 
-      <RevealOnScroll delayMs={80} className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
+      <RevealOnScroll delayMs={100} className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
         <EvidenceCard title="One codebase, multiple brands">
           A Next.js/React white-label pharmacy platform serves several brands from one shared
           codebase. Configuration and feature flags carry the differences between them — not
@@ -41,13 +41,13 @@ export function Complexity() {
         </EvidenceCard>
       </RevealOnScroll>
 
-      <RevealOnScroll delayMs={120} className="mt-space-4 grid gap-space-3 sm:grid-cols-3">
+      <RevealOnScroll delayMs={200} className="mt-space-4 grid gap-space-3 sm:grid-cols-3">
         <HighlightCard value="200+" label="accessibility issues addressed across two platforms" />
         <HighlightCard value="~50" label="routes covered by automated accessibility testing" />
         <HighlightCard value="~80" label="routes covered by automated SEO regression testing" />
       </RevealOnScroll>
 
-      <RevealOnScroll delayMs={160} className="mt-space-5">
+      <RevealOnScroll delayMs={300} className="mt-space-5">
         <h3 className={`text-ink ${textH4}`}>The workflows that had to hold up</h3>
         <p className="mt-space-2 max-w-xl text-body text-ink/72">
           Every one of these is a real interaction flow the automated accessibility suite

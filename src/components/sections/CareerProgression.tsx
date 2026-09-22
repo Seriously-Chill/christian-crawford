@@ -51,9 +51,9 @@ export function CareerProgression() {
     <section id="evolution" className="mx-auto max-w-5xl px-space-3 py-space-7">
       <RevealOnScroll>
         <p className="text-label text-primary">How this happened</p>
-        <h2 className={`mt-space-2 max-w-2xl text-ink ${textH2}`}>
+        <h1 className={`mt-space-2 max-w-2xl text-ink ${textH2}`}>
           Not a framework. A way of working with complexity.
-        </h2>
+        </h1>
         <p className="mt-space-3 max-w-xl text-body text-ink/72">
           The common thread across twenty years isn&apos;t a technology. It&apos;s the same
           question, asked in different rooms: why did this get complicated, and how do you
@@ -64,11 +64,11 @@ export function CareerProgression() {
       <ol className="mt-space-6 space-y-space-5 border-l border-ink/10 pl-space-4">
         {eras.map((era, i) => (
           <li key={era.range}>
-            <RevealOnScroll delayMs={i * 60}>
+            <RevealOnScroll delayMs={i * 100}>
               <p className="text-label text-ink/60">
                 {era.range} · {era.org}
               </p>
-              <h3 className={`mt-space-1 text-ink ${textH4}`}>{era.role}</h3>
+              <h2 className={`mt-space-1 text-ink ${textH4}`}>{era.role}</h2>
               <p className="mt-space-2 max-w-xl text-body text-ink/72">{era.body}</p>
             </RevealOnScroll>
           </li>

@@ -76,20 +76,22 @@
   --radius-pill: 100px;
   --radius-circle: 50%;
 
-  /* Motion timing (motion.md) */
+  /* Motion timing (motion.md) — real values checked against style.css,
+     page-transitions.min.js, and the sitewide animated/animated-slow
+     entrance system, across all 6 captured pages, not just Home. */
   --ease-ripple: ease-out;
   --duration-ripple: 800ms;
-  --duration-page-transition: 500ms;
+  --duration-page-transition: 700ms;
+  --duration-entrance: 1250ms;
+  --duration-entrance-slow: 2000ms;
+  --duration-accordion: 1000ms;
+  --ease-accordion: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Real gradients from the site's kit, at their real literal alpha values.
-   Not a Tailwind theme namespace, so registered as first-class utilities. */
+/* Real gradient from the site's kit, at its real literal alpha values.
+   Not a Tailwind theme namespace, so registered as a first-class utility. */
 @utility bg-header-gradient {
   background-image: linear-gradient(90deg, #236fc4e6 0%, #58c4e6e6 100%);
-}
-
-@utility bg-page-transition-gradient {
-  background-image: linear-gradient(174deg, var(--color-primary) 0%, var(--color-secondary) 100%);
 }
 
 @layer base {
@@ -127,6 +129,9 @@
    @media (hover: hover) and (pointer: fine) guard on touch devices. */
 @theme inline {
   --animate-ripple: ripple var(--duration-ripple) var(--ease-ripple) forwards;
+  /* Real e-page-transition overlay is a plain white fade (background:#fff,
+     no gradient) — see motion.md's correction. */
+  --animate-page-transition-out: page-transition-out var(--duration-page-transition) ease-out forwards;
 }
 
 @keyframes ripple {
@@ -137,5 +142,14 @@
   100% {
     opacity: 0;
     scale: 3;
+  }
+}
+
+@keyframes page-transition-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

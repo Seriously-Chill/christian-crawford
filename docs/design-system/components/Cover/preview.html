@@ -1,0 +1,37 @@
+<!-- @dsCard height=288 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body{margin:0;background:var(--surface);}
+  .primary-fill{fill:var(--primary);}
+  .ink-fill{fill:var(--ink);}
+  .tint-fill{fill:var(--surface-raised);}
+  .ground-fill{fill:var(--surface);}
+  .name{fill:var(--ink);font-family:var(--font-sans);font-weight:700;}
+  .tagline{fill:var(--ink);opacity:.7;font-family:var(--font-sans);font-weight:500;}
+</style>
+</head>
+<body>
+<svg width="960" height="288" viewBox="0 0 960 288" xmlns="http://www.w3.org/2000/svg">
+<!--
+  Derivation:
+  blocks: primary (240x288 full-height slab, the real header-gradient's left stop, at full value) + ink (240x144) + surface-raised tint (240x144), stacked right of the name.
+  arrangement: one tall primary slab against the right edge with two stacked satellites — echoes the site's own hero-plus-stacked-cards composition.
+  pattern: three discs cut from the ground into the primary slab — droplets for a gel/liquid cleaning line — sized from space-4/space-3/space-2 (32/24/16px radii doubled), radius-pill circles.
+  scales used: radius-pill (the discs), space-2/3/4 for their diameters.
+-->
+  <rect class="ground-fill" x="0" y="0" width="960" height="288"/>
+  <rect class="primary-fill" x="480" y="0" width="240" height="288"/>
+  <rect class="ink-fill" x="720" y="0" width="240" height="144"/>
+  <rect class="tint-fill" x="720" y="144" width="240" height="144"/>
+  <circle class="ground-fill" cx="560" cy="90" r="32"/>
+  <circle class="ground-fill" cx="650" cy="180" r="20"/>
+  <circle class="ground-fill" cx="590" cy="232" r="12"/>
+  <text class="name" x="40" y="130" font-size="60">Christian</text>
+  <text class="name" x="40" y="196" font-size="60">Crawford</text>
+  <text class="tagline" x="40" y="238" font-size="14">Premium cleanliness, every day.</text>
+</svg>
+</body>
+</html>

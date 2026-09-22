@@ -12,11 +12,14 @@ import type { MouseEventHandler, ReactNode } from "react";
  *  - bordered-inverse: transparent / on-header (white) border+label, for the
  *    header's own gradient (documented in ContactForm's README as the real
  *    submit-button treatment on a colored ground)
+ *
+ * Real hover transition is `.3s` (Elementor's own base button rule) — was
+ * wrongly set to 150ms in an earlier pass; checked against the source CSS.
  */
 type Variant = "primary" | "bordered" | "bordered-inverse";
 
 const base =
-  "inline-flex items-center justify-center rounded-pill text-label transition-colors duration-150";
+  "inline-flex items-center justify-center rounded-pill text-label transition-colors duration-300";
 
 const variants: Record<Variant, string> = {
   primary: "bg-surface text-primary px-[24px] py-[12px] hover:bg-primary hover:text-surface",
