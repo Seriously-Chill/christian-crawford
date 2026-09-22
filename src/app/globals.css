@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens ported from the Christian Crawford Design System artifact
+ * (project/tokens.json + motion.md). These are real values sourced from the
+ * original site's compiled CSS, not invented — see the artifact's own
+ * README/tokens.json `usage` notes for provenance of each one.
+ *
+ * Radius/color/spacing/text keys below intentionally override Tailwind's
+ * built-in scale (rather than living alongside it under different names):
+ * this app has no other design system to protect, since the Design System
+ * IS this site's entire visual language.
+ */
+@theme inline {
+  /* Typography — Montserrat variable comes from next/font in layout.tsx */
+  --font-sans: var(--font-montserrat), sans-serif;
+
+  --text-display: 80px;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.07em;
+  --text-display--font-weight: 400;
+
+  --text-h2: 56px;
+  --text-h2--line-height: 1;
+  --text-h2--letter-spacing: -0.04em;
+  --text-h2--font-weight: 400;
+
+  --text-h3: 32px;
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.04em;
+  --text-h3--font-weight: 500;
+
+  --text-h4: 28px;
+  --text-h4--line-height: 1.5;
+  --text-h4--letter-spacing: -0.02em;
+  --text-h4--font-weight: 500;
+
+  --text-h5: 20px;
+  --text-h5--line-height: 1.5;
+  --text-h5--letter-spacing: -0.02em;
+  --text-h5--font-weight: 500;
+
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-body--letter-spacing: -0.02em;
+  --text-body--font-weight: 500;
+
+  --text-label: 16px;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: -0.03em;
+  --text-label--font-weight: 500;
+
+  /* Colors */
+  --color-primary: #236fc4;
+  --color-secondary: #58c4e6;
+  --color-ink: #1b1b1d;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f8f8fa;
+  --color-surface-muted: #f0f0f2;
+  --color-on-header: #ffffff;
+
+  /* Spacing — the real gap/padding values actually seen on the source site */
+  --spacing-space-1: 8px;
+  --spacing-space-2: 16px;
+  --spacing-space-3: 24px;
+  --spacing-space-4: 32px;
+  --spacing-space-5: 40px;
+  --spacing-space-6: 60px;
+  --spacing-space-7: 80px;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 15px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 100px;
+  --radius-circle: 50%;
+
+  /* Motion timing (motion.md) */
+  --ease-ripple: ease-out;
+  --duration-ripple: 800ms;
+  --duration-page-transition: 500ms;
+}
+
+/* Real gradients from the site's kit, at their real literal alpha values.
+   Not a Tailwind theme namespace, so registered as first-class utilities. */
+@utility bg-header-gradient {
+  background-image: linear-gradient(90deg, #236fc4e6 0%, #58c4e6e6 100%);
+}
+
+@utility bg-page-transition-gradient {
+  background-image: linear-gradient(174deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+}
+
+@layer base {
+  html {
+    /* Lenis drives smooth scroll; avoid the browser double-smoothing it. */
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-surface text-ink font-sans text-body antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Ripple hover — the exact real keyframes from motion.md (product-category
+   cards on the source site), now the EvidenceCard hover in the Complexity
+   section. Tailwind's default hover: variant is itself already gated to
+   @media (hover: hover), matching the source's own
+   @media (hover: hover) and (pointer: fine) guard on touch devices. */
+@theme inline {
+  --animate-ripple: ripple var(--duration-ripple) var(--ease-ripple) forwards;
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0.6;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 3;
+  }
+}
