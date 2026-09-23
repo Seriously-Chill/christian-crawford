@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AiArchitecture } from "@/components/sections/AiArchitecture";
+import { PageIntro } from "@/components/sections/PageIntro";
+import { ClosingCta } from "@/components/sections/ClosingCta";
 import { essays } from "@/lib/essays";
 
 export function generateStaticParams() {
@@ -26,13 +28,18 @@ export default async function ThinkingEssayPage({ params }: { params: Promise<{ 
 
   return (
     <>
+      <PageIntro breadcrumb="Thinking" kicker="What I'm thinking about now" title={essay.title} />
+
       {slug === "ai-assisted-development" && <AiArchitecture />}
 
-      <div className="mx-auto max-w-5xl px-space-3 pb-space-6">
-        <Link href="/thinking" className="text-label text-primary hover:underline">
-          ← Back to Thinking
-        </Link>
+      <div className="bg-surface">
+        <div className="mx-auto max-w-5xl px-space-3 pb-space-6">
+          <Link href="/thinking" className="text-label text-primary hover:underline">
+            ← Back to Thinking
+          </Link>
+        </div>
       </div>
+      <ClosingCta />
     </>
   );
 }

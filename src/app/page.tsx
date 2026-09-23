@@ -1,8 +1,8 @@
 import { Opening } from "@/components/sections/Opening";
 import { NarrativeTeaser } from "@/components/sections/NarrativeTeaser";
-import { HomeContactCta } from "@/components/sections/HomeContactCta";
+import { ClosingCta } from "@/components/sections/ClosingCta";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { HighlightCard } from "@/components/ui/HighlightCard";
+import { EvidenceCard } from "@/components/ui/EvidenceCard";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -57,11 +57,17 @@ export default function HomePage() {
           billing, prescriptions, autoreorder."
         href="/work"
         linkLabel="See the case study"
+        onGradient
       >
-        <RevealOnScroll delayMs={80} className="mt-space-4 grid gap-space-3 sm:grid-cols-3">
-          <HighlightCard value="200+" label="accessibility issues addressed across two platforms" />
-          <HighlightCard value="~50" label="routes covered by automated accessibility testing" />
-          <HighlightCard value="~80" label="routes covered by automated SEO regression testing" />
+        <RevealOnScroll delayMs={100} className="mt-space-4 grid gap-space-3 sm:grid-cols-2">
+          <EvidenceCard onGradient title="One codebase, multiple brands">
+            Configuration and feature flags carry the differences between brands — not separate
+            applications duplicating the same infrastructure.
+          </EvidenceCard>
+          <EvidenceCard onGradient title="Accessibility, tested automatically">
+            200+ issues addressed across two platforms, backed by automated Playwright/axe-core
+            testing across ~50 routes — not a one-time audit.
+          </EvidenceCard>
         </RevealOnScroll>
       </NarrativeTeaser>
 
@@ -95,7 +101,7 @@ export default function HomePage() {
         linkLabel="Read the notes"
       />
 
-      <HomeContactCta />
+      <ClosingCta />
     </>
   );
 }

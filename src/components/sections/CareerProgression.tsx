@@ -1,5 +1,5 @@
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { textH2, textH4 } from "@/lib/type";
+import { textH4 } from "@/lib/type";
 
 /**
  * Spec section 7: not a résumé timeline immediately visible on the page —
@@ -48,32 +48,22 @@ const eras = [
 
 export function CareerProgression() {
   return (
-    <section id="evolution" className="mx-auto max-w-5xl px-space-3 py-space-7">
-      <RevealOnScroll>
-        <p className="text-label text-primary">How this happened</p>
-        <h1 className={`mt-space-2 max-w-2xl text-ink ${textH2}`}>
-          Not a framework. A way of working with complexity.
-        </h1>
-        <p className="mt-space-3 max-w-xl text-body text-ink/72">
-          The common thread across twenty years isn&apos;t a technology. It&apos;s the same
-          question, asked in different rooms: why did this get complicated, and how do you
-          make it something people can actually work with?
-        </p>
-      </RevealOnScroll>
-
-      <ol className="mt-space-6 space-y-space-5 border-l border-ink/10 pl-space-4">
-        {eras.map((era, i) => (
-          <li key={era.range}>
-            <RevealOnScroll delayMs={i * 100}>
-              <p className="text-label text-ink/60">
-                {era.range} · {era.org}
-              </p>
-              <h2 className={`mt-space-1 text-ink ${textH4}`}>{era.role}</h2>
-              <p className="mt-space-2 max-w-xl text-body text-ink/72">{era.body}</p>
-            </RevealOnScroll>
-          </li>
-        ))}
-      </ol>
+    <section id="evolution" className="bg-surface">
+      <div className="mx-auto max-w-5xl px-space-3 py-space-7">
+        <ol className="space-y-space-5 border-l border-ink/10 pl-space-4">
+          {eras.map((era, i) => (
+            <li key={era.range}>
+              <RevealOnScroll delayMs={i * 100}>
+                <p className="text-label text-ink/60">
+                  {era.range} · {era.org}
+                </p>
+                <h2 className={`mt-space-1 text-ink ${textH4}`}>{era.role}</h2>
+                <p className="mt-space-2 max-w-xl text-body text-ink/72">{era.body}</p>
+              </RevealOnScroll>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }

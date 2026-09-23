@@ -6,40 +6,62 @@ import { textDisplay } from "@/lib/type";
  * Production form of the Design System's Hero pattern (display headline,
  * one tagline line, primary + secondary CTA side by side — see the
  * artifact's Hero/README) carrying the spec's "What I Build" positioning
- * instead of the source's marketing copy. Generous vertical padding via
- * space-7 (80px) — the token's own usage note calls it out for exactly
- * this: "used sparingly between hero-scale sections."
+ * instead of the source's marketing copy.
  *
- * The real Home hero stages in on load (motion.md's sitewide entrance
- * system) rather than appearing all at once: headline → tagline → CTAs,
- * ~150ms apart, over the real hero-tier 2000ms duration. `playOnLoad`
- * plays this even though the hero is already in the initial viewport,
- * which `RevealOnScroll`'s default scroll-triggered mode wouldn't do.
+ * Real layout, confirmed on every captured page, not just Home: the top
+ * section is `min-height: calc(100vh - 100px)` — a near-full-viewport
+ * hero, not a padded text block. `100px` was the source's own (taller)
+ * header; `64px` is ours (see Header.tsx: space-2 padding + the 31px
+ * logo mark).
+ *
+ * The real Home hero also stages in on load (motion.md's sitewide
+ * entrance system) rather than appearing all at once: headline → tagline
+ * → CTAs, ~150ms apart, over the real hero-tier 2000ms duration.
+ * `playOnLoad` plays this even though the hero is already in the initial
+ * viewport, which `RevealOnScroll`'s default scroll-triggered mode
+ * wouldn't do.
+ *
+ * Text/button colors corrected to the real on-gradient treatment: the
+ * hero sits directly on the page's gradient canvas (confirmed by
+ * rendering, see globals.css), not a white background, so it needs
+ * `on-header` (white) text and `bordered-inverse` for its secondary CTA
+ * — matching the real Home hero's white headline/tagline and
+ * white-bordered secondary button, not the dark, white-background
+ * treatment this had before that correction.
+ *
+ * `bg-page-gradient` lives on this full-width outer `<section>`, not on
+ * the `max-w-5xl` inner content — the gradient is defined 0%→100% across
+ * whatever element carries it, so painting it on the narrower content
+ * column would restart the blue→cyan interpolation at the column's own
+ * edges instead of continuing the body's full-width gradient underneath,
+ * producing a visible seam ("gradient on gradient") right at the margins.
  */
 export function Opening() {
   return (
-    <section className="mx-auto max-w-5xl px-space-3 py-space-7">
-      <RevealOnScroll playOnLoad durationMs={2000}>
-        <p className="text-label text-primary mb-space-3">Christian Crawford</p>
-        <h1 className={`max-w-3xl text-ink ${textDisplay}`}>
-          Frontend architecture. Complex product systems.
-        </h1>
-      </RevealOnScroll>
-      <RevealOnScroll playOnLoad durationMs={2000} delayMs={150}>
-        <p className="mt-space-4 max-w-xl text-h5 text-ink/72">
-          I build things from scratch. I also spend a lot of time figuring out
-          why existing systems got complicated in the first place — and how to
-          make them simpler for the people who have to work with them.
-        </p>
-      </RevealOnScroll>
-      <RevealOnScroll playOnLoad durationMs={2000} delayMs={300}>
-        <div className="mt-space-5 flex flex-wrap gap-space-2">
-          <Button href="/work">See the work</Button>
-          <Button href="/contact" variant="bordered">
-            Get in touch
-          </Button>
-        </div>
-      </RevealOnScroll>
+    <section className="bg-page-gradient">
+      <div className="mx-auto flex min-h-[calc(100dvh-64px)] max-w-5xl flex-col justify-center px-space-3 py-space-6">
+        <RevealOnScroll playOnLoad durationMs={2000}>
+          <p className="text-label text-on-header/80 mb-space-3">Christian Crawford</p>
+          <h1 className={`max-w-3xl text-on-header ${textDisplay}`}>
+            Frontend architecture. Complex product systems.
+          </h1>
+        </RevealOnScroll>
+        <RevealOnScroll playOnLoad durationMs={2000} delayMs={150}>
+          <p className="mt-space-4 max-w-xl text-h5 text-on-header/80">
+            I build things from scratch. I also spend a lot of time figuring out
+            why existing systems got complicated in the first place — and how to
+            make them simpler for the people who have to work with them.
+          </p>
+        </RevealOnScroll>
+        <RevealOnScroll playOnLoad durationMs={2000} delayMs={300}>
+          <div className="mt-space-5 flex flex-wrap gap-space-2">
+            <Button href="/work">See the work</Button>
+            <Button href="/contact" variant="bordered-inverse">
+              Get in touch
+            </Button>
+          </div>
+        </RevealOnScroll>
+      </div>
     </section>
   );
 }

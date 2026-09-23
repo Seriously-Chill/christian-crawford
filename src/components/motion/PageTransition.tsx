@@ -5,16 +5,15 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 /**
- * The real, sourced page-transition preloader (motion.md, corrected): a
- * plain, ungradiented full-viewport overlay holding a static 70px logo
- * mark that only fades, never spins — the earlier "blue-gradient
- * preloader" claim was wrong. One deliberate departure from the literal
- * source: the real overlay background is `#fff`, but the real logo mark
- * is white-fill-only (confirmed against the actual asset), so on the
- * source site this combination is genuinely invisible — almost certainly
- * an authoring oversight, not a considered choice, and we only have the
- * white-fill mark to show. Using `bg-primary` instead keeps the real
- * flat-color/no-gradient correction while keeping the mark visible.
+ * The real, sourced page-transition preloader (motion.md): the header
+ * gradient at a steeper, near-vertical angle and full opacity
+ * (`linear-gradient(174deg, primary 0%, secondary 100%)`, confirmed via
+ * `.elementor-kit-6 e-page-transition`), holding a static 70px logo mark
+ * that only fades, never spins. A previous pass wrongly called this a
+ * flat white overlay based on a less-specific `e-page-transition{
+ * background:#fff}` fallback rule elsewhere in the same stylesheet — the
+ * descendant selector above has higher specificity and wins regardless of
+ * source order, so the gradient is what actually renders.
  *
  * The source plays this on route change — this app was single-page until
  * now, so it only ever ran once per session as an entrance (still true,
@@ -41,7 +40,7 @@ export function PageTransition() {
     <div
       key={transitionKey}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-10000 flex items-center justify-center bg-primary motion-safe:animate-page-transition-out motion-reduce:hidden"
+      className="pointer-events-none fixed inset-0 z-10000 flex items-center justify-center bg-page-transition-gradient motion-safe:animate-page-transition-out motion-reduce:hidden"
     >
       <Image src="/logo-mark.svg" alt="" width={70} height={82} />
     </div>

@@ -44,27 +44,33 @@ export function RevealOnScroll({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   // Above-the-fold content (the real source's hero fadeIn/fadeInUp plays
-  // on load, not on scroll) starts hidden immediately — computed here
-  // rather than corrected in an effect, so there's an actual hidden state
-  // for the browser to paint before the reveal transition below has
-  // something to animate from, and reduced-motion visitors never see it.
-  const [hidden, setHidden] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    return playOnLoad && !reduced;
-  });
+  // on load, not on scroll) starts hidden immediately, keyed only on the
+  // `playOnLoad` prop — never on `typeof window`, which would make the
+  // server (no window) and the client's first hydration pass (has
+  // window) compute different initial values for the same prop and break
+  // hydration. Whether a *reduced-motion* visitor ever actually sees that
+  // hidden state is corrected below, entirely inside an effect — effects
+  // only run post-hydration, so they can read browser-only state safely
+  // without this class of mismatch.
+  const [hidden, setHidden] = useState(playOnLoad);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (playOnLoad) {
+      if (reduced) {
+        const id = requestAnimationFrame(() => setHidden(false));
+        return () => cancelAnimationFrame(id);
+      }
       const raf1 = requestAnimationFrame(() => {
         requestAnimationFrame(() => setHidden(false));
       });
       return () => cancelAnimationFrame(raf1);
     }
+
+    if (reduced) return;
 
     const rect = node.getBoundingClientRect();
     const alreadyVisible = rect.top < window.innerHeight * 0.9;

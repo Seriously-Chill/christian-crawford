@@ -8,6 +8,17 @@ import { textH2 } from "@/lib/type";
  * condensed teaser here rather than their full section content — the full
  * versions live on their own routes. Keeps the homepage introducing the
  * site instead of duplicating it.
+ *
+ * `onGradient`: the real Home page has its hero *and* its first content
+ * grid both sitting directly on the page's gradient canvas (confirmed by
+ * rendering, see globals.css) before the first white panel — this teaser
+ * is the Work beat, so it gets the same treatment (white text and an
+ * explicit `bg-page-gradient`) instead of the plain white panel the other
+ * three beats use. The background lives on the full-width outer
+ * `<section>`, not the `max-w-5xl` inner content — painting the gradient
+ * on the narrower column would restart its 0%→100% interpolation at the
+ * column's own edges instead of continuing the body's full-width
+ * gradient underneath, producing a visible seam at the margins.
  */
 export function NarrativeTeaser({
   kicker,
@@ -15,6 +26,7 @@ export function NarrativeTeaser({
   body,
   href,
   linkLabel,
+  onGradient = false,
   children,
 }: {
   kicker: string;
@@ -22,23 +34,26 @@ export function NarrativeTeaser({
   body: string;
   href: string;
   linkLabel: string;
+  onGradient?: boolean;
   children?: ReactNode;
 }) {
   return (
-    <section className="mx-auto max-w-5xl px-space-3 py-space-6">
-      <RevealOnScroll>
-        <p className="text-label text-primary">{kicker}</p>
-        <h2 className={`mt-space-2 max-w-2xl text-ink ${textH2}`}>{title}</h2>
-        <p className="mt-space-3 max-w-xl text-body text-ink/72">{body}</p>
-      </RevealOnScroll>
+    <section className={onGradient ? "bg-page-gradient" : "bg-surface"}>
+      <div className="mx-auto max-w-5xl px-space-3 py-space-6">
+        <RevealOnScroll>
+          <p className={`text-label ${onGradient ? "text-on-header/80" : "text-primary"}`}>{kicker}</p>
+          <h2 className={`mt-space-2 max-w-2xl ${onGradient ? "text-on-header" : "text-ink"} ${textH2}`}>{title}</h2>
+          <p className={`mt-space-3 max-w-xl text-body ${onGradient ? "text-on-header/80" : "text-ink/72"}`}>{body}</p>
+        </RevealOnScroll>
 
-      {children}
+        {children}
 
-      <RevealOnScroll delayMs={100} className="mt-space-4">
-        <Button href={href} variant="bordered">
-          {linkLabel}
-        </Button>
-      </RevealOnScroll>
+        <RevealOnScroll delayMs={100} className="mt-space-4">
+          <Button href={href} variant={onGradient ? "bordered-inverse" : "bordered"}>
+            {linkLabel}
+          </Button>
+        </RevealOnScroll>
+      </div>
     </section>
   );
 }
