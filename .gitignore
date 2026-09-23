@@ -41,3 +41,11 @@ yarn-error.log*
 next-env.d.ts
 playwright-report/
 test-results/
+
+# Claude Code config is globally gitignored on this machine (~/.gitignore) so it
+# doesn't leak into other repos by default; this repo tracks it intentionally so
+# the governance hooks travel with a clone instead of staying machine-local.
+!CLAUDE.md
+!CLAUDE.local.md
+!.claude/
+!docs/agent-decision-log.md
