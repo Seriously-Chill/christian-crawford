@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-const ROUTES = ["/", "/work", "/systems", "/about", "/thinking", "/thinking/ai-assisted-development", "/contact"];
+const ROUTES = ["/", "/work", "/work/healthwarehouse", "/about", "/contact"];
 
 for (const route of ROUTES) {
   test(`${route} has no automatically detectable WCAG 2.2 AA violations`, async ({ page }) => {
@@ -48,9 +48,9 @@ test("nav marks the current route with aria-current and it moves on navigation",
     "page",
   );
 
-  await page.getByRole("link", { name: "Systems", exact: true }).first().click();
-  await expect(page).toHaveURL(/\/systems$/);
-  await expect(page.getByRole("link", { name: "Systems", exact: true }).first()).toHaveAttribute(
+  await page.getByRole("link", { name: "About", exact: true }).first().click();
+  await expect(page).toHaveURL(/\/about$/);
+  await expect(page.getByRole("link", { name: "About", exact: true }).first()).toHaveAttribute(
     "aria-current",
     "page",
   );
@@ -64,10 +64,23 @@ test("reduced motion: content is visible without waiting on animation", async ({
 
 test("contact links have real, correct destinations", async ({ page }) => {
   await page.goto("/contact");
-  const email = page.getByRole("link", { name: /christian\.crawford@pm\.me/ });
+  const main = page.locator("#main-content");
+  const email = main.getByRole("link", { name: /christian\.crawford@pm\.me/ });
   await expect(email).toHaveAttribute("href", "mailto:christian.crawford@pm.me");
 
-  const linkedin = page.getByRole("link", { name: /LinkedIn/ });
+  const linkedin = main.getByRole("link", { name: /LinkedIn/ });
+  await expect(linkedin).toHaveAttribute("href", "https://www.linkedin.com/in/christiancrawford");
+  await expect(linkedin).toHaveAttribute("target", "_blank");
+  await expect(linkedin).toHaveAttribute("rel", "noopener noreferrer");
+});
+
+test("footer contact links have real, correct destinations", async ({ page }) => {
+  await page.goto("/");
+  const footer = page.getByRole("contentinfo");
+  const email = footer.getByRole("link", { name: /christian\.crawford@pm\.me/ });
+  await expect(email).toHaveAttribute("href", "mailto:christian.crawford@pm.me");
+
+  const linkedin = footer.getByRole("link", { name: /LinkedIn/ });
   await expect(linkedin).toHaveAttribute("href", "https://www.linkedin.com/in/christiancrawford");
   await expect(linkedin).toHaveAttribute("target", "_blank");
   await expect(linkedin).toHaveAttribute("rel", "noopener noreferrer");

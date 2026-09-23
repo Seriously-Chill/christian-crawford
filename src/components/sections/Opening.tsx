@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { HeroVisual } from "@/components/visuals/HeroVisual";
 import { textDisplay } from "@/lib/type";
 
 /**
@@ -38,19 +39,25 @@ import { textDisplay } from "@/lib/type";
  */
 export function Opening() {
   return (
-    <section className="bg-page-gradient">
-      <div className="mx-auto flex min-h-[calc(100dvh-64px)] max-w-5xl flex-col justify-center px-space-3 py-space-6">
+    <section className="relative overflow-hidden bg-page-gradient">
+      <div className="pointer-events-none absolute right-0 top-1/2 hidden -translate-y-1/2 translate-x-[8%] sm:block">
+        <HeroVisual variant="home" />
+      </div>
+      <div className="relative mx-auto flex min-h-[calc(100dvh-64px)] max-w-5xl flex-col justify-center px-space-3 py-space-6">
+        <RevealOnScroll playOnLoad durationMs={2000} className="mb-space-4 sm:hidden">
+          <HeroVisual variant="work" />
+        </RevealOnScroll>
         <RevealOnScroll playOnLoad durationMs={2000}>
           <p className="text-label text-on-header/80 mb-space-3">Christian Crawford</p>
           <h1 className={`max-w-3xl text-on-header ${textDisplay}`}>
-            Frontend architecture. Complex product systems.
+            I take on the systems that got complicated and make them work again.
           </h1>
         </RevealOnScroll>
         <RevealOnScroll playOnLoad durationMs={2000} delayMs={150}>
           <p className="mt-space-4 max-w-xl text-h5 text-on-header/80">
-            I build things from scratch. I also spend a lot of time figuring out
-            why existing systems got complicated in the first place — and how to
-            make them simpler for the people who have to work with them.
+            I&apos;m a senior software engineer focused on frontend architecture. I work
+            across product, design, and engineering to turn difficult requirements
+            into systems people can understand, use, and evolve.
           </p>
         </RevealOnScroll>
         <RevealOnScroll playOnLoad durationMs={2000} delayMs={300}>

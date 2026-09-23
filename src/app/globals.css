@@ -50,9 +50,15 @@
   --text-label--letter-spacing: -0.03em;
   --text-label--font-weight: 500;
 
-  /* Colors */
-  --color-primary: #236fc4;
-  --color-secondary: #58c4e6;
+  /* Colors — primary/secondary expressed in HSL, driven by CSS custom
+     properties (`--hue-primary`/`--hue-secondary`, `--l-primary`/
+     `--l-secondary`) so the hue picker (ColorPicker.tsx) can rotate them
+     live. Defaults reproduce the real sourced hex colors exactly
+     (verified round-trip: hsl(211.68 69.7% 45.29%) = #236fc4,
+     hsl(194.37 73.96% 62.35%) = #58c4e6) — with no picker interaction,
+     rendering is bit-for-bit identical to the original design system. */
+  --color-primary: hsl(var(--hue-primary, 211.68) 69.7% var(--l-primary, 45.29%));
+  --color-secondary: hsl(var(--hue-secondary, 194.37) 73.96% var(--l-secondary, 62.35%));
   --color-ink: #1b1b1d;
   --color-surface: #ffffff;
   --color-surface-raised: #f8f8fa;
@@ -89,9 +95,18 @@
 }
 
 /* Real gradients from the site's kit, at their real literal alpha values.
-   Not a Tailwind theme namespace, so registered as first-class utilities. */
+   Not a Tailwind theme namespace, so registered as first-class utilities.
+   `bg-header-gradient`'s ~90% alpha now comes from `color-mix()` against
+   the same `--color-primary`/`--color-secondary` tokens every other
+   gradient uses (previously hardcoded as literal `#236fc4e6`/`#58c4e6e6`
+   hex+alpha — the one gradient utility that didn't track the tokens, so
+   it wouldn't have followed hue-picker changes). */
 @utility bg-header-gradient {
-  background-image: linear-gradient(90deg, #236fc4e6 0%, #58c4e6e6 100%);
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-primary) 90%, transparent) 0%,
+    color-mix(in srgb, var(--color-secondary) 90%, transparent) 100%
+  );
 }
 
 /* The page's actual canvas — confirmed by rendering, not just reading CSS:

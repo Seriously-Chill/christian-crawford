@@ -14,35 +14,35 @@ const eras = [
     role: "Web Designer",
     org: "Ginghamsburg Church",
     body:
-      "Built an organization's first cohesive digital identity from nothing, in TYPO3 — web design, multimedia, and the print/digital standards that held it together.",
+      "Created the organization’s first cohesive digital presence in TYPO3, bringing its website, multimedia, and print and digital standards together.",
   },
   {
     range: "2008–2013",
     role: "Multimedia Designer, then Creative Manager",
     org: "Trivantis",
     body:
-      "Interactive web and eLearning experiences in Flash and ActionScript, then Drupal and WordPress systems at scale — plus mentoring designers moving toward more technical roles.",
+      "Built interactive web and eLearning experiences, then worked on Drupal and WordPress platforms. As Creative Manager, I also mentored designers growing into more technical roles.",
   },
   {
     range: "2013–2016",
     role: "Senior Application Developer, then UI Developer",
     org: "CBTS · Kroger",
     body:
-      "Full-stack applications in C#/Razor, then enterprise UI work — responsive interfaces and a real migration path off WebSphere and onto AngularJS.",
+      "Built full-stack applications with C# and Razor, then moved into enterprise UI development at Kroger, contributing to responsive interfaces and the transition from WebSphere to AngularJS.",
   },
   {
     range: "2017–2021",
     role: "Frontend Developer, then Senior Consultant",
     org: "Ingage Partners",
     body:
-      "10+ client engagements — React, Angular, JAMstack — where the job kept expanding from building interfaces to owning how frontend systems were structured and maintained.",
+      "Across more than ten client engagements, I built with React, Angular, and JAMstack tools. The work grew from delivering interfaces to shaping how frontend systems were organized and maintained.",
   },
   {
     range: "2022–Present",
     role: "Senior Software Engineer",
     org: "HealthWarehouse.com",
     body:
-      "Frontend architecture for complex healthcare products — Next.js, React, GraphQL, configuration-driven platforms — and, more recently, how AI-assisted development changes what that architecture needs to hold up.",
+      "I lead frontend architecture for healthcare products built with Next.js, React, and GraphQL. The work includes a configurable pharmacy platform, accessibility and testing improvements, and practical standards for AI-assisted development.",
   },
 ];
 

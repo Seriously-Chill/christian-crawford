@@ -17,11 +17,13 @@ export function PageIntro({
   kicker,
   title,
   tagline,
+  meta,
 }: {
   breadcrumb: string;
   kicker: string;
   title: string;
   tagline?: string;
+  meta?: { label: string; value: string }[];
 }) {
   return (
     <section className="bg-page-gradient">
@@ -43,6 +45,16 @@ export function PageIntro({
           <p className="mt-space-4 text-label text-on-header/80">{kicker}</p>
           <h1 className={`mt-space-2 max-w-2xl text-on-header ${textH2}`}>{title}</h1>
           {tagline ? <p className="mt-space-3 max-w-xl text-body text-on-header/80">{tagline}</p> : null}
+          {meta ? (
+            <dl className="mt-space-4 flex flex-wrap gap-space-4">
+              {meta.map(({ label, value }) => (
+                <div key={label}>
+                  <dt className="text-label text-on-header/60">{label}</dt>
+                  <dd className="mt-1 text-body text-on-header">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
         </RevealOnScroll>
       </div>
     </section>

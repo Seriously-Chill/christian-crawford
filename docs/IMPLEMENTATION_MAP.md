@@ -27,7 +27,6 @@ whether it's a Server or Client Component.
 | `ProductGrid` | `components/ui/DetailGrid.tsx` — same tile pattern, repurposed for workflow/route lists | Complexity section | Server |
 | `NewsCard` | `components/ui/HighlightCard.tsx` — repurposed for discovered-metric callouts (200+ issues, ~50/~80 routes) | Complexity section | Server |
 | `ContactForm/preview.html` | Visual treatment only (on-gradient panel) reused in `components/sections/Contact.tsx` — no form fields; spec calls for a simple ending, not a lead-gen form | Contact | Server |
-| Accordion (`.vertical-acc`, About-us page — new mapping, not in the original DS export) | `components/ui/Accordion.tsx` — real `1s cubic-bezier(0.4,0,0.2,1)` height/margin expand, `scrollHeight`-measured (CSS can't transition to `height:auto`). Real component is more elaborate (numbered items, single-active via prev/next arrows, fixed `23px` open height, converts to a swipeable horizontal carousel below 880px) — not yet carried over, see `motion.md` | Systems ("classes of problem"), placeholder copy pending real content | **Client** (open/close state + DOM measurement) |
 | Lenis smooth scroll (`motion.md`, corrected) | `components/motion/SmoothScrollProvider.tsx` — real init is explicit (`duration:1.2, easing:<exp-out>, touchMultiplier:2`), not "no options"; `touchMultiplier:2` is now set, the rest already matched Lenis's own defaults | Wraps `<body>` children in root layout | **Client** (Lenis lifecycle) |
 | Page-transition preloader (`motion.md`) | `components/motion/PageTransition.tsx` — the header gradient at a steeper 174deg angle and full opacity, `700ms` fade, static `70px` logo; first visit still uses the inline-script preloader in `layout.tsx` (session-scoped entrance) with matching timing/size. (A pass before this one wrongly called the overlay flat white — see `motion.md` for the specificity mistake that caused it.) | Root layout | **Client** (keys off pathname) |
 | — (new, not in DS) | `components/motion/RevealOnScroll.tsx` — IntersectionObserver wrapper for progressive disclosure. Timing corrected against the real sitewide entrance system: `durationMs` defaults to 1250ms ("animated"), hero-tier sections pass 2000ms ("animated-slow") via `playOnLoad`; callers stagger `delayMs` in ~100ms steps to match the real per-element cadence | Every narrative section; `playOnLoad` on Opening (hero) | **Client** (IO + respects `prefers-reduced-motion`) |
@@ -37,7 +36,10 @@ whether it's a Server or Client Component.
 ## Routes and the sections that fill them
 
 A real multi-page site now, not one scrolling page — see `../docs/design-system/components/Header/README.md`
-for why: the source site's 6-item nav implies 6 real destinations, not anchors.
+for why: the source site's 6-item nav implies real destinations, not anchors.
+The route set below is the approved 5-page architecture (`/`, `/work`,
+`/work/healthwarehouse`, `/about`, `/contact`); `/systems` and `/thinking`
+were deleted outright rather than folded, per that decision.
 
 Layout rhythm is also real and checked page-by-page, not just Home: every
 captured page opens on a near-full-viewport hero band and closes on the
@@ -48,25 +50,44 @@ every route except `/contact` (which already is one).
 
 | Route | Sections | Notes |
 |---|---|---|
-| `/` (Home) | `Opening` + a `NarrativeTeaser` per other route + `ClosingCta` | Introduces the site; each teaser links out rather than duplicating the full page |
-| `/work` | `SelectedWork` + `Complexity` + `ClosingCta` | Case study + the evidence backing it; `Complexity`'s top padding is tightened (`pt-space-4`) since it continues the same case study rather than starting a new one |
-| `/systems` | `SystemsThinking` + `ClosingCta` | New copy generalizing facts already established on `/work`/`/about` into problem classes |
-| `/about` | `CareerProgression` + `DesignBackground` + `ClosingCta` | Full career timeline + the design→engineering throughline |
-| `/thinking` (index) + `/thinking/[slug]` | `AiArchitecture` (first essay, slug `ai-assisted-development`) + `ClosingCta` on both | Same index+article shape as the DS's own News section (`sitemap.md`); essay list lives in `lib/essays.ts` |
-| `/contact` | `Contact` | Promoted from the old page-ending panel to its own destination — already the closing band, so no separate `ClosingCta` |
+| `/` (Home) | `Opening` (+ `HeroVisual`) → `HardProblems` → `Capabilities` → `ProjectFeature` (compact) → `NarrativeTeaser` (background, → `/about`) → `ClosingCta` | Introduces the site; the featured-work teaser links straight to the case study, not to `/work` |
+| `/work` | `PageIntro` → `ProjectFeature` (full) → `OtherWork` → `ClosingCta` | Overview page: HealthWarehouse gets top billing, then Ingage/Kroger/Earlier-work |
+| `/work/healthwarehouse` | `PageIntro` (with `meta`) + `HeroVisual` → six `CaseStudySection`s (Problem → Architecture → Evidence → Product → Result → Role) → `ClosingCta` | The deep case study; Accessibility+Quality are merged into one "Evidence" beat so the page reads as one throughline, not independent modules |
+| `/about` | `CareerProgression` + `DesignBackground` + `CurrentInterests` + `ClosingCta` | Full career timeline, the design→engineering throughline, and the AI-interest cards (replaces the old `/thinking` essay) |
+| `/contact` | `Contact` (+ `ContactVisual`) | Its own destination — already the closing band, so no separate `ClosingCta` |
 
 | Component | Notes |
 |---|---|
-| `Opening.tsx` | Reuses Hero's shape (display headline, one tagline, two CTAs) |
+| `Opening.tsx` | Reuses Hero's shape (display headline, one tagline, two CTAs); now integrates `HeroVisual` (bled off the right edge on `sm:`+, inline above the headline on mobile) |
 | `NarrativeTeaser.tsx` | Shared homepage-teaser shape (kicker, h2, body, CTA) — not a DS component, built only from DS tokens/type scale |
-| `Complexity.tsx` | Built from `EvidenceCard` + `DetailGrid` + `HighlightCard` |
-| `SelectedWork.tsx` | Prose + `DetailGrid`; carries the page's `h1` on `/work` |
-| `SystemsThinking.tsx` | Prose + `Accordion` (placeholder copy); carries the page's `h1` on `/systems` |
+| `HardProblems.tsx` | Home §2, deliberately sparse (text only, no visual) |
+| `Capabilities.tsx` | Home §3, four `EvidenceCard`s (Architecture/Product/Frontend/Quality) |
+| `ProjectFeature.tsx` | Featured-HealthWarehouse composition shared by Home (`compact`) and `/work` (full) — `HeroVisual` + `Tags` + `Button` |
+| `OtherWork.tsx` | `/work`'s Ingage/Kroger `EvidenceCard`s + a distinct compact progression visual for CBTS/Trivantis/Ginghamsburg (not a third generic card) |
+| `CaseStudySection.tsx` | Generic kicker/title/body + children wrapper reused for all six HealthWarehouse beats instead of one bespoke component per section |
 | `CareerProgression.tsx` | Wrapped in `RevealOnScroll` for progressive disclosure, not a visible-on-load timeline; carries the page's `h1` on `/about` |
 | `DesignBackground.tsx` | Prose section, no heading of its own |
-| `AiArchitecture.tsx` | Open-question framing; carries the page's `h1` on the essay route |
-| `Contact.tsx` | Real email/LinkedIn only; carries the page's `h1` on `/contact` |
+| `CurrentInterests.tsx` | About §4, three `EvidenceCard`s (AI + Architecture/Testing/Developer Experience) |
+| `Contact.tsx` | Real email/LinkedIn + `ContactVisual` + a minimal closing statement; carries the page's `h1` on `/contact` |
 | `ClosingCta.tsx` | Sitewide closing bookend (real, reused-across-pages pattern — was homepage-only `HomeContactCta`) pointing at `/contact`, no email/LinkedIn duplicated |
+
+## Visual placeholders (`src/components/visuals/`)
+
+Deliberately flat 2D compositions — establish layout, scale, and a clean
+prop-driven boundary for a future R3F/Three.js swap, without pre-deciding
+depth, lighting, or motion a real 3D pass should design on its own terms.
+
+| Component | Used in |
+|---|---|
+| `HeroVisual.tsx` | Home hero, `/work` intro (via `ProjectFeature`), HealthWarehouse hero (`variant` sizes each) |
+| `ArchitectureVisual.tsx` | HealthWarehouse "Problem" beat — the shared-platform-branching diagram |
+| `QualityVisual.tsx` | HealthWarehouse "Evidence" beat — routes/checks grid |
+| `ContactVisual.tsx` | `/contact` — the complex→simple resolving motif |
+
+Extended (not replaced) to carry the above: `EvidenceCard` gained an optional
+`tags` prop (rendered via the new `Tags.tsx`), and `PageIntro` gained an
+optional `meta` prop (label/value pairs, used for the case study's
+Role/Focus/Stack row).
 
 ## Client/Server boundary summary
 
@@ -76,7 +97,10 @@ Client Components in the app:
 2. `SmoothScrollProvider` — Lenis needs the DOM/lifecycle
 3. `PageTransition` — needs the current pathname to key the transition
 4. `RevealOnScroll` — IntersectionObserver, degrades to "always visible" under `prefers-reduced-motion` or if JS fails
-5. `AccordionItem` — open/close state + `scrollHeight` measurement for the height transition
 
 Every section, every card, and the Button/Header/Footer markup itself render as
 Server Components. Nothing else in the tree needs `"use client"`.
+
+`Accordion`/`AccordionItem` were removed with `/systems`, their only caller —
+`--duration-accordion`/`--ease-accordion` stay defined in `globals.css` (real,
+sourced DS tokens, not invented) even though nothing currently consumes them.

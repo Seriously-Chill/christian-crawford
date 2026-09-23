@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { CareerProgression } from "@/components/sections/CareerProgression";
 import { DesignBackground } from "@/components/sections/DesignBackground";
-import { ClosingCta } from "@/components/sections/ClosingCta";
+import { CurrentInterests } from "@/components/sections/CurrentInterests";
+import { CurveDivider } from "@/components/visuals/CurveDivider";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Twenty years moving from design to development to consulting to architecture — and why that path, not a single framework, is the actual throughline.",
+    "From design and development to consulting and frontend architecture: the experiences that shape how I work.",
 };
 
 export default function AboutPage() {
@@ -16,12 +17,14 @@ export default function AboutPage() {
       <PageIntro
         breadcrumb="About"
         kicker="How this happened"
-        title="Not a framework. A way of working with complexity."
-        tagline="The common thread across twenty years isn't a technology. It's the same question, asked in different rooms: why did this get complicated, and how do you make it something people can actually work with?"
+        title="A career shaped by changing perspectives."
+        tagline="I started in design, moved into development, and grew into consulting and architecture. Across each role, I’ve kept coming back to the same things: how people experience a product, how teams build it, and the discipline of making a tangled system simpler without losing what makes it work."
       />
+      <CurveDivider above="gradient-page" below="surface" />
       <CareerProgression />
       <DesignBackground />
-      <ClosingCta />
+      <CurrentInterests />
+      <CurveDivider above="surface" below="primary" />
     </>
   );
 }

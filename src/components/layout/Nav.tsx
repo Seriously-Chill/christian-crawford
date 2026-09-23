@@ -5,19 +5,18 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 /**
- * Real DS behavior (Header/README.md): six flat top-level items, exact
- * order and label, default `on-header` (white @ ~60% opacity), current
- * route + hover/focus go fully opaque. Below the header breakpoint the
- * nav collapses behind a toggle; opening it reveals the same six links
- * stacked, full-width, over the same gradient — no dropdown, no invented
- * items, just the source's own collapse pattern pointed at real routes.
+ * Real DS behavior (Header/README.md): flat top-level items, exact order
+ * and label, default `on-header` (white @ ~60% opacity), current route +
+ * hover/focus go fully opaque. Below the header breakpoint the nav collapses
+ * behind a toggle; opening it reveals the same links stacked, full-width,
+ * over the same gradient — no dropdown, no invented items. Four routes
+ * (Home/Work/About/Contact) per the approved site architecture;
+ * `/work/healthwarehouse` is reached from `/work`, not top-level nav.
  */
 const links = [
   { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
-  { href: "/systems", label: "Systems" },
   { href: "/about", label: "About" },
-  { href: "/thinking", label: "Thinking" },
   { href: "/contact", label: "Contact" },
 ];
 

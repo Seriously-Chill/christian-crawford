@@ -12,12 +12,20 @@ import { PageTransition } from "@/components/motion/PageTransition";
 // choice anyway (no runtime fetch, no third-party request at all). Files
 // pulled from the real @fontsource/poppins package (weights 400/500 —
 // the only two the Design System's type scale ever uses).
+//
+// The two files were previously mapped backwards here (Medium tagged as
+// 400, Regular tagged as 500) — confirmed via each file's own `OS/2
+// usWeightClass` — which meant every "font-weight: 400" headline (display,
+// h2) rendered in the heavier Medium face and everything declared 500 (h3,
+// body, labels, buttons) rendered in the lighter Regular face: exactly
+// inverted from the reference site's real weight relationship (light
+// headlines, slightly heavier supporting text).
 const poppins = localFont({
   variable: "--font-poppins",
   display: "swap",
   src: [
-    { path: "../fonts/Poppins-Medium.ttf", weight: "400", style: "normal" },
-    { path: "../fonts/Poppins-Regular.ttf", weight: "500", style: "normal" },
+    { path: "../fonts/Poppins-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../fonts/Poppins-Medium.ttf", weight: "500", style: "normal" },
   ],
 });
 
@@ -28,11 +36,11 @@ export const metadata: Metadata = {
     template: "%s — Christian Crawford",
   },
   description:
-    "Christian Crawford is a Senior Software Engineer focused on frontend architecture and complex product systems — turning complicated systems into ones people can actually work with.",
+    "Christian Crawford is a senior software engineer focused on frontend architecture, React, Next.js, accessibility, and complex product systems.",
   openGraph: {
     title: "Christian Crawford — Frontend Architecture & Complex Product Systems",
     description:
-      "Senior Software Engineer focused on frontend architecture and complex product systems.",
+      "Frontend architecture and complex product systems, shaped around the people who build and use them.",
     url: "https://christiancrawford.dev",
     siteName: "Christian Crawford",
     type: "website",
@@ -41,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Christian Crawford — Frontend Architecture & Complex Product Systems",
     description:
-      "Senior Software Engineer focused on frontend architecture and complex product systems.",
+      "Frontend architecture and complex product systems, shaped around the people who build and use them.",
   },
 };
 

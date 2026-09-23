@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/Button";
+import { ContactVisual } from "@/components/visuals/ContactVisual";
+import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { textH2 } from "@/lib/type";
 
 /** Own destination now (was the page's closing panel) — still the header's own gradient. */
@@ -7,8 +9,11 @@ export function Contact() {
     <section className="bg-header-gradient">
       <div className="mx-auto max-w-5xl px-space-3 py-space-7 text-center">
         <h1 className={`text-on-header ${textH2}`}>
-          If any of this sounds like the problem you&apos;re working on —
+          Let&apos;s talk about what you’re building.
         </h1>
+        <div className="mt-space-5 flex justify-center">
+          <ContactVisual />
+        </div>
         <div className="mt-space-5 flex flex-wrap justify-center gap-space-3">
           <Button href="mailto:christian.crawford@pm.me" variant="bordered-inverse">
             christian.crawford@pm.me
@@ -23,7 +28,11 @@ export function Contact() {
             LinkedIn
           </Button>
         </div>
+        <p className="mt-space-6 text-label text-on-header/60">
+          Based in Cincinnati, Ohio.
+        </p>
       </div>
+      <CurveDivider above="gradient-header" below="primary" />
     </section>
   );
 }

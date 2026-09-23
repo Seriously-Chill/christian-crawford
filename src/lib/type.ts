@@ -20,7 +20,7 @@ export const textH2 =
   "text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] xl:text-[48px] 2xl:text-[56px] leading-none tracking-[-0.04em] font-normal";
 
 export const textH3 =
-  "text-[20px] sm:text-[22px] md:text-[25px] lg:text-[28px] xl:text-[30px] 2xl:text-[32px] leading-[1.2] tracking-[-0.04em] font-medium";
+  "text-[20px] sm:text-[22px] md:text-[25px] lg:text-[28px] xl:text-[30px] 2xl:text-[32px] leading-[1.5] tracking-[-0.02em] font-medium";
 
 export const textH4 =
   "text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px] 2xl:text-[28px] leading-[1.5] tracking-[-0.02em] font-medium";

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { textH5 } from "@/lib/type";
+import { textH4 } from "@/lib/type";
+import { Tags } from "@/components/ui/Tags";
 
 /**
  * Production form of ProductCategoryCard: same 24px radius, same real
@@ -38,19 +39,29 @@ import { textH5 } from "@/lib/type";
  * texture's bright, ringless center — a solid white-looking patch
  * instead of the real delicate concentric rings. Sizing to the smaller
  * dimension keeps the whole texture, rings included, in frame.
+ *
+ * Alignment/title scale corrected against a live re-measurement of the
+ * real card (getComputedStyle on the rendered site, not just its CSS
+ * text): the card is a centered flex column — title, body, and button all
+ * `text-align: center` — and the title itself measures 28px/500 (this
+ * design system's `h4` tier), not the smaller `h5` this previously used.
+ * ProductCategoryCard/README.md didn't document alignment at all and
+ * named the wrong tier for the title — both corrected there too.
  */
 export function EvidenceCard({
   title,
   children,
+  tags,
   onGradient = false,
 }: {
   title: string;
   children: ReactNode;
+  tags?: string[];
   onGradient?: boolean;
 }) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-lg p-space-2 sm:p-space-3
+      className={`group relative overflow-hidden rounded-lg p-space-2 text-center sm:p-space-3
         ${
           onGradient
             ? `border border-on-header/10 bg-on-header/10
@@ -62,8 +73,9 @@ export function EvidenceCard({
             : "border border-ink/10 bg-ink/3"
         }`}
     >
-      <h3 className={`${onGradient ? "text-on-header" : "text-ink"} ${textH5}`}>{title}</h3>
+      <h3 className={`${onGradient ? "text-on-header" : "text-ink"} ${textH4}`}>{title}</h3>
       <div className={`mt-space-2 text-body ${onGradient ? "text-on-header/80" : "text-ink/72"}`}>{children}</div>
+      {tags ? <Tags items={tags} onGradient={onGradient} align="center" /> : null}
     </div>
   );
 }

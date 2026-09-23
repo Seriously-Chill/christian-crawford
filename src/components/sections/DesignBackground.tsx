@@ -12,15 +12,15 @@ export function DesignBackground() {
       <div className="mx-auto max-w-5xl px-space-3 py-space-6">
         <RevealOnScroll className="max-w-2xl space-y-space-3 text-body text-ink/72">
           <p>
-            Starting in design isn&apos;t a footnote to the engineering that came after — it&apos;s
-            part of how the engineering works. Visual design, interaction, and multimedia all
-            train the same habit an architecture decision needs later: noticing what the person
-            on the other end of the system actually experiences, not just what the code does.
+            Design training leaves a specific habit: noticing the moment a product asks something
+            of the person using it, before that moment ever reaches code. I still look for that
+            moment first — it usually tells me more about the right architecture than the
+            requirements doc does.
           </p>
           <p>
-            That&apos;s why the useful unit here has never been a single framework. It&apos;s the
-            ability to move between product, UX, design, and engineering on the same problem —
-            and to know which of those disciplines it actually needs first.
+            Moving between design, product, UX, and engineering helps me see a problem from more
+            than one angle. It also helps me work out where a solution should begin: with the
+            interface, the architecture, or a clearer understanding of the need.
           </p>
         </RevealOnScroll>
       </div>
