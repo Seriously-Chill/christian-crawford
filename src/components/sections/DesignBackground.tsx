@@ -18,9 +18,9 @@ export function DesignBackground() {
             requirements doc does.
           </p>
           <p>
-            Moving between design, product, UX, and engineering helps me see a problem from more
-            than one angle. It also helps me work out where a solution should begin: with the
-            interface, the architecture, or a clearer understanding of the need.
+            It&apos;s also why I rarely stay in one lane. Most of the interesting work happens at
+            the point where product, design, and engineering are still negotiating what to build —
+            and that&apos;s easier to navigate having sat in all three seats.
           </p>
         </RevealOnScroll>
       </div>

@@ -50,7 +50,7 @@ export function Opening() {
         <RevealOnScroll playOnLoad durationMs={2000}>
           <p className="text-label text-on-header/80 mb-space-3">Christian Crawford</p>
           <h1 className={`max-w-3xl text-on-header ${textDisplay}`}>
-            I take on the systems that got complicated and make them work again.
+            I build products from scratch, and make the complicated ones work again.
           </h1>
         </RevealOnScroll>
         <RevealOnScroll playOnLoad durationMs={2000} delayMs={150}>
