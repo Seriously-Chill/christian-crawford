@@ -13,7 +13,7 @@ import { textH4 } from "@/lib/type";
 export const metadata: Metadata = {
   title: "HealthWarehouse",
   description:
-    "How a shared React and Next.js platform supports multiple pharmacy brands, alongside accessibility and quality improvements.",
+    "Building a React and Next.js pharmacy platform from the ground up, then architecting it to support multiple brands on a shared, configurable core — alongside accessibility and quality improvements.",
 };
 
 const architectureStack = [
@@ -39,6 +39,7 @@ const workflows = [
 ];
 
 const role = [
+  "Ground-up platform build",
   "Frontend architecture",
   "Next.js / React architecture",
   "GraphQL integration",
@@ -77,7 +78,7 @@ export default function HealthWarehousePage() {
       <CaseStudySection
         kicker="The problem"
         title="One platform. Multiple products."
-        body="HealthWarehouse supports multiple pharmacy brands, each with its own product requirements. Building a separate application for every brand would duplicate shared work and make future changes harder to maintain. The challenge was to support meaningful differences without multiplying the platform underneath them."
+        body="I built the HealthWarehouse platform from the ground up. It now supports multiple pharmacy brands, each with its own product requirements. Rather than splitting the brands into separate applications, I architected one shared, configuration-driven codebase — the trade-off was supporting real differences between brands without duplicating the platform underneath them."
       >
         <div className="flex justify-center">
           <ArchitectureVisual />
@@ -87,7 +88,7 @@ export default function HealthWarehousePage() {
       <CaseStudySection
         kicker="Architecture"
         title="Keep the core shared; configure what differs."
-        body="The platform keeps a shared Next.js and React codebase, using configuration and feature flags for brand-specific behavior. That gives each product room for its own requirements while preserving common infrastructure and patterns."
+        body="Configuration and feature flags carry what's different between brands, on top of one Next.js and React codebase. Each brand gets room for its own requirements without forking the system underneath it."
       >
         <div className="grid gap-space-3 sm:grid-cols-3">
           <EvidenceCard title="Shared core">Shared infrastructure and patterns support every brand.</EvidenceCard>

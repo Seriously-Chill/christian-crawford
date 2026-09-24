@@ -10,17 +10,16 @@ export function HardProblems() {
     <section className="bg-surface">
       <div className="mx-auto max-w-5xl px-space-3 py-space-7">
         <RevealOnScroll>
-          <h2 className={`text-ink ${textH2}`}>
-            Some problems start on a blank page. Others start in the middle of someone else&apos;s
-            decisions.
-          </h2>
+          <h2 className={`text-ink ${textH2}`}>Some of what I&apos;ve built started from nothing.</h2>
           <p className="mt-space-3 max-w-xl text-body text-ink/72">
-            I like both. A new product means figuring out the right shape before any of it exists.
-            An existing one means understanding why it got complicated before I touch anything.
+            A first website for an organization that had never had one. New applications for
+            clients who didn&apos;t have one yet. That&apos;s blank-page work — figuring out the
+            right shape before any of it exists.
           </p>
           <p className="mt-space-2 max-w-xl text-body text-ink/72">
-            Either way, the work is the same: connect product, design, and engineering into
-            something people can actually use.
+            HealthWarehouse started that way too: I built its React and Next.js platform from the
+            ground up. Then came the other kind of work — architecting that system to support
+            multiple pharmacy brands on a shared, configurable core.
           </p>
         </RevealOnScroll>
       </div>
