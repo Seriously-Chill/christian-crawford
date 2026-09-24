@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { textH2 } from "@/lib/type";
+import { textH1 } from "@/lib/type";
 
 /**
  * Real layout, confirmed by rendering every inner page (Products,
@@ -16,6 +16,9 @@ import { textH2 } from "@/lib/type";
  * `visual` is optional artwork beside the text, the same text-left /
  * render-right split Home's `Opening` uses. It stacks under the text below
  * `md`. Pages without one keep the single text column unchanged.
+ *
+ * `logo` is an optional mark (e.g. a case study's employer) shown above the
+ * kicker.
  */
 export function PageIntro({
   breadcrumb,
@@ -24,6 +27,7 @@ export function PageIntro({
   tagline,
   meta,
   visual,
+  logo,
 }: {
   breadcrumb: string;
   kicker: string;
@@ -31,6 +35,7 @@ export function PageIntro({
   tagline?: string;
   meta?: { label: string; value: string }[];
   visual?: ReactNode;
+  logo?: ReactNode;
 }) {
   return (
     <section className="bg-page-gradient">
@@ -53,9 +58,10 @@ export function PageIntro({
               </li>
             </ol>
           </nav>
-          <p className="mt-space-4 text-label text-on-header/80">{kicker}</p>
-          <h1 className={`mt-space-2 max-w-2xl text-on-header ${textH2}`}>{title}</h1>
-          {tagline ? <p className="mt-space-3 max-w-xl text-body text-on-header/80">{tagline}</p> : null}
+          {logo ? <div className="mt-space-4 flex text-on-header">{logo}</div> : null}
+          <p className={`${logo ? "mt-space-3" : "mt-space-4"} text-label text-on-header/80`}>{kicker}</p>
+          <h1 className={`mt-space-2 max-w-[15em] text-on-header lg:mt-space-3 ${textH1}`}>{title}</h1>
+          {tagline ? <p className="mt-space-3 max-w-xl lg:mt-space-4 text-body text-on-header/80">{tagline}</p> : null}
           {meta ? (
             <dl className="mt-space-4 flex flex-wrap gap-space-4">
               {meta.map(({ label, value }) => (

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
+import { LogoMark } from "@/components/ui/LogoMark";
 import { ColorPicker } from "@/components/ui/ColorPicker";
 
 /**
@@ -76,10 +77,7 @@ export function Header() {
           className="flex min-w-0 items-center gap-[10px] rounded-sm focus-visible:outline-offset-4"
           aria-label="Christian Crawford — home"
         >
-          <span
-            aria-hidden="true"
-            className="block h-[31px] w-[26px] shrink-0 bg-on-header [mask:url(/logo-mark.svg)_center/contain_no-repeat]"
-          />
+          <LogoMark className="h-9 w-auto shrink-0 text-on-header" />
           <span className="truncate text-sm text-on-header sm:text-label">Christian Crawford</span>
         </Link>
 

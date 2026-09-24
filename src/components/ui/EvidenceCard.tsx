@@ -52,9 +52,11 @@ export function EvidenceCard({
   title,
   children,
   tags,
+  logo,
   onGradient = false,
 }: {
   title: string;
+  logo?: ReactNode;
   children: ReactNode;
   tags?: string[];
   onGradient?: boolean;
@@ -73,6 +75,9 @@ export function EvidenceCard({
             : "border border-ink/10 bg-ink/3"
         }`}
     >
+      {logo ? (
+        <div className={`mb-space-2 flex justify-center ${onGradient ? "text-on-header" : "text-ink/60"}`}>{logo}</div>
+      ) : null}
       <h3 className={`${onGradient ? "text-on-header" : "text-ink"} ${textH4}`}>{title}</h3>
       <div className={`mt-space-2 text-body ${onGradient ? "text-on-header/80" : "text-ink/72"}`}>{children}</div>
       {tags ? <Tags items={tags} onGradient={onGradient} align="center" /> : null}

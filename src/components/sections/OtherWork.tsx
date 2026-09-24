@@ -1,5 +1,6 @@
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
+import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { textH2, textH4 } from "@/lib/type";
 
 const progression = [
@@ -26,11 +27,19 @@ export function OtherWork() {
         </RevealOnScroll>
 
         <RevealOnScroll delayMs={100} className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
-          <EvidenceCard title="Ingage Partners" tags={["React", "Angular", "JAMstack"]}>
+          <EvidenceCard
+            title="Ingage Partners"
+            tags={["React", "Angular", "JAMstack"]}
+            logo={<EmployerLogo employer="ingage" className="[--logo-h:2rem]" />}
+          >
             Worked across more than ten client engagements, from early-stage products to
             enterprise modernization, including integrations with Mapbox, AWS, and Contentful.
           </EvidenceCard>
-          <EvidenceCard title="Kroger" tags={["React", "AngularJS", "Enterprise"]}>
+          <EvidenceCard
+            title="Kroger"
+            tags={["React", "AngularJS", "Enterprise"]}
+            logo={<EmployerLogo employer="kroger" className="[--logo-h:2rem]" />}
+          >
             Contributed to frontend modernization for ClickList and internal applications, working
             across responsive interfaces and evolving enterprise systems.
           </EvidenceCard>
@@ -41,7 +50,12 @@ export function OtherWork() {
           <p className="mt-space-2 max-w-xl text-body text-ink/72">
             I began my career creating digital experiences at CBTS, Trivantis, and Ginghamsburg — a foundation that still informs how I approach products and systems.
           </p>
-          <ol className="mt-space-3 flex flex-wrap items-center gap-x-space-1 gap-y-space-2">
+          <div className="mt-space-3 flex flex-wrap items-center gap-x-space-4 gap-y-space-2 text-ink/60 [--logo-h:1.5rem]">
+            <EmployerLogo employer="cbts" />
+            <EmployerLogo employer="trivantis" />
+            <EmployerLogo employer="ginghamsburg" />
+          </div>
+          <ol className="mt-space-4 flex flex-wrap items-center gap-x-space-1 gap-y-space-2">
             {progression.map((step, i) => (
               <li key={step} className="flex items-center gap-space-1">
                 <span className="rounded-pill border border-ink/15 bg-ink/3 px-space-2 py-1 text-label text-ink/70">

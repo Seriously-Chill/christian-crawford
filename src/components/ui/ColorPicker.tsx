@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, type CSSProperties, type KeyboardEvent } from "react";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 
 const STORAGE_KEY = "cc-hue";
 const DEFAULT_HUE_PRIMARY = 197; // blue-leaning aqua
@@ -154,35 +155,61 @@ const SWATCHES: {
   })),
 ];
 
-function applyPosition(position: number) {
-  const root = document.documentElement.style;
+// The custom properties a position sets on <html>; `null` means "remove, fall
+// back to globals.css". Also persisted as-is (see `THEME_STORAGE_KEY`) so the
+// pre-paint script in layout.tsx can restore them without this math.
+function themeVars(position: number): Record<string, string | null> {
   const stop = stopAt(position);
   if (stop) {
     const t = STOP_TOKENS[stop];
-    root.setProperty("--hue-primary", "240");
-    root.setProperty("--hue-secondary", "240");
-    root.setProperty("--s-primary", `${t.s[0]}%`);
-    root.setProperty("--s-secondary", `${t.s[1]}%`);
-    root.setProperty("--l-primary", `${t.l[0]}%`);
-    root.setProperty("--l-secondary", `${t.l[1]}%`);
-    if (t.onHeader) root.setProperty("--on-header", t.onHeader);
-    else root.removeProperty("--on-header");
-    if (t.accent) root.setProperty("--accent", t.accent);
-    else root.removeProperty("--accent");
-    if (t.buttonEdge) root.setProperty("--button-edge", t.buttonEdge);
-    else root.removeProperty("--button-edge");
-    return;
+    return {
+      "--hue-primary": "240",
+      "--hue-secondary": "240",
+      "--s-primary": `${t.s[0]}%`,
+      "--s-secondary": `${t.s[1]}%`,
+      "--l-primary": `${t.l[0]}%`,
+      "--l-secondary": `${t.l[1]}%`,
+      "--on-header": t.onHeader ?? null,
+      "--accent": t.accent ?? null,
+      "--button-edge": t.buttonEdge ?? null,
+    };
   }
   const c = hueColors(position);
-  root.setProperty("--hue-primary", String(c.hue));
-  root.setProperty("--hue-secondary", String(c.secondaryHue));
-  root.setProperty("--s-primary", `${SAT_PRIMARY}%`);
-  root.setProperty("--s-secondary", `${SAT_SECONDARY}%`);
-  root.setProperty("--l-primary", `${c.lPrimary}%`);
-  root.setProperty("--l-secondary", `${c.lSecondary}%`);
-  root.removeProperty("--on-header");
-  root.removeProperty("--accent");
-  root.removeProperty("--button-edge");
+  return {
+    "--hue-primary": String(c.hue),
+    "--hue-secondary": String(c.secondaryHue),
+    "--s-primary": `${SAT_PRIMARY}%`,
+    "--s-secondary": `${SAT_SECONDARY}%`,
+    "--l-primary": `${c.lPrimary}%`,
+    "--l-secondary": `${c.lSecondary}%`,
+    "--on-header": null,
+    "--accent": null,
+    "--button-edge": null,
+  };
+}
+
+function applyPosition(position: number) {
+  const root = document.documentElement.style;
+  for (const [name, value] of Object.entries(themeVars(position))) {
+    if (value === null) root.removeProperty(name);
+    else root.setProperty(name, value);
+  }
+}
+
+function persist(position: number) {
+  try {
+    if (position === DEFAULT_HUE_PRIMARY) {
+      window.localStorage.removeItem(STORAGE_KEY);
+      window.localStorage.removeItem(THEME_STORAGE_KEY);
+      return;
+    }
+    const vars = Object.fromEntries(Object.entries(themeVars(position)).filter(([, v]) => v !== null));
+    window.localStorage.setItem(STORAGE_KEY, String(position));
+    window.localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(vars));
+  } catch {
+    // Storage blocked (private mode, disabled site data): the choice just
+    // won't survive a reload.
+  }
 }
 
 function describePosition(position: number) {
@@ -215,6 +242,12 @@ export function ColorPicker() {
   // component's JSX needs to re-render for — restoring the saved choice on
   // mount is a direct DOM write in the effect, not a `setState` call.
   // (`localStorage` doesn't exist during the server render either way.)
+  //
+  // The page's colors are already right before this runs — layout.tsx's
+  // inline <head> script restores them pre-paint. This layout effect syncs
+  // the picker's own controls, re-applies the tokens (dev Strict Mode's
+  // remount resets <html>'s attributes), and re-persists so a choice saved
+  // before the pre-paint script existed gains its stored tokens.
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -236,11 +269,15 @@ export function ColorPicker() {
     });
   }
 
-  useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
+  useLayoutEffect(() => {
+    let stored: string | null = null;
+    try {
+      stored = window.localStorage.getItem(STORAGE_KEY);
+    } catch {}
     const parsed = stored !== null ? Number(stored) : NaN;
     const initial = Number.isFinite(parsed) && parsed >= 0 && parsed <= SLIDER_MAX ? parsed : DEFAULT_HUE_PRIMARY;
     sync(initial);
+    persist(initial);
   }, []);
 
   // Native <details> only closes via its own <summary> toggle — this adds
@@ -265,8 +302,7 @@ export function ColorPicker() {
 
   function choose(position: number) {
     sync(position);
-    if (position === DEFAULT_HUE_PRIMARY) window.localStorage.removeItem(STORAGE_KEY);
-    else window.localStorage.setItem(STORAGE_KEY, String(position));
+    persist(position);
   }
 
   return (

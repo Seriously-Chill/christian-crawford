@@ -8,6 +8,7 @@ import { HeroVisual } from "@/components/visuals/HeroVisual";
 import { ArchitectureVisual } from "@/components/visuals/ArchitectureVisual";
 import { QualityVisual } from "@/components/visuals/QualityVisual";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
+import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { textH4 } from "@/lib/type";
 
 export const metadata: Metadata = {
@@ -61,6 +62,7 @@ export default function HealthWarehousePage() {
       <PageIntro
         breadcrumb="HealthWarehouse"
         kicker="Case study"
+        logo={<EmployerLogo employer="healthwarehouse" labelled className="[--logo-h:2.25rem]" />}
         title="One platform for multiple pharmacy brands."
         meta={[
           { label: "Role", value: "Senior Software Engineer" },
@@ -125,7 +127,7 @@ export default function HealthWarehousePage() {
             </div>
           </div>
           <div className="flex justify-center">
-            <QualityVisual className="max-w-80" />
+            <QualityVisual className="max-w-sm" />
           </div>
         </div>
       </CaseStudySection>

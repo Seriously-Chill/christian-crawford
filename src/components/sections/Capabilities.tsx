@@ -27,7 +27,7 @@ export function Capabilities() {
             <EvidenceCard key={item.title} title={item.title} onGradient>
               <p>{item.body}</p>
               <div className="mt-space-4">
-                <CapabilityVisual variant={item.visual} className="h-28 sm:h-32" />
+                <CapabilityVisual variant={item.visual} className="h-44 sm:h-56" />
               </div>
             </EvidenceCard>
           ))}

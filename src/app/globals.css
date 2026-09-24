@@ -12,42 +12,42 @@
  * IS this site's entire visual language.
  */
 @theme inline {
-  /* Typography — Poppins variable comes from next/font in layout.tsx */
-  --font-sans: var(--font-poppins), sans-serif;
+  /* Typography — Plus Jakarta Sans variable comes from next/font in layout.tsx */
+  --font-sans: var(--font-jakarta), sans-serif;
 
   --text-display: 80px;
-  --text-display--line-height: 1;
-  --text-display--letter-spacing: -0.07em;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.012em;
   --text-display--font-weight: 400;
 
   --text-h2: 56px;
-  --text-h2--line-height: 1;
-  --text-h2--letter-spacing: -0.04em;
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.01em;
   --text-h2--font-weight: 400;
 
   --text-h3: 32px;
-  --text-h3--line-height: 1.2;
-  --text-h3--letter-spacing: -0.04em;
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.005em;
   --text-h3--font-weight: 500;
 
   --text-h4: 28px;
-  --text-h4--line-height: 1.5;
-  --text-h4--letter-spacing: -0.02em;
+  --text-h4--line-height: 1.25;
+  --text-h4--letter-spacing: -0.005em;
   --text-h4--font-weight: 500;
 
   --text-h5: 20px;
-  --text-h5--line-height: 1.5;
-  --text-h5--letter-spacing: -0.02em;
+  --text-h5--line-height: 1.35;
+  --text-h5--letter-spacing: -0.005em;
   --text-h5--font-weight: 500;
 
   --text-body: 16px;
   --text-body--line-height: 1.5;
-  --text-body--letter-spacing: -0.02em;
+  --text-body--letter-spacing: 0;
   --text-body--font-weight: 500;
 
   --text-label: 16px;
   --text-label--line-height: 1;
-  --text-label--letter-spacing: -0.03em;
+  --text-label--letter-spacing: 0;
   --text-label--font-weight: 500;
 
   /* Colors — primary/secondary expressed in HSL, driven by CSS custom
@@ -106,7 +106,11 @@
      entrance system, across all 6 captured pages, not just Home. */
   --ease-ripple: ease-out;
   --duration-ripple: 800ms;
-  --duration-page-transition: 700ms;
+  /* Page transition: the source's 700ms each way, shortened for a
+     snappier feel — cover fast, reveal a touch slower so the new page
+     arrives rather than pops. */
+  --duration-page-cover: 300ms;
+  --duration-page-reveal: 400ms;
   --duration-entrance: 1250ms;
   --duration-entrance-slow: 2000ms;
   --duration-accordion: 1000ms;
@@ -161,6 +165,12 @@
     scroll-behavior: auto;
   }
 
+  /* Avoid a lone word on a paragraph's last line (headings balance
+     instead; see src/lib/type.ts). */
+  p {
+    text-wrap: pretty;
+  }
+
   /*
    * Real, confirmed by rendering the source (not just reading its CSS):
    * `<body>` itself carries `.elementor-kit-6`, which paints the page's
@@ -209,8 +219,12 @@
    @media (hover: hover) and (pointer: fine) guard on touch devices. */
 @theme inline {
   --animate-ripple: ripple var(--duration-ripple) var(--ease-ripple) forwards;
+  /* `ease` both ways: the closest standard curve to the source's measured
+     fade (half-covered ~45% of the way in, a long soft tail). */
+  --animate-page-transition-in: page-transition-in
+    var(--duration-page-cover) ease forwards;
   --animate-page-transition-out: page-transition-out
-    var(--duration-page-transition) ease-out forwards;
+    var(--duration-page-reveal) ease forwards;
 }
 
 @keyframes ripple {
@@ -221,6 +235,15 @@
   100% {
     opacity: 0;
     scale: 3.5;
+  }
+}
+
+@keyframes page-transition-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

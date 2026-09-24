@@ -66,7 +66,7 @@ export default function AiPage() {
         <div className="mx-auto max-w-5xl px-space-3 py-space-7">
           <RevealOnScroll className="text-center">
             <p className="text-label text-on-header/80">Scope</p>
-            <h2 className={`mt-space-2 text-on-header ${textH2}`}>A focused safeguard, not a safety net</h2>
+            <h2 className={`mt-space-2 text-on-header lg:mt-space-3 ${textH2}`}>A focused safeguard, not a safety net</h2>
           </RevealOnScroll>
           <RevealOnScroll delayMs={100} className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
             <EvidenceCard title="What it covers" onGradient>

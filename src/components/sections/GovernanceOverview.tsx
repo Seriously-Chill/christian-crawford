@@ -24,7 +24,7 @@ export function GovernanceOverview() {
       <div className="mx-auto max-w-5xl px-space-3 pb-space-7">
         <RevealOnScroll className="text-center">
           <h2 className={`text-on-header ${textH2}`}>The repository behind this site.</h2>
-          <p className="mx-auto mt-space-3 max-w-xl text-body text-on-header/80">
+          <p className="mx-auto mt-space-3 max-w-xl text-body lg:mt-space-4 text-on-header/80">
             Everything on this page describes the Git repository for this portfolio website—the
             code you&apos;re reading now. I build it with Claude Code, and I added a small set of
             hooks that treat changes to the agent&apos;s own instructions and enforcement files

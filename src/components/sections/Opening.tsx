@@ -40,7 +40,7 @@ import { textDisplay } from "@/lib/type";
 export function Opening() {
   return (
     <section className="relative overflow-hidden bg-page-gradient">
-      <div className="pointer-events-none absolute right-0 top-1/2 hidden -translate-y-1/2 translate-x-[8%] sm:block">
+      <div className="pointer-events-none absolute top-1/2 hidden -translate-y-1/2 right-space-3 sm:block">
         <HeroVisual variant="home" />
       </div>
       <div className="relative mx-auto flex min-h-[calc(100dvh-64px)] max-w-5xl flex-col justify-center px-space-3 py-space-6">
@@ -49,12 +49,12 @@ export function Opening() {
         </RevealOnScroll>
         <RevealOnScroll playOnLoad durationMs={2000}>
           <p className="text-label text-on-header/80 mb-space-3">Christian Crawford</p>
-          <h1 className={`max-w-3xl text-on-header ${textDisplay}`}>
+          <h1 className={`max-w-[11em] text-on-header ${textDisplay}`}>
             I build products from scratch, and make the complicated ones simpler to work with.
           </h1>
         </RevealOnScroll>
         <RevealOnScroll playOnLoad durationMs={2000} delayMs={150}>
-          <p className="mt-space-4 max-w-xl text-h5 text-on-header/80">
+          <p className="mt-space-4 max-w-xl text-h5 lg:mt-space-5 text-on-header/80">
             I&apos;m a senior software engineer focused on frontend architecture. I work
             across product, design, and engineering to turn difficult requirements
             into systems people can understand, use, and evolve.

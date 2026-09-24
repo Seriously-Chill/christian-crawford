@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/Button";
 import { Tags } from "@/components/ui/Tags";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { HeroVisual } from "@/components/visuals/HeroVisual";
+import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { textH2 } from "@/lib/type";
 
 const content = {
@@ -32,9 +33,11 @@ export function ProjectFeature({ compact = false }: { compact?: boolean }) {
     <section className="bg-page-gradient">
       <div className="mx-auto grid max-w-5xl items-center gap-space-5 px-space-3 py-space-7 sm:grid-cols-[3fr_2fr]">
         <RevealOnScroll>
-          <p className="text-label text-on-header/80">HealthWarehouse</p>
-          <h2 className={`mt-space-2 max-w-xl text-on-header ${textH2}`}>{headline}</h2>
-          <p className="mt-space-3 max-w-md text-body text-on-header/80">{body}</p>
+          <div className="flex">
+            <EmployerLogo employer="healthwarehouse" labelled className="text-on-header [--logo-h:2rem]" />
+          </div>
+          <h2 className={`mt-space-2 max-w-xl text-on-header lg:mt-space-3 ${textH2}`}>{headline}</h2>
+          <p className="mt-space-3 max-w-md text-body lg:mt-space-4 text-on-header/80">{body}</p>
           <Tags items={tags} onGradient />
           <div className="mt-space-4">
             <Button href="/work/healthwarehouse" variant="bordered-inverse">
@@ -44,9 +47,9 @@ export function ProjectFeature({ compact = false }: { compact?: boolean }) {
         </RevealOnScroll>
         <RevealOnScroll
           delayMs={100}
-          className="flex items-center justify-center justify-self-center rounded-lg border border-on-header/10 bg-on-header/10 p-space-4"
+          className="flex w-full max-w-sm items-center justify-center justify-self-center rounded-lg border border-on-header/10 bg-on-header/10 p-space-3 sm:max-w-none sm:p-space-4"
         >
-          <HeroVisual variant="work" />
+          <HeroVisual variant="feature" />
         </RevealOnScroll>
       </div>
     </section>

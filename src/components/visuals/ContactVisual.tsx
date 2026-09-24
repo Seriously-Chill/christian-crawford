@@ -6,11 +6,11 @@ export function ContactVisual({ className = "" }: { className?: string }) {
     <Image
       src="/visuals/contact-resolution.webp"
       alt=""
-      width={1200}
-      height={1200}
+      width={1004}
+      height={554}
       unoptimized
       sizes="(max-width: 640px) 80vw, 480px"
-      className={`h-48 w-48 object-contain sm:h-56 sm:w-56 ${className}`}
+      className={`h-auto w-56 sm:w-64 ${className}`}
     />
   );
 }

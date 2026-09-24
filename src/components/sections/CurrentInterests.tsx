@@ -28,7 +28,7 @@ export function CurrentInterests() {
       <div className="mx-auto max-w-5xl px-space-3 py-space-7">
         <RevealOnScroll className="text-center">
           <h2 className={`text-ink ${textH2}`}>I&apos;m interested in what&apos;s next.</h2>
-          <p className="mx-auto mt-space-3 max-w-xl text-body text-ink/72">
+          <p className="mx-auto mt-space-3 max-w-xl text-body lg:mt-space-4 text-ink/72">
             AI-assisted development is changing how software gets built. I&apos;m interested in
             what that means for architecture, testing, maintainability, and the way humans work
             with large codebases.

@@ -1,32 +1,23 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import Image from "next/image";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { themeInitScript } from "@/lib/theme";
+import { LogoMark } from "@/components/ui/LogoMark";
 
 // Self-hosted: the local device shell's egress allowlist doesn't reach
 // fonts.googleapis.com, and self-hosting is the more production-correct
-// choice anyway (no runtime fetch, no third-party request at all). Files
-// pulled from the real @fontsource/poppins package (weights 400/500 —
-// the only two the Design System's type scale ever uses).
-//
-// The two files were previously mapped backwards here (Medium tagged as
-// 400, Regular tagged as 500) — confirmed via each file's own `OS/2
-// usWeightClass` — which meant every "font-weight: 400" headline (display,
-// h2) rendered in the heavier Medium face and everything declared 500 (h3,
-// body, labels, buttons) rendered in the lighter Regular face: exactly
-// inverted from the reference site's real weight relationship (light
-// headlines, slightly heavier supporting text).
-const poppins = localFont({
-  variable: "--font-poppins",
+// choice anyway (no runtime fetch, no third-party request at all). One
+// variable file (wght 200–800, from google/fonts' ofl/plusjakartasans)
+// covers every weight the type scale uses.
+const jakarta = localFont({
+  variable: "--font-jakarta",
   display: "swap",
-  src: [
-    { path: "../fonts/Poppins-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../fonts/Poppins-Medium.ttf", weight: "500", style: "normal" },
-  ],
+  src: "../fonts/PlusJakartaSans-Variable.ttf",
+  weight: "200 800",
 });
 
 export const metadata: Metadata = {
@@ -60,8 +51,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${poppins.variable} min-h-full flex flex-col`}>
+    // `suppressHydrationWarning`: the <head> script below sets the saved
+    // color's custom properties on <html> before hydration, so its `style`
+    // intentionally differs from the server render.
+    <html lang="en" className="h-full" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className={`${jakarta.variable} min-h-full flex flex-col`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-10001 focus:top-4 focus:left-4 focus:rounded-sm focus:bg-surface focus:px-space-2 focus:py-2 focus:text-accent focus:shadow-lg"
@@ -99,7 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           suppressHydrationWarning
           className="fixed inset-0 z-10000 flex items-center justify-center bg-page-transition-gradient motion-reduce:hidden"
         >
-          <Image src="/logo-mark.svg" alt="" width={70} height={82} priority />
+          <LogoMark className="h-auto w-[70px] text-on-header" />
         </div>
         <script
           dangerouslySetInnerHTML={{

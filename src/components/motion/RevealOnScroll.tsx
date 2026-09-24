@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { PAGE_COVERED_ATTR, PAGE_REVEAL_EVENT } from "@/components/motion/PageTransition";
 
 /**
  * Small IntersectionObserver-driven reveal used for progressive disclosure
@@ -28,6 +29,10 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
  * component opts into client-side, and only once it has confirmed motion
  * is safe — so a no-JS visit and a reduced-motion visit are both just...
  * visible. Nothing is ever gated behind motion.
+ *
+ * `playOnLoad` entrances that mount behind the page-transition overlay
+ * wait for it to start lifting (PageTransition's `PAGE_REVEAL_EVENT`)
+ * rather than playing out unseen underneath it.
  */
 export function RevealOnScroll({
   children,
@@ -64,10 +69,21 @@ export function RevealOnScroll({
         const id = requestAnimationFrame(() => setHidden(false));
         return () => cancelAnimationFrame(id);
       }
-      const raf1 = requestAnimationFrame(() => {
-        requestAnimationFrame(() => setHidden(false));
-      });
-      return () => cancelAnimationFrame(raf1);
+      let raf1 = 0;
+      const play = () => {
+        raf1 = requestAnimationFrame(() => {
+          requestAnimationFrame(() => setHidden(false));
+        });
+      };
+      if (!document.documentElement.hasAttribute(PAGE_COVERED_ATTR)) {
+        play();
+        return () => cancelAnimationFrame(raf1);
+      }
+      window.addEventListener(PAGE_REVEAL_EVENT, play, { once: true });
+      return () => {
+        window.removeEventListener(PAGE_REVEAL_EVENT, play);
+        cancelAnimationFrame(raf1);
+      };
     }
 
     if (reduced) return;

@@ -4,6 +4,7 @@ import { Capabilities } from "@/components/sections/Capabilities";
 import { ProjectFeature } from "@/components/sections/ProjectFeature";
 import { NarrativeTeaser } from "@/components/sections/NarrativeTeaser";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
+import { EmployerLogoRow } from "@/components/ui/EmployerLogo";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -68,7 +69,13 @@ export default function HomePage() {
           how something actually gets used, then build toward that instead of around it."
         href="/about"
         linkLabel="More about me"
-      />
+      >
+        <EmployerLogoRow
+          label="Where I’ve worked"
+          employers={["healthwarehouse", "ingage", "kroger", "cbts", "cincinnati-bell", "trivantis", "ginghamsburg"]}
+          className="mt-space-5 text-ink/60"
+        />
+      </NarrativeTeaser>
 
       <CurveDivider above="surface" below="primary" />
     </>
