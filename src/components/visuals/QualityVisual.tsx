@@ -1,16 +1,16 @@
-const routes = Array.from({ length: 24 });
+import Image from "next/image";
 
-/**
- * Abstract "routes under automated check" grid — a portion of the cells
- * read as checked (`primary`), the rest as unchecked (`ink/10`). No real
- * route names or counts invented; the surrounding copy carries those.
- */
+/** Decorative illustration for the case study's quality evidence section. */
 export function QualityVisual({ className = "" }: { className?: string }) {
   return (
-    <div aria-hidden="true" className={`grid grid-cols-8 gap-space-1 ${className}`}>
-      {routes.map((_, i) => (
-        <div key={i} className={`aspect-square rounded-sm ${i % 3 === 0 ? "bg-accent/70" : "bg-ink/10"}`} />
-      ))}
-    </div>
+    <Image
+      src="/visuals/quality-evidence.webp"
+      alt=""
+      width={1200}
+      height={1200}
+      unoptimized
+      sizes="(max-width: 640px) 50vw, 160px"
+      className={`h-auto w-full object-contain ${className}`}
+    />
   );
 }
