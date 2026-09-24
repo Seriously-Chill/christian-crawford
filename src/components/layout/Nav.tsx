@@ -13,13 +13,14 @@ import { textH3 } from "@/lib/type";
  * over the same gradient (blurred, so the page doesn't read through), at
  * h3 size with a dot marking the current page. The links fade down in
  * sequence, and the header's curved bottom edge moves down to the
- * panel's while it's open — no dropdown, no invented items. Four routes
- * (Home/Work/About/Contact) per the approved site architecture;
+ * panel's while it's open — no dropdown, no invented items. Five routes
+ * (Home/Work/AI/About/Contact) per the approved site architecture;
  * `/work/healthwarehouse` is reached from `/work`, not top-level nav.
  */
 const links = [
   { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
+  { href: "/ai", label: "AI" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

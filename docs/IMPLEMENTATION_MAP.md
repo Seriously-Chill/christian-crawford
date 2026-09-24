@@ -37,8 +37,8 @@ whether it's a Server or Client Component.
 
 A real multi-page site now, not one scrolling page — see `../docs/design-system/components/Header/README.md`
 for why: the source site's 6-item nav implies real destinations, not anchors.
-The route set below is the approved 5-page architecture (`/`, `/work`,
-`/work/healthwarehouse`, `/about`, `/contact`); `/systems` and `/thinking`
+The route set below is the approved architecture (`/`, `/work`,
+`/work/healthwarehouse`, `/ai`, `/about`, `/contact`); `/systems` and `/thinking`
 were deleted outright rather than folded, per that decision.
 
 Layout rhythm is also real and checked page-by-page, not just Home: every
@@ -53,6 +53,7 @@ every route except `/contact` (which already is one).
 | `/` (Home) | `Opening` (+ `HeroVisual`) → `HardProblems` → `Capabilities` → `ProjectFeature` (compact) → `NarrativeTeaser` (background, → `/about`) → `ClosingCta` | Introduces the site; the featured-work teaser links straight to the case study, not to `/work` |
 | `/work` | `PageIntro` → `ProjectFeature` (full) → `OtherWork` → `ClosingCta` | Overview page: HealthWarehouse gets top billing, then Ingage/Kroger/Earlier-work |
 | `/work/healthwarehouse` | `PageIntro` (with `meta`) + `HeroVisual` → six `CaseStudySection`s (Problem → Architecture → Evidence → Product → Result → Role) → `ClosingCta` | The deep case study; Accessibility+Quality are merged into one "Evidence" beat so the page reads as one throughline, not independent modules |
+| `/ai` | `PageIntro` → `GovernanceOverview` (on-gradient `EvidenceCard`s: the two checks side by side, decision log full-width beneath, protected files as `Tags`) → three `CaseStudySection`s with `DetailGrid` (gate → Bash check → decision log) → on-gradient scope cards → closing line | How AI fits the workflow, told through this repo's Claude Code governance hooks, using only existing section/card patterns |
 | `/about` | `CareerProgression` + `DesignBackground` + `CurrentInterests` + `ClosingCta` | Full career timeline, the design→engineering throughline, and the AI-interest cards (replaces the old `/thinking` essay) |
 | `/contact` | `Contact` (+ `ContactVisual`) | Its own destination — already the closing band, so no separate `ClosingCta` |
 

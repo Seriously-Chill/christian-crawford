@@ -17,7 +17,7 @@ const POSITIONS: { name: string; value: number }[] = [
   { name: "black", value: 460 },
 ];
 
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/about", "/contact"];
+const ROUTES = ["/", "/work", "/work/healthwarehouse", "/ai", "/about", "/contact"];
 
 for (const { name, value } of POSITIONS) {
   for (const route of ROUTES) {

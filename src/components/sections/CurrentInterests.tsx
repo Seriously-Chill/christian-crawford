@@ -1,4 +1,5 @@
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { Button } from "@/components/ui/Button";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { textH2 } from "@/lib/type";
 
@@ -17,7 +18,10 @@ const interests = [
   },
 ];
 
-/** About §4, "What I'm interested in now" — forward-looking, not a solved problem. */
+/**
+ * About §4, "What I'm interested in now" — forward-looking, not a solved
+ * problem. Links on to `/ai`, where one of these interests is shown in practice.
+ */
 export function CurrentInterests() {
   return (
     <section className="bg-surface">
@@ -36,6 +40,11 @@ export function CurrentInterests() {
               {item.body}
             </EvidenceCard>
           ))}
+        </RevealOnScroll>
+        <RevealOnScroll delayMs={200} className="mt-space-5 text-center">
+          <Button href="/ai" variant="bordered">
+            See how I work with AI
+          </Button>
         </RevealOnScroll>
       </div>
     </section>

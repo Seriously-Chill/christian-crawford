@@ -31,6 +31,7 @@ import { textH3 } from "@/lib/type";
 const links = [
   { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
+  { href: "/ai", label: "AI" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
