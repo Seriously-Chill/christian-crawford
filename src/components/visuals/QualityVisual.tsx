@@ -1,6 +1,11 @@
 import Image from "next/image";
 
-/** Decorative illustration for the case study's quality evidence section. */
+/**
+ * Decorative illustration for the case study's quality evidence section.
+ * Shown at every width, cropped to 3:2 to drop the render's empty canvas
+ * above and below the object. It stacks under the workflow list on small
+ * screens and sits beside it from `md` up.
+ */
 export function QualityVisual({ className = "" }: { className?: string }) {
   return (
     <Image
@@ -9,8 +14,8 @@ export function QualityVisual({ className = "" }: { className?: string }) {
       width={1200}
       height={1200}
       unoptimized
-      sizes="(max-width: 640px) 50vw, 160px"
-      className={`h-auto w-full object-contain ${className}`}
+      sizes="320px"
+      className={`aspect-[3/2] w-full object-cover ${className}`}
     />
   );
 }

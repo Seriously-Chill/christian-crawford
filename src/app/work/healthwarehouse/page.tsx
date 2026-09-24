@@ -79,18 +79,15 @@ export default function HealthWarehousePage() {
         kicker="The problem"
         title="One platform. Multiple products."
         body="I built the HealthWarehouse platform from the ground up. It now supports multiple pharmacy brands, each with its own product requirements. The challenge was supporting real differences between those brands without splitting them into separate applications or duplicating the platform underneath them."
-      >
-        <div className="flex justify-center">
-          <ArchitectureVisual />
-        </div>
-      </CaseStudySection>
+      />
 
       <CaseStudySection
         kicker="Architecture"
         title="Keep the core shared; configure what differs."
-        body="I architected one shared Next.js and React codebase, with configuration and feature flags carrying what's different between brands. Each brand gets room for its own requirements without forking the core."
+        body="As the platform grew to serve more brands, I architected it as one shared Next.js and React codebase, with configuration and feature flags carrying what's different between brands. Each brand gets room for its own requirements without forking the core."
       >
-        <div className="grid gap-space-3 sm:grid-cols-3">
+        <ArchitectureVisual alt="Illustration: three separate brand modules above a single shared platform base." />
+        <div className="mt-space-3 grid gap-space-3 sm:grid-cols-3">
           <EvidenceCard title="Shared core">Shared infrastructure and patterns support every brand.</EvidenceCard>
           <EvidenceCard title="Configuration">
             Configuration carries product-specific behavior.
@@ -120,15 +117,15 @@ export default function HealthWarehousePage() {
         <p className="mx-auto mt-space-5 max-w-xl text-center text-body text-ink/72">
           Playwright and axe-core checks cover roughly 50 routes and key flows, including checkout, prescriptions, forms, and mobile navigation. A separate SEO regression suite checks roughly 80 routes for metadata, headings, structured data, language attributes, and link accessibility.
         </p>
-        <div className="mt-space-5 grid items-center gap-space-5 sm:grid-cols-[2fr_1fr]">
+        <div className="mt-space-5 grid items-center gap-space-3 md:grid-cols-[3fr_2fr] md:gap-space-5">
           <div>
             <h3 className={`text-ink ${textH4}`}>Critical patient workflows</h3>
             <div className="mt-space-3">
               <DetailGrid items={workflows} />
             </div>
           </div>
-          <div className="hidden justify-center sm:flex">
-            <QualityVisual className="w-full max-w-40" />
+          <div className="flex justify-center">
+            <QualityVisual className="max-w-80" />
           </div>
         </div>
       </CaseStudySection>

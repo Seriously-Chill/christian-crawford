@@ -42,7 +42,7 @@ const eras = [
     role: "Senior Software Engineer",
     org: "HealthWarehouse.com",
     body:
-      "I lead frontend architecture for healthcare products built with Next.js, React, and GraphQL. The work includes a configurable pharmacy platform, accessibility and testing improvements, and practical standards for AI-assisted development.",
+      "I lead frontend architecture for healthcare products built with Next.js, React, and GraphQL. The work includes a configurable pharmacy platform, accessibility and testing improvements, and practical standards for AI-assisted development within HealthWarehouse’s own codebases.",
   },
 ];
 

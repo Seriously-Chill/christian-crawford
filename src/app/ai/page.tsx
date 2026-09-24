@@ -4,18 +4,22 @@ import { GovernanceOverview } from "@/components/sections/GovernanceOverview";
 import { CaseStudySection } from "@/components/sections/CaseStudySection";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
-import { DetailGrid } from "@/components/ui/DetailGrid";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
+import { GovernanceFlow } from "@/components/visuals/GovernanceFlow";
 import { HeroVisual } from "@/components/visuals/HeroVisual";
 import { textH2, textH3 } from "@/lib/type";
 
 export const metadata: Metadata = {
   title: "AI in practice",
   description:
-    "How I use AI in engineering work, and the project-level governance layer I built around Claude Code to protect the rules it works within.",
+    "How I use AI in engineering work, and the Claude Code hooks I added to this portfolio site's own repository to protect the rules the agent works within.",
 };
 
-const followUp = "mx-auto mt-space-5 max-w-xl text-center text-body text-ink/72";
+const tradeOffs = [
+  "The Bash check runs after the command, so it stops work for review but doesn’t undo the change.",
+  "Shell changes to AGENTS.md aren’t flagged, because next dev rewrites that file on its own. Direct edits to it still ask first.",
+  "When the hooks are first installed, no session baseline exists yet, so the first Bash check can flag existing governance files as changed. From the next session on, the baseline is in place.",
+];
 
 export default function AiPage() {
   return (
@@ -31,39 +35,29 @@ export default function AiPage() {
       <CurveDivider above="gradient-page" below="surface" />
 
       <CaseStudySection
-        kicker="Confirmation gate"
-        title="Protect the rules that shape the work"
-        body="If Claude Code tries to edit a governance file directly, a hook asks for confirmation. The protected files include the Claude Code hook settings and scripts, the project’s agent instructions, and the decision log that explains why the safeguards exist."
+        kicker="How it works"
+        title="Two paths to the same files"
+        body="Claude Code can change a file with its Edit and Write tools or with a shell command. Each path gets its own check, and they share one record of what's already been reviewed."
       >
-        <DetailGrid items={["Hook settings", "Hook scripts", "Agent instructions", "Decision log"]} />
-        <p className={followUp}>
-          That distinction matters: an agent changing application code is different from an agent
-          quietly changing the rules it follows.
-        </p>
+        <GovernanceFlow />
       </CaseStudySection>
 
       <CaseStudySection
-        kicker="Bash change check"
-        title="Catch the alternate route"
-        body="A direct-edit check can’t see every way a file might be changed. A second hook checks after Bash commands and looks for changes to the same governance files. This helps catch edits made through shell commands such as sed, redirects, or file copies."
-      >
-        <DetailGrid items={["sed edits", "Redirects", "File copies", "Other shell writes"]} />
-        <p className={followUp}>
-          The two checks cover different paths through the tools, so the governance layer is harder
-          to weaken by accident.
-        </p>
-        <p className="mx-auto mt-space-2 max-w-xl text-center text-label text-ink/72">
-          The command has already run by then, so the check stops and asks rather than undoing it.
-          AGENTS.md is left to the confirmation gate, because next dev rewrites it on its own.
-        </p>
-      </CaseStudySection>
+        kicker="Why governance files"
+        title="Rules need a different check than code"
+        body="A bug in a component shows up in tests, in review, or on the page. A change to the hooks or instructions an agent follows is different: it can quietly remove the check that would have caught the next problem. So changes to those files stop and wait for me instead of riding along with ordinary work."
+      />
 
       <CaseStudySection
-        kicker="Decision log"
-        title="Make the reasoning inspectable"
-        body="The decision log records what the safeguards protect, why this project uses them, and which controls from another project were intentionally left out. That keeps the setup understandable instead of turning it into unexplained automation."
+        kicker="Why this subset"
+        title="Only the checks this repo needs"
+        body="These hooks are a scaled-down version of a larger set from another project. That set also covers brand configuration, API and authentication changes, quality gates, documentation drift, and accessibility—concerns this small site doesn't have. I kept the governance checks and left the rest out."
       >
-        <DetailGrid items={["What it protects", "Why it exists", "What was left out", "Known gaps"]} />
+        <p className="mx-auto max-w-xl text-center text-body text-ink/72">
+          The repository&apos;s decision log records what was kept, what was dropped, and the
+          adjustments made along the way, so the setup can be read and questioned rather than
+          taken on trust.
+        </p>
       </CaseStudySection>
 
       <CurveDivider above="surface" below="gradient-page" />
@@ -72,21 +66,26 @@ export default function AiPage() {
         <div className="mx-auto max-w-5xl px-space-3 py-space-7">
           <RevealOnScroll className="text-center">
             <p className="text-label text-on-header/80">Scope</p>
-            <h2 className={`mt-space-2 text-on-header ${textH2}`}>Build safeguards for the project at hand</h2>
-            <p className="mx-auto mt-space-3 max-w-xl text-body text-on-header/80">
-              This isn&apos;t a universal AI security system. It&apos;s a focused, project-level
-              safeguard for Claude Code&apos;s governance files. It asks for confirmation on direct
-              edits and checks for shell-based changes; it doesn&apos;t automatically validate every
-              piece of generated application code.
-            </p>
+            <h2 className={`mt-space-2 text-on-header ${textH2}`}>A focused safeguard, not a safety net</h2>
           </RevealOnScroll>
           <RevealOnScroll delayMs={100} className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
-            <EvidenceCard title="What it does" onGradient>
-              Guards the files that define how Claude Code works in this repo.
+            <EvidenceCard title="What it covers" onGradient>
+              Changes to the selected governance files in this repository, whether they come from a
+              direct edit or a shell command.
             </EvidenceCard>
             <EvidenceCard title="What it doesn’t" onGradient>
-              Validate generated application code. That still takes tests and review.
+              Whether AI-generated application code is correct. That still takes tests and my own
+              review.
             </EvidenceCard>
+            <div className="sm:col-span-2">
+              <EvidenceCard title="Trade-offs" onGradient>
+                <ul className="mx-auto max-w-2xl space-y-space-2">
+                  {tradeOffs.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </EvidenceCard>
+            </div>
           </RevealOnScroll>
         </div>
       </section>

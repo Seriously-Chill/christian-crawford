@@ -1,11 +1,16 @@
 import Image from "next/image";
 
-/** Rendered placeholder for the HealthWarehouse shared-platform architecture. */
-export function ArchitectureVisual({ className = "" }: { className?: string }) {
+/**
+ * Rendered HealthWarehouse shared-platform artwork: brand modules above one
+ * shared base. Shown in the case study's Architecture section, where it
+ * illustrates the shared core / configured differences split — pass `alt`
+ * there so it carries that meaning; it stays decorative without one.
+ */
+export function ArchitectureVisual({ className = "", alt = "" }: { className?: string; alt?: string }) {
   return (
     <Image
       src="/visuals/healthwarehouse-platform.webp"
-      alt=""
+      alt={alt}
       width={1200}
       height={1200}
       unoptimized
