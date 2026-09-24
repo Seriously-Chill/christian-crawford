@@ -11,7 +11,7 @@ whether it's a Server or Client Component.
 | Source | Production |
 |---|---|
 | `tokens.json` colors/spacing/radius | `src/app/globals.css` `@theme` block (Tailwind v4 CSS-first theme) |
-| `tokens.json` type styles (display/h2/h3/h4/h5/body/label) | Same `@theme` block, as `--text-*` tuples; Poppins loaded via `next/font/google` in `layout.tsx` |
+| `tokens.json` type styles (display/h2/h3/h4/h5/body/label) | Same `@theme` block, as `--text-*` tuples; Plus Jakarta Sans self-hosted via `next/font/local` in `layout.tsx` (source used Poppins); heading tracking loosened for it in `src/lib/type.ts` |
 | Header gradient + page-transition gradient (`motion.md`) | `bg-header-gradient` (90deg) / `bg-page-transition-gradient` (174deg, steeper + full opacity) utilities — both real, see below |
 | Entrance-system + accordion timing (`motion.md`, corrected) | `--duration-entrance` (1250ms), `--duration-entrance-slow` (2000ms), `--duration-accordion` (1000ms), `--ease-accordion` (`cubic-bezier(0.4,0,0.2,1)`) custom properties |
 
