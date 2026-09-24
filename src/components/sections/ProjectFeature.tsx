@@ -7,7 +7,7 @@ import { textH2 } from "@/lib/type";
 const content = {
   compact: {
     headline: "One platform. Different pharmacy brands.",
-    body: "I built this React and Next.js platform from the ground up, then architected it so multiple pharmacy brands run on one shared, configurable core.",
+    body: "A React and Next.js pharmacy platform where each brand gets its own requirements without a separate codebase — configuration and feature flags handle what differs.",
     tags: ["Next.js", "React", "GraphQL", "Zustand", "MUI"],
     cta: "View the case study",
   },

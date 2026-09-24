@@ -78,7 +78,7 @@ export default function HealthWarehousePage() {
       <CaseStudySection
         kicker="The problem"
         title="One platform. Multiple products."
-        body="I built the HealthWarehouse platform from the ground up. It now supports multiple pharmacy brands, each with its own product requirements. Rather than splitting the brands into separate applications, I architected one shared, configuration-driven codebase — the trade-off was supporting real differences between brands without duplicating the platform underneath them."
+        body="I built the HealthWarehouse platform from the ground up. It now supports multiple pharmacy brands, each with its own product requirements. The challenge was supporting real differences between those brands without splitting them into separate applications or duplicating the platform underneath them."
       >
         <div className="flex justify-center">
           <ArchitectureVisual />
@@ -88,7 +88,7 @@ export default function HealthWarehousePage() {
       <CaseStudySection
         kicker="Architecture"
         title="Keep the core shared; configure what differs."
-        body="Configuration and feature flags carry what's different between brands, on top of one Next.js and React codebase. Each brand gets room for its own requirements without forking the system underneath it."
+        body="I architected one shared Next.js and React codebase, with configuration and feature flags carrying what's different between brands. Each brand gets room for its own requirements without forking the core."
       >
         <div className="grid gap-space-3 sm:grid-cols-3">
           <EvidenceCard title="Shared core">Shared infrastructure and patterns support every brand.</EvidenceCard>

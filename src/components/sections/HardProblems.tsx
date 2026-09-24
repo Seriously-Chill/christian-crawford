@@ -17,9 +17,9 @@ export function HardProblems() {
             right shape before any of it exists.
           </p>
           <p className="mt-space-2 max-w-xl text-body text-ink/72">
-            HealthWarehouse started that way too: I built its React and Next.js platform from the
-            ground up. Then came the other kind of work — architecting that system to support
-            multiple pharmacy brands on a shared, configurable core.
+            At HealthWarehouse, I built the React and Next.js platform from the ground up. Then
+            came the other kind of work — architecting that system to support multiple pharmacy
+            brands on a shared, configurable core.
           </p>
         </RevealOnScroll>
       </div>
