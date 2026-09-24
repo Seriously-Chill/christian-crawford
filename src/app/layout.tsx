@@ -96,7 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           suppressHydrationWarning
           className="fixed inset-0 z-10000 flex items-center justify-center bg-page-transition-gradient motion-reduce:hidden"
         >
-          <LogoMark className="h-auto w-[70px] text-on-header" />
+          <LogoMark className="h-auto w-[70px] text-on-header opacity-25" />
         </div>
         <script
           dangerouslySetInnerHTML={{

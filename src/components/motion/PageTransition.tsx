@@ -180,7 +180,7 @@ export function PageTransition() {
         phase === "cover" ? "animate-page-transition-in" : phase === "reveal" ? "animate-page-transition-out" : ""
       }`}
     >
-      <LogoMark className="h-auto w-[70px] text-on-header" />
+      <LogoMark className="h-auto w-[70px] text-on-header opacity-25" />
     </div>
   );
 }
