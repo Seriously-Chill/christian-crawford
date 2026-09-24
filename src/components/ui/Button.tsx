@@ -22,9 +22,10 @@ const base =
   "inline-flex items-center justify-center rounded-pill text-label transition-colors duration-300";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-surface text-primary px-[24px] py-[12px] hover:bg-primary hover:text-surface",
+  primary:
+    "bg-surface text-accent border border-button-edge px-[23px] py-[11px] hover:bg-accent hover:text-surface",
   bordered:
-    "bg-transparent text-primary border border-primary px-[23px] py-[11px] hover:bg-primary hover:text-surface",
+    "bg-transparent text-accent border border-accent px-[23px] py-[11px] hover:bg-accent hover:text-surface",
   "bordered-inverse":
     "bg-transparent text-on-header border border-on-header px-[23px] py-[11px] hover:bg-on-header hover:text-primary",
 };
@@ -57,7 +58,8 @@ function isLink(props: ButtonProps): props is LinkButtonProps {
 
 export function Button(props: ButtonProps) {
   const variant = props.variant ?? "primary";
-  const classes = `${base} ${variants[variant]} ${props.className ?? ""}`.trim();
+  const classes =
+    `${base} ${variants[variant]} ${props.className ?? ""}`.trim();
 
   if (isLink(props)) {
     return (

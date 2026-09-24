@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { ColorPicker } from "@/components/ui/ColorPicker";
@@ -44,15 +43,16 @@ import { ColorPicker } from "@/components/ui/ColorPicker";
 export function Header() {
   return (
     <header className="sticky top-0 z-40">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-header-gradient"
-        style={{ clipPath: "url(#header-curve-clip)" }}
-      />
+      <div aria-hidden="true" className="header-bg absolute inset-0 bg-header-gradient" />
       <svg width="0" height="0" aria-hidden="true" className="absolute">
         <defs>
           <clipPath id="header-curve-clip" clipPathUnits="objectBoundingBox">
             <path d="M0,0 H1 V1 Q0.5,0.82 0,1 Z" />
+          </clipPath>
+          {/* The mobile nav panel is ~3x the header's height, so the same
+              visual curve depth is a shallower ratio of its box. */}
+          <clipPath id="mobile-nav-curve-clip" clipPathUnits="objectBoundingBox">
+            <path d="M0,0 H1 V1 Q0.5,0.94 0,1 Z" />
           </clipPath>
         </defs>
       </svg>
@@ -60,12 +60,12 @@ export function Header() {
         aria-hidden="true"
         viewBox="0 0 200 100"
         preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-0 block h-full w-full"
+        className="header-curve-line pointer-events-none absolute inset-0 block h-full w-full"
       >
         <path
           d="M0,100 Q100,82 200,100"
           fill="none"
-          stroke="color-mix(in srgb, var(--color-on-header) 35%, transparent)"
+          stroke="color-mix(in srgb, var(--color-on-header) 10%, transparent)"
           strokeWidth={2}
           vectorEffect="non-scaling-stroke"
         />
@@ -76,7 +76,10 @@ export function Header() {
           className="flex min-w-0 items-center gap-[10px] rounded-sm focus-visible:outline-offset-4"
           aria-label="Christian Crawford — home"
         >
-          <Image src="/logo-mark.svg" alt="" width={26} height={31} priority className="shrink-0" />
+          <span
+            aria-hidden="true"
+            className="block h-[31px] w-[26px] shrink-0 bg-on-header [mask:url(/logo-mark.svg)_center/contain_no-repeat]"
+          />
           <span className="truncate text-sm text-on-header sm:text-label">Christian Crawford</span>
         </Link>
 

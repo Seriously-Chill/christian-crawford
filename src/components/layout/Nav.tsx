@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { textH3 } from "@/lib/type";
 
 /**
  * Real DS behavior (Header/README.md): flat top-level items, exact order
  * and label, default `on-header` (white @ ~60% opacity), current route +
  * hover/focus go fully opaque. Below the header breakpoint the nav collapses
  * behind a toggle; opening it reveals the same links stacked, full-width,
- * over the same gradient — no dropdown, no invented items. Four routes
+ * over the same gradient (blurred, so the page doesn't read through), at
+ * h3 size with a dot marking the current page. The links fade down in
+ * sequence, and the header's curved bottom edge moves down to the
+ * panel's while it's open — no dropdown, no invented items. Four routes
  * (Home/Work/About/Contact) per the approved site architecture;
  * `/work/healthwarehouse` is reached from `/work`, not top-level nav.
  */
@@ -44,7 +48,9 @@ export function Nav() {
   // was wrongly 150ms in an earlier pass.
   const linkClasses = (active: boolean) =>
     `text-label transition-opacity duration-400 ${
-      active ? "text-on-header opacity-100 font-medium" : "text-on-header opacity-60 hover:opacity-100 focus-visible:opacity-100"
+      active
+        ? "text-on-header opacity-100 font-medium"
+        : "text-on-header opacity-60 hover:opacity-100 focus-visible:opacity-100"
     }`;
 
   return (
@@ -74,33 +80,72 @@ export function Nav() {
           aria-hidden="true"
           className={`h-0.5 w-6 bg-on-header transition-transform duration-150 ${open ? "translate-y-1.75 rotate-45" : ""}`}
         />
-        <span aria-hidden="true" className={`h-0.5 w-6 bg-on-header transition-opacity duration-150 ${open ? "opacity-0" : ""}`} />
+        <span
+          aria-hidden="true"
+          className={`h-0.5 w-6 bg-on-header transition-opacity duration-150 ${open ? "opacity-0" : ""}`}
+        />
         <span
           aria-hidden="true"
           className={`h-0.5 w-6 bg-on-header transition-transform duration-150 ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
         />
       </button>
 
+      {/* Always rendered so it can animate both ways; `inert` keeps the
+          closed panel out of the tab order and the accessibility tree.
+          `data-nav-open` also lets globals.css move the header's curved
+          bottom edge down onto this panel while it's open. */}
       <div
         id="mobile-nav-panel"
-        className={`absolute left-0 top-full w-full bg-header-gradient lg:hidden ${open ? "block" : "hidden"}`}
+        data-nav-open={open ? "" : undefined}
+        inert={!open}
+        className={`mobile-nav-panel absolute left-0 top-full w-full lg:hidden ${open ? "" : "pointer-events-none"}`}
       >
-        <ul className="mx-auto flex max-w-6xl flex-col gap-space-1 px-space-3 py-space-3">
-          {links.map(({ href, label }) => {
+        <ul className="mx-auto flex max-w-6xl flex-col px-space-3 pt-space-2 pb-space-6">
+          {links.map(({ href, label }, i) => {
             const active = isActive(pathname, href);
             return (
-              <li key={href}>
+              <li
+                key={href}
+                className="transition-[opacity,translate] duration-400 ease-accordion"
+                style={{
+                  opacity: open ? 1 : 0,
+                  translate: open ? "0 0" : "0 -8px",
+                  transitionDelay: open ? `${80 + i * 50}ms` : "0ms",
+                }}
+              >
                 <Link
                   href={href}
                   aria-current={active ? "page" : undefined}
-                  className={`block py-space-1 text-h5 ${linkClasses(active)}`}
+                  className={`flex items-center gap-space-2 py-space-1 text-on-header transition-opacity duration-400 ${textH3} ${
+                    active ? "opacity-100" : "opacity-70 hover:opacity-100 focus-visible:opacity-100"
+                  }`}
                 >
+                  <span
+                    aria-hidden="true"
+                    className={`h-2 w-2 shrink-0 rounded-full bg-on-header transition-transform duration-400 ${
+                      active ? "scale-100" : "scale-0"
+                    }`}
+                  />
                   {label}
                 </Link>
               </li>
             );
           })}
         </ul>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 200 100"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute inset-0 block h-full w-full"
+        >
+          <path
+            d="M0,100 Q100,94 200,100"
+            fill="none"
+            stroke="color-mix(in srgb, var(--color-on-header) 10%, transparent)"
+            strokeWidth={2}
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
       </div>
     </>
   );

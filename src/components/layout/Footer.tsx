@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { textH3 } from "@/lib/type";
@@ -46,8 +45,13 @@ export function Footer() {
             className="flex items-center gap-2.5 rounded-sm focus-visible:outline-offset-4"
             aria-label="Christian Crawford — home"
           >
-            <Image src="/logo-mark.svg" alt="" width={26} height={31} />
-            <span className="text-label text-on-header">Christian Crawford</span>
+            <span
+              aria-hidden="true"
+              className="block h-[31px] w-[26px] shrink-0 bg-on-header [mask:url(/logo-mark.svg)_center/contain_no-repeat]"
+            />
+            <span className="text-label text-on-header">
+              Christian Crawford
+            </span>
           </Link>
           <p className="mt-space-3 max-w-xs text-label text-on-header">
             Based in Cincinnati. Working wherever interesting problems are.
@@ -83,7 +87,10 @@ export function Footer() {
           <ul className="mt-space-2 space-y-space-1 text-label text-on-header">
             {links.map(({ href, label }) => (
               <li key={href}>
-                <Link href={href} className="inline-block py-1 hover:underline focus-visible:underline">
+                <Link
+                  href={href}
+                  className="inline-block py-1 hover:underline focus-visible:underline"
+                >
                   {label}
                 </Link>
               </li>
@@ -103,7 +110,9 @@ export function Footer() {
       </div>
       <div className="border-t border-on-header/20">
         <div className="mx-auto max-w-6xl px-space-3 py-space-3">
-          <p className="text-label text-on-header">© {new Date().getFullYear()} Christian Crawford.</p>
+          <p className="text-label text-on-header">
+            © {new Date().getFullYear()} Christian Crawford.
+          </p>
         </div>
       </div>
     </footer>
