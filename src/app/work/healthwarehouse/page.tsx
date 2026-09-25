@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { CaseStudySection } from "@/components/sections/CaseStudySection";
 import { FeaturePanel } from "@/components/ui/FeaturePanel";
+import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { DetailGrid } from "@/components/ui/DetailGrid";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { PlatformDiagram } from "@/components/visuals/PlatformDiagram";
@@ -17,12 +18,30 @@ export const metadata: Metadata = {
 const architectureStack = [
   "Next.js App Router",
   "React",
-  "GraphQL",
+  "GraphQL + Apollo Client",
   "Zustand",
-  "MUI",
+  "MUI + Emotion",
+  "NextAuth",
+  "Formik + Yup",
+  "Playwright + axe-core",
   "Configuration-driven",
   "Feature flags",
-  "Accessibility",
+];
+
+// The decision behind the architecture, told without internal names or code.
+const decision = [
+  {
+    title: "What I ruled out",
+    body: "A runtime brand switch: each brand is fixed when it's built, so switching at runtime only adds cost. And filename-based overrides: more powerful, but harder to follow than one explicit list.",
+  },
+  {
+    title: "What an audit caught",
+    body: "Per-brand files that had drifted into byte-identical copies. They collapsed back into one shared component and a single config value.",
+  },
+  {
+    title: "What it made possible",
+    body: "A third brand with its own fonts, colors, and corner radii, while the other two rendered byte-for-byte unchanged, with zero axe violations.",
+  },
 ];
 
 const evidence = [
@@ -70,7 +89,7 @@ export default function HealthWarehousePage() {
       <CaseStudySection
         kicker="The problem"
         title="Real differences, no forks."
-        body="I built the platform from the ground up. As it grew to serve more pharmacy brands, each brought its own requirements. The challenge: support those differences without splitting into separate apps."
+        body="I built the platform from the ground up. As it grew to serve three pharmacy brands, each brought its own requirements. The challenge: support those differences without splitting into separate apps."
       />
 
       <CaseStudySection
@@ -90,6 +109,20 @@ export default function HealthWarehousePage() {
           The same discipline applies to quality: checked automatically on every change, not
           audited once and forgotten.
         </p>
+      </CaseStudySection>
+
+      <CaseStudySection
+        kicker="The key decision"
+        title="Fork at the smallest unit."
+        body="When brands diverge, the easy move is to copy the page and change it. That's how codebases split. The rule instead: brand configuration holds only data (colors, copy, flags), and anything that truly differs lives in the smallest possible per-brand component, chosen when each brand is built."
+      >
+        <div className="grid gap-space-3 sm:grid-cols-3">
+          {decision.map((item) => (
+            <EvidenceCard key={item.title} title={item.title}>
+              {item.body}
+            </EvidenceCard>
+          ))}
+        </div>
       </CaseStudySection>
 
       <CaseStudySection id="evidence" kicker="Evidence" title="Quality checks across routes and real interactions.">

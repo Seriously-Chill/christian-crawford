@@ -34,7 +34,7 @@ export function ProjectFeature() {
               </div>
               <p className="mt-space-2 text-label text-accent">Case study</p>
               <h2 className={`mt-space-2 max-w-xl text-accent ${textH2}`}>
-                Multiple pharmacy brands. One codebase. No forks.
+                Three pharmacy brands. One codebase. No forks.
               </h2>
               <p className="mt-space-3 max-w-md text-body lg:mt-space-4 text-ink/72">
                 Every new brand brought requirements of its own: the kind that usually splits a

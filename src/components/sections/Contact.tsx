@@ -18,6 +18,9 @@ export function Contact() {
         <h1 className={`text-on-header ${textH1}`}>
           Let&apos;s talk about what you’re building.
         </h1>
+        <p className="mx-auto mt-space-3 max-w-xl text-body text-on-header/80">
+          Open to senior frontend and frontend architecture roles: remote, or hybrid in Cincinnati.
+        </p>
         <ul className="mt-space-5 grid gap-space-3 sm:grid-cols-3">
           <li>
             <a href="mailto:christian.crawford@pm.me" className={linkTile}>

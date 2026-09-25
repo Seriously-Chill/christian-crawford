@@ -22,8 +22,8 @@ function Arrow() {
  * GovernanceFlow: HTML boxes and arrows, so every label stays real text at
  * every width and follows the picker themes. Read bottom-up, the way the
  * platform is built: one shared core, configuration and feature flags on
- * top of it, and each brand's site on top of that. Brand names are left
- * generic; the three tiles stand for "every brand", not specific ones.
+ * top of it, and each brand's site on top of that. There are three brands;
+ * their names are left out.
  */
 export function PlatformDiagram() {
   return (
@@ -61,7 +61,7 @@ export function PlatformDiagram() {
         </li>
       </ol>
       <figcaption id="platform-diagram-caption" className="mt-space-3 text-center text-body text-ink/72">
-        Built bottom-up: every brand runs on the same core, and configuration carries what differs.
+        Built bottom-up: all three brands run on the same core, and configuration carries what differs.
       </figcaption>
     </figure>
   );

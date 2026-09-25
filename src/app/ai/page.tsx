@@ -6,13 +6,34 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { GovernanceFlow } from "@/components/visuals/GovernanceFlow";
-import { textH2, textH3 } from "@/lib/type";
+import { textH2, textH3, textH4 } from "@/lib/type";
+import { Button } from "@/components/ui/Button";
+import { FeaturePanel } from "@/components/ui/FeaturePanel";
+import { Tags } from "@/components/ui/Tags";
+import { SOURCE_REPO } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "AI in practice",
   description:
     "How I use AI in engineering work, and the Claude Code hooks I added to this portfolio site's own repository to protect the rules the agent works within.",
 };
+
+const siteStack = [
+  "Next.js 16 App Router",
+  "React 19",
+  "TypeScript",
+  "Tailwind CSS v4",
+  "Server Components",
+  "Playwright",
+  "axe-core",
+  "Claude Code",
+];
+
+const siteChecks = [
+  { value: "233", label: "automated Playwright tests across every page" },
+  { value: "28", label: "color settings each page is checked at for WCAG 2.2 AA contrast" },
+  { value: "20", label: "keyboard tests for navigation, menus, and the color picker" },
+];
 
 const tradeOffs = [
   "The Bash check runs after the command. It stops work for review but doesn’t undo the change.",
@@ -88,6 +109,44 @@ export default function AiPage() {
       </section>
 
       <CurveDivider above="gradient-page" below="surface" />
+
+      <CaseStudySection
+        id="built"
+        kicker="How this site is built"
+        title="Built the way I'd build it for a team"
+        body="The same habits as the case study, at a smaller scale: a design system turned into tokens, Server Components by default, and accessibility checked by tests rather than by eye."
+      >
+        <FeaturePanel>
+          <div>
+            <p className={`text-ink ${textH4}`}>Every hue the color picker can make is tested.</p>
+            <p className="mt-space-3 text-body text-ink/72">
+              The picker in the header can put the site on any color, gray, white, or black, so
+              the contrast suite checks every page at each of them. Only seven components run in
+              the browser; everything else renders on the server.
+            </p>
+            <Tags items={siteStack} />
+            <div className="mt-space-4">
+              <Button
+                href={SOURCE_REPO}
+                variant="bordered"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View the source on GitHub (opens in a new tab)"
+              >
+                View the source on GitHub
+              </Button>
+            </div>
+          </div>
+          <ul className="grid gap-space-4">
+            {siteChecks.map((item) => (
+              <li key={item.label}>
+                <span className={`block text-accent ${textH2}`}>{item.value}</span>
+                <span className="mt-1 block text-body text-ink/72">{item.label}</span>
+              </li>
+            ))}
+          </ul>
+        </FeaturePanel>
+      </CaseStudySection>
 
       <section className="bg-surface">
         <div className="mx-auto max-w-5xl px-space-3 py-space-7">

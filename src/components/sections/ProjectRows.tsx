@@ -28,8 +28,8 @@ const progression = ["Design", "Multimedia", "Creative Management", "Software De
 const projects: Project[] = [
   {
     employers: ["healthwarehouse"],
-    title: "One pharmacy platform. Many brands.",
-    body: "I built it from the ground up in React and Next.js, then shaped it to serve multiple brands from one shared core, with accessibility and automated testing built in.",
+    title: "One pharmacy platform. Three brands.",
+    body: "I built it from the ground up in React and Next.js, then shaped it to serve three brands from one shared core, with accessibility and automated testing built in.",
     tags: ["Architecture", "React", "Next.js", "GraphQL", "Accessibility"],
     link: { href: "/work/healthwarehouse", label: "Explore the case study" },
     panel: (

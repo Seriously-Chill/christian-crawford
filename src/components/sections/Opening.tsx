@@ -66,6 +66,10 @@ export function Opening() {
                 Get in touch
               </Button>
             </div>
+            <p className="mt-space-3 text-body text-on-header/80">
+              Open to senior frontend and frontend architecture roles: remote, or hybrid in
+              Cincinnati.
+            </p>
           </RevealOnScroll>
         </div>
         <RevealOnScroll>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { LineIcon } from "@/components/ui/LineIcon";
 import { textH2, textH3 } from "@/lib/type";
+import { SOURCE_REPO } from "@/lib/links";
 
 /**
  * Correction, confirmed by rendering the real page (a text-only CSS read
@@ -62,7 +63,7 @@ export function Footer() {
               <span className={textH3.replace("font-medium", "font-light")}>Christian Crawford</span>
             </Link>
             <p className="mt-space-3 max-w-xs text-body">
-              Based in Cincinnati. Working wherever interesting problems are.
+              Based in Cincinnati. Open to remote roles, or hybrid in Cincinnati.
             </p>
           </div>
 
@@ -107,9 +108,20 @@ export function Footer() {
       <div className="border-t border-on-header/20">
         <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-space-2 px-space-3 py-space-3 text-label">
           <p>© {new Date().getFullYear()} Christian Crawford.</p>
-          <Link href="/ai" className="hover:underline focus-visible:underline">
-            How this site is built
-          </Link>
+          <div className="flex flex-wrap gap-space-3">
+            <Link href="/ai#built" className="hover:underline focus-visible:underline">
+              How this site is built
+            </Link>
+            <a
+              href={SOURCE_REPO}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Source on GitHub (opens in a new tab)"
+              className="hover:underline focus-visible:underline"
+            >
+              Source on GitHub
+            </a>
+          </div>
         </div>
       </div>
     </footer>

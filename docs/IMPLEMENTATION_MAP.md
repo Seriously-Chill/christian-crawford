@@ -55,7 +55,7 @@ every route except `/contact` (which already is one).
 | `/` (Home) | `Opening` → `HowIWork` → `Capabilities` → `ProjectFeature` (white feature panel) → `NarrativeTeaser` (background + `EmployerMarquee`, → `/about`) → `AiBanner` (→ `/ai`) → `ClosingCta` | Introduces the site; the featured-work teaser links straight to the case study, not to `/work` |
 | `/work` | `PageIntro` → `ProjectRows` → `ClosingCta` | Overview page: HealthWarehouse, Ingage, Kroger, and earlier work as alternating rows, HealthWarehouse first |
 | `/work/healthwarehouse` | `PageIntro` (with `meta`) → six `CaseStudySection`s (Problem → Architecture → Evidence → Product → Result → Role) → `ClosingCta` | The deep case study; Accessibility+Quality are merged into one "Evidence" beat so the page reads as one throughline, not independent modules |
-| `/ai` | `PageIntro` (with `ai-governance.webp`) → `GovernanceOverview` (states this is the portfolio site's own repo; protected files as `Tags`) → `CaseStudySection` holding `GovernanceFlow` (HTML flow diagram: Edit/Write path vs. Bash path, AGENTS.md scope difference, shared session state) → two prose `CaseStudySection`s (why governance files, why this subset) → on-gradient scope cards incl. trade-offs → closing line | How AI fits the workflow, told through this repo's Claude Code governance hooks; the diagram carries the mechanics, the prose carries the reasoning |
+| `/ai` | `PageIntro` → `GovernanceOverview` (states this is the portfolio site's own repo; protected files as `Tags`; links the public source) → `CaseStudySection` holding `GovernanceFlow` (HTML flow diagram: Edit/Write path vs. Bash path, AGENTS.md scope difference, shared session state) → two prose `CaseStudySection`s (why governance files, why this subset) → on-gradient scope cards incl. trade-offs → `#built` "How this site is built" (`FeaturePanel`: stack, the 233-test / 28-colour-setting suite, source link; the footer links here) → closing line | How AI fits the workflow, told through this repo's Claude Code governance hooks; the diagram carries the mechanics, the prose carries the reasoning |
 | `/about` | `CareerProgression` + `DesignBackground` (gradient band) + `CurrentInterests` + `ClosingCta` | Full career timeline, the design→engineering throughline, and the AI-interest cards (replaces the old `/thinking` essay) |
 | `/contact` | `Contact` | Its own destination — already the closing band, so no separate `ClosingCta` |
 
@@ -86,6 +86,8 @@ clearly asks for one. What remains is structural or diagrammatic, not illustrati
 | `CurveDivider.tsx` | Curved section edges between gradient and surface bands |
 | `GovernanceFlow.tsx` | `/ai` "How it works" — the two hook paths |
 | `PlatformDiagram.tsx` | HealthWarehouse "Architecture" — shared core → configuration and feature flags → brand sites, drawn bottom-up in HTML |
+
+Share card: `src/app/opengraph-image.tsx` (re-exported by `twitter-image.tsx`) generates the link-preview image at build time from the site's type and default colours. It loads `src/fonts/PlusJakartaSans-Regular.ttf`, a static wght-400 instance cut from the variable font with fontTools, because the image renderer crashes on variable fonts. The public repository URL lives in `src/lib/links.ts`.
 
 The Blender source for the nested-forms renders stays in `artwork/blender/`
 (script + PNGs), unreferenced by the site.

@@ -66,9 +66,9 @@ export default function HomePage() {
 
       <NarrativeTeaser
         kicker="How this happened"
-        title="Twenty years, one throughline."
-        body="Design, development, consulting, architecture — different rooms, same habit: notice
-          how something gets used, then build toward that instead of around it."
+        title="Different rooms, same habit."
+        body="Design, development, consulting, architecture: in every role, I notice how something
+          gets used, then build toward that instead of around it."
         href="/about"
         linkLabel="More about me"
       >

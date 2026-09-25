@@ -1,5 +1,7 @@
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { Tags } from "@/components/ui/Tags";
+import { Button } from "@/components/ui/Button";
+import { SOURCE_REPO } from "@/lib/links";
 import { textH2 } from "@/lib/type";
 
 const protectedFiles = [
@@ -34,6 +36,17 @@ export function GovernanceOverview() {
         <RevealOnScroll className="mt-space-5 text-center">
           <p className="text-label text-on-header/80">Governance files the hooks protect</p>
           <Tags items={protectedFiles} onGradient align="center" />
+          <div className="mt-space-4">
+            <Button
+              href={SOURCE_REPO}
+              variant="bordered-inverse"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View the repository on GitHub (opens in a new tab)"
+            >
+              View the repository on GitHub
+            </Button>
+          </div>
         </RevealOnScroll>
       </div>
     </section>
