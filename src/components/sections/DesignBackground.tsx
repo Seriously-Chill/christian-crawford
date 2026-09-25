@@ -12,15 +12,14 @@ export function DesignBackground() {
       <div className="mx-auto max-w-5xl px-space-3 py-space-6">
         <RevealOnScroll className="max-w-2xl space-y-space-3 text-body text-ink/72">
           <p>
-            Design training leaves a specific habit: noticing the moment a product asks something
-            of the person using it, before that moment ever reaches code. I still look for that
-            moment first — it usually tells me more about the right architecture than the
-            requirements doc does.
+            Design training leaves a habit: noticing the moment a product asks something of the
+            person using it. I still look for that moment first — it usually tells me more about
+            the right architecture than the requirements doc does.
           </p>
           <p>
-            It&apos;s also why I rarely stay in one lane. Most of the interesting work happens at
-            the point where product, design, and engineering are still negotiating what to build —
-            and that&apos;s easier to navigate having sat in all three seats.
+            It&apos;s also why I rarely stay in one lane. The interesting work happens where
+            product, design, and engineering are still deciding what to build — and I&apos;ve sat
+            in all three seats.
           </p>
         </RevealOnScroll>
       </div>

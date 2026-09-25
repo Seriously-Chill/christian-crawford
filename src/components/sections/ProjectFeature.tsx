@@ -8,13 +8,13 @@ import { textH2 } from "@/lib/type";
 const content = {
   compact: {
     headline: "One platform. Different pharmacy brands.",
-    body: "A React and Next.js pharmacy platform where each brand gets its own requirements without a separate codebase — configuration and feature flags handle what differs.",
+    body: "Each brand gets what it needs from one shared React and Next.js codebase. Configuration and feature flags handle the differences.",
     tags: ["Next.js", "React", "GraphQL", "Zustand", "MUI"],
     cta: "View the case study",
   },
   full: {
-    headline: "One pharmacy platform, built to support more than one product.",
-    body: "At HealthWarehouse, I built the React and Next.js platform from the ground up, then architected it to support multiple pharmacy brands. Configuration and feature flags handle what differs; the core stays shared.",
+    headline: "One pharmacy platform. Many brands.",
+    body: "I built it from the ground up in React and Next.js, then shaped it to serve multiple brands from one shared core.",
     tags: ["Architecture", "React", "Next.js", "GraphQL", "Accessibility"],
     cta: "Explore the case study",
   },

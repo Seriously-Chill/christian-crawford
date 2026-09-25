@@ -32,23 +32,23 @@ export function OtherWork() {
             tags={["React", "Angular", "JAMstack"]}
             logo={<EmployerLogo employer="ingage" className="[--logo-h:2rem]" />}
           >
-            Worked across more than ten client engagements, from early-stage products to
-            enterprise modernization, including integrations with Mapbox, AWS, and Contentful.
+            More than ten client engagements, from early-stage products to enterprise
+            modernization, with integrations including Mapbox, AWS, and Contentful.
           </EvidenceCard>
           <EvidenceCard
             title="Kroger"
             tags={["React", "AngularJS", "Enterprise"]}
             logo={<EmployerLogo employer="kroger" className="[--logo-h:2rem]" />}
           >
-            Contributed to frontend modernization for ClickList and internal applications, working
-            across responsive interfaces and evolving enterprise systems.
+            Frontend modernization for ClickList and internal applications: responsive interfaces
+            on evolving enterprise systems.
           </EvidenceCard>
         </RevealOnScroll>
 
         <RevealOnScroll delayMs={200} className="mt-space-5">
           <h3 className={`text-ink ${textH4}`}>Earlier work</h3>
           <p className="mt-space-2 max-w-xl text-body text-ink/72">
-            I began my career creating digital experiences at CBTS, Trivantis, and Ginghamsburg — a foundation that still informs how I approach products and systems.
+            I started out building digital experiences at CBTS, Trivantis, and Ginghamsburg. That foundation still shapes how I work.
           </p>
           <div className="mt-space-3 flex flex-wrap items-center gap-x-space-4 gap-y-space-2 text-ink/60 [--logo-h:1.5rem]">
             <EmployerLogo employer="cbts" />

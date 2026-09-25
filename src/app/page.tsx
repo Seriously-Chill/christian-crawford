@@ -66,7 +66,7 @@ export default function HomePage() {
         kicker="How this happened"
         title="Twenty years, one throughline."
         body="Design, development, consulting, architecture — different rooms, same habit: notice
-          how something actually gets used, then build toward that instead of around it."
+          how something gets used, then build toward that instead of around it."
         href="/about"
         linkLabel="More about me"
       >

@@ -32,7 +32,7 @@ const eras: { range: string; role: string; org: string; logos: Employer[]; body:
     org: "CBTS · Kroger",
     logos: ["cbts", "cincinnati-bell", "kroger"],
     body:
-      "Built full-stack applications with C# and Razor, then moved into enterprise UI development at Kroger, contributing to responsive interfaces and the transition from WebSphere to AngularJS.",
+      "Built full-stack applications in C# and Razor, then moved to enterprise UI at Kroger, helping move from WebSphere to AngularJS.",
   },
   {
     range: "2017–2021",
@@ -40,7 +40,7 @@ const eras: { range: string; role: string; org: string; logos: Employer[]; body:
     org: "Ingage Partners",
     logos: ["ingage"],
     body:
-      "Across more than ten client engagements, I built with React, Angular, and JAMstack tools. The work grew from delivering interfaces to shaping how frontend systems were organized and maintained.",
+      "More than ten client engagements in React, Angular, and JAMstack. The work grew from building interfaces to shaping how frontend systems were organized.",
   },
   {
     range: "2022–Present",
@@ -48,7 +48,7 @@ const eras: { range: string; role: string; org: string; logos: Employer[]; body:
     org: "HealthWarehouse.com",
     logos: ["healthwarehouse"],
     body:
-      "I lead frontend architecture for healthcare products built with Next.js, React, and GraphQL. The work includes a configurable pharmacy platform, accessibility and testing improvements, and practical standards for AI-assisted development within HealthWarehouse’s own codebases.",
+      "I lead frontend architecture for healthcare products in Next.js, React, and GraphQL: a configurable pharmacy platform, accessibility and testing, and standards for AI-assisted development.",
   },
 ];
 

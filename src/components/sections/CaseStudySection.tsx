@@ -5,7 +5,7 @@ import { textH2 } from "@/lib/type";
 /**
  * Generic kicker/title/body + children slot for the HealthWarehouse case
  * study's narrative beats — same shape as `NarrativeTeaser`, minus the
- * forced CTA, reused across Problem/Architecture/Evidence/Product/Result/
+ * forced CTA, reused across Problem/Architecture/Evidence/
  * Role instead of one bespoke component per section.
  */
 export function CaseStudySection({

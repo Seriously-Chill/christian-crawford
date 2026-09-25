@@ -42,17 +42,9 @@ const workflows = [
 const role = [
   "Ground-up platform build",
   "Frontend architecture",
-  "Next.js / React architecture",
-  "GraphQL integration",
-  "State management",
   "Design system patterns",
-  "Accessibility",
-  "Automated testing",
-  "SEO regression testing",
-  "Product collaboration",
-  "UX collaboration",
-  "Backend collaboration",
-  "Technical decision making",
+  "Accessibility and automated testing",
+  "Cross-team technical decisions",
   "AI-assisted engineering practices",
 ];
 
@@ -79,24 +71,20 @@ export default function HealthWarehousePage() {
 
       <CaseStudySection
         kicker="The problem"
-        title="One platform. Multiple products."
-        body="I built the HealthWarehouse platform from the ground up. It now supports multiple pharmacy brands, each with its own product requirements. The challenge was supporting real differences between those brands without splitting them into separate applications or duplicating the platform underneath them."
+        title="Real differences, no forks."
+        body="I built the platform from the ground up. As it grew to serve more pharmacy brands, each brought its own requirements. The challenge: support those differences without splitting into separate apps."
       />
 
       <CaseStudySection
         kicker="Architecture"
         title="Keep the core shared; configure what differs."
-        body="As the platform grew to serve more brands, I architected it as one shared Next.js and React codebase, with configuration and feature flags carrying what's different between brands. Each brand gets room for its own requirements without forking the core."
+        body="One shared Next.js and React codebase serves every brand."
       >
         <ArchitectureVisual alt="Illustration: three separate brand modules above a single shared platform base." />
         <div className="mt-space-3 grid gap-space-3 sm:grid-cols-3">
-          <EvidenceCard title="Shared core">Shared infrastructure and patterns support every brand.</EvidenceCard>
-          <EvidenceCard title="Configuration">
-            Configuration carries product-specific behavior.
-          </EvidenceCard>
-          <EvidenceCard title="Feature flags">
-            Feature flags control variation without splitting the codebase.
-          </EvidenceCard>
+          <EvidenceCard title="Shared core">Infrastructure and patterns every brand uses.</EvidenceCard>
+          <EvidenceCard title="Configuration">Carries each brand&apos;s own behavior.</EvidenceCard>
+          <EvidenceCard title="Feature flags">Turn variation on and off without splitting the code.</EvidenceCard>
         </div>
         <div className="mt-space-5">
           <h3 className={`text-ink ${textH4}`}>The architecture underneath it</h3>
@@ -105,8 +93,8 @@ export default function HealthWarehousePage() {
           </div>
         </div>
         <p className="mx-auto mt-space-5 max-w-xl text-center text-body text-ink/72">
-          That same discipline extended into accessibility and quality — checked automatically on
-          every change, not audited once and forgotten.
+          The same discipline applies to quality: checked automatically on every change, not
+          audited once and forgotten.
         </p>
       </CaseStudySection>
 
@@ -117,7 +105,7 @@ export default function HealthWarehousePage() {
           <HighlightCard value="~80" label="routes covered by automated SEO regression testing" />
         </div>
         <p className="mx-auto mt-space-5 max-w-xl text-center text-body text-ink/72">
-          Playwright and axe-core checks cover roughly 50 routes and key flows, including checkout, prescriptions, forms, and mobile navigation. A separate SEO regression suite checks roughly 80 routes for metadata, headings, structured data, language attributes, and link accessibility.
+          Playwright and axe-core test real interactions, not just static pages. The SEO suite checks metadata, headings, structured data, and language attributes.
         </p>
         <div className="mt-space-5 grid items-center gap-space-3 md:grid-cols-[3fr_2fr] md:gap-space-5">
           <div>
@@ -129,20 +117,6 @@ export default function HealthWarehousePage() {
           <div className="flex justify-center">
             <QualityVisual className="max-w-sm" />
           </div>
-        </div>
-      </CaseStudySection>
-
-      <CaseStudySection
-        kicker="Product"
-        title="Architecture that supports everyday patient tasks."
-        body="The platform supports checkout, billing, prescriptions, and autoreorder. These workflows bring accessibility, performance, and healthcare requirements into the everyday experience of patients."
-      />
-
-      <CaseStudySection kicker="Result" title="A platform built to evolve.">
-        <div className="grid gap-space-3 sm:grid-cols-3">
-          <EvidenceCard title="Shared">One codebase.</EvidenceCard>
-          <EvidenceCard title="Configurable">Different products without duplication.</EvidenceCard>
-          <EvidenceCard title="Testable">Automated checks support ongoing quality.</EvidenceCard>
         </div>
       </CaseStudySection>
 

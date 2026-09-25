@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 };
 
 const tradeOffs = [
-  "The Bash check runs after the command, so it stops work for review but doesn’t undo the change.",
-  "Shell changes to AGENTS.md aren’t flagged, because next dev rewrites that file on its own. Direct edits to it still ask first.",
-  "When the hooks are first installed, no session baseline exists yet, so the first Bash check can flag existing governance files as changed. From the next session on, the baseline is in place.",
+  "The Bash check runs after the command. It stops work for review but doesn’t undo the change.",
+  "Shell changes to AGENTS.md aren’t flagged, because next dev rewrites that file itself. Direct edits still ask first.",
+  "On first install there’s no baseline yet, so the first Bash check may flag existing governance files. After that, the baseline is set.",
 ];
 
 export default function AiPage() {
@@ -27,8 +27,8 @@ export default function AiPage() {
       <PageIntro
         breadcrumb="AI in practice"
         kicker="AI in practice"
-        title="AI should help move the work forward. The rules around it deserve protection."
-        tagline="I use AI to explore ideas, speed up implementation, and work through complexity. But useful output isn’t the only measure of a good AI workflow. The way an AI tool operates—and the rules that guide it—needs to stay visible and open to review."
+        title="AI helps write the code. I protect the rules it follows."
+        tagline="Useful output isn’t the only test of an AI workflow. The rules guiding the tool need to stay visible and open to review."
         visual={<HeroVisual variant="ai" />}
       />
       <GovernanceOverview />
@@ -45,18 +45,17 @@ export default function AiPage() {
       <CaseStudySection
         kicker="Why governance files"
         title="Rules need a different check than code"
-        body="A bug in a component shows up in tests, in review, or on the page. A change to the hooks or instructions an agent follows is different: it can quietly remove the check that would have caught the next problem. So changes to those files stop and wait for me instead of riding along with ordinary work."
+        body="A bug in a component shows up in tests, review, or on the page. A change to the agent's rules can quietly remove the check that would catch the next problem. So those changes stop and wait for me."
       />
 
       <CaseStudySection
         kicker="Why this subset"
         title="Only the checks this repo needs"
-        body="These hooks are a scaled-down version of a larger set from another project. That set also covers brand configuration, API and authentication changes, quality gates, documentation drift, and accessibility—concerns this small site doesn't have. I kept the governance checks and left the rest out."
+        body="These hooks are trimmed down from a larger set in another project that also covers branding, APIs, auth, quality gates, docs, and accessibility. This small site only needs the governance checks."
       >
         <p className="mx-auto max-w-xl text-center text-body text-ink/72">
-          The repository&apos;s decision log records what was kept, what was dropped, and the
-          adjustments made along the way, so the setup can be read and questioned rather than
-          taken on trust.
+          The decision log records what I kept, what I dropped, and why, so the setup can be
+          questioned rather than taken on trust.
         </p>
       </CaseStudySection>
 
@@ -96,8 +95,7 @@ export default function AiPage() {
         <div className="mx-auto max-w-5xl px-space-3 py-space-7">
           <RevealOnScroll>
             <p className={`mx-auto max-w-2xl text-center text-ink ${textH3}`}>
-              AI can help produce the work. I&apos;m responsible for the system it works within—and
-              for reviewing what it produces.
+              The tools will keep changing. The responsibility won&apos;t.
             </p>
           </RevealOnScroll>
         </div>

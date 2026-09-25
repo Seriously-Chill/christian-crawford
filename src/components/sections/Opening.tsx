@@ -50,14 +50,13 @@ export function Opening() {
         <RevealOnScroll playOnLoad durationMs={2000}>
           <p className="text-label text-on-header/80 mb-space-3">Christian Crawford</p>
           <h1 className={`max-w-[11em] text-on-header ${textDisplay}`}>
-            I build products from scratch, and make the complicated ones simpler to work with.
+            I make complicated software simple.
           </h1>
         </RevealOnScroll>
         <RevealOnScroll playOnLoad durationMs={2000} delayMs={150}>
           <p className="mt-space-4 max-w-xl text-h5 lg:mt-space-5 text-on-header/80">
-            I&apos;m a senior software engineer focused on frontend architecture. I work
-            across product, design, and engineering to turn difficult requirements
-            into systems people can understand, use, and evolve.
+            I&apos;m a senior software engineer focused on frontend architecture. I turn
+            messy requirements into systems people can use and build on.
           </p>
         </RevealOnScroll>
         <RevealOnScroll playOnLoad durationMs={2000} delayMs={300}>

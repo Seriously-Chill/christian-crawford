@@ -4,10 +4,10 @@ import { CapabilityVisual } from "@/components/visuals/CapabilityVisual";
 import { textH2 } from "@/lib/type";
 
 const capabilities = [
-  { title: "Architecture", body: "Shared foundations that can support different products and keep evolving.", visual: "architecture" as const },
-  { title: "Product", body: "Turning real-world requirements into experiences people can use with confidence.", visual: "product" as const },
+  { title: "Architecture", body: "Shared foundations that serve different products and keep evolving.", visual: "architecture" as const },
+  { title: "Product", body: "Real requirements, turned into experiences people trust.", visual: "product" as const },
   { title: "Frontend", body: "React, Next.js, GraphQL, and design systems built around the product.", visual: "frontend" as const },
-  { title: "Quality", body: "Accessibility, testing, performance, and reliability built into the work.", visual: "quality" as const },
+  { title: "Quality", body: "Accessibility, testing, and performance built into the work.", visual: "quality" as const },
 ];
 
 /**

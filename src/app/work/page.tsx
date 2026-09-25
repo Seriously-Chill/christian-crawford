@@ -16,7 +16,7 @@ export default function WorkPage() {
       <PageIntro
         breadcrumb="Work"
         kicker="Selected work"
-        title="Products, platforms, and teams I've helped move forward."
+        title="Products and platforms I've helped build."
       />
       <ProjectFeature />
       <CurveDivider above="gradient-page" below="surface" />
