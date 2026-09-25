@@ -19,8 +19,8 @@ export function CapabilityVisual({ variant, className = "" }: { variant: Variant
         alt=""
         width={visual.width}
         height={visual.height}
-        unoptimized
-        sizes="(max-width: 640px) 80vw, 40vw"
+        // Height-bound (h-44 / sm:h-56 at the call site), so never wider than that.
+        sizes="(min-width: 640px) 224px, 176px"
         className="h-full w-full object-contain"
       />
     </div>

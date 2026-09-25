@@ -2,12 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { PAGE_COVERED_ATTR, PAGE_REVEAL_EVENT } from "@/components/motion/PageTransition";
-import { REVEAL_READY_FLAG } from "@/lib/motion";
-
-/** Gap between elements that reveal together (30–80ms is the usual range). */
-const STAGGER_MS = 70;
-/** Past this many steps a long batch would feel like it's dragging. */
-const MAX_STAGGER_STEPS = 5;
+import { MAX_STAGGER_STEPS, REVEAL_LINE, REVEAL_READY_FLAG, STAGGER_MS } from "@/lib/motion";
 
 /**
  * Progressive disclosure for the narrative sections (spec section 5/17:
@@ -35,6 +30,12 @@ const MAX_STAGGER_STEPS = 5;
  * lib/motion.ts), only under `prefers-reduced-motion: no-preference`, so
  * no-JS and reduced-motion visits are simply visible. It's hidden from
  * the first paint, so nothing is painted in place and then pulled away.
+ *
+ * On a full page load the first screen doesn't wait for this component:
+ * `revealArrivalScript` (lib/motion.ts) starts it from inline HTML, before
+ * hydration, and this picks up everything below it. That script sets
+ * attributes on this div before React hydrates it, hence
+ * `suppressHydrationWarning` (it covers this element's own attributes only).
  */
 export function RevealOnScroll({ children, className = "" }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -46,7 +47,7 @@ export function RevealOnScroll({ children, className = "" }: { children: ReactNo
   }, []);
 
   return (
-    <div ref={ref} className={`reveal ${className}`}>
+    <div ref={ref} className={`reveal ${className}`} suppressHydrationWarning>
       {children}
     </div>
   );
@@ -70,7 +71,7 @@ function observe(node: Element) {
     // Trigger once the top edge is ~12% into the viewport. A ratio
     // threshold would make tall blocks (card grids) wait until a share of
     // their height was on screen, so they'd reveal late.
-    rootMargin: "0px 0px -12% 0px",
+    rootMargin: `0px 0px -${Math.round((1 - REVEAL_LINE) * 100)}% 0px`,
     threshold: 0,
   });
   observer.observe(node);
@@ -83,6 +84,11 @@ function observe(node: Element) {
 function onIntersect(entries: IntersectionObserverEntry[]) {
   const batch: Element[] = [];
   for (const entry of entries) {
+    // Already played by the arrival script.
+    if (entry.target.hasAttribute("data-revealed")) {
+      observer?.unobserve(entry.target);
+      continue;
+    }
     // Already scrolled past (a restored scroll position or a hash link):
     // show it now rather than leave a hidden block above the reader.
     const above = !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;

@@ -11,7 +11,6 @@ export function QualityVisual({ className = "" }: { className?: string }) {
       alt=""
       width={1200}
       height={1200}
-      unoptimized
       sizes="(max-width: 768px) 90vw, 400px"
       className={`h-auto w-full ${className}`}
     />

@@ -8,7 +8,6 @@ export function ContactVisual({ className = "" }: { className?: string }) {
       alt=""
       width={1200}
       height={1200}
-      unoptimized
       sizes="(max-width: 640px) 80vw, 480px"
       className={`h-auto w-56 sm:w-64 ${className}`}
     />

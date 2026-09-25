@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { themeInitScript } from "@/lib/theme";
-import { revealInitScript } from "@/lib/motion";
+import { revealArrivalScript, revealInitScript } from "@/lib/motion";
 import { LogoMark } from "@/components/ui/LogoMark";
 
 // Self-hosted: the local device shell's egress allowlist doesn't reach
@@ -84,6 +84,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           it never touches the hydrated JS bundle, and motion-reduce:hidden
           keeps it from ever rendering for reduced-motion users.
 
+          It lifts once the document is parsed and the font is ready, not on
+          `load`: `load` also waits for every eager image, which on a slow
+          connection held the whole first screen hidden for seconds (LCP
+          5.2s on mobile Lighthouse, ~90% of it this wait). Artwork that's
+          still downloading appears when it arrives. The 1s timer caps the
+          wait on a font that stalls.
+
           `suppressHydrationWarning`: on every page load after the first
           in a session, the script below runs synchronously (it's parsed
           right after this div) and sets `el.style.display = 'none'`
@@ -106,7 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var k='cc-entered',d=document.documentElement,el=document.getElementById('cc-preloader');if(!el)return;if(sessionStorage.getItem(k)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.style.display='none';return;}sessionStorage.setItem(k,'1');d.setAttribute('data-page-covered','');window.addEventListener('load',function(){d.removeAttribute('data-page-covered');window.dispatchEvent(new Event('cc:page-reveal'));el.style.animation='page-transition-out var(--duration-page-reveal) ease forwards';setTimeout(function(){el.style.display='none';},500);});}catch(e){}})();",
+              "(function(){try{var k='cc-entered',d=document.documentElement,el=document.getElementById('cc-preloader');if(!el)return;if(sessionStorage.getItem(k)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.style.display='none';return;}sessionStorage.setItem(k,'1');d.setAttribute('data-page-covered','');var lifted=false;function lift(){if(lifted)return;lifted=true;d.removeAttribute('data-page-covered');window.dispatchEvent(new Event('cc:page-reveal'));el.style.animation='page-transition-out var(--duration-page-reveal) ease forwards';setTimeout(function(){el.style.display='none';},500);}function ready(){(document.fonts?document.fonts.ready:Promise.resolve()).then(lift);setTimeout(lift,1000);}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();}catch(e){}})();",
           }}
         />
 
@@ -119,6 +126,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <Footer />
         </SmoothScrollProvider>
+        {/* Last in <body>, so every section is parsed when it runs. */}
+        <script dangerouslySetInnerHTML={{ __html: revealArrivalScript }} />
       </body>
     </html>
   );
