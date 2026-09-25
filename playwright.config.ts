@@ -13,10 +13,12 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
   ],
+  // Build first: `next start` serves whatever production build is on disk,
+  // so without it the suite can silently test an old build of the site.
   webServer: {
-    command: "npx next start -p 4310",
+    command: "npx next build && npx next start -p 4310",
     url: "http://127.0.0.1:4310",
     reuseExistingServer: !process.env.CI,
-    timeout: 30_000,
+    timeout: 180_000,
   },
 });

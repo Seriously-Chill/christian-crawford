@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 // Every color the picker (src/components/ui/ColorPicker.tsx) can produce,
@@ -19,6 +19,17 @@ const POSITIONS: { name: string; value: number }[] = [
 
 const ROUTES = ["/", "/work", "/work/healthwarehouse", "/ai", "/about", "/contact"];
 
+// The picker applies its colors at hydration. Under reduced motion every
+// property still gets a 0.01ms transition (globals.css), and a transition
+// only completes on the next frame, so for one frame text can keep its old
+// color over the new background. Two frames later everything has settled;
+// scanning before that measures a single frame no visitor ever sees.
+async function settleTheme(page: Page) {
+  await page.evaluate(
+    () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+  );
+}
+
 for (const { name, value } of POSITIONS) {
   for (const route of ROUTES) {
     test(`${name} — ${route} has no WCAG 2.2 AA violations`, async ({ page }) => {
@@ -28,6 +39,7 @@ for (const { name, value } of POSITIONS) {
       await page.waitForFunction(
         () => document.documentElement.style.getPropertyValue("--hue-primary") !== "",
       );
+      await settleTheme(page);
       // The picker's own popover sits on `primary` too — check it open.
       await page.evaluate(() => {
         const details = document.querySelector("header details");
@@ -55,6 +67,7 @@ for (const { name, value } of POSITIONS) {
     await page.waitForFunction(
       () => document.documentElement.style.getPropertyValue("--hue-primary") !== "",
     );
+    await settleTheme(page);
     await page.getByRole("button", { name: "Open menu" }).click();
     await expect(page.locator("#mobile-nav-panel")).toHaveAttribute("data-nav-open", "");
 

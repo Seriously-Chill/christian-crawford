@@ -22,7 +22,7 @@ export function CaseStudySection({
   id?: string;
 }) {
   return (
-    <section id={id} className="scroll-mt-20 bg-surface">
+    <section id={id} className="bg-surface">
       <div className="mx-auto max-w-5xl px-space-3 py-space-6">
         <RevealOnScroll className="text-center">
           {kicker ? <p className="text-label text-accent">{kicker}</p> : null}

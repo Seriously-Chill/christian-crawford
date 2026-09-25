@@ -200,6 +200,10 @@
   html {
     /* Lenis drives smooth scroll; avoid the browser double-smoothing it. */
     scroll-behavior: auto;
+    /* Keep whatever the browser scrolls into view (a control reached by
+       Tab or Shift+Tab, an anchor target) clear of the sticky header,
+       rather than just under it (WCAG 2.4.11 Focus Not Obscured). */
+    scroll-padding-top: 6rem;
   }
 
   /* Avoid a lone word on a paragraph's last line (headings balance
