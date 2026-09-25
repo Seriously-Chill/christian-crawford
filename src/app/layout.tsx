@@ -7,7 +7,7 @@ import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { themeInitScript } from "@/lib/theme";
 import { revealArrivalScript, revealInitScript } from "@/lib/motion";
-import { LogoMark } from "@/components/ui/LogoMark";
+import { textH3 } from "@/lib/type";
 
 // Self-hosted: the local device shell's egress allowlist doesn't reach
 // fonts.googleapis.com, and self-hosting is the more production-correct
@@ -55,12 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // `suppressHydrationWarning`: the <head> script below sets the saved
     // color's custom properties on <html> before hydration, so its `style`
     // intentionally differs from the server render.
-    <html lang="en" className="h-full" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: revealInitScript }} />
       </head>
-      <body className={`${jakarta.variable} min-h-full flex flex-col`}>
+      <body className={`${jakarta.variable} min-h-dvh flex flex-col`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-10001 focus:top-4 focus:left-4 focus:rounded-sm focus:bg-surface focus:px-space-2 focus:py-2 focus:text-accent focus:shadow-lg"
@@ -71,8 +71,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/*
           Entrance preloader — the real page-transition treatment from the
           Design System (motion.md): the header gradient at a steeper,
-          full-opacity angle (174deg) and the 70px logo mark, lifting with
-          the same fade and duration as PageTransition's reveal, so the
+          full-opacity angle (174deg) with the name set at h3 size, lifting
+          with the same fade and duration as PageTransition's reveal, so the
           first page arrives the same way every later one does. Like
           PageTransition, it marks the page covered while it's up and
           fires the reveal event as it lifts, so the entrances underneath
@@ -108,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           suppressHydrationWarning
           className="fixed inset-0 z-10000 flex items-center justify-center bg-page-transition-gradient motion-reduce:hidden"
         >
-          <LogoMark className="h-auto w-[70px] text-on-header opacity-25" />
+          <p className={`px-space-2 text-center text-on-header-fade ${textH3.replace("font-medium", "font-light")}`}>Christian Crawford</p>
         </div>
         <script
           dangerouslySetInnerHTML={{

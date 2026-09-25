@@ -46,7 +46,7 @@ export function PageIntro({
       >
         <RevealOnScroll>
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-space-1 text-label text-on-header/60">
+            <ol className="flex items-center gap-space-1 text-label text-on-header/80">
               <li>
                 <Link href="/" className="hover:text-on-header focus-visible:text-on-header">
                   Home
@@ -66,7 +66,7 @@ export function PageIntro({
             <dl className="mt-space-4 flex flex-wrap gap-space-4">
               {meta.map(({ label, value }) => (
                 <div key={label}>
-                  <dt className="text-label text-on-header/60">{label}</dt>
+                  <dt className="text-label text-on-header/80">{label}</dt>
                   <dd className="mt-1 text-body text-on-header">{value}</dd>
                 </div>
               ))}

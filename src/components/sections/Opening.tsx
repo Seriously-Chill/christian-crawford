@@ -23,7 +23,7 @@ import { textDisplay } from "@/lib/type";
  * Text/button colors corrected to the real on-gradient treatment: the
  * hero sits directly on the page's gradient canvas (confirmed by
  * rendering, see globals.css), not a white background, so it needs
- * `on-header` (white) text and `bordered-inverse` for its secondary CTA
+ * `on-header` text and `bordered-inverse` for its secondary CTA
  * — matching the real Home hero's white headline/tagline and
  * white-bordered secondary button, not the dark, white-background
  * treatment this had before that correction.

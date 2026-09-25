@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { LogoMark } from "@/components/ui/LogoMark";
 import { textH3 } from "@/lib/type";
 
 /**
@@ -44,11 +43,10 @@ export function Footer() {
         <div>
           <Link
             href="/"
-            className="flex items-center gap-2.5 rounded-sm focus-visible:outline-offset-4"
+            className="rounded-sm focus-visible:outline-offset-4"
             aria-label="Christian Crawford — home"
           >
-            <LogoMark className="h-7 w-auto shrink-0 text-on-header" />
-            <span className="text-label text-on-header">
+            <span className="text-label font-light text-on-header">
               Christian Crawford
             </span>
           </Link>

@@ -7,7 +7,7 @@ import { textH3 } from "@/lib/type";
 
 /**
  * Real DS behavior (Header/README.md): flat top-level items, exact order
- * and label, default `on-header` (white @ ~60% opacity), current route +
+ * and label, default `on-header` (ink @ 80% opacity, so it keeps 4.5:1), current route +
  * hover/focus go fully opaque. Below the header breakpoint the nav collapses
  * behind a toggle; opening it reveals the same links stacked, full-width,
  * over the same gradient (blurred, so the page doesn't read through), at
@@ -65,7 +65,7 @@ export function Nav() {
     `text-label transition-opacity duration-400 ${
       active
         ? "text-on-header opacity-100 font-medium"
-        : "text-on-header opacity-60 hover:opacity-100 focus-visible:opacity-100"
+        : "text-on-header opacity-80 hover:opacity-100 focus-visible:opacity-100"
     }`;
 
   return (

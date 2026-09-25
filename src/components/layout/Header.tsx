@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
-import { FluidLogoMark } from "@/components/motion/FluidLogoMark";
 import { ColorPicker } from "@/components/ui/ColorPicker";
 import { textH4 } from "@/lib/type";
 
@@ -29,7 +28,7 @@ import { textH4 } from "@/lib/type";
  * keeps the curve's proportions (not its pixel depth) responsive to the
  * background layer's own rendered size. The content row's taller bottom
  * padding (`pb-space-4` vs `pt-space-2`) is what gives the pinch room to
- * curve into without ever touching the logo/nav row itself.
+ * curve into without ever touching the name/nav row itself.
  *
  * The clip alone isn't enough to *see*, though — it only changes where the
  * header's gradient stops painting, and that gradient is so close in
@@ -75,11 +74,10 @@ export function Header() {
       <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-space-2 px-space-2 pt-space-2 pb-space-4 sm:px-space-3">
         <Link
           href="/"
-          className="flex min-w-0 items-center gap-[10px] rounded-sm focus-visible:outline-offset-4"
+          className="min-w-0 rounded-sm focus-visible:outline-offset-4"
           aria-label="Christian Crawford — home"
         >
-          <FluidLogoMark className="h-9 w-auto shrink-0 text-on-header" />
-          <span className={`text-on-header ${textH4}`}>Christian Crawford</span>
+          <span className={`text-on-header ${textH4.replace("font-medium", "font-light")}`}>Christian Crawford</span>
         </Link>
 
         <div className="flex items-center gap-space-2">

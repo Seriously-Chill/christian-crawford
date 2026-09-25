@@ -1,8 +1,8 @@
 "use client";
 
-import { LogoMark } from "@/components/ui/LogoMark";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { textH3 } from "@/lib/type";
 
 /**
  * Pause between the new route rendering and the reveal starting, so the
@@ -64,8 +64,8 @@ function transitionTarget(e: MouseEvent): string | null {
  * The real, sourced page-transition preloader (motion.md): the header
  * gradient at a steeper, near-vertical angle and full opacity
  * (`linear-gradient(174deg, primary 0%, secondary 100%)`, confirmed via
- * `.elementor-kit-6 e-page-transition`), holding a static 70px logo mark
- * that only fades, never spins.
+ * `.elementor-kit-6 e-page-transition`), holding the name at h3 size
+ * where the source held its logo mark — it only fades, never moves.
  *
  * Both halves of the source's transition, measured live on igel.ua: the
  * overlay fades IN over the current page, holds while the next page
@@ -181,7 +181,7 @@ export function PageTransition() {
         phase === "cover" ? "animate-page-transition-in" : phase === "reveal" ? "animate-page-transition-out" : ""
       }`}
     >
-      <LogoMark className="h-auto w-[70px] text-on-header opacity-25" />
+      <p className={`px-space-2 text-center text-on-header-fade ${textH3.replace("font-medium", "font-light")}`}>Christian Crawford</p>
     </div>
   );
 }

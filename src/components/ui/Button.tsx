@@ -9,7 +9,7 @@ import type { MouseEventHandler, ReactNode } from "react";
  * Three real variants are documented across the source components:
  *  - primary: surface fill / primary label, hover inverts (Button preview.html)
  *  - bordered: transparent / primary border+label, for a light ground (Hero)
- *  - bordered-inverse: transparent / on-header (white) border+label, for the
+ *  - bordered-inverse: transparent / on-header border+label, for the
  *    header's own gradient (documented in ContactForm's README as the real
  *    submit-button treatment on a colored ground)
  *

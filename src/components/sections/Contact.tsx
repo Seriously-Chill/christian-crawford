@@ -28,7 +28,7 @@ export function Contact() {
             LinkedIn
           </Button>
         </div>
-        <p className="mt-space-6 text-label text-on-header/60">
+        <p className="mt-space-6 text-label text-on-header/80">
           Based in Cincinnati, Ohio.
         </p>
       </div>
