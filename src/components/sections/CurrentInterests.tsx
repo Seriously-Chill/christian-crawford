@@ -27,7 +27,7 @@ export function CurrentInterests() {
     <section className="bg-surface">
       <div className="mx-auto max-w-5xl px-space-3 py-space-7">
         <RevealOnScroll className="text-center">
-          <h2 className={`text-ink ${textH2}`}>I&apos;m interested in what&apos;s next.</h2>
+          <h2 className={`text-accent ${textH2}`}>I&apos;m interested in what&apos;s next.</h2>
           <p className="mx-auto mt-space-3 max-w-xl text-body lg:mt-space-4 text-ink/72">
             AI is changing how software gets built. I&apos;m most interested in what that means
             for architecture, testing, and the people working in large codebases.

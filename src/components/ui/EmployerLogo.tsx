@@ -48,28 +48,3 @@ export function EmployerLogo({
     />
   );
 }
-
-/**
- * A wrapping list of employer logos. Each one is labelled, since the row is
- * used where the names don't also appear in text; pass `label` to name the
- * list itself.
- */
-export function EmployerLogoRow({
-  employers: list,
-  label,
-  className = "",
-}: {
-  employers: Employer[];
-  label: string;
-  className?: string;
-}) {
-  return (
-    <ul aria-label={label} className={`flex flex-wrap items-center gap-x-space-5 gap-y-space-3 ${className}`}>
-      {list.map((employer) => (
-        <li key={employer} className="flex">
-          <EmployerLogo employer={employer} labelled />
-        </li>
-      ))}
-    </ul>
-  );
-}

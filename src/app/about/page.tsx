@@ -22,7 +22,9 @@ export default function AboutPage() {
       />
       <CurveDivider above="gradient-page" below="surface" />
       <CareerProgression />
+      <CurveDivider above="surface" below="gradient-page" />
       <DesignBackground />
+      <CurveDivider above="gradient-page" below="surface" />
       <CurrentInterests />
       <CurveDivider above="surface" below="primary" />
     </>

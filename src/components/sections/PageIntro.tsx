@@ -13,10 +13,6 @@ import { textH1 } from "@/lib/type";
  * one real exception (full-viewport, no breadcrumb) — this is for every
  * other page.
  *
- * `visual` is optional artwork beside the text, the same text-left /
- * render-right split Home's `Opening` uses. It stacks under the text below
- * `md`. Pages without one keep the single text column unchanged.
- *
  * `logo` is an optional mark (e.g. a case study's employer) shown above the
  * kicker.
  */
@@ -26,7 +22,6 @@ export function PageIntro({
   title,
   tagline,
   meta,
-  visual,
   logo,
 }: {
   breadcrumb: string;
@@ -34,16 +29,11 @@ export function PageIntro({
   title: string;
   tagline?: string;
   meta?: { label: string; value: string }[];
-  visual?: ReactNode;
   logo?: ReactNode;
 }) {
   return (
     <section className="bg-page-gradient">
-      <div
-        className={`mx-auto max-w-5xl px-space-3 py-space-6 ${
-          visual ? "grid items-center gap-space-5 md:grid-cols-[3fr_2fr]" : ""
-        }`}
-      >
+      <div className="mx-auto max-w-5xl px-space-3 py-space-6">
         <RevealOnScroll>
           <nav aria-label="Breadcrumb">
             <ol className="flex items-center gap-space-1 text-label text-on-header/80">
@@ -73,11 +63,6 @@ export function PageIntro({
             </dl>
           ) : null}
         </RevealOnScroll>
-        {visual ? (
-          <RevealOnScroll className="flex justify-center">
-            {visual}
-          </RevealOnScroll>
-        ) : null}
       </div>
     </section>
   );

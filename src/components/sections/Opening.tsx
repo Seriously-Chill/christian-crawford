@@ -1,7 +1,15 @@
 import { Button } from "@/components/ui/Button";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { HeroVisual } from "@/components/visuals/HeroVisual";
+import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { textDisplay } from "@/lib/type";
+
+// What the current role actually covers, in the About page's own words:
+// sentences rather than loose figures, which read as résumé filler here.
+const now = [
+  "Leading frontend architecture for healthcare products",
+  "A configurable pharmacy platform in Next.js, React, and GraphQL",
+  "Accessibility, automated testing, and standards for AI-assisted development",
+];
 
 /**
  * Production form of the Design System's Hero pattern (display headline,
@@ -38,30 +46,47 @@ import { textDisplay } from "@/lib/type";
 export function Opening() {
   return (
     <section className="relative overflow-hidden bg-page-gradient">
-      <div className="pointer-events-none absolute top-1/2 hidden -translate-y-1/2 right-space-3 sm:block">
-        <HeroVisual variant="home" />
-      </div>
-      <div className="relative mx-auto flex min-h-[calc(100dvh-64px)] max-w-5xl flex-col justify-center px-space-3 py-space-6">
-        <RevealOnScroll className="mb-space-4 sm:hidden">
-          <HeroVisual variant="work" />
-        </RevealOnScroll>
+      <div className="relative mx-auto grid min-h-[calc(100dvh-64px)] max-w-5xl content-center gap-space-6 px-space-3 py-space-6 md:grid-cols-[3fr_2fr] md:items-center md:gap-space-5">
+        <div>
+          <RevealOnScroll>
+            <h1 className={`max-w-[11em] text-on-header ${textDisplay}`}>
+              I make complicated software simple.
+            </h1>
+          </RevealOnScroll>
+          <RevealOnScroll>
+            <p className="mt-space-4 max-w-xl text-h5 lg:mt-space-5 text-on-header/80">
+              I&apos;m a senior software engineer focused on frontend architecture. I turn
+              messy requirements into systems people can use and build on.
+            </p>
+          </RevealOnScroll>
+          <RevealOnScroll>
+            <div className="mt-space-5 flex flex-wrap gap-space-2">
+              <Button href="/work">See the work</Button>
+              <Button href="/contact" variant="bordered-inverse">
+                Get in touch
+              </Button>
+            </div>
+          </RevealOnScroll>
+        </div>
         <RevealOnScroll>
-          <h1 className={`max-w-[11em] text-on-header ${textDisplay}`}>
-            I make complicated software simple.
-          </h1>
-        </RevealOnScroll>
-        <RevealOnScroll>
-          <p className="mt-space-4 max-w-xl text-h5 lg:mt-space-5 text-on-header/80">
-            I&apos;m a senior software engineer focused on frontend architecture. I turn
-            messy requirements into systems people can use and build on.
-          </p>
-        </RevealOnScroll>
-        <RevealOnScroll>
-          <div className="mt-space-5 flex flex-wrap gap-space-2">
-            <Button href="/work">See the work</Button>
-            <Button href="/contact" variant="bordered-inverse">
-              Get in touch
-            </Button>
+          <div className="rounded-xl border border-on-header/10 bg-on-header/10 p-space-3 sm:p-space-4">
+            <p className="text-label text-on-header/80">Now</p>
+            <div className="mt-space-2 flex text-on-header [--logo-h:1.75rem]">
+              <EmployerLogo employer="healthwarehouse" labelled />
+            </div>
+            <p className="mt-space-2 text-body text-on-header">Senior Software Engineer</p>
+            <ul className="mt-space-3 space-y-space-2 border-t border-on-header/15 pt-space-3">
+              {now.map((item) => (
+                <li key={item} className="flex gap-space-2 text-body text-on-header">
+                  <span aria-hidden="true" className="mt-[0.55em] size-1.5 shrink-0 rounded-circle bg-on-header/60" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-space-3 border-t border-on-header/15 pt-space-3 text-body text-on-header/80">
+              Twenty years of experience, from design and consulting to enterprise UI at Ingage,
+              Kroger, CBTS, and Trivantis.
+            </p>
           </div>
         </RevealOnScroll>
       </div>

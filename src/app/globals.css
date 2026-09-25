@@ -256,6 +256,9 @@
    @media (hover: hover) and (pointer: fine) guard on touch devices. */
 @theme inline {
   --animate-ripple: ripple var(--duration-ripple) var(--ease-ripple) forwards;
+  /* Employer logo strip (EmployerMarquee.tsx): slow and linear, so it reads
+     as ambient drift rather than something to track. */
+  --animate-marquee: marquee 60s linear infinite;
   /* `ease` both ways: the closest standard curve to the source's measured
      fade (half-covered ~45% of the way in, a long soft tail). */
   --animate-page-transition-in: page-transition-in
@@ -272,6 +275,14 @@
   100% {
     opacity: 0;
     scale: 3.5;
+  }
+}
+
+/* The strip holds two identical copies side by side, each padded by one
+   gap, so shifting the track by exactly half loops without a seam. */
+@keyframes marquee {
+  to {
+    translate: -50% 0;
   }
 }
 

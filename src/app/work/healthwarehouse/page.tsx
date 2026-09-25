@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { CaseStudySection } from "@/components/sections/CaseStudySection";
-import { EvidenceCard } from "@/components/ui/EvidenceCard";
-import { HighlightCard } from "@/components/ui/HighlightCard";
+import { FeaturePanel } from "@/components/ui/FeaturePanel";
 import { DetailGrid } from "@/components/ui/DetailGrid";
-import { HeroVisual } from "@/components/visuals/HeroVisual";
-import { ArchitectureVisual } from "@/components/visuals/ArchitectureVisual";
-import { QualityVisual } from "@/components/visuals/QualityVisual";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
+import { PlatformDiagram } from "@/components/visuals/PlatformDiagram";
 import { EmployerLogo } from "@/components/ui/EmployerLogo";
-import { textH4 } from "@/lib/type";
+import { textH2, textH4 } from "@/lib/type";
 
 export const metadata: Metadata = {
   title: "HealthWarehouse",
@@ -26,6 +23,12 @@ const architectureStack = [
   "Configuration-driven",
   "Feature flags",
   "Accessibility",
+];
+
+const evidence = [
+  { value: "200+", label: "accessibility issues addressed across two platforms" },
+  { value: "~50", label: "routes covered by automated accessibility testing" },
+  { value: "~80", label: "routes covered by automated SEO regression testing" },
 ];
 
 const workflows = [
@@ -62,11 +65,6 @@ export default function HealthWarehousePage() {
           { label: "Stack", value: "Next.js · React · GraphQL · Zustand · MUI" },
         ]}
       />
-      <div className="bg-page-gradient">
-        <div className="mx-auto flex max-w-5xl justify-center px-space-3 pb-space-6">
-          <HeroVisual variant="case-study" />
-        </div>
-      </div>
       <CurveDivider above="gradient-page" below="surface" />
 
       <CaseStudySection
@@ -76,16 +74,12 @@ export default function HealthWarehousePage() {
       />
 
       <CaseStudySection
+        id="architecture"
         kicker="Architecture"
         title="Keep the core shared; configure what differs."
         body="One shared Next.js and React codebase serves every brand."
       >
-        <ArchitectureVisual alt="A carved wooden box representing the shared platform." />
-        <div className="mt-space-3 grid gap-space-3 sm:grid-cols-3">
-          <EvidenceCard title="Shared core">Infrastructure and patterns every brand uses.</EvidenceCard>
-          <EvidenceCard title="Configuration">Carries each brand&apos;s own behavior.</EvidenceCard>
-          <EvidenceCard title="Feature flags">Turn variation on and off without splitting the code.</EvidenceCard>
-        </div>
+        <PlatformDiagram />
         <div className="mt-space-5">
           <h3 className={`text-ink ${textH4}`}>The architecture underneath it</h3>
           <div className="mt-space-3">
@@ -98,24 +92,28 @@ export default function HealthWarehousePage() {
         </p>
       </CaseStudySection>
 
-      <CaseStudySection kicker="Evidence" title="Quality checks across routes and real interactions.">
-        <div className="grid gap-space-3 sm:grid-cols-3">
-          <HighlightCard value="200+" label="accessibility issues addressed across two platforms" />
-          <HighlightCard value="~50" label="routes covered by automated accessibility testing" />
-          <HighlightCard value="~80" label="routes covered by automated SEO regression testing" />
-        </div>
-        <p className="mx-auto mt-space-5 max-w-xl text-center text-body text-ink/72">
-          Playwright and axe-core test real interactions, not just static pages. The SEO suite checks metadata, headings, structured data, and language attributes.
-        </p>
-        <div className="mt-space-5 grid items-center gap-space-3 md:grid-cols-[3fr_2fr] md:gap-space-5">
+      <CaseStudySection id="evidence" kicker="Evidence" title="Quality checks across routes and real interactions.">
+        <FeaturePanel>
           <div>
-            <h3 className={`text-ink ${textH4}`}>Critical patient workflows</h3>
-            <div className="mt-space-3">
-              <DetailGrid items={workflows} />
-            </div>
+            <p className={`text-ink ${textH4}`}>Checked on every change, not audited once.</p>
+            <p className="mt-space-3 text-body text-ink/72">
+              Playwright and axe-core test real interactions, not just static pages. The SEO suite
+              checks metadata, headings, structured data, and language attributes.
+            </p>
           </div>
-          <div className="flex justify-center">
-            <QualityVisual className="max-w-sm" />
+          <ul className="grid gap-space-4">
+            {evidence.map((item) => (
+              <li key={item.label}>
+                <span className={`block text-accent ${textH2}`}>{item.value}</span>
+                <span className="mt-1 block text-body text-ink/72">{item.label}</span>
+              </li>
+            ))}
+          </ul>
+        </FeaturePanel>
+        <div className="mt-space-5">
+          <h3 className={`text-ink ${textH4}`}>Critical patient workflows</h3>
+          <div className="mt-space-3">
+            <DetailGrid items={workflows} />
           </div>
         </div>
       </CaseStudySection>

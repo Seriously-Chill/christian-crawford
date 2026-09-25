@@ -6,7 +6,6 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { GovernanceFlow } from "@/components/visuals/GovernanceFlow";
-import { HeroVisual } from "@/components/visuals/HeroVisual";
 import { textH2, textH3 } from "@/lib/type";
 
 export const metadata: Metadata = {
@@ -29,7 +28,6 @@ export default function AiPage() {
         kicker="AI in practice"
         title="AI helps write the code. I protect the rules it follows."
         tagline="Useful output isn’t the only test of an AI workflow. The rules guiding the tool need to stay visible and open to review."
-        visual={<HeroVisual variant="ai" />}
       />
       <GovernanceOverview />
       <CurveDivider above="gradient-page" below="surface" />
