@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { textH3 } from "@/lib/type";
 
 /**
@@ -33,6 +33,7 @@ function isActive(pathname: string, href: string) {
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   // Close the mobile panel on route change so a link tap doesn't leave it
   // open — derived during render (React's "adjusting state on prop change"
@@ -43,6 +44,19 @@ export function Nav() {
     setLastPathname(pathname);
     setOpen(false);
   }
+
+  // Escape closes the open panel from anywhere, and hands focus back to
+  // the toggle so it doesn't drop to <body> when the links go inert.
+  useEffect(() => {
+    if (!open) return;
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
 
   // Real transition is .4s (custom-pro-widget-nav-menu.min.css:
   // .elementor-nav-menu--main .elementor-nav-menu a{transition:.4s}) —
@@ -70,6 +84,7 @@ export function Nav() {
       </ul>
 
       <button
+        ref={toggleRef}
         type="button"
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
