@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/Button";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EmployerLogo } from "@/components/ui/EmployerLogo";
+import { LineIcon } from "@/components/ui/LineIcon";
+import { RESUME_PDF } from "@/lib/links";
 import { textDisplay } from "@/lib/type";
 
 // What the current role actually covers, in the About page's own words:
@@ -70,6 +72,13 @@ export function Opening() {
               Open to senior frontend and frontend architecture roles: remote, or hybrid in
               Cincinnati.
             </p>
+            <a
+              href={RESUME_PDF}
+              className="mt-space-2 inline-flex items-center gap-space-1 py-1 text-body text-on-header underline-offset-4 hover:underline focus-visible:underline"
+            >
+              <LineIcon name="download" />
+              Download résumé (PDF)
+            </a>
           </RevealOnScroll>
         </div>
         <RevealOnScroll>

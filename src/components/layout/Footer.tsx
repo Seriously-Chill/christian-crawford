@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { LineIcon } from "@/components/ui/LineIcon";
 import { textH2, textH3 } from "@/lib/type";
-import { SOURCE_REPO } from "@/lib/links";
+import { RESUME_PDF, SOURCE_REPO } from "@/lib/links";
 
 /**
  * Correction, confirmed by rendering the real page (a text-only CSS read
@@ -85,6 +85,12 @@ export function Footer() {
                 >
                   <LineIcon name="external" />
                   LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href={RESUME_PDF} className={link}>
+                  <LineIcon name="download" />
+                  Résumé (PDF)
                 </a>
               </li>
             </ul>

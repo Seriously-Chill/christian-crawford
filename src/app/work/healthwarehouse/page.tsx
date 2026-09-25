@@ -7,7 +7,7 @@ import { DetailGrid } from "@/components/ui/DetailGrid";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { PlatformDiagram } from "@/components/visuals/PlatformDiagram";
 import { EmployerLogo } from "@/components/ui/EmployerLogo";
-import { textH2, textH4 } from "@/lib/type";
+import { textH2, textH4, textH5 } from "@/lib/type";
 
 export const metadata: Metadata = {
   title: "HealthWarehouse",
@@ -45,6 +45,7 @@ const decision = [
 ];
 
 const evidence = [
+  { value: "WCAG 2.2", label: "accessibility seal achieved" },
   { value: "200+", label: "accessibility issues addressed across two platforms" },
   { value: "~50", label: "routes covered by automated accessibility testing" },
   { value: "~80", label: "routes covered by automated SEO regression testing" },
@@ -61,13 +62,31 @@ const workflows = [
   "Mobile navigation",
 ];
 
+// Taken from the résumé, each led by what the work actually was.
 const role = [
-  "Ground-up platform build",
-  "Frontend architecture",
-  "Design system patterns",
-  "Accessibility and automated testing",
-  "Cross-team technical decisions",
-  "AI-assisted engineering practices",
+  { verb: "Led", text: "frontend architecture for the white-label pharmacy platform." },
+  { verb: "Chose", text: "to keep one shared codebase rather than split brands into separate apps." },
+  {
+    verb: "Established",
+    text: "architecture conventions for the App Router, React, GraphQL, Zustand, and MUI, including clear server/client boundaries.",
+  },
+  {
+    verb: "Led",
+    text: "accessibility work across two pharmacy platforms: 200+ issues addressed and a WCAG 2.2 accessibility seal.",
+  },
+  {
+    verb: "Established",
+    text: "automated accessibility coverage with Playwright and axe-core across ~50 routes and five browser/device profiles, plus SEO regression testing across ~80.",
+  },
+  { verb: "Owned", text: "frontend work on checkout, billing, and other critical patient workflows." },
+  {
+    verb: "Designed",
+    text: "governance for AI-assisted development: repository contracts, decision logs, lifecycle hooks, and approval checkpoints.",
+  },
+  {
+    verb: "Worked",
+    text: "across design, product, backend engineering, and leadership to turn ambiguous requirements into technical decisions.",
+  },
 ];
 
 export default function HealthWarehousePage() {
@@ -152,7 +171,14 @@ export default function HealthWarehousePage() {
       </CaseStudySection>
 
       <CaseStudySection kicker="Role" title="What I actually did">
-        <DetailGrid items={role} />
+        <ul className="grid gap-space-2 sm:grid-cols-2">
+          {role.map((item) => (
+            <li key={item.text} className="rounded-lg bg-surface-raised p-space-2 sm:p-space-3">
+              <span className={`block text-accent ${textH5}`}>{item.verb}</span>
+              <span className="mt-1 block text-body text-ink/72">{item.text}</span>
+            </li>
+          ))}
+        </ul>
       </CaseStudySection>
 
       <CurveDivider above="surface" below="primary" />

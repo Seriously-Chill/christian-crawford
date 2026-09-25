@@ -1,5 +1,6 @@
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { LineIcon } from "@/components/ui/LineIcon";
+import { RESUME_PDF } from "@/lib/links";
 import { textH1, textH5 } from "@/lib/type";
 
 const tile = "rounded-lg border border-on-header/10 bg-on-header/10 p-space-3 text-left";
@@ -21,7 +22,7 @@ export function Contact() {
         <p className="mx-auto mt-space-3 max-w-xl text-body text-on-header/80">
           Open to senior frontend and frontend architecture roles: remote, or hybrid in Cincinnati.
         </p>
-        <ul className="mt-space-5 grid gap-space-3 sm:grid-cols-3">
+        <ul className="mt-space-5 grid gap-space-3 sm:grid-cols-2 lg:grid-cols-4">
           <li>
             <a href="mailto:christian.crawford@pm.me" className={linkTile}>
               <span className={`flex items-center gap-space-1 text-on-header ${textH5}`}>
@@ -44,6 +45,15 @@ export function Contact() {
                 LinkedIn
               </span>
               <span className="mt-space-1 block text-body text-on-header/80">in/christiancrawford</span>
+            </a>
+          </li>
+          <li>
+            <a href={RESUME_PDF} className={linkTile}>
+              <span className={`flex items-center gap-space-1 text-on-header ${textH5}`}>
+                <LineIcon name="download" />
+                Résumé
+              </span>
+              <span className="mt-space-1 block text-body text-on-header/80">Download the PDF</span>
             </a>
           </li>
           <li className={tile}>

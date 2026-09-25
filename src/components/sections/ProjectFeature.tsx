@@ -10,7 +10,7 @@ import { textH2, textH3 } from "@/lib/type";
 const outcomes = [
   { value: "No forks", label: "Every brand runs on one shared codebase instead of its own copy." },
   { value: "Brand three", label: "added with a config file, env files, and build scripts. No structural change." },
-  { value: "200+", label: "accessibility issues addressed across two platforms." },
+  { value: "200+", label: "accessibility issues addressed, and a WCAG 2.2 accessibility seal." },
 ];
 
 /**
