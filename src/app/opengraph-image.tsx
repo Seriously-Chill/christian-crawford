@@ -6,7 +6,8 @@ import { join } from "node:path";
  * The share card shown when a link to the site is pasted into LinkedIn,
  * Slack, or a message. Generated at build time from the site's own type and
  * default colours (the picker's first-paint hue, see globals.css), so it
- * stays in step with the design rather than being a separate asset.
+ * stays in step with the design rather than being a separate asset: the
+ * default gray, with white text.
  */
 export const alt = "Christian Crawford — I make complicated software simple.";
 export const size = { width: 1200, height: 630 };
@@ -27,8 +28,8 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "linear-gradient(90deg, #5dbce2 0%, #20d4d3 100%)",
-          color: "#1b1b1d",
+          background: "linear-gradient(90deg, #525252 0%, #777777 100%)",
+          color: "#ffffff",
           fontFamily: "Plus Jakarta Sans",
         }}
       >

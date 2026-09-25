@@ -4,15 +4,15 @@ import AxeBuilder from "@axe-core/playwright";
 // Every color the picker (src/components/ui/ColorPicker.tsx) can produce,
 // seeded through its own localStorage key before load. Hues are sampled
 // every 15° — lightness clamping is continuous across the wheel, so this
-// catches any band that dips under contrast — plus the default (197) and
+// catches any band that dips under contrast — plus the aqua preset (197) and
 // the three neutral stops past the wheel. Stop positions mirror the
-// component's HUE_END/STOP_WIDTH layout: grey 360–399, white 400–439,
+// component's HUE_END/STOP_WIDTH layout: gray 360–399, white 400–439,
 // black 440–479.
 const HUES = Array.from({ length: 24 }, (_, i) => i * 15);
 const POSITIONS: { name: string; value: number }[] = [
   ...HUES.map((h) => ({ name: `hue ${h}`, value: h })),
-  { name: "default (hue 197)", value: 197 },
-  { name: "grey", value: 380 },
+  { name: "aqua (hue 197)", value: 197 },
+  { name: "gray (default)", value: 380 },
   { name: "white", value: 420 },
   { name: "black", value: 460 },
 ];

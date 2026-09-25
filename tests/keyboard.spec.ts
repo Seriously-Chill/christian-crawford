@@ -215,12 +215,12 @@ test.describe("keyboard", () => {
       await expect(slider).toHaveAttribute("aria-valuetext", "Hue 198°");
 
       await page.keyboard.press("Tab");
-      await expect(page.getByRole("button", { name: "Default" })).toBeFocused();
+      await expect(page.getByRole("button", { name: "Aqua" })).toBeFocused();
       await page.keyboard.press("Tab");
-      const grey = page.getByRole("button", { name: "Grey" });
-      await expect(grey).toBeFocused();
+      const gray = page.getByRole("button", { name: "Gray" });
+      await expect(gray).toBeFocused();
       await page.keyboard.press("Space");
-      await expect(grey).toHaveAttribute("aria-pressed", "true");
+      await expect(gray).toHaveAttribute("aria-pressed", "true");
       expect(await hue(page)).toBe("240");
 
       await page.keyboard.press("Escape");

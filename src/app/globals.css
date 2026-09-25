@@ -53,37 +53,36 @@
   /* Colors — primary/secondary expressed in HSL, driven by CSS custom
      properties (`--hue-primary`/`--hue-secondary`, `--l-primary`/
      `--l-secondary`) so the hue picker (ColorPicker.tsx) can rotate them
-     live. Defaults are a blue-leaning aqua (hue 197, secondary keeping the real
-     sourced 17.31° gap), at the same per-hue luminance-solved lightness
-     ColorPicker.tsx computes, so first paint matches post-hydration:
-     hsl(197 69.7% 62.61%) = #5dbce2, hsl(179.69 73.96% 47.75%) = #20d4d3.
-     Original sourced blues were hsl(211.68 69.7% 45.29%) = #236fc4 and
-     hsl(194.37 73.96% 62.35%) = #58c4e6. Saturation is overridable too
-     (`--s-primary`/`--s-secondary`) for the picker's grey/white/black
-     stops. Hue grounds are light, so `on-header` is ink; the grey and
-     black stops flip it to white. `accent` is the hue as foreground on
-     white (kickers, button labels, focus rings) — a deep shade of primary
-     at `--l-accent` (hsl(197 69.7% 27.46%) = #155b77), except in the
-     white stop, where primary is white and accent falls back to ink. */
+     live. The fallbacks below are the default look, the picker's gray
+     stop (hsl(240 0% 32%) = #525252 to hsl(240 0% 46.53%) = #777777, white
+     on-header, accent #525252 on white), matching what ColorPicker.tsx
+     applies so first paint matches post-hydration. The hues, including
+     the former default aqua (hue 197), set every token they differ on
+     explicitly, ink on-header among them. Original sourced blues were
+     hsl(211.68 69.7% 45.29%) = #236fc4 and hsl(194.37 73.96% 62.35%) =
+     #58c4e6. Hue grounds are light, so `on-header` is ink there; the gray
+     and black stops use white. `accent` is primary as foreground on white
+     (kickers, button labels, focus rings), a deep shade at `--l-accent`,
+     except in the white stop, where primary is white and accent is ink. */
   --color-primary: hsl(
-    var(--hue-primary, 197) var(--s-primary, 69.7%) var(--l-primary, 62.61%)
+    var(--hue-primary, 240) var(--s-primary, 0%) var(--l-primary, 32%)
   );
   --color-secondary: hsl(
-    var(--hue-secondary, 179.69) var(--s-secondary, 73.96%)
-      var(--l-secondary, 47.75%)
+    var(--hue-secondary, 240) var(--s-secondary, 0%)
+      var(--l-secondary, 46.53%)
   );
   --color-accent: var(
     --accent,
-    hsl(var(--hue-primary, 197) var(--s-primary, 69.7%) var(--l-accent, 27.46%))
+    hsl(var(--hue-primary, 240) var(--s-primary, 0%) var(--l-accent, 32%))
   );
   --color-ink: #1b1b1d;
   --color-surface: #ffffff;
   --color-surface-raised: #f8f8fa;
   --color-surface-muted: #f0f0f2;
-  --color-on-header: var(--on-header, #1b1b1d);
+  --color-on-header: var(--on-header, #ffffff);
   /* Edge for the surface-filled primary button — invisible (transparent)
      on colored grounds, ink on the picker's white stop, where a white
-     button would otherwise vanish into a white-to-grey gradient. */
+     button would otherwise vanish into a white-to-gray gradient. */
   --color-button-edge: var(--button-edge, transparent);
 
   /* Spacing — the real gap/padding values actually seen on the source site */
@@ -178,12 +177,13 @@
    specificity is what actually wins, regardless of source order. */
 /* The name on the page-transition overlay: on-header at 75%, the most
    transparency that keeps ≥4.5:1 on every hue and on the white/black stops
-   (worst case 4.8:1). The grey stop's lighter end only just clears 4.5:1
-   with solid white, so the picker sets `--fade-alpha` to 100% there. */
+   (worst case 4.8:1). The gray stop's lighter end only just clears 4.5:1
+   with solid white, so it's fully opaque there: 100% is the fallback,
+   since gray is the default, and the other stops set 75%. */
 @utility text-on-header-fade {
   color: color-mix(
     in srgb,
-    var(--color-on-header) var(--fade-alpha, 75%),
+    var(--color-on-header) var(--fade-alpha, 100%),
     transparent
   );
 }
@@ -316,7 +316,8 @@
 .color-panel {
   /* Frosted glass: a primary tint pushed away from the text color (primary
      lightened with a little white under ink text, darkened with black on
-     the grey/black stops' white text — `--panel-shade`), so on-header
+     the gray/black stops' white text — `--panel-shade`, black by default
+     since gray is), so on-header
      keeps ≥4.5:1 once the page behind is blended in) under a faint white
      sheen at the top edge, over a heavy blur. The blur is what makes a
      translucent panel workable at all: detail behind it is smeared into
@@ -328,7 +329,7 @@
       color-mix(in srgb, #ffffff 10%, transparent) 0%,
       transparent 40%
     ),
-    color-mix(in srgb, color-mix(in srgb, var(--color-primary) 72%, var(--panel-shade, #ffffff)) 62%, transparent);
+    color-mix(in srgb, color-mix(in srgb, var(--color-primary) 72%, var(--panel-shade, #000000)) 62%, transparent);
   -webkit-backdrop-filter: blur(28px) saturate(140%);
   backdrop-filter: blur(28px) saturate(140%);
   border: 1px solid color-mix(in srgb, #ffffff 30%, transparent);
