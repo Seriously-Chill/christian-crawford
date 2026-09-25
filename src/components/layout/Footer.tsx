@@ -63,7 +63,7 @@ export function Footer() {
               <span className={textH3.replace("font-medium", "font-light")}>Christian Crawford</span>
             </Link>
             <p className="mt-space-3 max-w-xs text-body">
-              Based in Cincinnati. Open to remote roles, or hybrid in Cincinnati.
+              Based in Cincinnati. Open to remote roles, or hybrid locally.
             </p>
           </div>
 

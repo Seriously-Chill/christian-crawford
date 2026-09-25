@@ -77,7 +77,7 @@ export default function HealthWarehousePage() {
         breadcrumb="HealthWarehouse"
         kicker="Case study"
         logo={<EmployerLogo employer="healthwarehouse" labelled className="[--logo-h:2.25rem]" />}
-        title="One platform for multiple pharmacy brands."
+        title="One platform for three pharmacy brands."
         meta={[
           { label: "Role", value: "Senior Software Engineer" },
           { label: "Focus", value: "Architecture · Frontend · Accessibility · Product" },
@@ -106,7 +106,7 @@ export default function HealthWarehousePage() {
           </div>
         </div>
         <p className="mx-auto mt-space-5 max-w-xl text-center text-body text-ink/72">
-          The same discipline applies to quality: checked automatically on every change, not
+          The same discipline applies to quality: checked by automated suites, not
           audited once and forgotten.
         </p>
       </CaseStudySection>
@@ -128,7 +128,7 @@ export default function HealthWarehousePage() {
       <CaseStudySection id="evidence" kicker="Evidence" title="Quality checks across routes and real interactions.">
         <FeaturePanel>
           <div>
-            <p className={`text-ink ${textH4}`}>Checked on every change, not audited once.</p>
+            <p className={`text-ink ${textH4}`}>Checked by tests, not audited once.</p>
             <p className="mt-space-3 text-body text-ink/72">
               Playwright and axe-core test real interactions, not just static pages. The SEO suite
               checks metadata, headings, structured data, and language attributes.

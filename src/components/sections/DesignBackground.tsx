@@ -5,7 +5,7 @@ import { textH2, textH5 } from "@/lib/type";
 const principles: { icon: IconName; title: string; body: string }[] = [
   { icon: "person", title: "Start with the person", body: "Find the moment the product asks something of the person using it." },
   { icon: "layers", title: "Share the core", body: "Build one foundation, and configure what really differs." },
-  { icon: "shield", title: "Check every change", body: "Accessibility and real interactions tested automatically, not audited once." },
+  { icon: "shield", title: "Test, don't audit", body: "Accessibility and real interactions tested automatically, not audited once." },
   { icon: "people", title: "Sit in every seat", body: "Product, design, and engineering deciding together what to build." },
 ];
 

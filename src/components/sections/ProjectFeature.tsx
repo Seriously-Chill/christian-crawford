@@ -9,7 +9,7 @@ import { textH2, textH3 } from "@/lib/type";
 // taken from the case study itself. How it's layered is left to its diagram.
 const outcomes = [
   { value: "No forks", label: "Every brand runs on one shared codebase instead of its own copy." },
-  { value: "~50 routes", label: "covered by automated accessibility tests on every change." },
+  { value: "Brand three", label: "added with a config file, env files, and build scripts. No structural change." },
   { value: "200+", label: "accessibility issues addressed across two platforms." },
 ];
 

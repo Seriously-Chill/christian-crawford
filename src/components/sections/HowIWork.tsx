@@ -20,7 +20,7 @@ const steps = [
   },
   {
     title: "Verify",
-    body: "Check accessibility, SEO, and real interactions automatically on every change, so simple stays simple.",
+    body: "Back accessibility, SEO, and real interactions with automated tests, so simple stays simple.",
   },
 ];
 
