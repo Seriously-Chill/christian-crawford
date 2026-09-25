@@ -42,13 +42,13 @@ export function NarrativeTeaser({
       <div className="mx-auto max-w-5xl px-space-3 py-space-6">
         <RevealOnScroll>
           <p className={`text-label ${onGradient ? "text-on-header/80" : "text-accent"}`}>{kicker}</p>
-          <h2 className={`mt-space-2 max-w-2xl ${onGradient ? "text-on-header" : "text-ink"} ${textH2}`}>{title}</h2>
-          <p className={`mt-space-3 max-w-xl text-body ${onGradient ? "text-on-header/80" : "text-ink/72"}`}>{body}</p>
+          <h2 className={`mt-space-2 max-w-2xl lg:mt-space-3 ${onGradient ? "text-on-header" : "text-accent"} ${textH2}`}>{title}</h2>
+          <p className={`mt-space-3 max-w-xl text-body lg:mt-space-4 ${onGradient ? "text-on-header/80" : "text-ink/72"}`}>{body}</p>
         </RevealOnScroll>
 
         {children}
 
-        <RevealOnScroll delayMs={100} className="mt-space-4">
+        <RevealOnScroll className="mt-space-4">
           <Button href={href} variant={onGradient ? "bordered-inverse" : "bordered"}>
             {linkLabel}
           </Button>

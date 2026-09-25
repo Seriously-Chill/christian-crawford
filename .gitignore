@@ -49,3 +49,9 @@ test-results/
 !CLAUDE.local.md
 !.claude/
 !docs/agent-decision-log.md
+
+# Blender autosave backups
+*.blend1
+
+# Blender render output: regenerate with artwork/blender/nested_forms_study.py
+/artwork/blender/renders/

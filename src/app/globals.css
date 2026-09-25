@@ -12,67 +12,68 @@
  * IS this site's entire visual language.
  */
 @theme inline {
-  /* Typography — Poppins variable comes from next/font in layout.tsx */
-  --font-sans: var(--font-poppins), sans-serif;
+  /* Typography — Plus Jakarta Sans variable comes from next/font in layout.tsx */
+  --font-sans: var(--font-jakarta), sans-serif;
 
   --text-display: 80px;
-  --text-display--line-height: 1;
-  --text-display--letter-spacing: -0.07em;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.012em;
   --text-display--font-weight: 400;
 
   --text-h2: 56px;
-  --text-h2--line-height: 1;
-  --text-h2--letter-spacing: -0.04em;
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.01em;
   --text-h2--font-weight: 400;
 
   --text-h3: 32px;
-  --text-h3--line-height: 1.2;
-  --text-h3--letter-spacing: -0.04em;
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.005em;
   --text-h3--font-weight: 500;
 
   --text-h4: 28px;
-  --text-h4--line-height: 1.5;
-  --text-h4--letter-spacing: -0.02em;
+  --text-h4--line-height: 1.25;
+  --text-h4--letter-spacing: -0.005em;
   --text-h4--font-weight: 500;
 
   --text-h5: 20px;
-  --text-h5--line-height: 1.5;
-  --text-h5--letter-spacing: -0.02em;
+  --text-h5--line-height: 1.35;
+  --text-h5--letter-spacing: -0.005em;
   --text-h5--font-weight: 500;
 
   --text-body: 16px;
   --text-body--line-height: 1.5;
-  --text-body--letter-spacing: -0.02em;
+  --text-body--letter-spacing: 0;
   --text-body--font-weight: 500;
 
   --text-label: 16px;
   --text-label--line-height: 1;
-  --text-label--letter-spacing: -0.03em;
+  --text-label--letter-spacing: 0;
   --text-label--font-weight: 500;
 
   /* Colors — primary/secondary expressed in HSL, driven by CSS custom
      properties (`--hue-primary`/`--hue-secondary`, `--l-primary`/
      `--l-secondary`) so the hue picker (ColorPicker.tsx) can rotate them
-     live. Defaults are a blue-leaning aqua (hue 197, secondary keeping the real
-     sourced 17.31° gap), at the same per-hue contrast-clamped lightness
-     ColorPicker.tsx computes, so first paint matches post-hydration:
-     hsl(197 69.7% 37.9%) = #1d7ea4, hsl(179.69 73.96% 29.4%) = #148282.
-     Original sourced blues were hsl(211.68 69.7% 45.29%) = #236fc4 and
-     hsl(194.37 73.96% 62.35%) = #58c4e6. Saturation is overridable too
-     (`--s-primary`/`--s-secondary`) for the picker's grey/white/black
-     stops. `accent` is primary-as-foreground-on-white (kickers, button
-     labels) — the same color, except in the white stop, where primary is
-     white and accent falls back to ink. `on-header` flips to ink there. */
+     live. The fallbacks below are the default look, the picker's gray
+     stop (hsl(240 0% 32%) = #525252 to hsl(240 0% 46.53%) = #777777, white
+     on-header, accent #525252 on white), matching what ColorPicker.tsx
+     applies so first paint matches post-hydration. The hues, including
+     the former default aqua (hue 197), set every token they differ on
+     explicitly, ink on-header among them. Original sourced blues were
+     hsl(211.68 69.7% 45.29%) = #236fc4 and hsl(194.37 73.96% 62.35%) =
+     #58c4e6. Hue grounds are light, so `on-header` is ink there; the gray
+     and black stops use white. `accent` is primary as foreground on white
+     (kickers, button labels, focus rings), a deep shade at `--l-accent`,
+     except in the white stop, where primary is white and accent is ink. */
   --color-primary: hsl(
-    var(--hue-primary, 197) var(--s-primary, 69.7%) var(--l-primary, 37.9%)
+    var(--hue-primary, 240) var(--s-primary, 0%) var(--l-primary, 32%)
   );
   --color-secondary: hsl(
-    var(--hue-secondary, 179.69) var(--s-secondary, 73.96%)
-      var(--l-secondary, 29.4%)
+    var(--hue-secondary, 240) var(--s-secondary, 0%)
+      var(--l-secondary, 46.53%)
   );
   --color-accent: var(
     --accent,
-    hsl(var(--hue-primary, 197) var(--s-primary, 69.7%) var(--l-primary, 37.9%))
+    hsl(var(--hue-primary, 240) var(--s-primary, 0%) var(--l-accent, 32%))
   );
   --color-ink: #1b1b1d;
   --color-surface: #ffffff;
@@ -81,7 +82,7 @@
   --color-on-header: var(--on-header, #ffffff);
   /* Edge for the surface-filled primary button — invisible (transparent)
      on colored grounds, ink on the picker's white stop, where a white
-     button would otherwise vanish into a white-to-grey gradient. */
+     button would otherwise vanish into a white-to-gray gradient. */
   --color-button-edge: var(--button-edge, transparent);
 
   /* Spacing — the real gap/padding values actually seen on the source site */
@@ -106,9 +107,18 @@
      entrance system, across all 6 captured pages, not just Home. */
   --ease-ripple: ease-out;
   --duration-ripple: 800ms;
-  --duration-page-transition: 700ms;
-  --duration-entrance: 1250ms;
-  --duration-entrance-slow: 2000ms;
+  /* Page transition: the source's 700ms each way, shortened for a
+     snappier feel — cover fast, reveal a touch slower so the new page
+     arrives rather than pops. */
+  --duration-page-cover: 300ms;
+  --duration-page-reveal: 400ms;
+  /* Entrances: every section reveal on every page (RevealOnScroll).
+     The source's 1250ms/2000ms read as sluggish here: common guidance
+     puts scroll reveals at 400–700ms with a 20–30px rise, on a strong
+     ease-out, so the move is mostly done by the time the eye lands. */
+  --duration-entrance: 700ms;
+  --ease-entrance: cubic-bezier(0.23, 1, 0.32, 1);
+  --distance-entrance: 20px;
   --duration-accordion: 1000ms;
   --ease-accordion: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -140,6 +150,24 @@
   );
 }
 
+/* Section entrances (RevealOnScroll). Hidden only while JS is running
+   (`html[data-reveal]`, set in <head>) and motion is welcome, so content
+   is never gated behind animation. `--reveal-delay` is the element's
+   place in its stagger batch, set by the component. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-reveal] .reveal {
+    opacity: 0;
+    translate: 0 var(--distance-entrance);
+    transition:
+      opacity var(--duration-entrance) var(--ease-entrance) var(--reveal-delay, 0ms),
+      translate var(--duration-entrance) var(--ease-entrance) var(--reveal-delay, 0ms);
+  }
+  html[data-reveal] .reveal[data-revealed] {
+    opacity: 1;
+    translate: none;
+  }
+}
+
 /* Page-transition overlay: confirmed real via `.elementor-kit-6
    e-page-transition{background-image:linear-gradient(174deg, primary 0%,
    secondary 100%)}` — a steeper, full-opacity variant of the header's own
@@ -147,6 +175,19 @@
    *less* specific `e-page-transition{background:#fff}` fallback rule
    elsewhere in the same stylesheet; the descendant selector's extra
    specificity is what actually wins, regardless of source order. */
+/* The name on the page-transition overlay: on-header at 75%, the most
+   transparency that keeps ≥4.5:1 on every hue and on the white/black stops
+   (worst case 4.8:1). The gray stop's lighter end only just clears 4.5:1
+   with solid white, so it's fully opaque there: 100% is the fallback,
+   since gray is the default, and the other stops set 75%. */
+@utility text-on-header-fade {
+  color: color-mix(
+    in srgb,
+    var(--color-on-header) var(--fade-alpha, 100%),
+    transparent
+  );
+}
+
 @utility bg-page-transition-gradient {
   background-image: linear-gradient(
     174deg,
@@ -159,6 +200,16 @@
   html {
     /* Lenis drives smooth scroll; avoid the browser double-smoothing it. */
     scroll-behavior: auto;
+    /* Keep whatever the browser scrolls into view (a control reached by
+       Tab or Shift+Tab, an anchor target) clear of the sticky header,
+       rather than just under it (WCAG 2.4.11 Focus Not Obscured). */
+    scroll-padding-top: 6rem;
+  }
+
+  /* Avoid a lone word on a paragraph's last line (headings balance
+     instead; see src/lib/type.ts). */
+  p {
+    text-wrap: pretty;
   }
 
   /*
@@ -209,8 +260,15 @@
    @media (hover: hover) and (pointer: fine) guard on touch devices. */
 @theme inline {
   --animate-ripple: ripple var(--duration-ripple) var(--ease-ripple) forwards;
+  /* Employer logo strip (EmployerMarquee.tsx): slow and linear, so it reads
+     as ambient drift rather than something to track. */
+  --animate-marquee: marquee 60s linear infinite;
+  /* `ease` both ways: the closest standard curve to the source's measured
+     fade (half-covered ~45% of the way in, a long soft tail). */
+  --animate-page-transition-in: page-transition-in
+    var(--duration-page-cover) ease forwards;
   --animate-page-transition-out: page-transition-out
-    var(--duration-page-transition) ease-out forwards;
+    var(--duration-page-reveal) ease forwards;
 }
 
 @keyframes ripple {
@@ -224,6 +282,23 @@
   }
 }
 
+/* The strip holds two identical copies side by side, each padded by one
+   gap, so shifting the track by exactly half loops without a seam. */
+@keyframes marquee {
+  to {
+    translate: -50% 0;
+  }
+}
+
+@keyframes page-transition-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes page-transition-out {
   0% {
     opacity: 1;
@@ -234,25 +309,27 @@
 }
 
 /* Color picker (ColorPicker.tsx). The panel uses the same translucent
-   "glass" as the cards on gradients, but tinted with primary rather than
-   white so on-header text keeps its contrast, plus a backdrop blur so the
-   page behind it doesn't read through. It grows out of its trigger on
-   open (collapsed to near-instant by the reduced-motion rule above). */
+   "glass" as the cards on gradients, but tinted with primary so it reads
+   as part of the header, plus a backdrop blur so the page behind it
+   doesn't read through. It grows out of its trigger on open (collapsed
+   to near-instant by the reduced-motion rule above). */
 .color-panel {
-  /* Frosted glass: a smoky primary tint (primary darkened with a little
-     black, so white text keeps ≥4.5:1 once the lighter page behind is
-     blended in) under a faint white sheen at the top edge, over a heavy
-     blur. The blur is what makes a translucent panel workable at all:
-     detail behind it is smeared into the surrounding color, not read
-     through. Contrast here was measured from rendered pixels, since axe
-     can't see through backdrop-filter. */
+  /* Frosted glass: a primary tint pushed away from the text color (primary
+     lightened with a little white under ink text, darkened with black on
+     the gray/black stops' white text — `--panel-shade`, black by default
+     since gray is), so on-header
+     keeps ≥4.5:1 once the page behind is blended in) under a faint white
+     sheen at the top edge, over a heavy blur. The blur is what makes a
+     translucent panel workable at all: detail behind it is smeared into
+     the surrounding color, not read through. Contrast here was measured
+     from rendered pixels, since axe can't see through backdrop-filter. */
   background:
     linear-gradient(
       170deg,
       color-mix(in srgb, #ffffff 10%, transparent) 0%,
       transparent 40%
     ),
-    color-mix(in srgb, color-mix(in srgb, var(--color-primary) 72%, #000000) 62%, transparent);
+    color-mix(in srgb, color-mix(in srgb, var(--color-primary) 72%, var(--panel-shade, #000000)) 62%, transparent);
   -webkit-backdrop-filter: blur(28px) saturate(140%);
   backdrop-filter: blur(28px) saturate(140%);
   border: 1px solid color-mix(in srgb, #ffffff 30%, transparent);

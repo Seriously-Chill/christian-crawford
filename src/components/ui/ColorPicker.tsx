@@ -1,34 +1,47 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, type CSSProperties, type KeyboardEvent } from "react";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 
 const STORAGE_KEY = "cc-hue";
-const DEFAULT_HUE_PRIMARY = 197; // blue-leaning aqua
+// The original blue-leaning aqua: now a preset, no longer the default.
+const AQUA_HUE = 197;
 const HUE_OFFSET = 211.68 - 194.37; // real, sourced gap between primary/secondary hues
 const SAT_PRIMARY = 69.7;
 const SAT_SECONDARY = 73.96;
-const BASE_L_PRIMARY = 45.29;
-const BASE_L_SECONDARY = 62.35;
-// WCAG AA is 4.5:1, but the browser rounds each channel to 8 bits after
-// this math — clamping to exactly 4.5 lands at 4.47–4.49 on some hues
-// (caught by tests/a11y-colors.spec.ts). Aim a little high for headroom.
-const MIN_CONTRAST = 4.6;
+// Hues are light grounds with ink text (like the white stop), so lightness
+// is solved per hue for a target relative luminance rather than clamped
+// under white text's ceiling — equal luminance reads as equally light
+// across the wheel (yellow needs far less HSL lightness than blue). 0.44/
+// 0.52 keep ink at 80% opacity ≥4.7:1 on both, even under the cards' 10%
+// ink tint. Accent (hue text on white sections, focus rings) is a deep
+// shade of the same hue: 0.09 is ≥7.5:1 on white and ≥3:1 against the
+// gradient, so focus outlines stay visible on it. The browser rounds each
+// channel to 8 bits after this math, so the targets leave headroom.
+const Y_PRIMARY = 0.44;
+const Y_SECONDARY = 0.52;
+const Y_ACCENT = 0.09;
 
 // Stored positions 0–359 are hues; past the wheel, three neutral stops,
-// each a 40-wide zone (grey 360–399, white 400–439, black 440–479). The
+// each a 40-wide zone (gray 360–399, white 400–439, black 440–479). The
 // slider itself only covers hues now — the neutrals are swatch buttons —
 // but the encoding stays, so saved choices and tests keep working.
 const HUE_END = 360;
 const STOP_WIDTH = 40;
-const STOPS = ["grey", "white", "black"] as const;
+const STOPS = ["gray", "white", "black"] as const;
 type Stop = (typeof STOPS)[number];
 const SLIDER_MAX = HUE_END + STOPS.length * STOP_WIDTH - 1;
 const stopPosition = (stop: Stop) => HUE_END + STOPS.indexOf(stop) * STOP_WIDTH + STOP_WIDTH / 2;
+// The site's default look: charcoal gray. globals.css's first-paint
+// fallbacks match it, so a first visit paints gray with no flash.
+const DEFAULT_POSITION = stopPosition("gray");
 
-// Fixed tokens per neutral stop. Grey keeps white on-header text at ≥4.5:1
-// (46.53% is the lightest grey that does); white flips on-header and
-// accent to ink, since primary itself is white there, and gives the
-// white primary button an ink edge so it doesn't vanish.
+// Fixed tokens per neutral stop. Gray and black are the only dark grounds,
+// so they flip on-header to white (46.53% is the lightest gray that keeps
+// white at ≥4.5:1) and shade the picker panel with black instead of white.
+// That leaves gray no headroom, so its transition name stays fully opaque.
+// White sets accent to ink, since primary itself is white there, and gives
+// the white primary button an ink edge so it doesn't vanish.
 const INK = "#1b1b1d";
 const STOP_TOKENS: Record<
   Stop,
@@ -38,9 +51,11 @@ const STOP_TOKENS: Record<
     onHeader?: string;
     accent?: string;
     buttonEdge?: string;
+    panelShade?: string;
+    fadeAlpha?: string;
   }
 > = {
-  grey: { s: [0, 0], l: [32, 46.53] },
+  gray: { s: [0, 0], l: [32, 46.53], onHeader: "#ffffff", panelShade: "#000000", fadeAlpha: "100%" },
   white: {
     s: [0, 3],
     l: [100, 85.5],
@@ -48,7 +63,7 @@ const STOP_TOKENS: Record<
     accent: INK,
     buttonEdge: INK,
   },
-  black: { s: [3.6, 3], l: [11, 24] },
+  black: { s: [3.6, 3], l: [11, 24], onHeader: "#ffffff", panelShade: "#000000" },
 };
 
 function stopAt(position: number): Stop | null {
@@ -79,22 +94,18 @@ function relativeLuminance(h: number, s: number, l: number) {
   return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
 }
 
-// White text's own luminance is 1 — solve the WCAG contrast formula for the
-// max background luminance that still clears `MIN_CONTRAST`, then binary
-// search for the highest HSL lightness (at this hue/saturation) that stays
-// at or under it. Guarantees on-header white text stays readable at every
-// hue on the wheel, not just the ones close to the real sourced blue.
-function maxSafeLightness(hue: number, saturation: number, baseline: number) {
-  const maxLuminance = (1 + 0.05) / MIN_CONTRAST - 0.05;
-  if (relativeLuminance(hue, saturation, baseline) <= maxLuminance) return baseline;
+// Binary search for the HSL lightness (at this hue/saturation) whose
+// relative luminance hits `target`. Luminance rises monotonically with
+// lightness, so this converges at every hue on the wheel.
+function lightnessFor(hue: number, saturation: number, target: number) {
   let lo = 0;
-  let hi = baseline;
+  let hi = 100;
   for (let i = 0; i < 24; i++) {
     const mid = (lo + hi) / 2;
-    if (relativeLuminance(hue, saturation, mid) <= maxLuminance) lo = mid;
+    if (relativeLuminance(hue, saturation, mid) < target) lo = mid;
     else hi = mid;
   }
-  return lo;
+  return hi;
 }
 
 // The exact primary/secondary a hue produces — shared by the live tokens,
@@ -104,8 +115,9 @@ function hueColors(hue: number) {
   return {
     hue,
     secondaryHue,
-    lPrimary: maxSafeLightness(hue, SAT_PRIMARY, BASE_L_PRIMARY),
-    lSecondary: maxSafeLightness(secondaryHue, SAT_SECONDARY, BASE_L_SECONDARY),
+    lPrimary: lightnessFor(hue, SAT_PRIMARY, Y_PRIMARY),
+    lSecondary: lightnessFor(secondaryHue, SAT_SECONDARY, Y_SECONDARY),
+    lAccent: lightnessFor(hue, SAT_PRIMARY, Y_ACCENT),
   };
 }
 
@@ -125,26 +137,26 @@ function hueGradient(hue: number) {
 // `background`: browsers normalize an inline hsl() to rgb(), which React
 // flags as a hydration mismatch. Custom property values stay verbatim.
 
-// Hue stops every 15°, at each hue's real clamped lightness — the track
-// previews the muted colors the site actually becomes, not neon.
+// Hue stops every 15°, at each hue's real solved lightness — the track
+// previews the colors the site actually becomes.
 const HUE_STOPS = Array.from({ length: 25 }, (_, i) => {
   const h = i * 15;
-  return `hsl(${h} ${SAT_PRIMARY}% ${round(maxSafeLightness(h, SAT_PRIMARY, BASE_L_PRIMARY))}%)`;
+  return `hsl(${h} ${SAT_PRIMARY}% ${round(lightnessFor(h, SAT_PRIMARY, Y_PRIMARY))}%)`;
 });
 const TRACK_GRADIENT = `linear-gradient(90deg, ${HUE_STOPS.join(", ")})`;
 const RING_GRADIENT = `conic-gradient(${HUE_STOPS.join(", ")})`;
 
 const SWATCHES: {
-  id: "default" | Stop;
+  id: "aqua" | Stop;
   label: string;
   position: number;
   background: string;
 }[] = [
   {
-    id: "default",
-    label: "Default",
-    position: DEFAULT_HUE_PRIMARY,
-    background: hueGradient(DEFAULT_HUE_PRIMARY),
+    id: "aqua",
+    label: "Aqua",
+    position: AQUA_HUE,
+    background: hueGradient(AQUA_HUE),
   },
   ...STOPS.map((stop) => ({
     id: stop,
@@ -154,39 +166,74 @@ const SWATCHES: {
   })),
 ];
 
-function applyPosition(position: number) {
-  const root = document.documentElement.style;
+// The custom properties a position sets on <html>; `null` means "remove, fall
+// back to globals.css". The fallbacks there are the gray default's, so
+// anything gray differs on (hues' ink text, white panel shade, faded
+// transition name) is set explicitly rather than left to fall back. Also
+// persisted as-is (see `THEME_STORAGE_KEY`) so the
+// pre-paint script in layout.tsx can restore them without this math.
+function themeVars(position: number): Record<string, string | null> {
   const stop = stopAt(position);
   if (stop) {
     const t = STOP_TOKENS[stop];
-    root.setProperty("--hue-primary", "240");
-    root.setProperty("--hue-secondary", "240");
-    root.setProperty("--s-primary", `${t.s[0]}%`);
-    root.setProperty("--s-secondary", `${t.s[1]}%`);
-    root.setProperty("--l-primary", `${t.l[0]}%`);
-    root.setProperty("--l-secondary", `${t.l[1]}%`);
-    if (t.onHeader) root.setProperty("--on-header", t.onHeader);
-    else root.removeProperty("--on-header");
-    if (t.accent) root.setProperty("--accent", t.accent);
-    else root.removeProperty("--accent");
-    if (t.buttonEdge) root.setProperty("--button-edge", t.buttonEdge);
-    else root.removeProperty("--button-edge");
-    return;
+    return {
+      "--hue-primary": "240",
+      "--hue-secondary": "240",
+      "--s-primary": `${t.s[0]}%`,
+      "--s-secondary": `${t.s[1]}%`,
+      "--l-primary": `${t.l[0]}%`,
+      "--l-secondary": `${t.l[1]}%`,
+      "--l-accent": `${t.l[0]}%`,
+      "--on-header": t.onHeader ?? null,
+      "--accent": t.accent ?? null,
+      "--button-edge": t.buttonEdge ?? null,
+      "--panel-shade": t.panelShade ?? "#ffffff",
+      "--fade-alpha": t.fadeAlpha ?? "75%",
+    };
   }
   const c = hueColors(position);
-  root.setProperty("--hue-primary", String(c.hue));
-  root.setProperty("--hue-secondary", String(c.secondaryHue));
-  root.setProperty("--s-primary", `${SAT_PRIMARY}%`);
-  root.setProperty("--s-secondary", `${SAT_SECONDARY}%`);
-  root.setProperty("--l-primary", `${c.lPrimary}%`);
-  root.setProperty("--l-secondary", `${c.lSecondary}%`);
-  root.removeProperty("--on-header");
-  root.removeProperty("--accent");
-  root.removeProperty("--button-edge");
+  return {
+    "--hue-primary": String(c.hue),
+    "--hue-secondary": String(c.secondaryHue),
+    "--s-primary": `${SAT_PRIMARY}%`,
+    "--s-secondary": `${SAT_SECONDARY}%`,
+    "--l-primary": `${c.lPrimary}%`,
+    "--l-secondary": `${c.lSecondary}%`,
+    "--l-accent": `${c.lAccent}%`,
+    "--on-header": INK,
+    "--accent": null,
+    "--button-edge": null,
+    "--panel-shade": "#ffffff",
+    "--fade-alpha": "75%",
+  };
+}
+
+function applyPosition(position: number) {
+  const root = document.documentElement.style;
+  for (const [name, value] of Object.entries(themeVars(position))) {
+    if (value === null) root.removeProperty(name);
+    else root.setProperty(name, value);
+  }
+}
+
+function persist(position: number) {
+  try {
+    if (position === DEFAULT_POSITION) {
+      window.localStorage.removeItem(STORAGE_KEY);
+      window.localStorage.removeItem(THEME_STORAGE_KEY);
+      return;
+    }
+    const vars = Object.fromEntries(Object.entries(themeVars(position)).filter(([, v]) => v !== null));
+    window.localStorage.setItem(STORAGE_KEY, String(position));
+    window.localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(vars));
+  } catch {
+    // Storage blocked (private mode, disabled site data): the choice just
+    // won't survive a reload.
+  }
 }
 
 function describePosition(position: number) {
-  if (position === DEFAULT_HUE_PRIMARY) return "Default";
+  if (position === AQUA_HUE) return "Aqua";
   const stop = stopAt(position);
   return stop ? stop[0].toUpperCase() + stop.slice(1) : `Hue ${position}°`;
 }
@@ -194,10 +241,10 @@ function describePosition(position: number) {
 /**
  * Small, playful color picker — not a theme switch. A hue slider rotates
  * `--color-primary`/`--color-secondary` (see globals.css) together across
- * the wheel, keeping each color's own real saturation and clamping
- * lightness per-hue so on-header white text stays at or above 4.5:1
- * everywhere (yellow/green read far lighter than blue at the same raw
- * lightness). A swatch row below covers the default and the grey/white/
+ * the wheel, keeping each color's own real saturation and solving
+ * lightness per-hue to one target luminance, so every hue is equally
+ * light and ink on-header text stays above 4.5:1 everywhere (yellow/green
+ * read far lighter than blue at the same raw lightness). A swatch row below covers aqua and the gray/white/
  * black stops as one-tap presets.
  *
  * Styled to match the rest of the design system: the trigger is a hue
@@ -215,6 +262,12 @@ export function ColorPicker() {
   // component's JSX needs to re-render for — restoring the saved choice on
   // mount is a direct DOM write in the effect, not a `setState` call.
   // (`localStorage` doesn't exist during the server render either way.)
+  //
+  // The page's colors are already right before this runs — layout.tsx's
+  // inline <head> script restores them pre-paint. This layout effect syncs
+  // the picker's own controls, re-applies the tokens (dev Strict Mode's
+  // remount resets <html>'s attributes), and re-persists so a choice saved
+  // before the pre-paint script existed gains its stored tokens.
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -236,11 +289,15 @@ export function ColorPicker() {
     });
   }
 
-  useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
+  useLayoutEffect(() => {
+    let stored: string | null = null;
+    try {
+      stored = window.localStorage.getItem(STORAGE_KEY);
+    } catch {}
     const parsed = stored !== null ? Number(stored) : NaN;
-    const initial = Number.isFinite(parsed) && parsed >= 0 && parsed <= SLIDER_MAX ? parsed : DEFAULT_HUE_PRIMARY;
+    const initial = Number.isFinite(parsed) && parsed >= 0 && parsed <= SLIDER_MAX ? parsed : DEFAULT_POSITION;
     sync(initial);
+    persist(initial);
   }, []);
 
   // Native <details> only closes via its own <summary> toggle — this adds
@@ -265,8 +322,7 @@ export function ColorPicker() {
 
   function choose(position: number) {
     sync(position);
-    if (position === DEFAULT_HUE_PRIMARY) window.localStorage.removeItem(STORAGE_KEY);
-    else window.localStorage.setItem(STORAGE_KEY, String(position));
+    persist(position);
   }
 
   return (
@@ -295,7 +351,7 @@ export function ColorPicker() {
             Color
           </label>
           <span ref={nameRef} className="text-sm text-on-header/80" aria-live="polite">
-            Default
+            Gray
           </span>
         </div>
         <input
@@ -305,7 +361,7 @@ export function ColorPicker() {
           min={0}
           max={HUE_END - 1}
           step={1}
-          defaultValue={DEFAULT_HUE_PRIMARY}
+          defaultValue={AQUA_HUE}
           onChange={(e) => choose(Number(e.target.value))}
           className="color-slider mt-space-2 w-full"
           style={{ "--track": TRACK_GRADIENT } as CSSProperties}

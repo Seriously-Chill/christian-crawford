@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
-import { ProjectFeature } from "@/components/sections/ProjectFeature";
-import { OtherWork } from "@/components/sections/OtherWork";
+import { ProjectRows } from "@/components/sections/ProjectRows";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 
 export const metadata: Metadata = {
@@ -16,11 +15,10 @@ export default function WorkPage() {
       <PageIntro
         breadcrumb="Work"
         kicker="Selected work"
-        title="Products, platforms, and teams I've helped move forward."
+        title="Products and platforms I've helped build."
       />
-      <ProjectFeature />
       <CurveDivider above="gradient-page" below="surface" />
-      <OtherWork />
+      <ProjectRows />
       <CurveDivider above="surface" below="primary" />
     </>
   );

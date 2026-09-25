@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
 import { useSyncExternalStore, type ReactNode } from "react";
 
 const QUERY = "(prefers-reduced-motion: reduce)";
@@ -30,6 +31,13 @@ function getServerSnapshot() {
  * own library defaults (so leaving them unset is equivalent), but
  * `touchMultiplier: 2` is a real override — the library default is `1`.
  * This is the app's only reason to reach for a client component for scrolling.
+ *
+ * Lenis measures the page by watching <html>'s size, so <html> must grow
+ * with its content: lenis.css sets `height: auto` on it, and layout.tsx
+ * sizes <body> with `min-h-dvh` rather than a fixed-height <html>. With
+ * <html> pinned to the viewport, Lenis kept the first page's scroll limit
+ * for the whole visit — land on a short page, navigate to a longer one,
+ * and scrolling stopped at the short page's length.
  */
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const reducedMotion = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);

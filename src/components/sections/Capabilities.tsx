@@ -1,19 +1,47 @@
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { Button } from "@/components/ui/Button";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
-import { CapabilityVisual } from "@/components/visuals/CapabilityVisual";
+import { LineIcon } from "@/components/ui/LineIcon";
 import { textH2 } from "@/lib/type";
 
+// Each card links to where that claim is backed up, with its own link name
+// so a screen-reader link list doesn't read four identical "More details".
 const capabilities = [
-  { title: "Architecture", body: "Shared foundations that can support different products and keep evolving.", visual: "architecture" as const },
-  { title: "Product", body: "Turning real-world requirements into experiences people can use with confidence.", visual: "product" as const },
-  { title: "Frontend", body: "React, Next.js, GraphQL, and design systems built around the product.", visual: "frontend" as const },
-  { title: "Quality", body: "Accessibility, testing, performance, and reliability built into the work.", visual: "quality" as const },
+  {
+    icon: "layers" as const,
+    title: "Architecture",
+    body: "One codebase serving three pharmacy brands, with configuration instead of forks.",
+    href: "/work/healthwarehouse#architecture",
+    link: "See the architecture",
+  },
+  {
+    icon: "person" as const,
+    title: "Product",
+    body: "Checkout, prescriptions, and autoreorder for patients who need them to just work.",
+    href: "/work/healthwarehouse",
+    link: "Read the case study",
+  },
+  {
+    icon: "code" as const,
+    title: "Frontend",
+    body: "Next.js App Router, React, Apollo GraphQL, and a per-brand design system on MUI.",
+    href: "/work",
+    link: "See the work",
+  },
+  {
+    icon: "shield" as const,
+    title: "Quality",
+    body: "Playwright and axe-core across ~50 routes, keyboard paths, and checkout flows.",
+    href: "/work/healthwarehouse#evidence",
+    link: "See the evidence",
+  },
 ];
 
 /**
  * Home §3, "What I do" — restyled after the reference site's product-line
- * grid: on-gradient glass cards, each led by a large abstract mark rather
- * than four small white text-only cards.
+ * grid: four on-gradient glass cards, each led by a line icon and ending
+ * in its own link through to the evidence, like the reference's
+ * "More details".
  */
 export function Capabilities() {
   return (
@@ -22,12 +50,14 @@ export function Capabilities() {
         <RevealOnScroll className="text-center">
           <h2 className={`text-on-header ${textH2}`}>What I do.</h2>
         </RevealOnScroll>
-        <RevealOnScroll delayMs={100} className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
+        <RevealOnScroll className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
           {capabilities.map((item) => (
-            <EvidenceCard key={item.title} title={item.title} onGradient>
+            <EvidenceCard key={item.title} title={item.title} logo={<LineIcon name={item.icon} variant="badge" />} onGradient>
               <p>{item.body}</p>
-              <div className="mt-space-4">
-                <CapabilityVisual variant={item.visual} className="h-28 sm:h-32" />
+              <div className="mt-space-3">
+                <Button href={item.href} variant="bordered-inverse">
+                  {item.link}
+                </Button>
               </div>
             </EvidenceCard>
           ))}

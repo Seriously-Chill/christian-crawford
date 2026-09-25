@@ -2,24 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { textH3 } from "@/lib/type";
 
 /**
  * Real DS behavior (Header/README.md): flat top-level items, exact order
- * and label, default `on-header` (white @ ~60% opacity), current route +
+ * and label, default `on-header` (ink @ 80% opacity, so it keeps 4.5:1), current route +
  * hover/focus go fully opaque. Below the header breakpoint the nav collapses
  * behind a toggle; opening it reveals the same links stacked, full-width,
  * over the same gradient (blurred, so the page doesn't read through), at
  * h3 size with a dot marking the current page. The links fade down in
  * sequence, and the header's curved bottom edge moves down to the
- * panel's while it's open — no dropdown, no invented items. Four routes
- * (Home/Work/About/Contact) per the approved site architecture;
+ * panel's while it's open — no dropdown, no invented items. Five routes
+ * (Home/Work/AI/About/Contact) per the approved site architecture;
  * `/work/healthwarehouse` is reached from `/work`, not top-level nav.
  */
 const links = [
   { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
+  { href: "/ai", label: "AI" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -32,6 +33,7 @@ function isActive(pathname: string, href: string) {
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   // Close the mobile panel on route change so a link tap doesn't leave it
   // open — derived during render (React's "adjusting state on prop change"
@@ -43,6 +45,19 @@ export function Nav() {
     setOpen(false);
   }
 
+  // Escape closes the open panel from anywhere, and hands focus back to
+  // the toggle so it doesn't drop to <body> when the links go inert.
+  useEffect(() => {
+    if (!open) return;
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
+
   // Real transition is .4s (custom-pro-widget-nav-menu.min.css:
   // .elementor-nav-menu--main .elementor-nav-menu a{transition:.4s}) —
   // was wrongly 150ms in an earlier pass.
@@ -50,7 +65,7 @@ export function Nav() {
     `text-label transition-opacity duration-400 ${
       active
         ? "text-on-header opacity-100 font-medium"
-        : "text-on-header opacity-60 hover:opacity-100 focus-visible:opacity-100"
+        : "text-on-header opacity-80 hover:opacity-100 focus-visible:opacity-100"
     }`;
 
   return (
@@ -69,6 +84,7 @@ export function Nav() {
       </ul>
 
       <button
+        ref={toggleRef}
         type="button"
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
@@ -78,15 +94,15 @@ export function Nav() {
       >
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-transform duration-150 ${open ? "translate-y-1.75 rotate-45" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-transform duration-300 ease-accordion ${open ? "translate-y-1.75 rotate-45" : ""}`}
         />
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-opacity duration-150 ${open ? "opacity-0" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-opacity duration-300 ease-accordion ${open ? "opacity-0" : ""}`}
         />
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-transform duration-150 ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-transform duration-300 ease-accordion ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
         />
       </button>
 

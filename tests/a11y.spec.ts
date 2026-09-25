@@ -1,11 +1,27 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { REVEAL_LINE } from "../src/lib/motion";
 
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/about", "/contact"];
+const ROUTES = ["/", "/work", "/work/healthwarehouse", "/ai", "/about", "/contact"];
 
 for (const route of ROUTES) {
   test(`${route} has no automatically detectable WCAG 2.2 AA violations`, async ({ page }) => {
     await page.goto(route);
+    // Let the entrances in view finish: text caught mid-fade reads as low
+    // contrast. Content below the reveal line (RevealOnScroll's own
+    // threshold, not the viewport's bottom edge) stays hidden until
+    // scrolled to, so axe skips it here; the reduced-motion suite in
+    // a11y-colors checks every route with everything visible. Looping
+    // ambient motion (the logo strip) never finishes, so only animations
+    // with an end are waited on.
+    await page.waitForFunction(
+      (line) =>
+        [...document.querySelectorAll(".reveal")].every(
+          (el) => el.hasAttribute("data-revealed") || el.getBoundingClientRect().top >= innerHeight * line,
+        ) &&
+        document.getAnimations().every((a) => a.effect?.getTiming().iterations === Infinity),
+      REVEAL_LINE,
+    );
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
       .analyze();
