@@ -1,13 +1,13 @@
 import Image from "next/image";
 
-/** Decorative artwork for the contact section's complexity-to-clarity motif. */
+/** Isolated sphere form for the conversation and product-experience motif. */
 export function ContactVisual({ className = "" }: { className?: string }) {
   return (
     <Image
-      src="/visuals/contact-resolution.webp"
+      src="/visuals/nested-sphere.webp"
       alt=""
-      width={1004}
-      height={554}
+      width={1200}
+      height={1200}
       unoptimized
       sizes="(max-width: 640px) 80vw, 480px"
       className={`h-auto w-56 sm:w-64 ${className}`}

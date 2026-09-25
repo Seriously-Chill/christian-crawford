@@ -49,3 +49,6 @@ test-results/
 !CLAUDE.local.md
 !.claude/
 !docs/agent-decision-log.md
+
+# Blender autosave backups
+*.blend1

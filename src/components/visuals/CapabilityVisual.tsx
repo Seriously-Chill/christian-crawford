@@ -2,12 +2,11 @@ import Image from "next/image";
 
 type Variant = "architecture" | "product" | "frontend" | "quality";
 
-// Cropped to their visible artwork (see artwork/blender/optimize_renders.mjs).
 const visuals: Record<Variant, { src: string; width: number; height: number }> = {
-  architecture: { src: "/visuals/capability-architecture.webp", width: 1124, height: 710 },
-  product: { src: "/visuals/capability-product.webp", width: 1140, height: 815 },
-  frontend: { src: "/visuals/capability-frontend.webp", width: 1136, height: 851 },
-  quality: { src: "/visuals/capability-quality.webp", width: 1108, height: 829 },
+  architecture: { src: "/visuals/nested-box.webp", width: 1200, height: 1200 },
+  product: { src: "/visuals/nested-sphere.webp", width: 1200, height: 1200 },
+  frontend: { src: "/visuals/nested-diamond.webp", width: 1200, height: 1200 },
+  quality: { src: "/visuals/nested-triangle.webp", width: 1200, height: 1200 },
 };
 
 /** Decorative rendered artwork for each capability card. */

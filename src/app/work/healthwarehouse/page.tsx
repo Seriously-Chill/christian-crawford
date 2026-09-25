@@ -80,7 +80,7 @@ export default function HealthWarehousePage() {
         title="Keep the core shared; configure what differs."
         body="One shared Next.js and React codebase serves every brand."
       >
-        <ArchitectureVisual alt="Illustration: three separate brand modules above a single shared platform base." />
+        <ArchitectureVisual alt="A carved wooden box representing the shared platform." />
         <div className="mt-space-3 grid gap-space-3 sm:grid-cols-3">
           <EvidenceCard title="Shared core">Infrastructure and patterns every brand uses.</EvidenceCard>
           <EvidenceCard title="Configuration">Carries each brand&apos;s own behavior.</EvidenceCard>
