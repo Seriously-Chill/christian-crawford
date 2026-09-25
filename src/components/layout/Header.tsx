@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { FluidLogoMark } from "@/components/motion/FluidLogoMark";
 import { ColorPicker } from "@/components/ui/ColorPicker";
+import { textH4 } from "@/lib/type";
 
 /**
  * Real DS behavior preserved: the header's own gradient (bg-header-gradient,
@@ -78,7 +79,7 @@ export function Header() {
           aria-label="Christian Crawford — home"
         >
           <FluidLogoMark className="h-9 w-auto shrink-0 text-on-header" />
-          <span className="truncate text-sm text-on-header sm:text-label">Christian Crawford</span>
+          <span className={`text-on-header ${textH4}`}>Christian Crawford</span>
         </Link>
 
         <div className="flex items-center gap-space-2">

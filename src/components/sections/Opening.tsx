@@ -46,7 +46,6 @@ export function Opening() {
           <HeroVisual variant="work" />
         </RevealOnScroll>
         <RevealOnScroll>
-          <p className="text-label text-on-header/80 mb-space-3">Christian Crawford</p>
           <h1 className={`max-w-[11em] text-on-header ${textDisplay}`}>
             I make complicated software simple.
           </h1>
