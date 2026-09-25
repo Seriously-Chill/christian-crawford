@@ -26,7 +26,7 @@ export function OtherWork() {
           <h2 className={`text-ink ${textH2}`}>Other work.</h2>
         </RevealOnScroll>
 
-        <RevealOnScroll delayMs={100} className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
+        <RevealOnScroll className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
           <EvidenceCard
             title="Ingage Partners"
             tags={["React", "Angular", "JAMstack"]}
@@ -45,7 +45,7 @@ export function OtherWork() {
           </EvidenceCard>
         </RevealOnScroll>
 
-        <RevealOnScroll delayMs={200} className="mt-space-5">
+        <RevealOnScroll className="mt-space-5">
           <h3 className={`text-ink ${textH4}`}>Earlier work</h3>
           <p className="mt-space-2 max-w-xl text-body text-ink/72">
             I started out building digital experiences at CBTS, Trivantis, and Ginghamsburg. That foundation still shapes how I work.

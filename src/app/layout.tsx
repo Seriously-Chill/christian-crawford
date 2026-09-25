@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { themeInitScript } from "@/lib/theme";
+import { revealInitScript } from "@/lib/motion";
 import { LogoMark } from "@/components/ui/LogoMark";
 
 // Self-hosted: the local device shell's egress allowlist doesn't reach
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="h-full" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: revealInitScript }} />
       </head>
       <body className={`${jakarta.variable} min-h-full flex flex-col`}>
         <a
@@ -69,9 +71,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/*
           Entrance preloader — the real page-transition treatment from the
           Design System (motion.md): the header gradient at a steeper,
-          full-opacity angle (174deg), a 700ms fade (corrected from an
-          earlier 500ms), and the 70px logo mark (corrected from 51x60) —
-          matching PageTransition's own real timing/size. The source shows
+          full-opacity angle (174deg) and the 70px logo mark, lifting with
+          the same fade and duration as PageTransition's reveal, so the
+          first page arrives the same way every later one does. Like
+          PageTransition, it marks the page covered while it's up and
+          fires the reveal event as it lifts, so the entrances underneath
+          wait and play into view instead of finishing behind it. The source shows
           this on route change; this app is a single scrolling page for
           its first paint, so it's replayed once per browser session as
           the opening moment instead, then PageTransition takes over for
@@ -101,7 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var k='cc-entered';if(sessionStorage.getItem(k)){var el=document.getElementById('cc-preloader');if(el)el.style.display='none';}else{sessionStorage.setItem(k,'1');window.addEventListener('load',function(){var el=document.getElementById('cc-preloader');if(!el)return;el.style.transition='opacity 700ms ease';el.style.opacity='0';setTimeout(function(){el.style.display='none';},720);});}}catch(e){}})();",
+              "(function(){try{var k='cc-entered',d=document.documentElement,el=document.getElementById('cc-preloader');if(!el)return;if(sessionStorage.getItem(k)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.style.display='none';return;}sessionStorage.setItem(k,'1');d.setAttribute('data-page-covered','');window.addEventListener('load',function(){d.removeAttribute('data-page-covered');window.dispatchEvent(new Event('cc:page-reveal'));el.style.animation='page-transition-out var(--duration-page-reveal) ease forwards';setTimeout(function(){el.style.display='none';},500);});}catch(e){}})();",
           }}
         />
 

@@ -30,7 +30,7 @@ export function CaseStudySection({
           {body ? <p className="mx-auto mt-space-3 max-w-xl lg:mt-space-4 text-body text-ink/72">{body}</p> : null}
         </RevealOnScroll>
         {children ? (
-          <RevealOnScroll delayMs={100} className="mt-space-5">
+          <RevealOnScroll className="mt-space-5">
             {children}
           </RevealOnScroll>
         ) : null}

@@ -1,123 +1,109 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { PAGE_COVERED_ATTR, PAGE_REVEAL_EVENT } from "@/components/motion/PageTransition";
+import { REVEAL_READY_FLAG } from "@/lib/motion";
+
+/** Gap between elements that reveal together (30–80ms is the usual range). */
+const STAGGER_MS = 70;
+/** Past this many steps a long batch would feel like it's dragging. */
+const MAX_STAGGER_STEPS = 5;
 
 /**
- * Small IntersectionObserver-driven reveal used for progressive disclosure
- * across the narrative sections (spec section 5/17: "content appearing at
- * intentional moments" rather than everything stacked and visible at once).
+ * Progressive disclosure for the narrative sections (spec section 5/17:
+ * "content appearing at intentional moments"). Every section on every page
+ * goes through this one component, so the whole site enters the same way:
+ * a fade plus a short rise, one duration, one curve (the `--*-entrance`
+ * tokens and `.reveal` rule in globals.css).
  *
- * Timing corrected against motion.md's real, sourced sitewide entrance
- * system (Elementor's `animated`/`animated-slow` + fadeIn/fadeInUp,
- * confirmed on Home/Innovations/News): `durationMs` now defaults to the
- * real 1250ms ("animated"), with `playOnLoad` sections passing 2000ms
- * ("animated-slow", reserved for hero-tier content) — an earlier pass
- * used an invented 700ms with no stagger. The real system also pairs
- * every element with an explicit ~100ms-per-element delay; callers should
- * pass `delayMs` in 100ms steps to match.
+ * Staggering is automatic. All reveals share one IntersectionObserver, and
+ * whatever it reports visible in the same callback is revealed as one
+ * batch, in document order, `STAGGER_MS` apart. So the order holds on its
+ * own: a page's intro, then the content under it, and a card grid that
+ * scrolls in reveals its cards in sequence. An element that scrolls in on
+ * its own starts immediately. Callers don't pass delays; an earlier
+ * version took a fixed `delayMs` per element, so the fifth career entry
+ * waited 400ms whenever it scrolled in, even with nothing before it.
  *
- * Still deliberately transform-only, no opacity — that part isn't a
- * fidelity gap, it's a real accessibility tradeoff kept on purpose: text
- * under an IntersectionObserver-gated opacity fade reads as low-contrast
- * to a static accessibility scan (and to a user if the observer ever
- * fails to fire) even though it's invisible off-screen either way. A
- * vertical offset achieves the same "arriving" feel without ever putting
- * real content in a reduced-contrast state.
+ * Content in view when the page arrives plays on arrival too, not only on
+ * scroll. That's the hero, and on /about the first few career entries,
+ * which used to sit still while the intro above them moved. Arrivals
+ * behind the page-transition overlay wait for it to lift
+ * (`PAGE_REVEAL_EVENT`), so they play where they can be seen.
  *
- * Content defaults to VISIBLE. Hiding-then-revealing is something this
- * component opts into client-side, and only once it has confirmed motion
- * is safe — so a no-JS visit and a reduced-motion visit are both just...
- * visible. Nothing is ever gated behind motion.
- *
- * `playOnLoad` entrances that mount behind the page-transition overlay
- * wait for it to start lifting (PageTransition's `PAGE_REVEAL_EVENT`)
- * rather than playing out unseen underneath it.
+ * Content is hidden only by CSS under `html[data-reveal]` (see
+ * lib/motion.ts), only under `prefers-reduced-motion: no-preference`, so
+ * no-JS and reduced-motion visits are simply visible. It's hidden from
+ * the first paint, so nothing is painted in place and then pulled away.
  */
-export function RevealOnScroll({
-  children,
-  className = "",
-  delayMs = 0,
-  durationMs = 1250,
-  playOnLoad = false,
-}: {
-  children: ReactNode;
-  className?: string;
-  delayMs?: number;
-  durationMs?: number;
-  playOnLoad?: boolean;
-}) {
+export function RevealOnScroll({ children, className = "" }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  // Above-the-fold content (the real source's hero fadeIn/fadeInUp plays
-  // on load, not on scroll) starts hidden immediately, keyed only on the
-  // `playOnLoad` prop — never on `typeof window`, which would make the
-  // server (no window) and the client's first hydration pass (has
-  // window) compute different initial values for the same prop and break
-  // hydration. Whether a *reduced-motion* visitor ever actually sees that
-  // hidden state is corrected below, entirely inside an effect — effects
-  // only run post-hydration, so they can read browser-only state safely
-  // without this class of mismatch.
-  const [hidden, setHidden] = useState(playOnLoad);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (playOnLoad) {
-      if (reduced) {
-        const id = requestAnimationFrame(() => setHidden(false));
-        return () => cancelAnimationFrame(id);
-      }
-      let raf1 = 0;
-      const play = () => {
-        raf1 = requestAnimationFrame(() => {
-          requestAnimationFrame(() => setHidden(false));
-        });
-      };
-      if (!document.documentElement.hasAttribute(PAGE_COVERED_ATTR)) {
-        play();
-        return () => cancelAnimationFrame(raf1);
-      }
-      window.addEventListener(PAGE_REVEAL_EVENT, play, { once: true });
-      return () => {
-        window.removeEventListener(PAGE_REVEAL_EVENT, play);
-        cancelAnimationFrame(raf1);
-      };
-    }
-
-    if (reduced) return;
-
-    const rect = node.getBoundingClientRect();
-    const alreadyVisible = rect.top < window.innerHeight * 0.9;
-    if (alreadyVisible) return;
-
-    setHidden(true);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHidden(false);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [playOnLoad]);
+    return observe(node);
+  }, []);
 
   return (
-    <div
-      ref={ref}
-      className={`transition-transform ease-out motion-reduce:transition-none motion-reduce:transform-none ${
-        hidden ? "translate-y-6" : "translate-y-0"
-      } ${className}`}
-      style={{
-        transitionDuration: `${durationMs}ms`,
-        transitionDelay: !hidden ? `${delayMs}ms` : "0ms",
-      }}
-    >
+    <div ref={ref} className={`reveal ${className}`}>
       {children}
     </div>
   );
+}
+
+let observer: IntersectionObserver | null = null;
+/** Visible while the overlay covers the page; revealed as it lifts. */
+const waiting = new Set<Element>();
+
+if (typeof window !== "undefined") {
+  (window as unknown as Record<string, boolean>)[REVEAL_READY_FLAG] = true;
+  window.addEventListener(PAGE_REVEAL_EVENT, () => {
+    const batch = [...waiting].filter((el) => el.isConnected);
+    waiting.clear();
+    reveal(batch);
+  });
+}
+
+function observe(node: Element) {
+  observer ??= new IntersectionObserver(onIntersect, {
+    // Trigger once the top edge is ~12% into the viewport. A ratio
+    // threshold would make tall blocks (card grids) wait until a share of
+    // their height was on screen, so they'd reveal late.
+    rootMargin: "0px 0px -12% 0px",
+    threshold: 0,
+  });
+  observer.observe(node);
+  return () => {
+    observer?.unobserve(node);
+    waiting.delete(node);
+  };
+}
+
+function onIntersect(entries: IntersectionObserverEntry[]) {
+  const batch: Element[] = [];
+  for (const entry of entries) {
+    // Already scrolled past (a restored scroll position or a hash link):
+    // show it now rather than leave a hidden block above the reader.
+    const above = !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;
+    if (!entry.isIntersecting && !above) continue;
+    observer?.unobserve(entry.target);
+    if (above) entry.target.setAttribute("data-revealed", "");
+    else batch.push(entry.target);
+  }
+  if (!batch.length) return;
+  if (document.documentElement.hasAttribute(PAGE_COVERED_ATTR)) {
+    batch.forEach((el) => waiting.add(el));
+    return;
+  }
+  reveal(batch);
+}
+
+function reveal(batch: Element[]) {
+  batch
+    .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
+    .forEach((el, i) => {
+      (el as HTMLElement).style.setProperty("--reveal-delay", `${Math.min(i, MAX_STAGGER_STEPS) * STAGGER_MS}ms`);
+      el.setAttribute("data-revealed", "");
+    });
 }

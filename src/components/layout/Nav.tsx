@@ -79,15 +79,15 @@ export function Nav() {
       >
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-transform duration-150 ${open ? "translate-y-1.75 rotate-45" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-transform duration-300 ease-accordion ${open ? "translate-y-1.75 rotate-45" : ""}`}
         />
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-opacity duration-150 ${open ? "opacity-0" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-opacity duration-300 ease-accordion ${open ? "opacity-0" : ""}`}
         />
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-transform duration-150 ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-transform duration-300 ease-accordion ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
         />
       </button>
 

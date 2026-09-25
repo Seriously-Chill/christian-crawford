@@ -33,14 +33,14 @@ export function CurrentInterests() {
             for architecture, testing, and the people working in large codebases.
           </p>
         </RevealOnScroll>
-        <RevealOnScroll delayMs={100} className="mt-space-5 grid gap-space-3 sm:grid-cols-3">
+        <RevealOnScroll className="mt-space-5 grid gap-space-3 sm:grid-cols-3">
           {interests.map((item) => (
             <EvidenceCard key={item.title} title={item.title}>
               {item.body}
             </EvidenceCard>
           ))}
         </RevealOnScroll>
-        <RevealOnScroll delayMs={200} className="mt-space-5 text-center">
+        <RevealOnScroll className="mt-space-5 text-center">
           <Button href="/ai" variant="bordered">
             See how I work with AI
           </Button>

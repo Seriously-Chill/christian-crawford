@@ -6,6 +6,16 @@ const ROUTES = ["/", "/work", "/work/healthwarehouse", "/ai", "/about", "/contac
 for (const route of ROUTES) {
   test(`${route} has no automatically detectable WCAG 2.2 AA violations`, async ({ page }) => {
     await page.goto(route);
+    // Let the entrances in view finish: text caught mid-fade reads as low
+    // contrast. Content further down stays hidden until scrolled to, so
+    // axe skips it here; the reduced-motion suite in a11y-colors checks
+    // every route with everything visible.
+    await page.waitForFunction(
+      () =>
+        [...document.querySelectorAll(".reveal")].every(
+          (el) => el.hasAttribute("data-revealed") || el.getBoundingClientRect().top > innerHeight,
+        ) && document.getAnimations().length === 0,
+    );
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
       .analyze();

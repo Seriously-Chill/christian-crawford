@@ -17,10 +17,8 @@ import { textDisplay } from "@/lib/type";
  *
  * The real Home hero also stages in on load (motion.md's sitewide
  * entrance system) rather than appearing all at once: headline → tagline
- * → CTAs, ~150ms apart, over the real hero-tier 2000ms duration.
- * `playOnLoad` plays this even though the hero is already in the initial
- * viewport, which `RevealOnScroll`'s default scroll-triggered mode
- * wouldn't do.
+ * → CTAs, each its own `RevealOnScroll` so they stagger in that order
+ * as the page arrives.
  *
  * Text/button colors corrected to the real on-gradient treatment: the
  * hero sits directly on the page's gradient canvas (confirmed by
@@ -44,22 +42,22 @@ export function Opening() {
         <HeroVisual variant="home" />
       </div>
       <div className="relative mx-auto flex min-h-[calc(100dvh-64px)] max-w-5xl flex-col justify-center px-space-3 py-space-6">
-        <RevealOnScroll playOnLoad durationMs={2000} className="mb-space-4 sm:hidden">
+        <RevealOnScroll className="mb-space-4 sm:hidden">
           <HeroVisual variant="work" />
         </RevealOnScroll>
-        <RevealOnScroll playOnLoad durationMs={2000}>
+        <RevealOnScroll>
           <p className="text-label text-on-header/80 mb-space-3">Christian Crawford</p>
           <h1 className={`max-w-[11em] text-on-header ${textDisplay}`}>
             I make complicated software simple.
           </h1>
         </RevealOnScroll>
-        <RevealOnScroll playOnLoad durationMs={2000} delayMs={150}>
+        <RevealOnScroll>
           <p className="mt-space-4 max-w-xl text-h5 lg:mt-space-5 text-on-header/80">
             I&apos;m a senior software engineer focused on frontend architecture. I turn
             messy requirements into systems people can use and build on.
           </p>
         </RevealOnScroll>
-        <RevealOnScroll playOnLoad durationMs={2000} delayMs={300}>
+        <RevealOnScroll>
           <div className="mt-space-5 flex flex-wrap gap-space-2">
             <Button href="/work">See the work</Button>
             <Button href="/contact" variant="bordered-inverse">

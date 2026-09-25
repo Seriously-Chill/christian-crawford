@@ -48,7 +48,7 @@ export function NarrativeTeaser({
 
         {children}
 
-        <RevealOnScroll delayMs={100} className="mt-space-4">
+        <RevealOnScroll className="mt-space-4">
           <Button href={href} variant={onGradient ? "bordered-inverse" : "bordered"}>
             {linkLabel}
           </Button>

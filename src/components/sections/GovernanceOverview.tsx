@@ -31,7 +31,7 @@ export function GovernanceOverview() {
           </p>
         </RevealOnScroll>
 
-        <RevealOnScroll delayMs={100} className="mt-space-5 text-center">
+        <RevealOnScroll className="mt-space-5 text-center">
           <p className="text-label text-on-header/80">Governance files the hooks protect</p>
           <Tags items={protectedFiles} onGradient align="center" />
         </RevealOnScroll>

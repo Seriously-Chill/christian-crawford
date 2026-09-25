@@ -22,7 +22,7 @@ export function Capabilities() {
         <RevealOnScroll className="text-center">
           <h2 className={`text-on-header ${textH2}`}>What I do.</h2>
         </RevealOnScroll>
-        <RevealOnScroll delayMs={100} className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
+        <RevealOnScroll className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
           {capabilities.map((item) => (
             <EvidenceCard key={item.title} title={item.title} onGradient>
               <p>{item.body}</p>

@@ -57,9 +57,9 @@ export function CareerProgression() {
     <section id="evolution" className="bg-surface">
       <div className="mx-auto max-w-5xl px-space-3 py-space-7">
         <ol className="space-y-space-5 border-l border-ink/10 pl-space-4">
-          {eras.map((era, i) => (
+          {eras.map((era) => (
             <li key={era.range}>
-              <RevealOnScroll delayMs={i * 100}>
+              <RevealOnScroll>
                 <div className="mb-space-2 flex flex-wrap items-center gap-x-space-3 gap-y-space-2 text-ink/60 [--logo-h:1.5rem]">
                   {era.logos.map((employer) => (
                     <EmployerLogo key={employer} employer={employer} />

@@ -44,7 +44,7 @@ export function PageIntro({
           visual ? "grid items-center gap-space-5 md:grid-cols-[3fr_2fr]" : ""
         }`}
       >
-        <RevealOnScroll playOnLoad durationMs={2000}>
+        <RevealOnScroll>
           <nav aria-label="Breadcrumb">
             <ol className="flex items-center gap-space-1 text-label text-on-header/60">
               <li>
@@ -74,7 +74,7 @@ export function PageIntro({
           ) : null}
         </RevealOnScroll>
         {visual ? (
-          <RevealOnScroll playOnLoad durationMs={2000} delayMs={100} className="flex justify-center">
+          <RevealOnScroll className="flex justify-center">
             {visual}
           </RevealOnScroll>
         ) : null}

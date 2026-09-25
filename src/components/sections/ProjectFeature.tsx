@@ -45,10 +45,7 @@ export function ProjectFeature({ compact = false }: { compact?: boolean }) {
             </Button>
           </div>
         </RevealOnScroll>
-        <RevealOnScroll
-          delayMs={100}
-          className="flex w-full max-w-sm items-center justify-center justify-self-center rounded-lg border border-on-header/10 bg-on-header/10 p-space-3 sm:max-w-none sm:p-space-4"
-        >
+        <RevealOnScroll className="flex w-full max-w-sm items-center justify-center justify-self-center rounded-lg border border-on-header/10 bg-on-header/10 p-space-3 sm:max-w-none sm:p-space-4">
           <HeroVisual variant="feature" />
         </RevealOnScroll>
       </div>

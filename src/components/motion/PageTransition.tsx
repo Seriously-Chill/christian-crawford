@@ -83,9 +83,10 @@ function transitionTarget(e: MouseEvent): string | null {
  * overlay and no added delay, links navigate immediately.
  *
  * While covered, `<html data-page-covered>` is set, and the new page's
- * load-time entrance (RevealOnScroll `playOnLoad`) waits for
- * `PAGE_REVEAL_EVENT`, so it plays where it can be seen instead of
- * underneath the overlay.
+ * entrances (RevealOnScroll) wait for `PAGE_REVEAL_EVENT`, so they play
+ * where they can be seen instead of underneath the overlay. The
+ * first-visit preloader in layout.tsx sets and fires the same two, by
+ * their literal names.
  */
 export function PageTransition() {
   const router = useRouter();

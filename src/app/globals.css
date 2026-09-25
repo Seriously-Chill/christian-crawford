@@ -111,8 +111,13 @@
      arrives rather than pops. */
   --duration-page-cover: 300ms;
   --duration-page-reveal: 400ms;
-  --duration-entrance: 1250ms;
-  --duration-entrance-slow: 2000ms;
+  /* Entrances: every section reveal on every page (RevealOnScroll).
+     The source's 1250ms/2000ms read as sluggish here: common guidance
+     puts scroll reveals at 400–700ms with a 20–30px rise, on a strong
+     ease-out, so the move is mostly done by the time the eye lands. */
+  --duration-entrance: 700ms;
+  --ease-entrance: cubic-bezier(0.23, 1, 0.32, 1);
+  --distance-entrance: 20px;
   --duration-accordion: 1000ms;
   --ease-accordion: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -142,6 +147,24 @@
     var(--color-primary) 0%,
     var(--color-secondary) 100%
   );
+}
+
+/* Section entrances (RevealOnScroll). Hidden only while JS is running
+   (`html[data-reveal]`, set in <head>) and motion is welcome, so content
+   is never gated behind animation. `--reveal-delay` is the element's
+   place in its stagger batch, set by the component. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-reveal] .reveal {
+    opacity: 0;
+    translate: 0 var(--distance-entrance);
+    transition:
+      opacity var(--duration-entrance) var(--ease-entrance) var(--reveal-delay, 0ms),
+      translate var(--duration-entrance) var(--ease-entrance) var(--reveal-delay, 0ms);
+  }
+  html[data-reveal] .reveal[data-revealed] {
+    opacity: 1;
+    translate: none;
+  }
 }
 
 /* Page-transition overlay: confirmed real via `.elementor-kit-6
