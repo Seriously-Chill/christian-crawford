@@ -14,7 +14,7 @@ import { textH3 } from "@/lib/type";
  * sequence, and the header's curved bottom edge moves down to the
  * panel's while it's open — no dropdown. Five routes
  * (Home/Work/AI/About/Contact) per the approved site architecture;
- * `/work/healthwarehouse` is reached from `/work`, not top-level nav.
+ * the case studies under `/work/` are reached from `/work`, not top-level nav.
  */
 const links = [
   { href: "/", label: "Home" },

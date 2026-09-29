@@ -40,6 +40,14 @@ const projects: Project[] = [
     ),
   },
   {
+    employers: ["healthwarehouse"],
+    title: "A partner portal, shaped before it was built.",
+    body: "I wrote the pitch, reviewed it with frontend and backend engineers, and am building the portal that takes routine partner requests off email and out of engineers' hands.",
+    tags: ["Product shaping", "UX", "Next.js", "TypeScript", "Accessibility"],
+    link: { href: "/work/partner-portal", label: "Explore the case study" },
+    panel: <Stat value="9" label="areas with working screens so far, from one written pitch" />,
+  },
+  {
     employers: ["ingage"],
     title: "Ingage Partners",
     body: "More than ten client engagements, from early-stage products to enterprise modernization, with integrations including Mapbox, AWS, and Contentful.",

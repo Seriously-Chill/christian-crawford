@@ -31,9 +31,9 @@ const siteStack = [
 ];
 
 const siteChecks = [
-  { value: "263", label: "automated Playwright tests across every page, run in Chromium and WebKit" },
+  { value: "299", label: "automated Playwright tests across every page, run in Chromium and WebKit" },
   { value: "28", label: "color settings each page is checked at for WCAG 2.2 AA contrast" },
-  { value: "20", label: "keyboard tests for navigation, menus, and the color picker" },
+  { value: "22", label: "keyboard tests for navigation, menus, and the color picker" },
 ];
 
 const tradeOffs = [

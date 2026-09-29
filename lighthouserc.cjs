@@ -2,7 +2,7 @@
 // `next build` first (the npm script does), since `next start` serves
 // whatever production build is on disk.
 const PORT = 4311;
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/ai", "/about", "/contact"];
+const ROUTES = ["/", "/work", "/work/healthwarehouse", "/work/partner-portal", "/ai", "/about", "/contact"];
 // Lighthouse simulates a slow phone by scaling the CPU time it observes, so
 // a slower machine inflates blocking time directly: the home page measures
 // ~15ms on a laptop and ~320ms on a GitHub runner. CI gets a looser TBT

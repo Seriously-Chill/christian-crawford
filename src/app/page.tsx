@@ -14,7 +14,7 @@ const structuredData = {
     {
       "@type": "Person",
       name: "Christian Crawford",
-      jobTitle: "Senior Software Engineer",
+      jobTitle: "Senior Frontend Engineer",
       url: "https://christiancrawford.dev",
       email: "mailto:christian.crawford@pm.me",
       sameAs: ["https://www.linkedin.com/in/christiancrawford"],

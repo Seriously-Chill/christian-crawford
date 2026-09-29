@@ -48,7 +48,7 @@ export function Opening() {
           </RevealOnScroll>
           <RevealOnScroll>
             <p className="mt-space-4 max-w-xl text-h5 lg:mt-space-5 text-on-header/80">
-              I&apos;m a senior software engineer focused on frontend architecture. I turn
+              I&apos;m a senior frontend engineer who came up through design. I turn
               messy requirements into systems people can use and build on.
             </p>
           </RevealOnScroll>

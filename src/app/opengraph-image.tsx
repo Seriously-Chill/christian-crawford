@@ -38,7 +38,7 @@ export default async function Image() {
           I make complicated software simple.
         </div>
         <div style={{ fontSize: 27 }}>
-          Senior Software Engineer  ·  Frontend architecture  ·  React, Next.js, GraphQL
+          Senior Frontend Engineer  ·  Frontend architecture  ·  React, Next.js, GraphQL
         </div>
       </div>
     ),

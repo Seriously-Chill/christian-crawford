@@ -20,8 +20,9 @@ Every route sits on the gradient canvas. White sections paint their own `bg-surf
 | Route | Sections, in order | Purpose |
 |---|---|---|
 | `/` | `Opening` → `HowIWork` → `Capabilities` → `ProjectFeature` → `NarrativeTeaser` with `EmployerMarquee` → `AiBanner` | Introduces the work, how Christian works, and the featured project, then points to `/about` and `/ai` |
-| `/work` | `PageIntro` → `ProjectRows` | HealthWarehouse, Ingage, Kroger and earlier work as alternating rows, HealthWarehouse first |
+| `/work` | `PageIntro` → `ProjectRows` | HealthWarehouse, the partner portal, Ingage, Kroger and earlier work as alternating rows, HealthWarehouse first |
 | `/work/healthwarehouse` | `PageIntro` (with `meta`) → `CaseStudySection`s: The problem → Architecture (`PlatformDiagram`, `DetailGrid`) → The key decision (`EvidenceCard`s) → Evidence (`FeaturePanel`, `DetailGrid`) → Role | The in-depth case study |
+| `/work/partner-portal` | `PageIntro` (with `meta`) → `CaseStudySection`s: The problem → Shaping (`EvidenceCard`s) → The key decision (`EvidenceCard`s) → Architecture (`SheetStackDiagram`, `EvidenceCard`s) → The hard part (`EvidenceCard`s) → Where it stands (`DetailGrid`) → Role | The product-shaping and UX case study |
 | `/ai` | `PageIntro` → `GovernanceOverview` → How it works (`GovernanceFlow`) → Why governance files → Why this subset → scope cards on the gradient (`EvidenceCard onGradient` ×3) → How this site is built (`FeaturePanel`, `Button`) | How AI fits the workflow, told through this repo's Claude Code governance hooks |
 | `/about` | `PageIntro` → `CareerProgression` → `DesignBackground` → `CurrentInterests` | Career timeline, the path from design to engineering, current interests |
 | `/contact` | `Contact` | Contact tiles; the page is its own closing band |

@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { tabKey } from "./keys";
 import { waitForHydration } from "./hydration";
 
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/ai", "/about", "/contact"];
+const ROUTES = ["/", "/work", "/work/healthwarehouse", "/work/partner-portal", "/ai", "/about", "/contact"];
 
 // Next.js's route announcer: a live region in an open shadow root that
 // reads the new page's name after a client-side navigation, the cue a

@@ -17,7 +17,7 @@ const POSITIONS: { name: string; value: number }[] = [
   { name: "black", value: 460 },
 ];
 
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/ai", "/about", "/contact"];
+const ROUTES = ["/", "/work", "/work/healthwarehouse", "/work/partner-portal", "/ai", "/about", "/contact"];
 
 // The picker applies its colors at hydration. Under reduced motion every
 // property still gets a 0.01ms transition (globals.css), and a transition

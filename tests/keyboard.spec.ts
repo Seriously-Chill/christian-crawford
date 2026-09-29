@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { tabKey } from "./keys";
 import { waitForHydration } from "./hydration";
 
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/ai", "/about", "/contact"];
+const ROUTES = ["/", "/work", "/work/healthwarehouse", "/work/partner-portal", "/ai", "/about", "/contact"];
 
 /** Upper bound on Tab presses per walk; well past any page's control count. */
 const MAX_STEPS = 150;

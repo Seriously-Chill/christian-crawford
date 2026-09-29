@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s — Christian Crawford",
   },
   description:
-    "Christian Crawford is a senior software engineer focused on frontend architecture, React, Next.js, accessibility, and complex product systems.",
+    "Christian Crawford is a senior frontend engineer focused on frontend architecture, React, Next.js, accessibility, and complex product systems.",
   openGraph: {
     title: "Christian Crawford — Frontend Architecture & Complex Product Systems",
     description:
