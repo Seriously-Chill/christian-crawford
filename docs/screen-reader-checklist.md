@@ -34,7 +34,6 @@ wording. Screen readers phrase things differently.
 ## Controls
 
 - [ ] **Color picker.** The toggle names what it does. The hue slider reads its value as "Hue N°" and updates as you adjust it. The Aqua, Gray, White and Black buttons read as toggle buttons with their pressed state. The name of the chosen color is announced politely, without interrupting.
-- [ ] **How I Work stepper** (home page, desktop width). All four steps are read, including the collapsed ones, and the active one is read as the current step. The Previous and Next step buttons read as unavailable (dimmed) at either end.
 - [ ] **External links** (LinkedIn, GitHub source) say they open in a new tab.
 - [ ] **Résumé link** makes clear it's a PDF download.
 - [ ] **Email links** read the address, not only "Email".

@@ -1,7 +1,5 @@
 import { Opening } from "@/components/sections/Opening";
-import { HowIWork } from "@/components/sections/HowIWork";
-import { Capabilities } from "@/components/sections/Capabilities";
-import { ProjectFeature } from "@/components/sections/ProjectFeature";
+import { ProofFeature } from "@/components/sections/ProofFeature";
 import { NarrativeTeaser } from "@/components/sections/NarrativeTeaser";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
@@ -54,15 +52,50 @@ export default function HomePage() {
 
       <CurveDivider above="gradient-page" below="surface" />
 
-      <HowIWork />
+      <ProofFeature
+        employer="healthwarehouse"
+        kicker="Architecture"
+        title="Three pharmacy brands. One codebase. No forks."
+        body="Every new brand brought requirements of its own: the kind that usually splits a product into separate apps. I built the platform from the ground up so they all run on one shared core, with configuration and feature flags carrying the differences."
+        tags={["Next.js", "React", "GraphQL", "Zustand", "MUI"]}
+        href="/work/healthwarehouse"
+        linkLabel="Read the case study"
+        outcomes={[
+          { value: "No forks", label: "Every brand runs on one shared codebase instead of its own copy." },
+          { value: "Brand three", label: "added with a config file, env files, and build scripts. No structural change." },
+        ]}
+      />
 
-      <CurveDivider above="surface" below="gradient-page" />
+      <ProofFeature
+        flip
+        employer="healthwarehouse"
+        kicker="Product and UX"
+        title="A partner portal, shaped before it was built."
+        body="Pharmacy partners ran orders, reports, and API changes through email and engineers. I wrote the pitch for a self-service portal, reviewed it with frontend and backend engineers, and am building it, with the UX decided around the operations staff who'll use it."
+        tags={["Product shaping", "UX", "Next.js", "TypeScript", "GraphQL"]}
+        href="/work/partner-portal"
+        linkLabel="Read the case study"
+        outcomes={[
+          { value: "The pitch", label: "Problem, solution, rabbit holes, and what's out of scope, reviewed before any code." },
+          { value: "Labeled filters", label: "chosen over a search box with chips, because of who uses it." },
+          { value: "9 areas", label: "with working screens so far. Still in progress." },
+        ]}
+      />
 
-      <Capabilities />
-
-      <CurveDivider above="gradient-page" below="surface" />
-
-      <ProjectFeature />
+      <ProofFeature
+        employer="healthwarehouse"
+        kicker="Quality"
+        title="200+ accessibility issues, fixed and kept fixed."
+        body="Audits kept finding problems: forms that failed silently for screen readers, controls a keyboard couldn't operate, dialogs nested inside dialogs. I led the work through the findings to a WCAG 2.2 AA seal, then added automated tests so the fixes stay fixed."
+        tags={["WCAG 2.2", "Playwright", "axe-core", "Screen readers"]}
+        href="/work/healthwarehouse#evidence"
+        linkLabel="See the evidence"
+        outcomes={[
+          { value: "200+", label: "accessibility issues addressed across two platforms, and a WCAG 2.2 AA seal." },
+          { value: "Announced", label: "Form errors and confirmations now reach screen readers across checkout, payments, and account forms." },
+          { value: "~50 routes", label: "re-checked by axe-core in five browser and device profiles." },
+        ]}
+      />
 
       <NarrativeTeaser
         kicker="How this happened"

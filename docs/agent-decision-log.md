@@ -9,8 +9,9 @@ that catches ordinary bugs.
 
 The layer covers:
 
-- `.claude/settings.json`, `.claude/hooks/*.sh`, `.claude/rules/*.md` — the enforcement
-  wiring itself.
+- `.claude/settings.json`, `.claude/hooks/*.sh` — the enforcement wiring itself. The hooks
+  also match `.claude/rules/*.md`. This repo has no rule files yet; the pattern is there
+  so the first one is protected when it's added.
 - `CLAUDE.md` / `AGENTS.md` — the operating contract.
 - `docs/agent-decision-log.md` — this file, the record of why the setup exists.
 
@@ -21,8 +22,9 @@ Three hooks cover it:
 - `governance-integrity-bash-check.sh` (PostToolUse, Bash) — catches the same files being
   changed by a Bash command (`sed -i`, heredoc redirects, `cp`, etc.) instead of the
   Edit/Write tools, which the first hook can't see. Uses file mtimes rather than
-  `git status --porcelain` because `.claude/` is globally gitignored on this machine and
-  never shows up as dirty.
+  `git status --porcelain` because `.claude/` is in the global gitignore on this machine.
+  The files already there are force-tracked, so edits to them do show as dirty, but a new
+  hook or rule file wouldn't appear in `git status` at all. Mtimes catch both.
 - `governance-integrity-mark.sh` (PostToolUse, Edit|Write) — marks a file as "already
   reviewed" right after an approved edit, so the Bash-check hook doesn't re-flag the same
   change a second time.

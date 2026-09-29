@@ -37,7 +37,7 @@ Page sections, each owning its own background and padding:
 - **`CaseStudySection`**: a kicker, h2 and body, plus a slot for diagrams or cards. It's used for each part of the HealthWarehouse case study and for the prose on `/ai`.
 - **`Contact`**: the contact page, with its h1 and the Email, LinkedIn, Résumé and location tiles.
 - **Page-specific sections:**
-  - Home: `HowIWork`, `Capabilities`, `ProjectFeature`, `NarrativeTeaser` and `AiBanner`
+  - Home: `ProofFeature`, `NarrativeTeaser` and `AiBanner`
   - `/work`: `ProjectRows`
   - `/about`: `CareerProgression`, `DesignBackground` and `CurrentInterests`
   - `/ai`: `GovernanceOverview`

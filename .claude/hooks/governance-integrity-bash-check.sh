@@ -5,7 +5,8 @@
 # bypass any other PreToolUse hook scoped to Edit|Write. Checks the effect (did a
 # governance-layer file change this session) rather than enumerating every shell idiom that
 # could write to one. Uses file mtimes directly rather than `git status --porcelain`, since
-# .claude/ is globally gitignored on this machine and never shows up as dirty. Hooks are
+# .claude/ is in the global gitignore on this machine: the existing files are force-tracked
+# and do show as dirty, but a new file under .claude/ never appears in git status. Hooks are
 # enumerated via `find`, not a fixed list, so a new hook script added later is automatically
 # covered.
 #

@@ -1,7 +1,7 @@
 /**
  * Small pill list for a card's technology/category tags — built only from
  * existing tokens (`radius-pill`, `text-label`), no new visual language.
- * Shared by `EvidenceCard`, `ProjectFeature`, and `ProjectRows`.
+ * Shared by `EvidenceCard`, `ProofFeature`, and `ProjectRows`.
  */
 export function Tags({
   items,

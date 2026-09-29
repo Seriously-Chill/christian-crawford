@@ -15,8 +15,8 @@ const TEXT_SPACING = `
 
 // Content a visitor can't get to: a horizontal page scroll, or text cut off
 // by an overflow-hidden/clip box. Screen-reader-only text is clipped to 1px
-// by design, and a box with no height at all is a collapsed disclosure
-// (HowIWork's accordion), not clipped text, so neither counts.
+// by design, and a box with no height at all is a collapsed disclosure,
+// not clipped text, so neither counts.
 async function lostContent(page: Page) {
   return page.evaluate(() => {
     const root = document.documentElement;

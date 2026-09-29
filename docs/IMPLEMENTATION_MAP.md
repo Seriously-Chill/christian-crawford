@@ -19,7 +19,7 @@ Every route sits on the gradient canvas. White sections paint their own `bg-surf
 
 | Route | Sections, in order | Purpose |
 |---|---|---|
-| `/` | `Opening` → `HowIWork` → `Capabilities` → `ProjectFeature` → `NarrativeTeaser` with `EmployerMarquee` → `AiBanner` | Introduces the work, how Christian works, and the featured project, then points to `/about` and `/ai` |
+| `/` | `Opening` → three `ProofFeature`s (Architecture → HealthWarehouse, Product and UX → partner portal, Quality → accessibility evidence) → `NarrativeTeaser` with `EmployerMarquee` → `AiBanner` | Says what Christian does, then shows one piece of evidence for each part of it, then points to `/about` and `/ai` |
 | `/work` | `PageIntro` → `ProjectRows` | HealthWarehouse, the partner portal, Ingage, Kroger and earlier work as alternating rows, HealthWarehouse first |
 | `/work/healthwarehouse` | `PageIntro` (with `meta`) → `CaseStudySection`s: The problem → Architecture (`PlatformDiagram`, `DetailGrid`) → The key decision (`EvidenceCard`s) → Evidence (`FeaturePanel`, `DetailGrid`) → Role | The in-depth case study |
 | `/work/partner-portal` | `PageIntro` (with `meta`) → `CaseStudySection`s: The problem → Shaping (`EvidenceCard`s) → The key decision (`EvidenceCard`s) → Architecture (`SheetStackDiagram`, `EvidenceCard`s) → The hard part (`EvidenceCard`s) → Where it stands (`DetailGrid`) → Role | The product-shaping and UX case study |
@@ -29,15 +29,14 @@ Every route sits on the gradient canvas. White sections paint their own `bg-surf
 
 ## Client/Server boundary
 
-Everything renders as a Server Component except these seven Client Components:
+Everything renders as a Server Component except these six Client Components:
 
 1. `Nav`: the current route, and the mobile menu's open state
 2. `SmoothScrollProvider`: Lenis
 3. `PageTransition`: intercepting clicks and tracking the pathname
 4. `RevealOnScroll`: IntersectionObserver. Content stays visible under reduced motion or without JS.
 5. `ColorPicker`: the slider and the stored choice
-6. `HowIWork`: which step is open. All four stay readable without JS.
-7. `EmployerMarquee`: the pause toggle
+6. `EmployerMarquee`: the pause toggle
 
 ## Other pieces
 
