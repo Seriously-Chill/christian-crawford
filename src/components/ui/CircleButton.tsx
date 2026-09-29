@@ -2,14 +2,14 @@ import type { MouseEventHandler } from "react";
 import { IconGlyph, type IconName } from "@/components/ui/LineIcon";
 
 /**
- * Round icon-only controls (the How I Work stepper's up/down arrows, the
- * logo strip's pause): `radius-circle`, a hairline border,
+ * Round icon-only controls (the logo strip's back, pause, and forward):
+ * `radius-circle`, a hairline border,
  * an icon only, hover filling with `accent` the way `Button` does. Icon-only,
  * so `label` is required and becomes the accessible name.
  *
- * `disabled` is `aria-disabled`, not the native attribute: a stepper's
- * "Next" becomes disabled the moment it's pressed onto the last step, and a
- * natively disabled button would drop keyboard focus to the page.
+ * `disabled` is `aria-disabled`, not the native attribute: a control that
+ * becomes disabled the moment it's pressed would otherwise drop keyboard
+ * focus to the page.
  */
 export function CircleButton({
   icon,

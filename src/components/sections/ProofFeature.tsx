@@ -12,6 +12,8 @@ import { textH2, textH3 } from "@/lib/type";
  * place of a list of capabilities, so each claim arrives with its proof and
  * a link to the case study behind it. `flip` puts the outcomes on the left
  * from `md` up, so a stack of panels alternates instead of repeating.
+ * `onGradient` sets the section on the page gradient instead of white; the
+ * panel itself stays light, so its text colors and contrast don't change.
  */
 export function ProofFeature({
   employer,
@@ -23,6 +25,7 @@ export function ProofFeature({
   linkLabel,
   outcomes,
   flip = false,
+  onGradient = false,
 }: {
   employer: Employer;
   kicker: string;
@@ -33,10 +36,11 @@ export function ProofFeature({
   linkLabel: string;
   outcomes: { value: string; label: string }[];
   flip?: boolean;
+  onGradient?: boolean;
 }) {
   return (
-    <section className="bg-surface">
-      <div className="mx-auto max-w-5xl px-space-3 pt-space-7">
+    <section className={onGradient ? "bg-page-gradient" : "bg-surface"}>
+      <div className="mx-auto max-w-5xl px-space-3 py-space-6">
         <RevealOnScroll>
           <FeaturePanel>
             <div className={flip ? "md:order-2" : undefined}>

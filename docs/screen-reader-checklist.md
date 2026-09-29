@@ -34,6 +34,7 @@ wording. Screen readers phrase things differently.
 ## Controls
 
 - [ ] **Color picker.** The toggle names what it does. The hue slider reads its value as "Hue N°" and updates as you adjust it. The Aqua, Gray, White and Black buttons read as toggle buttons with their pressed state. The name of the chosen color is announced politely, without interrupting.
+- [ ] **Logo strip** (home page). The logos are read once, as a list named "Where I've worked", not twice. "Scroll logos back" and "Scroll logos forward" read as buttons, and "Pause logo scroll" reads as a toggle button with its pressed state.
 - [ ] **External links** (LinkedIn, GitHub source) say they open in a new tab.
 - [ ] **Résumé link** makes clear it's a PDF download.
 - [ ] **Email links** read the address, not only "Email".

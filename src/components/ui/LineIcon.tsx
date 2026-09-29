@@ -16,8 +16,8 @@ const paths = {
   external: "M14 4h6v6M20 4l-9 9M18 14v5.5H4.5V6H10",
   download: "M12 4v11M7 10l5 5 5-5M5 19.5h14",
   pin: "M12 21s-6.5-6-6.5-11a6.5 6.5 0 1 1 13 0c0 5-6.5 11-6.5 11ZM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z",
-  up: "M12 19V5M6 11l6-6 6 6",
-  down: "M12 5v14M6 13l6 6 6-6",
+  left: "M19 12H5M11 6l-6 6 6 6",
+  right: "M5 12h14M13 6l6 6-6 6",
   pause: "M9 5v14M15 5v14",
   play: "M8 5v14l11-7L8 5Z",
 } as const;

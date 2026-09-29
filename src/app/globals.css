@@ -113,7 +113,6 @@
   --duration-entrance: 700ms;
   --ease-entrance: cubic-bezier(0.23, 1, 0.32, 1);
   --distance-entrance: 20px;
-  --duration-accordion: 1000ms;
   --ease-accordion: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -234,9 +233,6 @@
    touch devices never trigger it. */
 @theme inline {
   --animate-ripple: ripple var(--duration-ripple) var(--ease-ripple) forwards;
-  /* Employer logo strip (EmployerMarquee.tsx): slow and linear, so it reads
-     as ambient drift rather than something to track. */
-  --animate-marquee: marquee 60s linear infinite;
   /* `ease` both ways: half-covered ~45% of the way in, with a long soft
      tail. */
   --animate-page-transition-in: page-transition-in
@@ -253,14 +249,6 @@
   100% {
     opacity: 0;
     scale: 3.5;
-  }
-}
-
-/* The strip holds two identical copies side by side, each padded by one
-   gap, so shifting the track by exactly half loops without a seam. */
-@keyframes marquee {
-  to {
-    translate: -50% 0;
   }
 }
 

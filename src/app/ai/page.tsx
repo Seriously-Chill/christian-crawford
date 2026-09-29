@@ -6,6 +6,7 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { GovernanceFlow } from "@/components/visuals/GovernanceFlow";
+import { WorkShiftDiagram } from "@/components/visuals/WorkShiftDiagram";
 import { textH2, textH3, textH4 } from "@/lib/type";
 import { Button } from "@/components/ui/Button";
 import { FeaturePanel } from "@/components/ui/FeaturePanel";
@@ -31,7 +32,7 @@ const siteStack = [
 ];
 
 const siteChecks = [
-  { value: "299", label: "automated Playwright tests across every page, run in Chromium and WebKit" },
+  { value: "303", label: "automated Playwright tests across every page, run in Chromium and WebKit" },
   { value: "28", label: "color settings each page is checked at for WCAG 2.2 AA contrast" },
   { value: "22", label: "keyboard tests for navigation, menus, and the color picker" },
 ];
@@ -51,6 +52,17 @@ export default function AiPage() {
         title="AI helps write the code. I protect the rules it follows."
         tagline="Useful output isn’t the only test of an AI workflow. The rules guiding the tool need to stay visible and open to review."
       />
+      <CurveDivider above="gradient-page" below="surface" />
+
+      <CaseStudySection
+        kicker="Where the work went"
+        title="Implementation got faster. The judgment moved to either side of it."
+        body="An agent writes code quickly, so less of my time goes to typing it. More goes to setting up what the agent works within, and to proving what it produced is right."
+      >
+        <WorkShiftDiagram />
+      </CaseStudySection>
+
+      <CurveDivider above="surface" below="gradient-page" />
       <GovernanceOverview />
       <CurveDivider above="gradient-page" below="surface" />
 

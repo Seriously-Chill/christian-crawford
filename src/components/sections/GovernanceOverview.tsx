@@ -13,16 +13,16 @@ const protectedFiles = [
 ];
 
 /**
- * `/ai` §2 — sets the context before the diagram: which repository this
- * is (this portfolio site's, not a client or employer codebase) and which
- * files count as "governance." The mechanics live in `GovernanceFlow`
- * below, so this section deliberately doesn't restate them as cards.
- * Sits directly under `PageIntro` on the same gradient.
+ * `/ai` §3 — sets the context before the hooks diagram: which repository
+ * this is (this portfolio site's, not a client or employer codebase) and
+ * which files count as "governance." The mechanics live in
+ * `GovernanceFlow` below, so this section deliberately doesn't restate
+ * them as cards. Sits on the gradient between two white sections.
  */
 export function GovernanceOverview() {
   return (
     <section className="bg-page-gradient">
-      <div className="mx-auto max-w-5xl px-space-3 pb-space-7">
+      <div className="mx-auto max-w-5xl px-space-3 pt-space-6 pb-space-7">
         <RevealOnScroll className="text-center">
           <h2 className={`text-on-header ${textH2}`}>The repository behind this site.</h2>
           <p className="mx-auto mt-space-3 max-w-xl text-body lg:mt-space-4 text-on-header/80">

@@ -26,7 +26,7 @@ The shared building blocks, grouped by folder under `src/components/`. Use these
 - **`Tags`**: a pill list of technologies or categories, with an `onGradient` option.
 - **`LineIcon`**: the icon set, available as an `inline` glyph or a round `badge`. Always decorative.
 - **`EmployerLogo`**: an employer mark from `public/employers/`, drawn in `currentColor` so it follows the theme. Decorative by default; pass `labelled` when the logo stands in for the name.
-- **`EmployerMarquee`**: the slowly drifting logo strip. It pauses on hover, has a pause button, and stays still under reduced motion.
+- **`EmployerMarquee`**: the slowly drifting logo strip (one full pass per 60s). People can drag it with a mouse, swipe it on touch or a trackpad, or step one logo at a time with back and forward buttons; the drift resumes two seconds after they stop. It pauses on hover, has a pause button, and stays still under reduced motion.
 
 ## Sections (`sections/`)
 

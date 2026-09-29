@@ -41,20 +41,22 @@ Details:
 - **Buttons** change color over 300ms.
 - **Nav links** change opacity over 400ms.
 - **Evidence cards on a gradient** get a soft ripple on hover (`EvidenceCard`, 800ms ease-out, growing from 1× to 3.5× while fading out). It only plays for pointers that can hover, and only on the gradient variant, never on white sections.
-- **The How I Work stepper** opens a step over 1s on `--ease-accordion`, animating its height to the content. It's the slowest motion on the site, so keep that pace for this kind of reveal, and nothing faster-paced. Below `md` every step stays open.
+- **Open/close motion** (the color picker panel, the mobile menu, the menu toggle's bars) uses `--ease-accordion`, a standard ease-in-out, at 300–700ms.
 
 ## Ambient motion
 
-The employer logo strip drifts in a slow 60s linear loop. Because it moves on its own:
-- it pauses on hover
+The employer logo strip drifts one full set of logos every 60s, linearly. Because it moves on its own:
+- it pauses on hover and while being dragged
 - it has a pause button (WCAG 2.2.2)
 - it stays still under reduced motion
+
+People can also move it themselves instead of waiting: drag with a mouse, swipe on touch or a trackpad, or step one logo at a time with the back and forward buttons (a 450ms ease-out step that lands on a tile edge). The drift picks up again 2s after they stop. The timing lives in `EmployerMarquee.tsx`, since it's driven by an animation-frame loop rather than CSS.
 
 Nothing else on the site loops.
 
 ## Adding motion
 
 - **Reuse** an existing timing token before adding a new one.
-- **Keep it modest:** don't spread the ripple to other cards or buttons, and don't use the accordion's 1s easing for anything quick.
+- **Keep it modest:** don't spread the ripple to other cards or buttons.
 - **Give it an off switch:** anything that moves on its own needs a way to pause it, and must stop under reduced motion.
 - **Test it:** check it with the tests' reduced-motion runs and with the page transition running (`tests/navigation.spec.ts`).

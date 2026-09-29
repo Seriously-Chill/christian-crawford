@@ -62,12 +62,15 @@ export default function HomePage() {
         linkLabel="Read the case study"
         outcomes={[
           { value: "No forks", label: "Every brand runs on one shared codebase instead of its own copy." },
-          { value: "Brand three", label: "added with a config file, env files, and build scripts. No structural change." },
+          { value: "Brand three", label: "added with a config file, env files, and build scripts, then given its own fonts, colors, and corners while the other two stayed pixel-identical." },
         ]}
       />
 
+      <CurveDivider above="surface" below="gradient-page" />
+
       <ProofFeature
         flip
+        onGradient
         employer="healthwarehouse"
         kicker="Product and UX"
         title="A partner portal, shaped before it was built."
@@ -81,6 +84,8 @@ export default function HomePage() {
           { value: "9 areas", label: "with working screens so far. Still in progress." },
         ]}
       />
+
+      <CurveDivider above="gradient-page" below="surface" />
 
       <ProofFeature
         employer="healthwarehouse"

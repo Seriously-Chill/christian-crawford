@@ -23,7 +23,7 @@ Every route sits on the gradient canvas. White sections paint their own `bg-surf
 | `/work` | `PageIntro` → `ProjectRows` | HealthWarehouse, the partner portal, Ingage, Kroger and earlier work as alternating rows, HealthWarehouse first |
 | `/work/healthwarehouse` | `PageIntro` (with `meta`) → `CaseStudySection`s: The problem → Architecture (`PlatformDiagram`, `DetailGrid`) → The key decision (`EvidenceCard`s) → Evidence (`FeaturePanel`, `DetailGrid`) → Role | The in-depth case study |
 | `/work/partner-portal` | `PageIntro` (with `meta`) → `CaseStudySection`s: The problem → Shaping (`EvidenceCard`s) → The key decision (`EvidenceCard`s) → Architecture (`SheetStackDiagram`, `EvidenceCard`s) → The hard part (`EvidenceCard`s) → Where it stands (`DetailGrid`) → Role | The product-shaping and UX case study |
-| `/ai` | `PageIntro` → `GovernanceOverview` → How it works (`GovernanceFlow`) → Why governance files → Why this subset → scope cards on the gradient (`EvidenceCard onGradient` ×3) → How this site is built (`FeaturePanel`, `Button`) | How AI fits the workflow, told through this repo's Claude Code governance hooks |
+| `/ai` | `PageIntro` → Where the work went (`WorkShiftDiagram`) → `GovernanceOverview` → How it works (`GovernanceFlow`) → Why governance files → Why this subset → scope cards on the gradient (`EvidenceCard onGradient` ×3) → How this site is built (`FeaturePanel`, `Button`) | How AI fits the workflow, told through this repo's Claude Code governance hooks |
 | `/about` | `PageIntro` → `CareerProgression` → `DesignBackground` → `CurrentInterests` | Career timeline, the path from design to engineering, current interests |
 | `/contact` | `Contact` | Contact tiles; the page is its own closing band |
 
@@ -36,7 +36,7 @@ Everything renders as a Server Component except these six Client Components:
 3. `PageTransition`: intercepting clicks and tracking the pathname
 4. `RevealOnScroll`: IntersectionObserver. Content stays visible under reduced motion or without JS.
 5. `ColorPicker`: the slider and the stored choice
-6. `EmployerMarquee`: the pause toggle
+6. `EmployerMarquee`: the drift, dragging and swiping, the back/forward steps, and the pause toggle
 
 ## Other pieces
 
