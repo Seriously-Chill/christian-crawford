@@ -264,10 +264,11 @@ export function ColorPicker() {
   // (`localStorage` doesn't exist during the server render either way.)
   //
   // The page's colors are already right before this runs — layout.tsx's
-  // inline <head> script restores them pre-paint. This layout effect syncs
-  // the picker's own controls, re-applies the tokens (dev Strict Mode's
-  // remount resets <html>'s attributes), and re-persists so a choice saved
-  // before the pre-paint script existed gains its stored tokens.
+  // inline script at the top of <body> restores them pre-paint. This
+  // layout effect syncs the picker's own controls, re-applies the tokens
+  // (dev Strict Mode's remount resets <html>'s attributes), and re-persists
+  // so a choice saved before the pre-paint script existed gains its stored
+  // tokens.
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);

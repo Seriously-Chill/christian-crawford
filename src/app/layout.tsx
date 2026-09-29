@@ -52,15 +52,21 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // `suppressHydrationWarning`: the <head> script below sets the saved
+    // `suppressHydrationWarning`: the first script in <body> sets the saved
     // color's custom properties on <html> before hydration, so its `style`
     // intentionally differs from the server render.
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <body className={`${jakarta.variable} min-h-dvh flex flex-col`}>
+        {/*
+          First in <body>, not in <head>: they still run before anything
+          below them paints, and <head> keeps nothing of ours for React to
+          hydrate. Netlify injects a comment into <head> after <meta
+          charset>; with these scripts there, that mismatch made React throw
+          away the server HTML and re-render the page, which left the
+          first-visit preloader covering it for good.
+        */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: revealInitScript }} />
-      </head>
-      <body className={`${jakarta.variable} min-h-dvh flex flex-col`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:z-10001 focus:top-4 focus:left-4 focus:rounded-sm focus:bg-surface focus:px-space-2 focus:py-2 focus:text-accent focus:shadow-lg"
@@ -99,6 +105,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           React between server render and hydration" case this prop
           exists for. It only suppresses the mismatch warning for this
           element's own attributes, not its children.
+
+          If hydration still fails somewhere, React re-renders the whole
+          tree and replaces this div with a fresh one the script never
+          touched. So the script looks the element up again each time it
+          acts, and sets `window.__ccPreloaderDone` once it's gone;
+          PageTransition hides any replacement that shows up after that.
         */}
         <div
           id="cc-preloader"
@@ -111,7 +123,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var k='cc-entered',d=document.documentElement,el=document.getElementById('cc-preloader');if(!el)return;if(sessionStorage.getItem(k)||matchMedia('(prefers-reduced-motion: reduce)').matches){el.style.display='none';return;}sessionStorage.setItem(k,'1');d.setAttribute('data-page-covered','');var lifted=false;function lift(){if(lifted)return;lifted=true;d.removeAttribute('data-page-covered');window.dispatchEvent(new Event('cc:page-reveal'));el.style.animation='page-transition-out var(--duration-page-reveal) ease forwards';setTimeout(function(){el.style.display='none';},500);}function ready(){(document.fonts?document.fonts.ready:Promise.resolve()).then(lift);setTimeout(lift,1000);}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();}catch(e){}})();",
+              "(function(){try{var k='cc-entered',d=document.documentElement;function $(){return document.getElementById('cc-preloader')||{style:{}};}if(!document.getElementById('cc-preloader'))return;if(sessionStorage.getItem(k)||matchMedia('(prefers-reduced-motion: reduce)').matches){window.__ccPreloaderDone=true;$().style.display='none';return;}sessionStorage.setItem(k,'1');d.setAttribute('data-page-covered','');var lifted=false;function lift(){if(lifted)return;lifted=true;d.removeAttribute('data-page-covered');window.dispatchEvent(new Event('cc:page-reveal'));$().style.animation='page-transition-out var(--duration-page-reveal) ease forwards';setTimeout(function(){window.__ccPreloaderDone=true;$().style.display='none';},500);}function ready(){(document.fonts?document.fonts.ready:Promise.resolve()).then(lift);setTimeout(lift,1000);}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();}catch(e){}})();",
           }}
         />
 

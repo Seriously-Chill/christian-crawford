@@ -7,7 +7,6 @@ import { textH2 } from "@/lib/type";
 const protectedFiles = [
   ".claude/settings.json",
   ".claude/hooks/*.sh",
-  ".claude/rules/*.md",
   "CLAUDE.md",
   "AGENTS.md",
   "docs/agent-decision-log.md",

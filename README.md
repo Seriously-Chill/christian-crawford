@@ -1,59 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# christiancrawford.dev
 
-## Getting Started
+Source for [christiancrawford.dev](https://christiancrawford.dev), the portfolio of Christian Crawford, a senior engineer who came to frontend architecture from design.
 
-First, run the development server:
+The site is small, but it's built the way I'd build for a team: a documented design system, Server Components by default, accessibility enforced by tests, and Claude Code working inside rules it can't quietly change.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Playwright + axe-core · Lighthouse CI
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Testing
+## Running it
 
 ```bash
-npm run lint              # ESLint
-npm run typecheck         # tsc --noEmit
-npm run test:a11y         # Playwright, in Chromium and WebKit
-npm run test:lighthouse   # Lighthouse CI on every page
+npm install
+npm run dev        # http://localhost:3000
+npm run lint
+npm run typecheck
 ```
 
-Both test commands build the site first, so they always test the current code.
+## Tests
 
-- **`test:a11y`** runs every spec in `tests/`:
-  - `a11y.spec.ts`: axe WCAG 2.2 AA scans, heading order, landmarks
-  - `a11y-colors.spec.ts`: contrast at all 28 color-picker settings
-  - `keyboard.spec.ts`: Tab order, visible focus, menus
-  - `reflow.spec.ts`: 320px reflow and WCAG text spacing
-  - `navigation.spec.ts`: page titles, route announcements, and where focus lands after navigating
+```bash
+npm run test:a11y        # Playwright suite in Chromium and WebKit
+npm run test:lighthouse  # production build + Lighthouse CI budgets
+```
 
-  Run a single browser with `-- --project=webkit` (or `chromium`).
-- **`test:lighthouse`** fails if any page scores under 90 for performance or under 100 for accessibility, best practices or SEO, or exceeds the LCP, TBT or CLS limits in `lighthouserc.cjs`. Reports are written to `.lighthouseci/`.
-- **CI:** `.github/workflows/test.yml` runs all of the above on every pull request and on pushes to `main`.
-- **Manual checks:** what automation can't hear is covered in [docs/screen-reader-checklist.md](docs/screen-reader-checklist.md).
+The Playwright suite builds and serves the site on port 4310. It covers:
 
-## Learn More
+- **Accessibility**: axe-core on every route, plus WCAG 2.2 AA contrast on every route at each of the 28 settings the header's color picker can produce (`tests/a11y-colors.spec.ts`)
+- **Keyboard**: navigation, menus and the color picker (`tests/keyboard.spec.ts`)
+- **Reflow and text spacing**: content at 320px and under WCAG text-spacing overrides (`tests/reflow.spec.ts`)
+- **Navigation**: page titles, and that client-side page changes are announced and keep focus in the right place (`tests/navigation.spec.ts`)
 
-To learn more about Next.js, take a look at the following resources:
+Screen-reader passes are manual; the checklist is in [`docs/screen-reader-checklist.md`](docs/screen-reader-checklist.md).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Where to look
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Path | What's there |
+|---|---|
+| [`docs/IMPLEMENTATION_MAP.md`](docs/IMPLEMENTATION_MAP.md) | What each route is built from and where the code lives |
+| [`docs/design-system/`](docs/design-system/) | Tokens, motion and component guidelines |
+| [`docs/agent-decision-log.md`](docs/agent-decision-log.md) | Why the Claude Code governance hooks exist and what was left out |
+| [`.claude/`](.claude/) | Hook wiring (`settings.json`) and the hook scripts |
 
-## Deploy on Vercel
+## AI governance
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+I build this site with Claude Code. The hooks in `.claude/hooks/` treat changes to the agent's own rules (`CLAUDE.md`, `AGENTS.md`, `.claude/settings.json`, the hook scripts and the decision log) differently from ordinary edits: Edit/Write tool calls ask for confirmation first, and changes made through shell commands are caught afterward and stopped for review. The [AI page](https://christiancrawford.dev/ai) walks through how it works and its trade-offs.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`AGENTS.md` is written and re-added by `next dev`; see the note inside it.

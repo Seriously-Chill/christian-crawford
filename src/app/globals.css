@@ -140,9 +140,9 @@
 }
 
 /* Section entrances (RevealOnScroll). Hidden only while JS is running
-   (`html[data-reveal]`, set in <head>) and motion is welcome, so content
-   is never gated behind animation. `--reveal-delay` is the element's
-   place in its stagger batch, set by the component. */
+   (`html[data-reveal]`, set before first paint) and motion is welcome, so
+   content is never gated behind animation. `--reveal-delay` is the
+   element's place in its stagger batch, set by the component. */
 @media (prefers-reduced-motion: no-preference) {
   html[data-reveal] .reveal {
     opacity: 0;

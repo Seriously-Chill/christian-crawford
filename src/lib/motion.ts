@@ -1,8 +1,8 @@
 /**
- * Set on <html> by the inline head script when JS is running; globals.css
- * only hides `.reveal` content while it's present (and only under
- * `prefers-reduced-motion: no-preference`), so a no-JS or reduced-motion
- * visit renders everything visible from the first frame.
+ * Set on <html> by the inline script at the top of <body> when JS is
+ * running; globals.css only hides `.reveal` content while it's present
+ * (and only under `prefers-reduced-motion: no-preference`), so a no-JS or
+ * reduced-motion visit renders everything visible from the first frame.
  */
 export const REVEAL_ATTR = "data-reveal";
 

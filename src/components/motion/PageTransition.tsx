@@ -117,6 +117,16 @@ export function PageTransition() {
     router.push(href);
   }
 
+  // A failed hydration re-renders the first-visit preloader (layout.tsx)
+  // as a fresh, fully opaque element its inline script never touched. If
+  // that script already finished, hide the replacement so it can't cover
+  // the page for good.
+  useLayoutEffect(() => {
+    if (!(window as { __ccPreloaderDone?: boolean }).__ccPreloaderDone) return;
+    const el = document.getElementById("cc-preloader");
+    if (el) el.style.display = "none";
+  }, []);
+
   // Cover: take over qualifying link clicks.
   useEffect(() => {
     function handleClick(e: MouseEvent) {
