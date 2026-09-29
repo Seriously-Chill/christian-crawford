@@ -44,13 +44,13 @@ const steps = [
  */
 export function SheetStackDiagram() {
   return (
-    <figure aria-labelledby="sheet-stack-caption" className="mx-auto max-w-3xl">
+    <figure aria-labelledby="sheet-stack-caption" className="max-w-3xl">
       <ol>
         {steps.map((step, i) => (
           <li key={step.url}>
             {i > 0 ? <Arrow /> : null}
             <div
-              className={`rounded-lg border bg-surface-raised p-space-2 text-center sm:p-space-3 ${
+              className={`rounded-lg border bg-surface-raised p-space-2 sm:p-space-3 ${
                 i === steps.length - 1 ? "border-accent" : "border-ink/15"
               }`}
             >
@@ -61,7 +61,7 @@ export function SheetStackDiagram() {
           </li>
         ))}
       </ol>
-      <figcaption id="sheet-stack-caption" className="mt-space-3 text-center text-body text-ink/72">
+      <figcaption id="sheet-stack-caption" className="mt-space-3 text-body text-ink/72">
         The address bar holds which panels are open, so the view survives a refresh, the back
         button, and a shared link.
       </figcaption>

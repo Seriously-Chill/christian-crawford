@@ -3,9 +3,11 @@ import { textH5 } from "@/lib/type";
 type Stage = { name: string; weight: number; swatch: string; text: string };
 
 // Each stage keeps one swatch across both rows, so the eye can follow it.
+// Context engineering is an outline rather than a fill: in the gray theme,
+// accent and ink tints land too close together to tell apart.
 const swatch = {
   specs: "bg-ink/25",
-  context: "bg-accent/45",
+  context: "border-2 border-accent",
   implementation: "bg-ink/65",
   verification: "bg-accent",
 };
@@ -62,7 +64,7 @@ const rows: { id: string; title: string; stages: Stage[] }[] = [
  */
 export function WorkShiftDiagram() {
   return (
-    <figure aria-labelledby="work-shift-caption" className="mx-auto max-w-4xl">
+    <figure aria-labelledby="work-shift-caption" className="max-w-4xl">
       <div className="grid gap-space-4">
         {rows.map((row) => (
           <section
@@ -96,7 +98,7 @@ export function WorkShiftDiagram() {
           </section>
         ))}
       </div>
-      <figcaption id="work-shift-caption" className="mt-space-3 text-center text-label text-ink/72">
+      <figcaption id="work-shift-caption" className="mt-space-3 text-label text-ink/72">
         Widths show rough share of the work, not measurements.
       </figcaption>
     </figure>

@@ -78,7 +78,7 @@ function Arrow() {
  */
 export function GovernanceFlow() {
   return (
-    <figure aria-labelledby="governance-flow-caption" className="mx-auto max-w-4xl">
+    <figure aria-labelledby="governance-flow-caption" className="max-w-4xl">
       <div className="grid gap-space-3 md:grid-cols-2">
         {paths.map((path) => (
           <section
@@ -125,7 +125,7 @@ export function GovernanceFlow() {
         </p>
       </div>
 
-      <figcaption id="governance-flow-caption" className="mt-space-3 text-center text-label text-ink/72">
+      <figcaption id="governance-flow-caption" className="mt-space-3 text-label text-ink/72">
         How the Claude Code hooks in this site&apos;s repository handle the two ways a governance
         file can change.
       </figcaption>

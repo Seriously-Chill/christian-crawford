@@ -1,19 +1,13 @@
-/**
- * Small pill list for a card's technology/category tags — built only from
- * existing tokens (`radius-pill`, `text-label`), no new visual language.
- * Shared by `EvidenceCard`, `ProofFeature`, and `ProjectRows`.
- */
+/** A small pill list for a card's technology/category tags. */
 export function Tags({
   items,
   onGradient = false,
-  align = "start",
 }: {
   items: string[];
   onGradient?: boolean;
-  align?: "start" | "center";
 }) {
   return (
-    <ul className={`mt-space-2 flex flex-wrap gap-space-1 ${align === "center" ? "justify-center" : ""}`}>
+    <ul className="mt-space-2 flex flex-wrap gap-space-1">
       {items.map((item) => (
         <li
           key={item}

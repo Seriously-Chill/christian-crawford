@@ -9,11 +9,9 @@ import { themeInitScript } from "@/lib/theme";
 import { revealArrivalScript, revealInitScript } from "@/lib/motion";
 import { textH3 } from "@/lib/type";
 
-// Self-hosted: the local device shell's egress allowlist doesn't reach
-// fonts.googleapis.com, and self-hosting is the more production-correct
-// choice anyway (no runtime fetch, no third-party request at all). One
-// variable file (wght 200–800, from google/fonts' ofl/plusjakartasans)
-// covers every weight the type scale uses.
+// Self-hosted rather than loaded from Google Fonts: no runtime fetch and no
+// third-party request. One variable file (wght 200–800) covers every weight
+// the type scale uses.
 const jakarta = localFont({
   variable: "--font-jakarta",
   display: "swap",
@@ -75,42 +73,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
 
         {/*
-          Entrance preloader — the page-transition treatment (see
-          docs/design-system/motion.md): the header gradient at a steeper,
-          full-opacity angle (174deg) with the name set at h3 size, lifting
-          with the same fade and duration as PageTransition's reveal, so the
-          first page arrives the same way every later one does. Like
-          PageTransition, it marks the page covered while it's up and
-          fires the reveal event as it lifts, so the entrances underneath
-          wait and play into view instead of finishing behind it. It plays
-          once per browser session as the opening moment, then
-          PageTransition takes over for navigations. Plain inline script, not a client component —
-          it never touches the hydrated JS bundle, and motion-reduce:hidden
-          keeps it from ever rendering for reduced-motion users.
+          First-visit preloader: the same treatment as PageTransition, so the
+          first page arrives the way every later one does. It marks the page
+          covered while it's up and fires the reveal event as it lifts, so the
+          entrances underneath wait and play into view. It plays once per
+          browser session. Plain inline script, not a client component, so it
+          never touches the hydrated bundle; motion-reduce:hidden keeps it
+          from rendering for reduced-motion users.
 
           It lifts once the document is parsed and the font is ready, not on
           `load`: `load` also waits for every eager image, which on a slow
-          connection held the whole first screen hidden for seconds (LCP
-          5.2s on mobile Lighthouse, ~90% of it this wait). Artwork that's
-          still downloading appears when it arrives. The 1s timer caps the
-          wait on a font that stalls.
+          connection held the whole first screen hidden for seconds (LCP 5.2s
+          on mobile Lighthouse). The 1s timer caps the wait on a font that
+          stalls.
 
-          `suppressHydrationWarning`: on every page load after the first
-          in a session, the script below runs synchronously (it's parsed
-          right after this div) and sets `el.style.display = 'none'`
-          directly via the DOM API, before React hydrates this node. That
-          makes the live DOM's `style` genuinely differ from what React's
-          client render produces (no `style` prop at all) — not a bug to
-          fix, but exactly the "a DOM node is deliberately mutated outside
-          React between server render and hydration" case this prop
-          exists for. It only suppresses the mismatch warning for this
-          element's own attributes, not its children.
+          `suppressHydrationWarning`: after the first visit in a session, the
+          script below hides this div through the DOM before React hydrates
+          it, so its `style` deliberately differs from the client render. The
+          prop only covers this element's own attributes, not its children.
 
-          If hydration still fails somewhere, React re-renders the whole
-          tree and replaces this div with a fresh one the script never
-          touched. So the script looks the element up again each time it
-          acts, and sets `window.__ccPreloaderDone` once it's gone;
-          PageTransition hides any replacement that shows up after that.
+          If hydration still fails somewhere, React replaces this div with a
+          fresh one the script never touched. So the script looks the element
+          up again each time it acts, and sets `window.__ccPreloaderDone` once
+          it's gone; PageTransition hides any replacement after that.
         */}
         <div
           id="cc-preloader"

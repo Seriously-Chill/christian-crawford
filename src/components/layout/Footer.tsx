@@ -5,27 +5,19 @@ import { textH2, textH3 } from "@/lib/type";
 import { RESUME_PDF, SOURCE_REPO } from "@/lib/links";
 
 /**
- * The footer is a solid, flat `primary` band with `on-header` text — not a
- * neutral white utility bar, and not a gradient either: a closing line and
- * contact links, then the wordmark, a footer nav, and the source link.
+ * A flat `primary` band with `on-header` text: a closing statement with its
+ * CTAs, the wordmark and link columns, then a bottom bar.
  *
- * Text opacity: the header/CTA gradient's lighter, cyan-leaning half gives
- * `on-header/72` and `/60` enough contrast, but the same opacity against
- * this flat, darker `primary` fails WCAG AA (axe caught this at 3.43:1 /
- * 2.84:1, and even `/90` still only reached 4.44:1 — against the required
- * 4.5:1) — full opacity clears it at ~5.1:1. Every text node here stays at
- * full `text-on-header`; hierarchy comes from order/spacing, not fade.
+ * Every text node stays at full `text-on-header`. The faded opacities that
+ * pass on the header gradient fail WCAG AA on this flatter, darker
+ * `primary` (even `/90` measured 4.44:1), so hierarchy comes from size,
+ * order, and spacing instead.
  *
- * Three tiers, top to bottom, so the footer has real hierarchy rather than
- * one flat run of 16px labels: the closing statement at `h2` scale with
- * its CTAs (the page's last big moment, not squeezed between link
- * columns); the brand block and link columns, with the wordmark set large
- * in the header's own light style, and `h5` column headings (the flat
- * 20px `text-h5`, since the responsive h5 steps down to 14px on phones,
- * below the 16px links under it); then the
- * bottom bar split left/right. `/contact` still gets its own dedicated closing section; the
- * statement repeating there is consistent with the footer's contact links
- * already intentionally repeating on that page.
+ * Column headings use the flat 20px `text-h5`: the responsive h5 steps down
+ * to 14px on phones, below the 16px links under it.
+ *
+ * The closing statement also appears on `/contact`, as the footer's contact
+ * links do. That repetition is intentional.
  */
 const links = [
   { href: "/", label: "Home" },

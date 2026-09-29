@@ -6,15 +6,12 @@ import { useEffect, useRef, useState } from "react";
 import { textH3 } from "@/lib/type";
 
 /**
- * Flat top-level items in a fixed order, default `on-header` (ink @ 80% opacity, so it keeps 4.5:1), current route +
- * hover/focus go fully opaque. Below the header breakpoint the nav collapses
- * behind a toggle; opening it reveals the same links stacked, full-width,
- * over the same gradient (blurred, so the page doesn't read through), at
- * h3 size with a dot marking the current page. The links fade down in
- * sequence, and the header's curved bottom edge moves down to the
- * panel's while it's open — no dropdown. Five routes
- * (Home/Work/AI/About/Contact) per the approved site architecture;
- * the case studies under `/work/` are reached from `/work`, not top-level nav.
+ * Below the header breakpoint the nav collapses behind a toggle into a
+ * full-width panel over the same gradient (blurred, so the page doesn't read
+ * through), and the header's curved bottom edge moves down to the panel's.
+ * Links default to `on-header` (ink at 80% opacity, which keeps 4.5:1); the
+ * current route and hover/focus go fully opaque. The case studies are
+ * reached from `/work`, not the top-level nav.
  */
 const links = [
   { href: "/", label: "Home" },
@@ -57,7 +54,6 @@ export function Nav() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open]);
 
-  // Nav links change opacity over 400ms, a touch slower than buttons.
   const linkClasses = (active: boolean) =>
     `text-label transition-opacity duration-400 ${
       active

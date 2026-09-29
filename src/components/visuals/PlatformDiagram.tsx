@@ -27,9 +27,9 @@ function Arrow() {
  */
 export function PlatformDiagram() {
   return (
-    <figure aria-labelledby="platform-diagram-caption" className="mx-auto max-w-3xl">
+    <figure aria-labelledby="platform-diagram-caption" className="max-w-3xl">
       <ol className="flex flex-col-reverse">
-        <li className="rounded-lg border border-accent bg-surface-raised p-space-2 text-center sm:p-space-3">
+        <li className="rounded-lg border border-accent bg-surface-raised p-space-2 sm:p-space-3">
           <h3 className={`text-ink ${textH5}`}>Shared core</h3>
           <p className="mt-1 text-body text-ink/72">
             One Next.js and React codebase: infrastructure, patterns, and the design system every
@@ -38,7 +38,7 @@ export function PlatformDiagram() {
         </li>
         <li>
           <Arrow />
-          <div className="rounded-lg border border-ink/10 bg-surface-raised p-space-2 text-center sm:p-space-3">
+          <div className="rounded-lg border border-ink/10 bg-surface-raised p-space-2 sm:p-space-3">
             <h3 className={`text-ink ${textH5}`}>Configuration and feature flags</h3>
             <p className="mt-1 text-body text-ink/72">
               Carry each brand&apos;s own behavior, and turn variation on and off without splitting
@@ -52,7 +52,7 @@ export function PlatformDiagram() {
           <p className="sr-only">Each pharmacy brand&apos;s site, built on the same core.</p>
           <div aria-hidden="true" className="grid grid-cols-3 gap-space-2">
             {["Brand", "Brand", "Brand"].map((label, i) => (
-              <div key={i} className="rounded-lg border border-ink/10 bg-surface p-space-2 text-center sm:p-space-3">
+              <div key={i} className="rounded-lg border border-ink/10 bg-surface p-space-2 sm:p-space-3">
                 <p className={`text-ink ${textH5}`}>{label}</p>
                 <p className="mt-1 text-label text-ink/60">own site</p>
               </div>
@@ -60,7 +60,7 @@ export function PlatformDiagram() {
           </div>
         </li>
       </ol>
-      <figcaption id="platform-diagram-caption" className="mt-space-3 text-center text-body text-ink/72">
+      <figcaption id="platform-diagram-caption" className="mt-space-3 text-body text-ink/72">
         Built bottom-up: all three brands run on the same core, and configuration carries what differs.
       </figcaption>
     </figure>

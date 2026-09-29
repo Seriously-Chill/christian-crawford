@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, type CSSProperties, type KeyboardEv
 import { THEME_STORAGE_KEY } from "@/lib/theme";
 
 const STORAGE_KEY = "cc-hue";
-// The original blue-leaning aqua: now a preset, no longer the default.
+// The blue-leaning aqua preset.
 const AQUA_HUE = 197;
 const HUE_OFFSET = 211.68 - 194.37; // gap between the primary and secondary hues
 const SAT_PRIMARY = 69.7;
@@ -24,8 +24,8 @@ const Y_ACCENT = 0.09;
 
 // Stored positions 0–359 are hues; past the wheel, three neutral stops,
 // each a 40-wide zone (gray 360–399, white 400–439, black 440–479). The
-// slider itself only covers hues now — the neutrals are swatch buttons —
-// but the encoding stays, so saved choices and tests keep working.
+// slider only covers hues (the neutrals are swatch buttons), but the
+// encoding keeps them so saved choices and tests keep working.
 const HUE_END = 360;
 const STOP_WIDTH = 40;
 const STOPS = ["gray", "white", "black"] as const;
@@ -239,22 +239,12 @@ function describePosition(position: number) {
 }
 
 /**
- * Small, playful color picker — not a theme switch. A hue slider rotates
- * `--color-primary`/`--color-secondary` (see globals.css) together across
- * the wheel, keeping each color's own real saturation and solving
- * lightness per-hue to one target luminance, so every hue is equally
- * light and ink on-header text stays above 4.5:1 everywhere (yellow/green
- * read far lighter than blue at the same raw lightness). A swatch row below covers aqua and the gray/white/
- * black stops as one-tap presets.
- *
- * Styled to match the rest of the design system: the trigger is a hue
- * ring around a dot of the live gradient; the panel is the same
- * translucent "glass" as the cards on gradients (with a backdrop blur so
- * content behind it doesn't read through), and it grows out of its
- * trigger on open. Built on native `<details>/<summary>` for free
- * keyboard and screen-reader disclosure semantics. Persists to
- * localStorage; reduced motion is handled by the sitewide
- * `prefers-reduced-motion` rule in globals.css.
+ * A small, playful color picker, not a theme switch. The hue slider rotates
+ * `--color-primary`/`--color-secondary` together, solving lightness per hue
+ * (see `Y_PRIMARY`) so every hue is equally light and ink text keeps 4.5:1.
+ * A swatch row covers aqua and the gray/white/black stops as presets. Built
+ * on native `<details>/<summary>` for keyboard and screen-reader disclosure
+ * semantics.
  */
 export function ColorPicker() {
   // Uncontrolled on purpose: the slider value, the swatches' pressed state

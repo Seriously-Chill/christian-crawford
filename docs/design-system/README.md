@@ -40,6 +40,7 @@ Every color is a token, and every token follows the visitor's choice in the colo
 - **Font:** Plus Jakarta Sans, a self-hosted variable font in `src/fonts/`, used for everything.
 - **Headings:** use the class strings in `src/lib/type.ts` (`textDisplay`, `textH1` … `textH5`). They scale across six breakpoints and balance their line breaks so no line is left with a lone word.
 - **Body and label** text stay at 16px at every breakpoint. Paragraphs use `text-wrap: pretty`.
+- **Alignment:** left-align by default: section headers, paragraphs, lists, card and diagram text. Centered lines have no fixed starting edge, so the eye has to find the start of each one, which slows reading once text wraps. Center only text that stays within two or three lines at every width: a short pull quote, a single-word chip, the preloader name.
 
 Headings follow the page outline: one h1 per page, and no skipped levels. The tests enforce this.
 

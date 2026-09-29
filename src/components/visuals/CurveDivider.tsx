@@ -15,20 +15,11 @@ const flatFill: Partial<Record<Tone, string>> = {
 };
 
 /**
- * A small, shallow "upward bow" between two sections, sitting in normal
- * document flow (no absolute positioning or negative margins needed) —
- * `below` sets its own background (the section that follows), `above`
- * sets the dome shape drawn on top of it (the section before it), so the
- * boundary reads as the upper section's color bowing gently up into the
- * lower one at the center, full depth at the edges. Deliberately shallow
- * (a single quadratic curve, ~24px of deviation) — not a wave or blob,
- * and only used where two genuinely different tones actually meet.
- *
- * The two gradient tones fill the dome with an SVG `<linearGradient>`
- * built from the same `--color-primary`/`--color-secondary` custom
- * properties every other gradient on the site uses (not a baked hex
- * copy), so the hue picker (`ColorPicker.tsx`) updates these curves too,
- * automatically, with no separate logic.
+ * A shallow upward bow where two genuinely different tones meet, in normal
+ * document flow: `below` is the following section's background, `above` the
+ * dome drawn over it. The dome's `<linearGradient>` uses the same
+ * `--color-primary`/`--color-secondary` properties as every other gradient,
+ * so the color picker updates it too.
  */
 export function CurveDivider({
   above,

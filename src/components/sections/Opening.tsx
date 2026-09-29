@@ -14,27 +14,15 @@ const now = [
 ];
 
 /**
- * The home hero: display headline, one tagline, primary + secondary CTA
- * side by side, carrying the "What I Build" positioning, with an "at a
- * glance" panel beside it.
+ * The home hero, with an "at a glance" panel beside it. Near full viewport:
+ * `min-height: calc(100dvh - 64px)`, 64px being the header's height. The
+ * headline, tagline, and CTAs are separate `RevealOnScroll`s so they stagger
+ * in that order.
  *
- * A near-full-viewport hero, not a padded text block: the top section is
- * `min-height: calc(100dvh - 64px)`, 64px being the header's height.
- *
- * It stages in on load rather than appearing all at once: headline →
- * tagline → CTAs, each its own `RevealOnScroll` so they stagger in that
- * order as the page arrives.
- *
- * The hero sits directly on the page's gradient canvas (see globals.css),
- * not a white background, so it uses `on-header` text and
- * `bordered-inverse` for its secondary CTA.
- *
- * `bg-page-gradient` lives on this full-width outer `<section>`, not on
- * the `max-w-5xl` inner content — the gradient is defined 0%→100% across
- * whatever element carries it, so painting it on the narrower content
- * column would restart the primary→secondary interpolation at the column's own
- * edges instead of continuing the body's full-width gradient underneath,
- * producing a visible seam ("gradient on gradient") right at the margins.
+ * `bg-page-gradient` sits on the full-width `<section>`, not the
+ * `max-w-5xl` column: a gradient spans whatever element carries it, so on
+ * the narrower column it would restart at the column's edges and leave a
+ * visible seam against the body's gradient.
  */
 export function Opening() {
   return (

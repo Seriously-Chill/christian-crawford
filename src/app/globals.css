@@ -48,16 +48,13 @@
   --text-label--letter-spacing: 0;
   --text-label--font-weight: 500;
 
-  /* Colors — primary/secondary expressed in HSL, driven by CSS custom
-     properties (`--hue-primary`/`--hue-secondary`, `--l-primary`/
-     `--l-secondary`) so the hue picker (ColorPicker.tsx) can rotate them
-     live. The fallbacks below are the default look, the picker's gray
-     stop (hsl(240 0% 32%) = #525252 to hsl(240 0% 46.53%) = #777777, white
-     on-header, accent #525252 on white), matching what ColorPicker.tsx
-     applies so first paint matches post-hydration. The hues, including
-     the former default aqua (hue 197), set every token they differ on
-     explicitly, ink on-header among them. Hue grounds are light, so
-     `on-header` is ink there; the gray
+  /* Colors — primary/secondary in HSL, driven by `--hue-*`/`--l-*` custom
+     properties so ColorPicker.tsx can rotate them live. The fallbacks below
+     are the default gray stop (hsl(240 0% 32%) = #525252 to
+     hsl(240 0% 46.53%) = #777777, white on-header, accent #525252 on white),
+     matching what ColorPicker.tsx applies so first paint matches
+     post-hydration; every other stop sets the tokens it differs on
+     explicitly. Hue grounds are light, so `on-header` is ink there; the gray
      and black stops use white. `accent` is primary as foreground on white
      (kickers, button labels, focus rings), a deep shade at `--l-accent`,
      except in the white stop, where primary is white and accent is ink. */
@@ -82,7 +79,6 @@
      button would otherwise vanish into a white-to-gray gradient. */
   --color-button-edge: var(--button-edge, transparent);
 
-  /* Spacing */
   --spacing-space-1: 8px;
   --spacing-space-2: 16px;
   --spacing-space-3: 24px;
@@ -91,7 +87,6 @@
   --spacing-space-6: 60px;
   --spacing-space-7: 80px;
 
-  /* Radius */
   --radius-sm: 12px;
   --radius-md: 15px;
   --radius-lg: 24px;
@@ -195,16 +190,11 @@
 
   /*
    * The page's canvas is the full-opacity gradient (`bg-page-gradient`,
-   * distinct from the header bar's 90%-alpha `bg-header-gradient` on top
-   * of it). Every white section is an opaque `surface` panel painted over
-   * it, not the absence of color.
-   *
-   * Concretely: any section meant to read as a white panel needs an
-   * explicit `bg-surface` (it can no longer rely on "no background =
-   * white"); any section meant to sit on the gradient needs no
-   * background at all (or an explicit `bg-page-gradient`/
-   * `bg-header-gradient` for self-containment regardless of what
-   * surrounds it).
+   * under the header bar's 90%-alpha `bg-header-gradient`), and every white
+   * section is an opaque `surface` panel painted over it. So a section meant
+   * to read as white needs an explicit `bg-surface`, and one meant to sit on
+   * the gradient needs no background (or an explicit gradient utility to be
+   * self-contained).
    */
   body {
     @apply text-ink font-sans text-body antialiased bg-page-gradient;

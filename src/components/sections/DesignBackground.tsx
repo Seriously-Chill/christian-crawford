@@ -10,9 +10,8 @@ const principles: { icon: IconName; title: string; body: string }[] = [
 ];
 
 /**
- * About §3, woven in as explanation rather than a marketing claim.
- * The story on the left, on the page gradient, and the working principles
- * it produced as four glass tiles on the right, each led by its icon.
+ * The design background, told as explanation rather than a marketing claim,
+ * with the working principles it produced as glass tiles beside it.
  */
 export function DesignBackground() {
   return (

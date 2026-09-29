@@ -3,14 +3,10 @@ import { textH4 } from "@/lib/type";
 import { Tags } from "@/components/ui/Tags";
 
 /**
- * A centered card: `h4` title, body, optional tags and logo, 24px radius,
- * 16px padding on mobile and 24px from `sm` up.
- *
- * `onGradient` is for colored sections: a translucent white glass tint
- * (10% fill and border) plus the ripple hover (docs/design-system/
- * motion.md) — 0.8s ease-out, scale(1→3.5)/opacity(0.22→0), hover-capable
- * pointers only. The default variant, for white sections, gets the same
- * tint in ink and no ripple.
+ * `onGradient` is for colored sections: a translucent white glass tint plus
+ * the ripple hover (docs/design-system/motion.md), on hover-capable pointers
+ * only. The default variant, for white sections, gets the same tint in ink
+ * and no ripple.
  *
  * The ripple's texture, `public/ripple.png`, carries its ring shape almost
  * entirely in its alpha channel (its RGB is nearly pure white), so painting
@@ -40,7 +36,7 @@ export function EvidenceCard({
 }) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-lg p-space-2 text-center sm:p-space-3
+      className={`group relative overflow-hidden rounded-lg p-space-2 sm:p-space-3
         ${
           onGradient
             ? `border border-on-header/10 bg-on-header/10
@@ -53,11 +49,11 @@ export function EvidenceCard({
         }`}
     >
       {logo ? (
-        <div className={`mb-space-2 flex justify-center ${onGradient ? "text-on-header" : "text-ink/60"}`}>{logo}</div>
+        <div className={`mb-space-2 flex ${onGradient ? "text-on-header" : "text-ink/60"}`}>{logo}</div>
       ) : null}
       <h3 className={`${onGradient ? "text-on-header" : "text-ink"} ${textH4}`}>{title}</h3>
       <div className={`mt-space-2 text-body ${onGradient ? "text-on-header/80" : "text-ink/72"}`}>{children}</div>
-      {tags ? <Tags items={tags} onGradient={onGradient} align="center" /> : null}
+      {tags ? <Tags items={tags} onGradient={onGradient} /> : null}
     </div>
   );
 }

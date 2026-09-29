@@ -124,7 +124,7 @@ export default function HealthWarehousePage() {
             <DetailGrid items={architectureStack} />
           </div>
         </div>
-        <p className="mx-auto mt-space-5 max-w-xl text-center text-body text-ink/72">
+        <p className="mt-space-5 max-w-xl text-body text-ink/72">
           The same discipline applies to quality: checked by automated suites, not
           audited once and forgotten.
         </p>

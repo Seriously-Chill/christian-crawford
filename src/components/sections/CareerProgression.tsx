@@ -3,11 +3,10 @@ import { EmployerLogo, type Employer } from "@/components/ui/EmployerLogo";
 import { textH4 } from "@/lib/type";
 
 /**
- * Spec section 7: not a résumé timeline immediately visible on the page —
- * a progressive-disclosure narrative (RevealOnScroll, staggered) tracing
- * the real design → implementation → systems → architecture arc without
- * naming it that literally. Every date, employer, and technology below is
- * from the source résumé (spec section 11) — nothing invented.
+ * The design → implementation → systems → architecture arc, told as a
+ * staggered narrative rather than a résumé timeline and without naming the
+ * arc literally. Every date, employer, and technology below is from the
+ * résumé; nothing is invented.
  */
 const eras: { range: string; role: string; org: string; logos: Employer[]; body: string }[] = [
   {

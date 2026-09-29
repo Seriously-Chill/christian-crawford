@@ -2,17 +2,12 @@ import Link from "next/link";
 import type { MouseEventHandler, ReactNode } from "react";
 
 /**
- * The site has exactly one button shape: a pill (radius-pill, 100px) with
- * 12px/24px padding and a `label` text style. Don't add a square or
- * radius-lg variant.
+ * The site's one button shape is a pill. Don't add a square or radius-lg
+ * variant.
  *
- * Three variants:
- *  - primary: surface fill / accent label, hover inverts
- *  - bordered: transparent / accent border+label, for a light ground
- *  - bordered-inverse: transparent / on-header border+label, for a
- *    gradient or other colored ground
- *
- * The hover transition is 300ms.
+ *  - primary: surface fill, accent label; hover inverts
+ *  - bordered: for a light ground
+ *  - bordered-inverse: for a gradient or other colored ground
  */
 type Variant = "primary" | "bordered" | "bordered-inverse";
 

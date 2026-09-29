@@ -5,10 +5,8 @@ import { textH2 } from "@/lib/type";
 const governed = [".claude/settings.json", ".claude/hooks/*.sh", "CLAUDE.md", "AGENTS.md"];
 
 /**
- * A solid promo panel: one saturated block on a white section pointing
- * somewhere else.
- * Here it points Home visitors to /ai, which Home otherwise never mentions.
- * The right side lists the real files that page's hooks protect.
+ * Points Home visitors to /ai, which Home otherwise never mentions. The
+ * right side lists the real files that page's hooks protect.
  */
 export function AiBanner() {
   return (

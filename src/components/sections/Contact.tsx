@@ -7,19 +7,17 @@ const tile = "rounded-lg border border-on-header/10 bg-on-header/10 p-space-3 te
 const linkTile = `${tile} block transition-colors duration-300 hover:bg-on-header/20`;
 
 /**
- * Own destination now (was the page's closing panel) — still the header's
- * own gradient. Each contact detail is its own glass tile (Email /
- * LinkedIn / Résumé / location), the three reachable ones linking
- * straight through.
+ * On the header's gradient. Each contact detail is its own glass tile; the
+ * three reachable ones link straight through.
  */
 export function Contact() {
   return (
     <section className="bg-header-gradient">
-      <div className="mx-auto max-w-5xl px-space-3 py-space-7 text-center">
+      <div className="mx-auto max-w-5xl px-space-3 py-space-7">
         <h1 className={`text-on-header ${textH1}`}>
           Let&apos;s talk about what you’re building.
         </h1>
-        <p className="mx-auto mt-space-3 max-w-xl text-body text-on-header/80">
+        <p className="mt-space-3 max-w-xl text-body text-on-header/80">
           Open to senior frontend and frontend architecture roles: remote, or hybrid in Cincinnati.
         </p>
         <ul className="mt-space-5 grid gap-space-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -29,7 +27,9 @@ export function Contact() {
                 <LineIcon name="mail" />
                 Email
               </span>
-              <span className="mt-space-1 block text-body text-on-header/80 wrap-anywhere">christian.crawford@pm.me</span>
+              <span className="mt-space-1 block text-body text-on-header/80 wrap-break-word">
+                christian.crawford<wbr />@pm.me
+              </span>
             </a>
           </li>
           <li>

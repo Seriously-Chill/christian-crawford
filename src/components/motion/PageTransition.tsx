@@ -60,24 +60,17 @@ function transitionTarget(e: MouseEvent): string | null {
 }
 
 /**
- * The page transition (docs/design-system/motion.md): the header gradient
- * at a steeper, near-vertical angle and full opacity
- * (`bg-page-transition-gradient`, 174deg), holding the name at h3 size —
- * it only fades, never moves.
+ * The page transition (docs/design-system/motion.md). The overlay fades in
+ * over the current page, holds while the next page settles, then fades out
+ * to reveal it. It only fades, never moves.
  *
- * The overlay fades IN over the current page, holds while the next page
- * settles, then fades OUT to reveal it (see the duration tokens in
- * globals.css). An earlier
- * version only had the second half — it waited for the pathname to change,
- * by which point the new page had already replaced the old one, so every
- * navigation opened with a hard cut to a solid overlay.
- *
- * To fade in before navigating, plain internal link clicks are caught in
- * the capture phase and `preventDefault`ed — next/link skips any click
- * that's already default-prevented — then routed with `router.push` once
- * the page is covered. Navigations that can't be delayed (back/forward)
- * still get the hold + reveal. Reduced-motion visitors get none of it: no
- * overlay and no added delay, links navigate immediately.
+ * The fade-in has to finish before navigating, or the new page replaces the
+ * old one first and the transition opens on a hard cut. So plain internal
+ * link clicks are caught in the capture phase and `preventDefault`ed —
+ * next/link skips any click that's already default-prevented — then routed
+ * with `router.push` once the page is covered. Navigations that can't be
+ * delayed (back/forward) still get the hold + reveal. Reduced-motion
+ * visitors get none of it: no overlay and no added delay.
  *
  * While covered, `<html data-page-covered>` is set, and the new page's
  * entrances (RevealOnScroll) wait for `PAGE_REVEAL_EVENT`, so they play

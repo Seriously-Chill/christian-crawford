@@ -4,18 +4,13 @@ import { Button } from "@/components/ui/Button";
 import { textH2 } from "@/lib/type";
 
 /**
- * The homepage's narrative beats (Work/Systems/About/Thinking) each get a
- * condensed teaser here rather than their full section content — the full
- * versions live on their own routes. Keeps the homepage introducing the
- * site instead of duplicating it.
+ * A condensed teaser for one of the homepage's narrative beats. The full
+ * content lives on its own route, so Home introduces the site instead of
+ * duplicating it.
  *
- * `onGradient`: for a teaser that sits directly on the page's gradient
- * canvas (see globals.css) rather than a white panel, with `on-header`
- * text and an explicit `bg-page-gradient`. The background lives on the full-width outer
- * `<section>`, not the `max-w-5xl` inner content — painting the gradient
- * on the narrower column would restart its 0%→100% interpolation at the
- * column's own edges instead of continuing the body's full-width
- * gradient underneath, producing a visible seam at the margins.
+ * `onGradient` sets the teaser on the page gradient with `on-header` text.
+ * The background goes on the full-width `<section>`, not the `max-w-5xl`
+ * column, for the same reason as in `Opening`.
  */
 export function NarrativeTeaser({
   kicker,

@@ -4,14 +4,10 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { textH1 } from "@/lib/type";
 
 /**
- * The top of every inner page: a short breadcrumb + kicker + h1 (+
- * optional one-line tagline) strip sitting directly on the page's gradient
- * canvas, followed by white body content — not a full-viewport hero, and
- * not a plain white heading block either. Home's own hero (`Opening`) is
- * the one exception (full-viewport, no breadcrumb).
- *
- * `logo` is an optional mark (e.g. a case study's employer) shown above the
- * kicker.
+ * The top of every inner page: breadcrumb, kicker, h1, and an optional
+ * tagline on the page gradient, followed by white body content. Home's
+ * full-viewport `Opening` is the one exception. `logo` is an optional mark
+ * (e.g. a case study's employer) shown above the kicker.
  */
 export function PageIntro({
   breadcrumb,

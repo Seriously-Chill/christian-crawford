@@ -24,17 +24,14 @@ function getServerSnapshot() {
 }
 
 /**
- * Sitewide smooth scroll (docs/design-system/motion.md): Lenis's own
- * default duration and easing, with `touchMultiplier: 2` (the library
- * default is `1`) so touch scrolling keeps pace. This is the app's only
- * reason to reach for a client component for scrolling.
+ * Sitewide smooth scroll (docs/design-system/motion.md): Lenis's defaults,
+ * except `touchMultiplier: 2` (default `1`) so touch scrolling keeps pace.
  *
  * Lenis measures the page by watching <html>'s size, so <html> must grow
  * with its content: lenis.css sets `height: auto` on it, and layout.tsx
- * sizes <body> with `min-h-dvh` rather than a fixed-height <html>. With
- * <html> pinned to the viewport, Lenis kept the first page's scroll limit
- * for the whole visit — land on a short page, navigate to a longer one,
- * and scrolling stopped at the short page's length.
+ * sizes <body> with `min-h-dvh`. With <html> pinned to the viewport, Lenis
+ * kept the first page's scroll limit for the whole visit, so scrolling
+ * stopped short on any longer page navigated to afterward.
  */
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const reducedMotion = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);

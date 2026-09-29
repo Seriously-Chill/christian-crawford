@@ -19,16 +19,16 @@ const interests = [
 ];
 
 /**
- * About §4, "What I'm interested in now" — forward-looking, not a solved
- * problem. Links on to `/ai`, where one of these interests is shown in practice.
+ * "What I'm interested in now": forward-looking, not a solved problem.
+ * Links on to `/ai`, where one of these interests is shown in practice.
  */
 export function CurrentInterests() {
   return (
     <section className="bg-surface">
       <div className="mx-auto max-w-5xl px-space-3 py-space-7">
-        <RevealOnScroll className="text-center">
+        <RevealOnScroll>
           <h2 className={`text-accent ${textH2}`}>I&apos;m interested in what&apos;s next.</h2>
-          <p className="mx-auto mt-space-3 max-w-xl text-body lg:mt-space-4 text-ink/72">
+          <p className="mt-space-3 max-w-xl text-body lg:mt-space-4 text-ink/72">
             AI is changing how software gets built. I&apos;m most interested in what that means
             for architecture, testing, and the people working in large codebases.
           </p>
@@ -40,7 +40,7 @@ export function CurrentInterests() {
             </EvidenceCard>
           ))}
         </RevealOnScroll>
-        <RevealOnScroll className="mt-space-5 text-center">
+        <RevealOnScroll className="mt-space-5">
           <Button href="/ai" variant="bordered">
             See how I work with AI
           </Button>

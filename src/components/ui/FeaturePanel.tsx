@@ -1,9 +1,8 @@
 import type { ReactNode } from "react";
 
 /**
- * A contained feature panel: a large rounded `surface-raised` block on a white section that
- * lifts one idea above the running text around it. Two columns from `md`
- * up, stacked below.
+ * A contained panel on a white section that lifts one idea above the
+ * running text around it.
  */
 export function FeaturePanel({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (

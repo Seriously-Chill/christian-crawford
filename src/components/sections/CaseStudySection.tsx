@@ -3,10 +3,9 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { textH2 } from "@/lib/type";
 
 /**
- * Generic kicker/title/body + children slot for the HealthWarehouse case
- * study's narrative beats — same shape as `NarrativeTeaser`, minus the
- * forced CTA, reused across Problem/Architecture/Evidence/
- * Role instead of one bespoke component per section.
+ * One narrative beat of the HealthWarehouse case study (Problem,
+ * Architecture, Evidence, Role): the same shape as `NarrativeTeaser`, minus
+ * the forced CTA.
  */
 export function CaseStudySection({
   kicker,
@@ -24,10 +23,10 @@ export function CaseStudySection({
   return (
     <section id={id} className="bg-surface">
       <div className="mx-auto max-w-5xl px-space-3 py-space-6">
-        <RevealOnScroll className="text-center">
+        <RevealOnScroll>
           {kicker ? <p className="text-label text-accent">{kicker}</p> : null}
           <h2 className={`mt-space-2 text-accent lg:mt-space-3 ${textH2}`}>{title}</h2>
-          {body ? <p className="mx-auto mt-space-3 max-w-xl lg:mt-space-4 text-body text-ink/72">{body}</p> : null}
+          {body ? <p className="mt-space-3 max-w-xl lg:mt-space-4 text-body text-ink/72">{body}</p> : null}
         </RevealOnScroll>
         {children ? (
           <RevealOnScroll className="mt-space-5">

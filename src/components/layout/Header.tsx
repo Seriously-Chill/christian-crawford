@@ -4,41 +4,21 @@ import { ColorPicker } from "@/components/ui/ColorPicker";
 import { textH4 } from "@/lib/type";
 
 /**
- * The header's own gradient (bg-header-gradient, 90deg at ~90% opacity),
- * the on-header wordmark, and the sticky positioning. The nav itself —
- * the five routes, their order and labels, the mobile collapse — lives in
- * `Nav` (a Client Component; it needs the current pathname for the active
- * state and open/close state for the mobile panel). Everything else here
- * stays a Server Component.
+ * The header's gradient, wordmark, and sticky positioning. The nav lives in
+ * `Nav`, a Client Component (it needs the pathname and open/close state);
+ * everything else here stays a Server Component.
  *
- * The bottom edge's shallow "upward bow" (bends up into the header at the
- * center) is a `clip-path` on its own background
- * layer — not on `<header>` itself, and not a separate color-matched
- * overlay strip either. An overlay strip couldn't work here specifically:
- * the header's gradient sits over the identical page gradient beneath it
- * (same tokens, just different opacity), so no overlay fill color would
- * ever contrast enough to read as a curve. Clipping `<header>`'s own box
- * sidesteps the color-matching problem, but clips *everything* painted
- * within it — including `ColorPicker`'s popover and `Nav`'s mobile panel,
- * both of which render outside the header's own box on purpose. Splitting
- * the clipped gradient into its own `inset-0` background div, as a sibling
- * of the real (unclipped) content row, keeps the curve without capping
- * anything that needs to overflow it. `clipPathUnits="objectBoundingBox"`
- * keeps the curve's proportions (not its pixel depth) responsive to the
- * background layer's own rendered size. The content row's taller bottom
- * padding (`pb-space-4` vs `pt-space-2`) is what gives the pinch room to
- * curve into without ever touching the name/nav row itself.
+ * The bottom edge's shallow upward bow is a `clip-path` on its own `inset-0`
+ * background layer, not on `<header>`: clipping the header would also clip
+ * `ColorPicker`'s popover and `Nav`'s mobile panel, which render outside its
+ * box on purpose. A color-matched overlay strip can't draw it either, since
+ * the header's gradient sits over the same page gradient and no fill would
+ * contrast with it. The taller bottom padding gives the curve room to bow in
+ * without touching the content row.
  *
- * The clip alone isn't enough to *see*, though — it only changes where the
- * header's gradient stops painting, and that gradient is so close in
- * color to the page gradient behind it (same tokens, ~90% vs 100%
- * opacity) that the notch reads as barely-there even magnified 3x. A
- * second, purely decorative SVG traces the identical curve as a visible
- * stroke line, so the shape itself is legible regardless of how much the
- * fill actually contrasts with what's behind it. It's an *open* path (no
- * closing edges) specifically so stroking it doesn't also draw a straight
- * line across the top/sides — `stroke` traces a path's whole perimeter,
- * which is exactly the bug an earlier, closed-path version of this hit.
+ * The clip alone barely shows (the two gradients differ only in opacity),
+ * so a decorative SVG strokes the same curve. It's an open path: stroking a
+ * closed one also draws the straight top and side edges.
  */
 export function Header() {
   return (

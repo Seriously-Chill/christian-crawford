@@ -13,28 +13,27 @@ const protectedFiles = [
 ];
 
 /**
- * `/ai` §3 — sets the context before the hooks diagram: which repository
- * this is (this portfolio site's, not a client or employer codebase) and
- * which files count as "governance." The mechanics live in
- * `GovernanceFlow` below, so this section deliberately doesn't restate
- * them as cards. Sits on the gradient between two white sections.
+ * Context before the hooks diagram: which repository this is (this site's,
+ * not a client or employer codebase) and which files count as governance.
+ * The mechanics live in `GovernanceFlow`, so this deliberately doesn't
+ * restate them as cards.
  */
 export function GovernanceOverview() {
   return (
     <section className="bg-page-gradient">
       <div className="mx-auto max-w-5xl px-space-3 pt-space-6 pb-space-7">
-        <RevealOnScroll className="text-center">
+        <RevealOnScroll>
           <h2 className={`text-on-header ${textH2}`}>The repository behind this site.</h2>
-          <p className="mx-auto mt-space-3 max-w-xl text-body lg:mt-space-4 text-on-header/80">
+          <p className="mt-space-3 max-w-xl text-body lg:mt-space-4 text-on-header/80">
             This page describes the repository for this site, the code you&apos;re reading now. I
             build it with Claude Code, and I added hooks that treat changes to the agent&apos;s own
             rules differently from everyday edits.
           </p>
         </RevealOnScroll>
 
-        <RevealOnScroll className="mt-space-5 text-center">
+        <RevealOnScroll className="mt-space-5">
           <p className="text-label text-on-header/80">Governance files the hooks protect</p>
-          <Tags items={protectedFiles} onGradient align="center" />
+          <Tags items={protectedFiles} onGradient />
           <div className="mt-space-4">
             <Button
               href={SOURCE_REPO}

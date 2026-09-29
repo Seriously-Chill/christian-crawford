@@ -5,25 +5,17 @@ import { PAGE_COVERED_ATTR, PAGE_REVEAL_EVENT } from "@/components/motion/PageTr
 import { MAX_STAGGER_STEPS, REVEAL_LINE, REVEAL_READY_FLAG, STAGGER_MS } from "@/lib/motion";
 
 /**
- * Progressive disclosure for the narrative sections (spec section 5/17:
- * "content appearing at intentional moments"). Every section on every page
- * goes through this one component, so the whole site enters the same way:
- * a fade plus a short rise, one duration, one curve (the `--*-entrance`
- * tokens and `.reveal` rule in globals.css).
+ * Every section on every page enters through this one component: a fade
+ * plus a short rise, one duration, one curve (the `--*-entrance` tokens and
+ * `.reveal` rule in globals.css).
  *
  * Staggering is automatic. All reveals share one IntersectionObserver, and
  * whatever it reports visible in the same callback is revealed as one
- * batch, in document order, `STAGGER_MS` apart. So the order holds on its
- * own: a page's intro, then the content under it, and a card grid that
- * scrolls in reveals its cards in sequence. An element that scrolls in on
- * its own starts immediately. Callers don't pass delays; an earlier
- * version took a fixed `delayMs` per element, so the fifth career entry
- * waited 400ms whenever it scrolled in, even with nothing before it.
+ * batch, in document order, `STAGGER_MS` apart. An element that scrolls in
+ * on its own starts immediately, so callers don't pass delays.
  *
  * Content in view when the page arrives plays on arrival too, not only on
- * scroll. That's the hero, and on /about the first few career entries,
- * which used to sit still while the intro above them moved. Arrivals
- * behind the page-transition overlay wait for it to lift
+ * scroll. Arrivals behind the page-transition overlay wait for it to lift
  * (`PAGE_REVEAL_EVENT`), so they play where they can be seen.
  *
  * Content is hidden only by CSS under `html[data-reveal]` (see
