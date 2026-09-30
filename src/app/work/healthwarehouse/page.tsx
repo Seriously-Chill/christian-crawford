@@ -6,6 +6,7 @@ import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { DetailGrid } from "@/components/ui/DetailGrid";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { PlatformDiagram } from "@/components/visuals/PlatformDiagram";
+import { DialogFixExample } from "@/components/visuals/DialogFixExample";
 import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { textH2, textH4, textH5 } from "@/lib/type";
 
@@ -47,7 +48,7 @@ const decision = [
 const evidence = [
   { value: "WCAG 2.2", label: "accessibility seal achieved" },
   { value: "200+", label: "accessibility issues addressed across two platforms" },
-  { value: "~50", label: "routes covered by automated accessibility testing" },
+  { value: "40+", label: "routes covered by automated accessibility testing" },
   { value: "~80", label: "routes covered by automated SEO regression testing" },
 ];
 
@@ -76,7 +77,7 @@ const role = [
   },
   {
     verb: "Established",
-    text: "automated accessibility coverage with Playwright and axe-core across ~50 routes and five browser/device profiles, plus SEO regression testing across ~80.",
+    text: "automated accessibility coverage with Playwright and axe-core across 40+ routes and five browser/device profiles, plus SEO regression testing across ~80.",
   },
   { verb: "Owned", text: "frontend work on checkout, billing, and other critical patient workflows." },
   {
@@ -162,6 +163,9 @@ export default function HealthWarehousePage() {
             ))}
           </ul>
         </FeaturePanel>
+        <div className="mt-space-5">
+          <DialogFixExample />
+        </div>
         <div className="mt-space-5">
           <h3 className={`text-ink ${textH4}`}>Critical patient workflows</h3>
           <div className="mt-space-3">

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Button } from "@/components/ui/Button";
 import { Tags } from "@/components/ui/Tags";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
@@ -14,6 +15,9 @@ import { textH2, textH3 } from "@/lib/type";
  * from `md` up, so a stack of panels alternates instead of repeating.
  * `onGradient` sets the section on the page gradient instead of white; the
  * panel itself stays light, so its text colors and contrast don't change.
+ * `evidence` is a figure that shows the claim rather than restating it; it
+ * spans the panel's full width under both columns, and reveals on its own
+ * so it fades in when it's reached, not with the top of the panel.
  */
 export function ProofFeature({
   employer,
@@ -26,6 +30,7 @@ export function ProofFeature({
   outcomes,
   flip = false,
   onGradient = false,
+  evidence,
 }: {
   employer: Employer;
   kicker: string;
@@ -37,6 +42,7 @@ export function ProofFeature({
   outcomes: { value: string; label: string }[];
   flip?: boolean;
   onGradient?: boolean;
+  evidence?: ReactNode;
 }) {
   return (
     <section className={onGradient ? "bg-page-gradient" : "bg-surface"}>
@@ -65,6 +71,11 @@ export function ProofFeature({
                 </li>
               ))}
             </ul>
+            {evidence ? (
+              <RevealOnScroll className="border-t border-ink/10 pt-space-4 md:order-3 md:col-span-2 md:pt-space-5">
+                {evidence}
+              </RevealOnScroll>
+            ) : null}
           </FeaturePanel>
         </RevealOnScroll>
       </div>

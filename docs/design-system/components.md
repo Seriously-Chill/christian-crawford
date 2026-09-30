@@ -53,6 +53,7 @@ These are covered in `motion.md`:
 
 - **`CurveDivider`**: the shallow curve where two section tones meet. Set `above` and `below` to the two tones (`surface`, `primary`, `gradient-page` or `gradient-header`).
 - **`GovernanceFlow`** (`/ai`) and **`PlatformDiagram`** (the HealthWarehouse architecture): diagrams built in HTML, so their text reflows, can be read aloud, and follows the theme.
+- **Evidence figures** show a claim instead of restating it, drawn only from real project artifacts: `BrandConfigDiagram` (the three brand configs), `PortalShapingDiagram` (email → pitch → the orders screen, no data), `AccessibilityTrail` (found → fixed → verified → kept fixed) on Home, and `DialogFixExample` (one fix's before and after) on the HealthWarehouse case study. Pass one to `ProofFeature` through `evidence`.
 
 ## Writing a new component
 

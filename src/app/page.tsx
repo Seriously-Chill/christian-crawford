@@ -5,6 +5,9 @@ import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EmployerMarquee } from "@/components/ui/EmployerMarquee";
 import { AiBanner } from "@/components/sections/AiBanner";
+import { BrandConfigDiagram } from "@/components/visuals/BrandConfigDiagram";
+import { PortalShapingDiagram } from "@/components/visuals/PortalShapingDiagram";
+import { AccessibilityTrail } from "@/components/visuals/AccessibilityTrail";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -58,12 +61,12 @@ export default function HomePage() {
         title="Three pharmacy brands. One codebase. No forks."
         body="Every new brand brought requirements of its own: the kind that usually splits a product into separate apps. I built the platform from the ground up so they all run on one shared core, with configuration and feature flags carrying the differences."
         tags={["Next.js", "React", "GraphQL", "Zustand", "MUI"]}
-        href="/work/healthwarehouse"
-        linkLabel="Read the case study"
+        href="/work/healthwarehouse#architecture"
+        linkLabel="See the architecture"
         outcomes={[
-          { value: "No forks", label: "Every brand runs on one shared codebase instead of its own copy." },
           { value: "Brand three", label: "added with a config file, env files, and build scripts, then given its own fonts, colors, and corners while the other two stayed pixel-identical." },
         ]}
+        evidence={<BrandConfigDiagram />}
       />
 
       <CurveDivider above="surface" below="gradient-page" />
@@ -79,10 +82,10 @@ export default function HomePage() {
         href="/work/partner-portal"
         linkLabel="Read the case study"
         outcomes={[
-          { value: "The pitch", label: "Problem, solution, rabbit holes, and what's out of scope, reviewed before any code." },
           { value: "Labeled filters", label: "chosen over a search box with chips, because of who uses it." },
           { value: "9 areas", label: "with working screens so far. Still in progress." },
         ]}
+        evidence={<PortalShapingDiagram />}
       />
 
       <CurveDivider above="gradient-page" below="surface" />
@@ -96,10 +99,10 @@ export default function HomePage() {
         href="/work/healthwarehouse#evidence"
         linkLabel="See the evidence"
         outcomes={[
-          { value: "200+", label: "accessibility issues addressed across two platforms, and a WCAG 2.2 AA seal." },
           { value: "Announced", label: "Form errors and confirmations now reach screen readers across checkout, payments, and account forms." },
-          { value: "~50 routes", label: "re-checked by axe-core in five browser and device profiles." },
+          { value: "40+ routes", label: "re-checked by axe-core in five browser and device profiles." },
         ]}
+        evidence={<AccessibilityTrail />}
       />
 
       <NarrativeTeaser
