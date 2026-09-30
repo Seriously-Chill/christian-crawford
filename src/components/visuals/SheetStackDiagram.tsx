@@ -37,7 +37,7 @@ const steps = [
 
 /**
  * Partner portal case study: how the address bar carries which detail
- * panels are open. Drawn like `PlatformDiagram`, as HTML boxes and arrows so
+ * panels are open. Drawn like `DifferenceRouting`, as HTML boxes and arrows so
  * every label stays real text and follows the picker themes. Read top-down,
  * the order a person clicks through. The URLs are illustrative, not the
  * portal's actual parameter names.

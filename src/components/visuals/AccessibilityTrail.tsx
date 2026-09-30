@@ -3,10 +3,10 @@ import { textH5 } from "@/lib/type";
 // Markers fill in step by step: an open finding on the left, a closed and
 // guarded one on the right.
 const steps = [
-  { name: "Found", detail: "Audits of two platforms", marker: "border-2 border-ink/30" },
+  { name: "Found", detail: "Audits and screen-reader testing", marker: "border-2 border-ink/30" },
   { name: "Fixed", detail: "Forms, keyboard, dialogs", marker: "border-2 border-accent" },
-  { name: "Verified", detail: "WCAG 2.2 AA seal", marker: "border-[5px] border-accent" },
-  { name: "Kept fixed", detail: "Automated tests", marker: "bg-accent" },
+  { name: "Verified", detail: "WCAG 2.2 accessibility seal", marker: "border-[5px] border-accent" },
+  { name: "Re-checked", detail: "Automated tests, run by hand", marker: "bg-accent" },
 ];
 
 /**

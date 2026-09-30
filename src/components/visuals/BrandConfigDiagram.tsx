@@ -49,7 +49,7 @@ function BrandSite({ brand }: { brand: (typeof brands)[number] }) {
  * Home's architecture proof: three brand sites converging on one codebase,
  * with what each brand's config carries in between. The miniature sites are
  * decorative (`aria-hidden`); the sr-only line and the visible text carry the
- * same facts. Drawn in HTML and token colors like `PlatformDiagram`, so it
+ * same facts. Drawn in HTML and token colors like `DifferenceRouting`, so it
  * follows the picker themes. Brands stay unnamed, as on the case study.
  */
 export function BrandConfigDiagram() {
@@ -90,8 +90,8 @@ export function BrandConfigDiagram() {
       <div className="mt-space-1 rounded-lg border border-accent bg-surface p-space-2 sm:p-space-3">
         <p className={`text-ink ${textH5}`}>One shared codebase</p>
         <p className="mt-1 text-body text-ink/72">
-          Every page, form, and checkout step. Seven components pick a per-brand version; the other
-          ~280 are shared.
+          Every form and checkout step. Seven components pick a per-brand version; the other ~270
+          are shared.
         </p>
       </div>
       <figcaption id="brand-config-caption" className="mt-space-3 text-label leading-normal text-ink/72">

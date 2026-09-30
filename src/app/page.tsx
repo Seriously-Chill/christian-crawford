@@ -59,12 +59,12 @@ export default function HomePage() {
         employer="healthwarehouse"
         kicker="Architecture"
         title="Three pharmacy brands. One codebase. No forks."
-        body="Every new brand brought requirements of its own: the kind that usually splits a product into separate apps. I built the platform from the ground up so they all run on one shared core, with configuration and feature flags carrying the differences."
+        body="Every new brand brought requirements of its own: the kind that usually splits a product into separate apps. I built the multi-brand system that lets them all run on one shared core, with configuration and a few per-brand components carrying the differences."
         tags={["Next.js", "React", "GraphQL", "Zustand", "MUI"]}
         href="/work/healthwarehouse#architecture"
         linkLabel="See the architecture"
         outcomes={[
-          { value: "Brand three", label: "added with a config file, env files, and build scripts, then given its own fonts, colors, and corners while the other two stayed pixel-identical." },
+          { value: "Brand three", label: "added with a config file, env files, and build scripts, then given its own fonts, colors, and corners while the other two kept their existing theme exactly." },
         ]}
         evidence={<BrandConfigDiagram />}
       />
@@ -93,8 +93,8 @@ export default function HomePage() {
       <ProofFeature
         employer="healthwarehouse"
         kicker="Quality"
-        title="200+ accessibility issues, fixed and kept fixed."
-        body="Audits kept finding problems: forms that failed silently for screen readers, controls a keyboard couldn't operate, dialogs nested inside dialogs. I led the work through the findings to a WCAG 2.2 AA seal, then added automated tests so the fixes stay fixed."
+        title="Accessibility issues, fixed and re-checked."
+        body="Audits kept finding problems: forms that failed silently for screen readers, controls a keyboard couldn't operate, dialogs nested inside dialogs. I led most of the remediation through to a third-party accessibility seal on HealthWarehouse, then wrote the automated tests that re-check it."
         tags={["WCAG 2.2", "Playwright", "axe-core", "Screen readers"]}
         href="/work/healthwarehouse#evidence"
         linkLabel="See the evidence"

@@ -23,6 +23,7 @@ The shared building blocks, grouped by folder under `src/components/`. Use these
 - **`EvidenceCard`**: a card with a title (`h4`), body, and optional `tags` and `logo`. Use `onGradient` on colored sections: that variant gets a glass tint and the hover ripple. The default variant is for white sections.
 - **`FeaturePanel`**: a large `surface-raised` panel with two columns from `md` up, used to lift one idea above the text around it.
 - **`DetailGrid`**: a grid of small `surface-raised` tiles for short lists like tech stack or workflows.
+- **`ComparisonTable`**: a small comparison with ARIA table roles: a quiet table from `sm` up, one card per row on phones.
 - **`Tags`**: a pill list of technologies or categories, with an `onGradient` option.
 - **`LineIcon`**: the icon set, available as an `inline` glyph or a round `badge`. Always decorative.
 - **`EmployerLogo`**: an employer mark from `public/employers/`, drawn in `currentColor` so it follows the theme. Decorative by default; pass `labelled` when the logo stands in for the name.
@@ -52,8 +53,8 @@ These are covered in `motion.md`:
 ## Visuals (`visuals/`)
 
 - **`CurveDivider`**: the shallow curve where two section tones meet. Set `above` and `below` to the two tones (`surface`, `primary`, `gradient-page` or `gradient-header`).
-- **`GovernanceFlow`** (`/ai`) and **`PlatformDiagram`** (the HealthWarehouse architecture): diagrams built in HTML, so their text reflows, can be read aloud, and follows the theme.
-- **Evidence figures** show a claim instead of restating it, drawn only from real project artifacts: `BrandConfigDiagram` (the three brand configs), `PortalShapingDiagram` (email → pitch → the orders screen, no data), `AccessibilityTrail` (found → fixed → verified → kept fixed) on Home, and `DialogFixExample` (one fix's before and after) on the HealthWarehouse case study. Pass one to `ProofFeature` through `evidence`.
+- **`GovernanceFlow`** (`/ai`) and **`DifferenceRouting`** (the HealthWarehouse forking rule): diagrams built in HTML, so their text reflows, can be read aloud, and follows the theme.
+- **Evidence figures** show a claim instead of restating it, drawn only from real project artifacts: `BrandConfigDiagram` (the three brand configs), `PortalShapingDiagram` (email → pitch → the orders screen, no data), `AccessibilityTrail` (found → fixed → verified → kept fixed) on Home, and `DialogFixExample` (one fix's before and after) and `MenuAnnouncementExample` (an approach that failed, and the one that shipped) on the HealthWarehouse case study. Pass one to `ProofFeature` through `evidence`.
 
 ## Writing a new component
 

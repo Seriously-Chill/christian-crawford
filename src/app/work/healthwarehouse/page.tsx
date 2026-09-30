@@ -3,90 +3,127 @@ import { PageIntro } from "@/components/sections/PageIntro";
 import { CaseStudySection } from "@/components/sections/CaseStudySection";
 import { FeaturePanel } from "@/components/ui/FeaturePanel";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
-import { DetailGrid } from "@/components/ui/DetailGrid";
+import { ComparisonTable } from "@/components/ui/ComparisonTable";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
-import { PlatformDiagram } from "@/components/visuals/PlatformDiagram";
+import { DifferenceRouting } from "@/components/visuals/DifferenceRouting";
 import { DialogFixExample } from "@/components/visuals/DialogFixExample";
+import { MenuAnnouncementExample } from "@/components/visuals/MenuAnnouncementExample";
 import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { textH2, textH4, textH5 } from "@/lib/type";
 
 export const metadata: Metadata = {
   title: "HealthWarehouse",
   description:
-    "Building a React and Next.js pharmacy platform from the ground up, then architecting it to support multiple brands on a shared, configurable core — alongside accessibility and quality improvements.",
+    "How one team-built pharmacy platform serves three brands from one codebase: the rule that keeps brand differences small, where it bent, how a third brand tested it, and the accessibility work checked alongside it.",
 };
 
-const architectureStack = [
-  "Next.js App Router",
-  "React",
-  "GraphQL + Apollo Client",
-  "Zustand",
-  "MUI + Emotion",
-  "NextAuth",
-  "Formik + Yup",
-  "Playwright + axe-core",
-  "Configuration-driven",
-  "Feature flags",
+// Everything on this page comes from the platform's repository: its three
+// brand configs, its decision log, its measured baselines, and the fixes'
+// own commits. Brands stay unnamed, as on Home.
+
+// Read from the three brand configs.
+const differences = [
+  { label: "Typefaces", cells: ["Montserrat", "Montserrat", "Inter and Hepta Slab"] },
+  { label: "Corners", cells: ["8px", "8px", "16px cards, pill buttons"] },
+  { label: "Feature flags on", cells: ["14 of 18", "3 of 18", "4 of 18"] },
+  { label: "Legal copy", cells: ["Shared", "Its own", "Shared"] },
 ];
 
-// The decision behind the architecture, told without internal names or code.
-const decision = [
+const how = [
   {
-    title: "What I ruled out",
-    body: "A runtime brand switch: each brand is fixed when it's built, so switching at runtime only adds cost. And filename-based overrides: more powerful, but harder to follow than one explicit list.",
+    title: "Picked when a brand is built",
+    body: "Each brand is fixed at build time, for config and components alike. Nothing switches brands while the app runs.",
   },
   {
-    title: "What an audit caught",
-    body: "Per-brand files that had drifted into byte-identical copies. They collapsed back into one shared component and a single config value.",
-  },
-  {
-    title: "What it made possible",
-    body: "A third brand with its own fonts, colors, and corner radii, while the other two rendered byte-for-byte unchanged, with zero axe violations.",
+    title: "Kept honest by audit",
+    body: "When I audited the per-brand files, two had drifted into byte-identical copies and a third differed by one value. They collapsed into one shared component and a config string.",
   },
 ];
 
-const evidence = [
-  { value: "WCAG 2.2", label: "accessibility seal achieved" },
-  { value: "200+", label: "accessibility issues addressed across two platforms" },
-  { value: "40+", label: "routes covered by automated accessibility testing" },
-  { value: "~80", label: "routes covered by automated SEO regression testing" },
+const boundaries = [
+  {
+    title: "Four forks are whole components",
+    body: "Of the seven per-brand components, four are large: the header, footer, homepage layout, and logo. Brand three's design changed their structure, not just their values. To keep that fork to markup, I moved the header's behavior into a hook both headers share.",
+  },
+  {
+    title: "Every build carries every version",
+    body: "The helper that picks a brand's component imports all of its versions, so each brand ships the others' code. Resolving by filename at build time would drop them. I deferred it: more build setup than a handful of small components justified then. It's the next step now that headers fork.",
+  },
+  {
+    title: "Fonts one brand uses",
+    body: "Brand three adds about 116 KB of fonts. The other two carry about 3 KB of font CSS they never use, because the font loader can't branch on the brand. Measured, and too small to fix yet.",
+  },
+  {
+    title: "One build per brand",
+    body: "Build-time brands keep runtime simple, but each brand is its own build and deploy. A stale build can pass for the wrong brand: one measurement ran against one, and checking the page title caught it.",
+  },
 ];
 
-const workflows = [
-  "Checkout",
-  "Billing",
-  "Patient management",
-  "Prescriptions",
-  "Autoreorder",
-  "Search",
-  "Forms",
-  "Mobile navigation",
+const phases = ["Baseline", "Design system", "Header and footer", "Homepage", "Interior pages", "Content", "Re-measure"];
+
+// From the rollout's decision log and its baseline captures (September 2026).
+const results = [
+  {
+    label: "Theme",
+    cells: ["Reproduces the previous theme exactly", "Its own typefaces, corners, and colors"],
+  },
+  {
+    label: "Header, footer, logo",
+    cells: [
+      "Footer and logo code moved over byte-for-byte. The header's behavior moved into the shared hook, then sign-in, the mini-cart, and sign-out were exercised on running builds.",
+      "Its own versions, on the same hook",
+    ],
+  },
+  {
+    label: "axe-core: 42 routes, 5 browser and device profiles",
+    cells: ["210 of 210 scans clean on brand one. Brand two wasn't re-scanned.", "210 of 210 scans clean"],
+  },
+  {
+    label: "Lighthouse: 6 routes, desktop and mobile",
+    cells: ["No change beyond run-to-run noise", "Meets its targets, except mobile homepage load"],
+  },
 ];
 
-// Taken from the résumé, each led by what the work actually was.
+const checks = [
+  { value: "42", label: "routes scanned by axe-core, in five browser and device profiles" },
+  { value: "210 / 210", label: "scans clean in the last recorded run, September 2026" },
+  { value: "83", label: "routes in the SEO regression suite" },
+];
+
+const next = [
+  {
+    title: "Gate the suites",
+    body: "Run the accessibility suites in CI, and make the route script fail when a scan does.",
+  },
+  {
+    title: "Cover every brand",
+    body: "Brand two has no accessibility script of its own yet.",
+  },
+  {
+    title: "Ship each brand only its own code",
+    body: "Resolve per-brand components by filename at build time, the step deferred above.",
+  },
+  {
+    title: "Fix the landmarks",
+    body: "The header and footer sit inside the main content area, so no brand exposes them as banner and footer landmarks. Found while adding tests; left for its own change.",
+  },
+];
+
+// From the repository's history. Most of this was shared work; each line is
+// the part that was mine.
 const role = [
-  { verb: "Led", text: "frontend architecture for the white-label pharmacy platform." },
-  { verb: "Chose", text: "to keep one shared codebase rather than split brands into separate apps." },
+  { verb: "Built", text: "the brand system: the configs, the per-brand component helper, and the smallest-unit rule." },
+  { verb: "Ran", text: "brand three's redesign in seven measured phases." },
+  { verb: "Moved", text: "the app from the Pages Router to the App Router." },
+  { verb: "Wrote", text: "the Playwright and axe-core suites: routes, interaction flows, keyboard, and SEO." },
   {
-    verb: "Established",
-    text: "architecture conventions for the App Router, React, GraphQL, Zustand, and MUI, including clear server/client boundaries.",
+    verb: "Fixed",
+    text: "most of the accessibility issues audits found; the form-error announcements were shared work with two teammates.",
   },
-  {
-    verb: "Led",
-    text: "accessibility work across two pharmacy platforms: 200+ issues addressed and a WCAG 2.2 accessibility seal.",
-  },
-  {
-    verb: "Established",
-    text: "automated accessibility coverage with Playwright and axe-core across 40+ routes and five browser/device profiles, plus SEO regression testing across ~80.",
-  },
-  { verb: "Owned", text: "frontend work on checkout, billing, and other critical patient workflows." },
+  { verb: "Did", text: "most of the frontend work on checkout and payments." },
   {
     verb: "Designed",
     text: "governance for AI-assisted development: repository contracts, decision logs, lifecycle hooks, and approval checkpoints.",
-  },
-  {
-    verb: "Worked",
-    text: "across design, product, backend engineering, and leadership to turn ambiguous requirements into technical decisions.",
   },
 ];
 
@@ -98,9 +135,11 @@ export default function HealthWarehousePage() {
         kicker="Case study"
         logo={<EmployerLogo employer="healthwarehouse" labelled className="[--logo-h:2.25rem]" />}
         title="One platform for three pharmacy brands."
+        tagline="A team-built React and Next.js pharmacy platform. I've been one of its engineers since November 2023: I built its multi-brand system, made most of its accessibility fixes, and wrote its Playwright test suites."
         meta={[
           { label: "Role", value: "Senior Software Engineer" },
-          { label: "Focus", value: "Architecture · Frontend · Accessibility · Product" },
+          { label: "Since", value: "November 2023" },
+          { label: "Focus", value: "Architecture · Frontend · Accessibility" },
           { label: "Stack", value: "Next.js · React · GraphQL · Zustand · MUI" },
         ]}
       />
@@ -108,36 +147,26 @@ export default function HealthWarehousePage() {
 
       <CaseStudySection
         kicker="The problem"
-        title="Real differences, no forks."
-        body="I built the platform from the ground up. As it grew to serve three pharmacy brands, each brought its own requirements. The challenge: support those differences without splitting into separate apps."
-      />
-
-      <CaseStudySection
-        id="architecture"
-        kicker="Architecture"
-        title="Keep the core shared; configure what differs."
-        body="One shared Next.js and React codebase serves every brand."
+        title="Three brands, different in real ways."
+        body="Each brand has its own colors, typefaces, corners, features, and legal copy. The easy way to handle that is to copy a page and change it. Do that often enough and you have three apps."
       >
-        <PlatformDiagram />
-        <div className="mt-space-5">
-          <h3 className={`text-ink ${textH4}`}>The architecture underneath it</h3>
-          <div className="mt-space-3">
-            <DetailGrid items={architectureStack} />
-          </div>
-        </div>
-        <p className="mt-space-5 max-w-xl text-body text-ink/72">
-          The same discipline applies to quality: checked by automated suites, not
-          audited once and forgotten.
-        </p>
+        <ComparisonTable
+          label="How the three brands differ"
+          columns={["", "Brand one", "Brand two", "Brand three"]}
+          columnsClass="sm:grid-cols-[9rem_1fr_1fr_1fr]"
+          rows={differences}
+        />
       </CaseStudySection>
 
       <CaseStudySection
-        kicker="The key decision"
+        id="architecture"
+        kicker="The rule"
         title="Fork at the smallest unit."
-        body="When brands diverge, the easy move is to copy the page and change it. That's how codebases split. The rule instead: brand configuration holds only data (colors, copy, flags), and anything that truly differs lives in the smallest possible per-brand component, chosen when each brand is built."
+        body="A difference between brands goes to the smallest place that can hold it. Config holds data only. Anything that truly differs lives in the smallest per-brand component that can carry it."
       >
-        <div className="grid gap-space-3 sm:grid-cols-3">
-          {decision.map((item) => (
+        <DifferenceRouting />
+        <div className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
+          {how.map((item) => (
             <EvidenceCard key={item.title} title={item.title}>
               {item.body}
             </EvidenceCard>
@@ -145,17 +174,80 @@ export default function HealthWarehousePage() {
         </div>
       </CaseStudySection>
 
-      <CaseStudySection id="evidence" kicker="Evidence" title="Quality checks across routes and real interactions.">
-        <FeaturePanel>
+      <CaseStudySection
+        kicker="Where it bent"
+        title="The rule had boundaries."
+        body="Brand three needed more than small forks could carry. These are the costs I accepted, and why."
+      >
+        <div className="grid gap-space-3 sm:grid-cols-2">
+          {boundaries.map((item) => (
+            <EvidenceCard key={item.title} title={item.title}>
+              {item.body}
+            </EvidenceCard>
+          ))}
+        </div>
+      </CaseStudySection>
+
+      <CaseStudySection
+        kicker="The test"
+        title="Brand three was the test."
+        body="It arrived in June 2026 as a config file, env files, and build scripts, with no structural change. Its redesign in September needed its own typefaces, corners, header, footer, and homepage, and the other two brands had to come out unchanged."
+      >
+        <ol aria-label="Redesign phases" className="flex flex-wrap items-center gap-x-space-1 gap-y-space-2">
+          {phases.map((phase, i) => (
+            <li key={phase} className="flex items-center gap-space-1">
+              <span className="rounded-pill border border-ink/15 bg-surface px-space-2 py-1 text-label text-ink/72">
+                {i} · {phase}
+              </span>
+              {i < phases.length - 1 ? (
+                <span aria-hidden="true" className="text-ink/40">
+                  →
+                </span>
+              ) : null}
+            </li>
+          ))}
+        </ol>
+        <div className="mt-space-5">
+          <ComparisonTable
+            label="Measured after the redesign, against the baseline"
+            columns={["Check", "Brands one and two", "Brand three"]}
+            columnsClass="sm:grid-cols-[12rem_1fr_1fr]"
+            rows={results}
+          />
+        </div>
+        <p className="mt-space-4 max-w-xl text-body text-ink/72">
+          Big swings in the sweep were re-run on their own before I trusted them, and none held up.
+          One gap is real, and it predates the redesign: brand three&apos;s mobile homepage takes about
+          7 seconds to show its main image, against a 2.5-second target. The cause is placeholder
+          photos still waiting on licensed ones.
+        </p>
+      </CaseStudySection>
+
+      <CaseStudySection
+        id="evidence"
+        kicker="Accessibility"
+        title="What screen readers were actually told."
+        body="Audits kept finding markup that looked fine and told a screen reader something wrong. Two examples, from the fixes themselves."
+      >
+        <DialogFixExample />
+        <div className="mt-space-6">
+          <MenuAnnouncementExample />
+        </div>
+        <FeaturePanel className="mt-space-6">
           <div>
-            <p className={`text-ink ${textH4}`}>Checked by tests, not audited once.</p>
+            <h3 className={`text-ink ${textH4}`}>Checked by tests, run by hand.</h3>
             <p className="mt-space-3 text-body text-ink/72">
-              Playwright and axe-core test real interactions, not just static pages. The SEO suite
-              checks metadata, headings, structured data, and language attributes.
+              Playwright and axe-core scan every listed route, plus the states people reach through
+              forms, dialogs, and checkout. The suites run by hand, not in CI, and the route script
+              exits successfully even when a scan fails. Today they report problems; they don&apos;t
+              block them.
+            </p>
+            <p className="mt-space-3 text-body text-ink/72">
+              The HealthWarehouse site also carries a third-party WCAG 2.2 accessibility seal.
             </p>
           </div>
           <ul className="grid gap-space-4">
-            {evidence.map((item) => (
+            {checks.map((item) => (
               <li key={item.label}>
                 <span className={`block text-accent ${textH2}`}>{item.value}</span>
                 <span className="mt-1 block text-body text-ink/72">{item.label}</span>
@@ -163,18 +255,24 @@ export default function HealthWarehousePage() {
             ))}
           </ul>
         </FeaturePanel>
-        <div className="mt-space-5">
-          <DialogFixExample />
-        </div>
-        <div className="mt-space-5">
-          <h3 className={`text-ink ${textH4}`}>Critical patient workflows</h3>
-          <div className="mt-space-3">
-            <DetailGrid items={workflows} />
-          </div>
-        </div>
       </CaseStudySection>
 
-      <CaseStudySection kicker="Role" title="What I actually did">
+      <CaseStudySection
+        kicker="Next"
+        title="What I'd change now."
+        body="Each of these was a deliberate call at the time. With another pass:"
+      >
+        <ul className="grid gap-space-2 sm:grid-cols-2">
+          {next.map((item) => (
+            <li key={item.title} className="rounded-lg bg-surface-raised p-space-2 sm:p-space-3">
+              <span className={`block text-ink ${textH5}`}>{item.title}</span>
+              <span className="mt-1 block text-body text-ink/72">{item.body}</span>
+            </li>
+          ))}
+        </ul>
+      </CaseStudySection>
+
+      <CaseStudySection kicker="Role" title="What was mine">
         <ul className="grid gap-space-2 sm:grid-cols-2">
           {role.map((item) => (
             <li key={item.text} className="rounded-lg bg-surface-raised p-space-2 sm:p-space-3">

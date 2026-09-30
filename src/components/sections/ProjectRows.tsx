@@ -29,12 +29,12 @@ const projects: Project[] = [
   {
     employers: ["healthwarehouse"],
     title: "One pharmacy platform. Three brands.",
-    body: "I built it from the ground up in React and Next.js, then shaped it to serve three brands from one shared core, with accessibility and automated testing built in.",
+    body: "A team-built React and Next.js platform. I built the system that serves three brands from one shared core, and the accessibility testing around it.",
     tags: ["Architecture", "React", "Next.js", "GraphQL", "Accessibility"],
     link: { href: "/work/healthwarehouse", label: "Explore the case study" },
     panel: (
       <div className="grid gap-space-4">
-        <Stat value="200+" label="accessibility issues addressed across two platforms" />
+        <Stat value="210 / 210" label="axe scans clean: 42 routes in five browser and device profiles" />
         <Stat value="~80" label="routes covered by automated SEO regression testing" />
       </div>
     ),

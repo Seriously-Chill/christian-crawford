@@ -52,7 +52,7 @@ function Tree({ node }: { node: Node }) {
 export function DialogFixExample() {
   return (
     <figure aria-labelledby="dialog-fix-caption">
-      <h3 className={`text-ink ${textH4}`}>One fix, before and after</h3>
+      <h3 className={`text-ink ${textH4}`}>The cart drawer, before and after</h3>
       <div className="mt-space-3 grid gap-space-3 sm:grid-cols-2">
         <div className="rounded-lg border border-ink/15 bg-surface p-space-2 sm:p-space-3">
           <p className={`text-ink ${textH5}`}>Before: four dialogs for one drawer</p>
