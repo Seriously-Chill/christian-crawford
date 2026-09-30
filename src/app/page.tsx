@@ -64,7 +64,7 @@ export default function HomePage() {
         href="/work/healthwarehouse#architecture"
         linkLabel="See the architecture"
         outcomes={[
-          { value: "Brand three", label: "added with a config file, env files, and build scripts, then given its own fonts, colors, and corners while the other two kept their existing theme exactly." },
+          { value: "PharmcoRx", label: "added with a config file, env files, and build scripts, then given its own fonts, colors, and corners while the other two kept their existing theme exactly." },
         ]}
         evidence={<BrandConfigDiagram />}
       />
@@ -94,7 +94,7 @@ export default function HomePage() {
         employer="healthwarehouse"
         kicker="Quality"
         title="Accessibility issues, fixed and re-checked."
-        body="Audits kept finding problems: forms that failed silently for screen readers, controls a keyboard couldn't operate, dialogs nested inside dialogs. I led most of the remediation through to a third-party accessibility seal on HealthWarehouse, then wrote the automated tests that re-check it."
+        body="Audits kept finding problems: forms that failed silently for screen readers, controls a keyboard couldn't operate, dialogs nested inside dialogs. I fixed most of them on the way to a third-party accessibility seal on HealthWarehouse, then wrote the automated tests that re-check it."
         tags={["WCAG 2.2", "Playwright", "axe-core", "Screen readers"]}
         href="/work/healthwarehouse#evidence"
         linkLabel="See the evidence"

@@ -134,8 +134,10 @@ export default function AiPage() {
             <p className={`text-ink ${textH4}`}>Every hue the color picker can make is tested.</p>
             <p className="mt-space-3 text-body text-ink/72">
               The picker in the header can put the site on any color, gray, white, or black, so
-              the contrast suite checks every page at each of them. Only six components run in
-              the browser; everything else renders on the server.
+              the contrast suite checks every page at each of them. The suites run in CI on every
+              push, so a change that breaks contrast at any setting fails the build, whether I
+              wrote it or an agent did. Only six components run in the browser; everything else
+              renders on the server.
             </p>
             <Tags items={siteStack} />
             <div className="mt-space-4">

@@ -5,6 +5,7 @@ import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { DetailGrid } from "@/components/ui/DetailGrid";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { SheetStackDiagram } from "@/components/visuals/SheetStackDiagram";
+import { PartnerRequestFlow } from "@/components/visuals/PartnerRequestFlow";
 import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { textH4, textH5 } from "@/lib/type";
 
@@ -118,12 +119,14 @@ export default function PartnerPortalPage() {
         kicker="The problem"
         title="Everything went through email."
         body="Pharmacy partners had no tool of their own. Looking up an order, correcting a patient record, pulling a report, or rotating an API key meant emailing support and waiting for someone to query the database. Partners couldn't check status, requests had no priority or history, and engineers were in the path of routine work."
-      />
+      >
+        <PartnerRequestFlow />
+      </CaseStudySection>
 
       <CaseStudySection
         kicker="Shaping"
         title="A written pitch before any code."
-        body="I wrote a pitch: the problem, a proposed solution for each area, the rabbit holes, and what was out of scope. Frontend and backend engineers reviewed it before work started."
+        body="The team shapes work as a written pitch before building it. I wrote this one: the problem, a proposed solution for each area, the rabbit holes, and what was out of scope. Frontend and backend engineers reviewed it before work started."
       >
         <div className="grid gap-space-3 sm:grid-cols-3">
           {shaping.map((item) => (

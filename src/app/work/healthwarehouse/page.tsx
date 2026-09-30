@@ -8,20 +8,38 @@ import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { DifferenceRouting } from "@/components/visuals/DifferenceRouting";
 import { DialogFixExample } from "@/components/visuals/DialogFixExample";
 import { MenuAnnouncementExample } from "@/components/visuals/MenuAnnouncementExample";
+import { BrandScreens } from "@/components/visuals/BrandScreens";
 import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { textH2, textH4, textH5 } from "@/lib/type";
 
 export const metadata: Metadata = {
   title: "HealthWarehouse",
   description:
-    "How one team-built pharmacy platform serves three brands from one codebase: the rule that keeps brand differences small, where it bent, how a third brand tested it, and the accessibility work checked alongside it.",
+    "How one team-built pharmacy platform serves three brands from one codebase: the rule that keeps brand differences small, where it bent, how PharmcoRx tested it, and the accessibility work checked alongside it.",
 };
 
 // Everything on this page comes from the platform's repository: its three
 // brand configs, its decision log, its measured baselines, and the fixes'
-// own commits. Brands stay unnamed, as on Home.
+// own commits. Brand one is HealthWarehouse, two SpringMeds, three PharmcoRx.
 
 // Read from the three brand configs.
+// What the work changed for the platform and the team, each backed by a
+// section further down.
+const changed = [
+  {
+    title: "A rule the team builds by",
+    body: "The other engineers follow the smallest-unit rule when they add a brand difference. It's how the platform grows, not just how I built it.",
+  },
+  {
+    title: "A new brand is a config file",
+    body: "PharmcoRx joined without a structural change, instead of starting as a copy of another brand's app.",
+  },
+  {
+    title: "A redesign stays in its brand",
+    body: "PharmcoRx got its own typefaces, header, footer, and homepage. Measured against a baseline, the other two brands came out unchanged.",
+  },
+];
+
 const differences = [
   { label: "Typefaces", cells: ["Montserrat", "Montserrat", "Inter and Hepta Slab"] },
   { label: "Corners", cells: ["8px", "8px", "16px cards, pill buttons"] },
@@ -43,7 +61,7 @@ const how = [
 const boundaries = [
   {
     title: "Four forks are whole components",
-    body: "Of the seven per-brand components, four are large: the header, footer, homepage layout, and logo. Brand three's design changed their structure, not just their values. To keep that fork to markup, I moved the header's behavior into a hook both headers share.",
+    body: "Of the seven per-brand components, four are large: the header, footer, homepage layout, and logo. PharmcoRx's design changed their structure, not just their values. To keep that fork to markup, I moved the header's behavior into a hook both headers share.",
   },
   {
     title: "Every build carries every version",
@@ -51,7 +69,7 @@ const boundaries = [
   },
   {
     title: "Fonts one brand uses",
-    body: "Brand three adds about 116 KB of fonts. The other two carry about 3 KB of font CSS they never use, because the font loader can't branch on the brand. Measured, and too small to fix yet.",
+    body: "PharmcoRx adds about 116 KB of fonts. HealthWarehouse and SpringMeds carry about 3 KB of font CSS they never use, because the font loader can't branch on the brand. Measured, and too small to fix yet.",
   },
   {
     title: "One build per brand",
@@ -76,7 +94,7 @@ const results = [
   },
   {
     label: "axe-core: 42 routes, 5 browser and device profiles",
-    cells: ["210 of 210 scans clean on brand one. Brand two wasn't re-scanned.", "210 of 210 scans clean"],
+    cells: ["210 of 210 scans clean on HealthWarehouse. SpringMeds wasn't re-scanned.", "210 of 210 scans clean"],
   },
   {
     label: "Lighthouse: 6 routes, desktop and mobile",
@@ -97,7 +115,7 @@ const next = [
   },
   {
     title: "Cover every brand",
-    body: "Brand two has no accessibility script of its own yet.",
+    body: "SpringMeds has no accessibility script of its own yet.",
   },
   {
     title: "Ship each brand only its own code",
@@ -112,8 +130,9 @@ const next = [
 // From the repository's history. Most of this was shared work; each line is
 // the part that was mine.
 const role = [
-  { verb: "Built", text: "the brand system: the configs, the per-brand component helper, and the smallest-unit rule." },
-  { verb: "Ran", text: "brand three's redesign in seven measured phases." },
+  { verb: "Built", text: "the brand system: the configs and the per-brand component helper." },
+  { verb: "Established", text: "the smallest-unit rule, which the team now follows when adding brand differences." },
+  { verb: "Ran", text: "PharmcoRx's redesign in seven measured phases." },
   { verb: "Moved", text: "the app from the Pages Router to the App Router." },
   { verb: "Wrote", text: "the Playwright and axe-core suites: routes, interaction flows, keyboard, and SEO." },
   {
@@ -145,6 +164,17 @@ export default function HealthWarehousePage() {
       />
       <CurveDivider above="gradient-page" below="surface" />
 
+      <CaseStudySection kicker="What changed" title="Three brands that stay one platform.">
+        <BrandScreens />
+        <div className="mt-space-6 grid gap-space-3 sm:grid-cols-3">
+          {changed.map((item) => (
+            <EvidenceCard key={item.title} title={item.title}>
+              {item.body}
+            </EvidenceCard>
+          ))}
+        </div>
+      </CaseStudySection>
+
       <CaseStudySection
         kicker="The problem"
         title="Three brands, different in real ways."
@@ -152,7 +182,7 @@ export default function HealthWarehousePage() {
       >
         <ComparisonTable
           label="How the three brands differ"
-          columns={["", "Brand one", "Brand two", "Brand three"]}
+          columns={["", "HealthWarehouse", "SpringMeds", "PharmcoRx"]}
           columnsClass="sm:grid-cols-[9rem_1fr_1fr_1fr]"
           rows={differences}
         />
@@ -177,7 +207,7 @@ export default function HealthWarehousePage() {
       <CaseStudySection
         kicker="Where it bent"
         title="The rule had boundaries."
-        body="Brand three needed more than small forks could carry. These are the costs I accepted, and why."
+        body="PharmcoRx needed more than small forks could carry. These are the costs I accepted, and why."
       >
         <div className="grid gap-space-3 sm:grid-cols-2">
           {boundaries.map((item) => (
@@ -190,7 +220,7 @@ export default function HealthWarehousePage() {
 
       <CaseStudySection
         kicker="The test"
-        title="Brand three was the test."
+        title="PharmcoRx was the test."
         body="It arrived in June 2026 as a config file, env files, and build scripts, with no structural change. Its redesign in September needed its own typefaces, corners, header, footer, and homepage, and the other two brands had to come out unchanged."
       >
         <ol aria-label="Redesign phases" className="flex flex-wrap items-center gap-x-space-1 gap-y-space-2">
@@ -210,16 +240,16 @@ export default function HealthWarehousePage() {
         <div className="mt-space-5">
           <ComparisonTable
             label="Measured after the redesign, against the baseline"
-            columns={["Check", "Brands one and two", "Brand three"]}
+            columns={["Check", "HealthWarehouse and SpringMeds", "PharmcoRx"]}
             columnsClass="sm:grid-cols-[12rem_1fr_1fr]"
             rows={results}
           />
         </div>
         <p className="mt-space-4 max-w-xl text-body text-ink/72">
           Big swings in the sweep were re-run on their own before I trusted them, and none held up.
-          One gap is real, and it predates the redesign: brand three&apos;s mobile homepage takes about
-          7 seconds to show its main image, against a 2.5-second target. The cause is placeholder
-          photos still waiting on licensed ones.
+          One gap was real, and it predated the redesign: in that measurement, PharmcoRx&apos;s mobile
+          homepage took about 7 seconds to show its main image, against a 2.5-second target. The
+          cause was placeholder photos, then still waiting on licensed ones.
         </p>
       </CaseStudySection>
 

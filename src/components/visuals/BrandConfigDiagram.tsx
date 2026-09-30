@@ -50,7 +50,7 @@ function BrandSite({ brand }: { brand: (typeof brands)[number] }) {
  * with what each brand's config carries in between. The miniature sites are
  * decorative (`aria-hidden`); the sr-only line and the visible text carry the
  * same facts. Drawn in HTML and token colors like `DifferenceRouting`, so it
- * follows the picker themes. Brands stay unnamed, as on the case study.
+ * follows the picker themes. The case study names and links the brands.
  */
 export function BrandConfigDiagram() {
   return (
