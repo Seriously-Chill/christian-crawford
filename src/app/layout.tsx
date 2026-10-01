@@ -27,11 +27,14 @@ export const metadata: Metadata = {
   },
   description:
     "Christian Crawford is a senior frontend engineer focused on frontend architecture, React, Next.js, accessibility, and complex product systems.",
+  // "./" resolves against each route's own pathname, so every page names
+  // itself rather than the homepage.
+  alternates: { canonical: "./" },
   openGraph: {
     title: "Christian Crawford — Frontend Architecture & Complex Product Systems",
     description:
       "Frontend architecture and complex product systems, shaped around the people who build and use them.",
-    url: "https://christiancrawford.dev",
+    url: "./",
     siteName: "Christian Crawford",
     type: "website",
   },
