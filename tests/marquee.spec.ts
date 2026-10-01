@@ -21,6 +21,18 @@ function moved(a: { offset: number; period: number }, b: { offset: number }) {
   return d > a.period / 2 ? d - a.period : d;
 }
 
+// Pausing eases the strip to a stop over a fraction of a second; wait until
+// it has fully come to rest.
+async function settle(page: Page) {
+  await expect
+    .poll(async () => {
+      const a = await position(page);
+      await page.waitForTimeout(100);
+      return moved(a, await position(page));
+    })
+    .toBe(0);
+}
+
 test.describe("logo strip", () => {
   test.beforeEach(async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -41,6 +53,8 @@ test.describe("logo strip", () => {
     await pause.click();
     await expect(pause).toHaveAttribute("aria-pressed", "true");
     await page.mouse.move(0, 0);
+    // It eases to a stop rather than halting mid-frame, then stays put.
+    await settle(page);
     const paused = await position(page);
     await page.waitForTimeout(800);
     expect(moved(paused, await position(page))).toBe(0);
@@ -48,6 +62,7 @@ test.describe("logo strip", () => {
 
   test("dragging with a mouse moves it with the pointer", async ({ page }) => {
     await page.getByRole("button", { name: "Pause logo scroll" }).click();
+    await settle(page);
     const box = (await strip(page).boundingBox())!;
     const y = box.y + box.height / 2;
     const x = box.x + 300;
@@ -57,13 +72,32 @@ test.describe("logo strip", () => {
     await page.mouse.down();
     await page.mouse.move(x - 100, y, { steps: 5 });
     await page.mouse.move(x - 200, y, { steps: 5 });
-    await page.mouse.up();
-
+    // Measured before letting go: on release a flick carries on and glides.
     expect(moved(before, await position(page))).toBeCloseTo(200, 0);
+    await page.mouse.up();
+  });
+
+  test("a flick keeps gliding after release, then settles", async ({ page }) => {
+    await page.getByRole("button", { name: "Pause logo scroll" }).click();
+    await settle(page);
+    const box = (await strip(page).boundingBox())!;
+    const y = box.y + box.height / 2;
+    const x = box.x + 300;
+
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x - 200, y, { steps: 5 });
+    await page.mouse.up();
+    const released = await position(page);
+
+    await expect.poll(async () => moved(released, await position(page))).toBeGreaterThan(20);
+    // Paused, so the glide bleeds off to a full stop.
+    await settle(page);
   });
 
   test("back and forward step one logo at a time", async ({ page }) => {
     await page.getByRole("button", { name: "Pause logo scroll" }).click();
+    await settle(page);
     const tile = await strip(page).evaluate((list) => {
       const first = list.firstElementChild as HTMLElement;
       return first.offsetWidth + parseFloat(getComputedStyle(list).columnGap);
