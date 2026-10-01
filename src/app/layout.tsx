@@ -30,19 +30,16 @@ export const metadata: Metadata = {
   // "./" resolves against each route's own pathname, so every page names
   // itself rather than the homepage.
   alternates: { canonical: "./" },
+  // No title or description here: Next fills both from each page's own
+  // `title` and `description`, so a shared case study shows its own card.
+  // Setting them would pin every page's card to the homepage's text.
   openGraph: {
-    title: "Christian Crawford — Frontend Architecture & Complex Product Systems",
-    description:
-      "Frontend architecture and complex product systems, shaped around the people who build and use them.",
     url: "./",
     siteName: "Christian Crawford",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Christian Crawford — Frontend Architecture & Complex Product Systems",
-    description:
-      "Frontend architecture and complex product systems, shaped around the people who build and use them.",
   },
 };
 
