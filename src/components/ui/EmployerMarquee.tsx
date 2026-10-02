@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { EmployerLogo, type Employer } from "@/components/ui/EmployerLogo";
 import { CircleButton } from "@/components/ui/CircleButton";
+import { REDUCED_MOTION_QUERY } from "@/lib/motion";
 
 /** Seconds for one full set of logos to drift past: slow enough to read as ambient. */
 const DRIFT_SECONDS = 60;
@@ -79,7 +80,7 @@ export function EmployerMarquee({ employers, label }: { employers: Employer[]; l
     pausedRef.current = paused;
   }, [paused]);
 
-  const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = () => window.matchMedia(REDUCED_MOTION_QUERY).matches;
 
   const wrap = (x: number) => {
     const period = motion.current.period;

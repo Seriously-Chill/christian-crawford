@@ -1,21 +1,6 @@
 import { textH5 } from "@/lib/type";
-
-function Arrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 24"
-      className="mx-auto my-space-1 h-6 w-4 text-ink/40"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 2v18M3 15l5 5 5-5" />
-    </svg>
-  );
-}
+import { FlowArrow } from "@/components/visuals/FlowArrow";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 const flows = [
   {
@@ -51,7 +36,7 @@ export function PartnerRequestFlow() {
             <ol className="mt-space-2">
               {flow.steps.map((step, i) => (
                 <li key={step}>
-                  {i > 0 ? <Arrow /> : null}
+                  {i > 0 ? <FlowArrow /> : null}
                   <div
                     className={`rounded-lg border bg-surface-raised p-space-2 text-body text-ink/72 ${
                       f === flows.length - 1 && i === flow.steps.length - 1
@@ -67,10 +52,10 @@ export function PartnerRequestFlow() {
           </div>
         ))}
       </div>
-      <figcaption id="partner-request-caption" className="mt-space-3 text-body text-ink/72">
+      <FigureCaption id="partner-request-caption">
         The portal is still being built, so the second path is the design, not yet the daily
         routine.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

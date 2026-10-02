@@ -1,4 +1,5 @@
 import { textH4, textH5 } from "@/lib/type";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 type Node = { role: string; name: string; children?: Node[] };
 
@@ -67,10 +68,10 @@ export function DialogFixExample() {
           </ul>
         </div>
       </div>
-      <figcaption id="dialog-fix-caption" className="mt-space-3 max-w-xl text-body text-ink/72">
+      <FigureCaption id="dialog-fix-caption">
         The shopping cart drawer, as a screen reader was told about it. The add-to-cart state, with
         this drawer open, is scanned by axe-core in five browser and device profiles.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

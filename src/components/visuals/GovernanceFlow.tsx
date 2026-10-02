@@ -1,4 +1,6 @@
 import { textH5 } from "@/lib/type";
+import { FlowArrow } from "@/components/visuals/FlowArrow";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 type Step = { stage: string; text: string; outcome?: boolean };
 
@@ -50,23 +52,6 @@ const paths: Path[] = [
   },
 ];
 
-function Arrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 24"
-      className="mx-auto my-space-1 h-6 w-4 text-ink/40"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 2v18M3 15l5 5 5-5" />
-    </svg>
-  );
-}
-
 /**
  * `/ai` workflow diagram — the two tool paths the governance hooks cover,
  * drawn in HTML rather than an image so the steps stay real text (an
@@ -93,7 +78,7 @@ export function GovernanceFlow() {
             <ol className="mt-space-2 flex-1">
               {path.steps.map((step, i) => (
                 <li key={step.stage}>
-                  {i > 0 ? <Arrow /> : null}
+                  {i > 0 ? <FlowArrow /> : null}
                   <div
                     className={`rounded-md border bg-surface-raised px-space-2 py-space-2 ${
                       step.outcome ? "border-accent" : "border-ink/10"
@@ -125,10 +110,10 @@ export function GovernanceFlow() {
         </p>
       </div>
 
-      <figcaption id="governance-flow-caption" className="mt-space-3 text-label text-ink/72">
-        How the Claude Code hooks in this site&apos;s repository handle the two ways a governance
+      <FigureCaption id="governance-flow-caption">
+        How the Claude Code hooks in this site’s repository handle the two ways a governance
         file can change.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

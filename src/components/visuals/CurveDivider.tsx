@@ -24,18 +24,16 @@ const flatFill: Partial<Record<Tone, string>> = {
 export function CurveDivider({
   above,
   below,
-  className = "",
 }: {
   above: Tone;
   below: Tone;
-  className?: string;
 }) {
   const id = useId();
   const isGradient = above === "gradient-page" || above === "gradient-header";
   const stopOpacity = above === "gradient-header" ? 0.9 : 1;
 
   return (
-    <div aria-hidden="true" className={`h-4 w-full sm:h-6 ${belowBg[below]} ${className}`}>
+    <div aria-hidden="true" className={`h-4 w-full sm:h-6 ${belowBg[below]}`}>
       <svg viewBox="0 0 200 24" preserveAspectRatio="none" className="block h-full w-full">
         {isGradient ? (
           <defs>

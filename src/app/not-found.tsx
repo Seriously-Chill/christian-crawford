@@ -19,7 +19,7 @@ export default function NotFound() {
         <div className="mx-auto max-w-5xl px-space-3 py-space-7">
           <p className="text-label text-on-header/80">404</p>
           <h1 className={`mt-space-2 max-w-[15em] text-on-header lg:mt-space-3 ${textH1}`}>
-            This page doesn&apos;t exist, but the work does.
+            This page doesn’t exist, but the work does.
           </h1>
           <div className="mt-space-5 flex flex-wrap gap-space-2">
             <Button href="/">Go home</Button>

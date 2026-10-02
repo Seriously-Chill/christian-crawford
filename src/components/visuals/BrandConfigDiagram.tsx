@@ -1,4 +1,5 @@
 import { textH5 } from "@/lib/type";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 // The 18 feature flags every brand config declares, in the configs' own
 // order, as each brand sets them (1 = on). Same keys, different values: the
@@ -78,7 +79,7 @@ export function BrandConfigDiagram() {
         <path d="M50 0C50 24 150 16 150 40M150 0v40M250 0C250 24 150 16 150 40" vectorEffect="non-scaling-stroke" />
       </svg>
       <div className="rounded-lg border border-ink/10 bg-surface p-space-2 sm:p-space-3">
-        <p className="text-label text-ink">What each brand&apos;s config carries</p>
+        <p className="text-label text-ink">What each brand’s config carries</p>
         <ul className="mt-space-2 flex flex-wrap gap-space-1">
           {perBrand.map((item) => (
             <li key={item} className="rounded-pill border border-ink/15 px-space-2 py-1 text-label text-ink/72">
@@ -94,10 +95,10 @@ export function BrandConfigDiagram() {
           are shared.
         </p>
       </div>
-      <figcaption id="brand-config-caption" className="mt-space-3 text-label leading-normal text-ink/72">
+      <FigureCaption id="brand-config-caption">
         Drawn from the three brand configs: the same keys, set differently. Dots are the flags, on
         or off.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

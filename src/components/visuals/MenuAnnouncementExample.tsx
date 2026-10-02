@@ -1,4 +1,5 @@
 import { textH4, textH5 } from "@/lib/type";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 // From the fix's own commit (June 2026). The instructions are quoted as
 // shipped.
@@ -28,7 +29,7 @@ const steps = [
 export function MenuAnnouncementExample() {
   return (
     <figure aria-labelledby="menu-announcement-caption">
-      <h3 className={`text-ink ${textH4}`}>The menu&apos;s instructions, second attempt</h3>
+      <h3 className={`text-ink ${textH4}`}>The menu’s instructions, second attempt</h3>
       <ol className="mt-space-3 grid gap-space-3 sm:grid-cols-3">
         {steps.map((step, i) => (
           <li
@@ -43,11 +44,11 @@ export function MenuAnnouncementExample() {
           </li>
         ))}
       </ol>
-      <figcaption id="menu-announcement-caption" className="mt-space-3 max-w-xl text-body text-ink/72">
-        The site&apos;s main menu, June 2026. An earlier fix had already stopped VoiceOver reading
-        each category name twice, by removing region roles and a live region the menu didn&apos;t
+      <FigureCaption id="menu-announcement-caption">
+        The site’s main menu, June 2026. An earlier fix had already stopped VoiceOver reading
+        each category name twice, by removing region roles and a live region the menu didn’t
         need.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

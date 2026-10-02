@@ -3,7 +3,9 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { Button } from "@/components/ui/Button";
 import { Tags } from "@/components/ui/Tags";
 import { EmployerLogo, type Employer } from "@/components/ui/EmployerLogo";
-import { textH2, textH3 } from "@/lib/type";
+import { StatList } from "@/components/ui/StatList";
+import { StepChain } from "@/components/ui/StepChain";
+import { textH3 } from "@/lib/type";
 
 type Project = {
   employers: Employer[];
@@ -13,15 +15,6 @@ type Project = {
   link?: { href: string; label: string };
   panel: ReactNode;
 };
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <p className={`text-accent ${textH2}`}>{value}</p>
-      <p className="mt-1 text-body text-ink/72">{label}</p>
-    </div>
-  );
-}
 
 const progression = ["Design", "Multimedia", "Creative Management", "Software Development", "Consulting", "Architecture"];
 
@@ -33,61 +26,50 @@ const projects: Project[] = [
     tags: ["Architecture", "React", "Next.js", "GraphQL", "Accessibility"],
     link: { href: "/work/healthwarehouse", label: "Explore the case study" },
     panel: (
-      <div className="grid gap-space-4">
-        <Stat value="210 / 210" label="axe scans clean: 42 routes in five browser and device profiles" />
-        <Stat value="~80" label="routes covered by automated SEO regression testing" />
-      </div>
+      <StatList
+        items={[
+          { value: "210 / 210", label: "axe scans clean: 42 routes in five browser and device profiles" },
+          { value: "~80", label: "routes covered by automated SEO regression testing" },
+        ]}
+      />
     ),
   },
   {
     employers: ["healthwarehouse"],
     title: "A partner portal, shaped before it was built.",
-    body: "I wrote the pitch, reviewed it with frontend and backend engineers, and am building the portal that takes routine partner requests off email and out of engineers' hands.",
+    body: "I wrote the pitch, reviewed it with frontend and backend engineers, and am building the portal that takes routine partner requests off email and out of engineers’ hands.",
     tags: ["Product shaping", "UX", "Next.js", "TypeScript", "Accessibility"],
     link: { href: "/work/partner-portal", label: "Explore the case study" },
-    panel: <Stat value="9" label="areas with working screens so far, from one written pitch" />,
+    panel: <StatList items={[{ value: "9", label: "areas with working screens so far, from one written pitch" }]} />,
   },
   {
     employers: ["ingage"],
     title: "Ingage Partners",
     body: "More than ten client engagements, from early-stage products to enterprise modernization, with integrations including Mapbox, AWS, and Contentful.",
     tags: ["React", "Angular", "JAMstack"],
-    panel: <Stat value="10+" label="client engagements, from first release to enterprise modernization" />,
+    panel: <StatList items={[{ value: "10+", label: "client engagements, from first release to enterprise modernization" }]} />,
   },
   {
     employers: ["kroger"],
     title: "Kroger",
     body: "Frontend modernization for ClickList and internal applications: responsive interfaces on evolving enterprise systems.",
     tags: ["React", "AngularJS", "Enterprise"],
-    panel: <Stat value="WebSphere → AngularJS" label="the enterprise UI move I helped carry out" />,
+    panel: <StatList items={[{ value: "WebSphere → AngularJS", label: "the enterprise UI move I helped carry out" }]} />,
   },
   {
     employers: ["cbts", "trivantis", "ginghamsburg"],
     title: "Earlier work",
     body: "I started out building digital experiences at CBTS, Trivantis, and Ginghamsburg. That foundation still shapes how I work.",
     tags: ["C#", "Drupal", "WordPress", "eLearning"],
-    panel: (
-      <ol aria-label="How the work changed" className="flex flex-wrap items-center gap-x-space-1 gap-y-space-2">
-        {progression.map((step, i) => (
-          <li key={step} className="flex items-center gap-space-1">
-            <span className="rounded-pill border border-ink/15 bg-surface px-space-2 py-1 text-label text-ink/70">{step}</span>
-            {i < progression.length - 1 ? (
-              <span aria-hidden="true" className="text-ink/30">
-                →
-              </span>
-            ) : null}
-          </li>
-        ))}
-      </ol>
-    ),
+    panel: <StepChain label="How the work changed" steps={progression} />,
   },
 ];
 
 /**
- * `/work`'s projects as alternating rows: each project gets a full-width moment, text on one side and a rounded
- * `surface-raised` panel on the other, swapping sides row by row. The
- * panels hold real evidence (numbers, the migration, the career arc)
- * instead of photography.
+ * `/work`'s projects as alternating rows: each project gets a full-width
+ * moment, text on one side and a rounded `surface-raised` panel on the
+ * other, swapping sides row by row. The panels hold real evidence
+ * (numbers, the migration, the career arc) instead of photography.
  */
 export function ProjectRows() {
   return (

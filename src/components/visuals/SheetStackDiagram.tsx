@@ -1,21 +1,6 @@
 import { textH5 } from "@/lib/type";
-
-function Arrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 24"
-      className="mx-auto my-space-1 h-6 w-4 text-ink/40"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 2v18M3 15l5 5 5-5" />
-    </svg>
-  );
-}
+import { FlowArrow } from "@/components/visuals/FlowArrow";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 const steps = [
   {
@@ -31,7 +16,7 @@ const steps = [
   {
     url: "/customers?customer=42&order=7",
     title: "A related record stacks on top",
-    body: "One of that customer's orders opens as a second panel. Back closes it, and the customer is still there.",
+    body: "One of that customer’s orders opens as a second panel. Back closes it, and the customer is still there.",
   },
 ];
 
@@ -48,7 +33,7 @@ export function SheetStackDiagram() {
       <ol>
         {steps.map((step, i) => (
           <li key={step.url}>
-            {i > 0 ? <Arrow /> : null}
+            {i > 0 ? <FlowArrow /> : null}
             <div
               className={`rounded-lg border bg-surface-raised p-space-2 sm:p-space-3 ${
                 i === steps.length - 1 ? "border-accent" : "border-ink/15"
@@ -61,10 +46,10 @@ export function SheetStackDiagram() {
           </li>
         ))}
       </ol>
-      <figcaption id="sheet-stack-caption" className="mt-space-3 text-body text-ink/72">
+      <FigureCaption id="sheet-stack-caption">
         The address bar holds which panels are open, so the view survives a refresh, the back
         button, and a shared link.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

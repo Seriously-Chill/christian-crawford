@@ -1,14 +1,12 @@
 /**
  * The site's one line-icon set: 24px grid, 1.5px round strokes, drawn in
- * `currentColor` so every picker theme applies. `badge` puts the glyph in
- * a `radius-circle` badge (capability cards); `inline` is a bare glyph for
- * tile headings. Always decorative: each
- * use sits next to text that says the same thing.
+ * `currentColor` so every picker theme applies. Always decorative: each
+ * use sits next to text that says the same thing, or on a control with its
+ * own label.
  */
 const paths = {
   layers: "M12 3 3 7.5l9 4.5 9-4.5L12 3ZM3 12l9 4.5 9-4.5M3 16.5 12 21l9-4.5",
   person: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c0-3.9 3.4-6.5 7.5-6.5s7.5 2.6 7.5 6.5",
-  code: "m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16",
   shield: "M12 3 20 6v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3ZM8.5 12l2.5 2.5 4.5-5",
   people:
     "M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5M16 4.3a3.5 3.5 0 0 1 0 6.4M18 14.8c2.1.6 3.5 2.5 3.5 5.2",
@@ -24,7 +22,8 @@ const paths = {
 
 export type IconName = keyof typeof paths;
 
-function Glyph({ name, className }: { name: IconName; className: string }) {
+/** `className` sizes it; the default is the inline size beside text. */
+export function LineIcon({ name, className = "size-6 shrink-0" }: { name: IconName; className?: string }) {
   return (
     <svg
       aria-hidden="true"
@@ -40,16 +39,3 @@ function Glyph({ name, className }: { name: IconName; className: string }) {
     </svg>
   );
 }
-
-export function LineIcon({ name, variant = "inline" }: { name: IconName; variant?: "inline" | "badge" }) {
-  if (variant === "badge") {
-    return (
-      <span aria-hidden="true" className="flex size-16 items-center justify-center rounded-circle bg-on-header/15">
-        <Glyph name={name} className="size-8" />
-      </span>
-    );
-  }
-  return <Glyph name={name} className="size-6 shrink-0" />;
-}
-
-export { Glyph as IconGlyph };

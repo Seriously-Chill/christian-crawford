@@ -2,8 +2,7 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { REVEAL_LINE } from "../src/lib/motion";
 import { tabKey } from "./keys";
-
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/work/partner-portal", "/ai", "/about", "/contact"];
+import { ROUTES } from "./routes";
 
 for (const route of ROUTES) {
   test(`${route} has no automatically detectable WCAG 2.2 AA violations`, async ({ page }) => {

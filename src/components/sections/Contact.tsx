@@ -1,6 +1,7 @@
 import { CurveDivider } from "@/components/visuals/CurveDivider";
+import { ExternalLink } from "@/components/ui/ExternalLink";
 import { LineIcon } from "@/components/ui/LineIcon";
-import { RESUME_PDF } from "@/lib/links";
+import { EMAIL, LINKEDIN_URL, RESUME_PDF } from "@/lib/links";
 import { textH1, textH5 } from "@/lib/type";
 
 const tile = "rounded-lg border border-on-header/10 bg-on-header/10 p-space-3 text-left";
@@ -15,14 +16,14 @@ export function Contact() {
     <section className="bg-header-gradient">
       <div className="mx-auto max-w-5xl px-space-3 py-space-7">
         <h1 className={`text-on-header ${textH1}`}>
-          Let&apos;s talk about what you’re building.
+          Let’s talk about what you’re building.
         </h1>
         <p className="mt-space-3 max-w-xl text-body text-on-header/80">
           Open to senior frontend and frontend architecture roles: remote, or hybrid in Cincinnati.
         </p>
         <ul className="mt-space-5 grid gap-space-3 sm:grid-cols-2 lg:grid-cols-4">
           <li>
-            <a href="mailto:christian.crawford@pm.me" className={linkTile}>
+            <a href={`mailto:${EMAIL}`} className={linkTile}>
               <span className={`flex items-center gap-space-1 text-on-header ${textH5}`}>
                 <LineIcon name="mail" />
                 Email
@@ -33,19 +34,13 @@ export function Contact() {
             </a>
           </li>
           <li>
-            <a
-              href="https://www.linkedin.com/in/christiancrawford"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn (opens in a new tab)"
-              className={linkTile}
-            >
+            <ExternalLink href={LINKEDIN_URL} className={linkTile}>
               <span className={`flex items-center gap-space-1 text-on-header ${textH5}`}>
                 <LineIcon name="external" />
                 LinkedIn
               </span>
               <span className="mt-space-1 block text-body text-on-header/80">in/christiancrawford</span>
-            </a>
+            </ExternalLink>
           </li>
           <li>
             <a href={RESUME_PDF} className={linkTile}>

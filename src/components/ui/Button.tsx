@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { MouseEventHandler, ReactNode } from "react";
+import type { ReactNode } from "react";
+import { ExternalLink } from "@/components/ui/ExternalLink";
 
 /**
  * The site's one button shape is a pill. Don't add a square or radius-lg
@@ -8,75 +9,43 @@ import type { MouseEventHandler, ReactNode } from "react";
  *  - primary: surface fill, accent label; hover inverts
  *  - bordered: for a light ground
  *  - bordered-inverse: for a gradient or other colored ground
+ *
+ * Every button on the site is a link. `external` opens it in a new tab
+ * (`ExternalLink`).
  */
 type Variant = "primary" | "bordered" | "bordered-inverse";
 
 const base =
-  "inline-flex items-center justify-center rounded-pill text-label transition-colors duration-300";
+  "inline-flex items-center justify-center rounded-pill px-[23px] py-[11px] text-label transition-colors duration-300";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-surface text-accent border border-button-edge px-[23px] py-[11px] hover:bg-accent hover:text-surface",
-  bordered:
-    "bg-transparent text-accent border border-accent px-[23px] py-[11px] hover:bg-accent hover:text-surface",
-  "bordered-inverse":
-    "bg-transparent text-on-header border border-on-header px-[23px] py-[11px] hover:bg-on-header hover:text-primary",
+  primary: "bg-surface text-accent border border-button-edge hover:bg-accent hover:text-surface",
+  bordered: "bg-transparent text-accent border border-accent hover:bg-accent hover:text-surface",
+  "bordered-inverse": "bg-transparent text-on-header border border-on-header hover:bg-on-header hover:text-primary",
 };
 
-type BaseProps = {
-  variant?: Variant;
-  className?: string;
-  children: ReactNode;
-  "aria-label"?: string;
-};
-
-type LinkButtonProps = BaseProps & {
+export function Button({
+  href,
+  variant = "primary",
+  external = false,
+  children,
+}: {
   href: string;
-  target?: string;
-  rel?: string;
-};
-
-type NativeButtonProps = BaseProps & {
-  href?: undefined;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  type?: "button" | "submit";
-  disabled?: boolean;
-};
-
-export type ButtonProps = LinkButtonProps | NativeButtonProps;
-
-function isLink(props: ButtonProps): props is LinkButtonProps {
-  return typeof props.href === "string";
-}
-
-export function Button(props: ButtonProps) {
-  const variant = props.variant ?? "primary";
-  const classes =
-    `${base} ${variants[variant]} ${props.className ?? ""}`.trim();
-
-  if (isLink(props)) {
+  variant?: Variant;
+  external?: boolean;
+  children: ReactNode;
+}) {
+  const className = `${base} ${variants[variant]}`;
+  if (external) {
     return (
-      <Link
-        href={props.href}
-        target={props.target}
-        rel={props.rel}
-        aria-label={props["aria-label"]}
-        className={classes}
-      >
-        {props.children}
-      </Link>
+      <ExternalLink href={href} className={className}>
+        {children}
+      </ExternalLink>
     );
   }
-
   return (
-    <button
-      type={props.type ?? "button"}
-      onClick={props.onClick}
-      disabled={props.disabled}
-      aria-label={props["aria-label"]}
-      className={classes}
-    >
-      {props.children}
-    </button>
+    <Link href={href} className={className}>
+      {children}
+    </Link>
   );
 }

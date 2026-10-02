@@ -3,17 +3,16 @@
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import { useSyncExternalStore, type ReactNode } from "react";
-
-const QUERY = "(prefers-reduced-motion: reduce)";
+import { REDUCED_MOTION_QUERY } from "@/lib/motion";
 
 function subscribe(callback: () => void) {
-  const mql = window.matchMedia(QUERY);
+  const mql = window.matchMedia(REDUCED_MOTION_QUERY);
   mql.addEventListener("change", callback);
   return () => mql.removeEventListener("change", callback);
 }
 
 function getSnapshot() {
-  return window.matchMedia(QUERY).matches;
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
 }
 
 // Server/first-paint default: assume reduced motion so Lenis never mounts

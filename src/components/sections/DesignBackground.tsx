@@ -5,7 +5,7 @@ import { textH2, textH5 } from "@/lib/type";
 const principles: { icon: IconName; title: string; body: string }[] = [
   { icon: "person", title: "Start with the person", body: "Find the moment the product asks something of the person using it." },
   { icon: "layers", title: "Share the core", body: "Build one foundation, and configure what really differs." },
-  { icon: "shield", title: "Test, don't audit", body: "Accessibility and real interactions tested automatically, not audited once." },
+  { icon: "shield", title: "Test, don’t audit", body: "Accessibility and real interactions tested automatically, not audited once." },
   { icon: "people", title: "Sit in every seat", body: "Product, design, and engineering deciding together what to build." },
 ];
 
@@ -26,8 +26,8 @@ export function DesignBackground() {
               the right architecture than the requirements doc does.
             </p>
             <p>
-              It&apos;s also why I rarely stay in one lane. The interesting work happens where
-              product, design, and engineering are still deciding what to build — and I&apos;ve sat
+              It’s also why I rarely stay in one lane. The interesting work happens where
+              product, design, and engineering are still deciding what to build — and I’ve sat
               in all three seats.
             </p>
           </div>

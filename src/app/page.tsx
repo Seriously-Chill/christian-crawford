@@ -1,13 +1,14 @@
 import { Opening } from "@/components/sections/Opening";
 import { ProofFeature } from "@/components/sections/ProofFeature";
-import { NarrativeTeaser } from "@/components/sections/NarrativeTeaser";
+import { NarrativeSection } from "@/components/sections/NarrativeSection";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
-import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EmployerMarquee } from "@/components/ui/EmployerMarquee";
 import { AiBanner } from "@/components/sections/AiBanner";
+import { Button } from "@/components/ui/Button";
 import { BrandConfigDiagram } from "@/components/visuals/BrandConfigDiagram";
 import { PortalShapingDiagram } from "@/components/visuals/PortalShapingDiagram";
 import { AccessibilityTrail } from "@/components/visuals/AccessibilityTrail";
+import { EMAIL, LINKEDIN_URL, SITE_URL } from "@/lib/links";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -16,9 +17,9 @@ const structuredData = {
       "@type": "Person",
       name: "Christian Crawford",
       jobTitle: "Senior Frontend Engineer",
-      url: "https://christiancrawford.dev",
-      email: "mailto:christian.crawford@pm.me",
-      sameAs: ["https://www.linkedin.com/in/christiancrawford"],
+      url: SITE_URL,
+      email: `mailto:${EMAIL}`,
+      sameAs: [LINKEDIN_URL],
       knowsAbout: [
         "Frontend Architecture",
         "React",
@@ -39,7 +40,7 @@ const structuredData = {
     {
       "@type": "WebSite",
       name: "Christian Crawford",
-      url: "https://christiancrawford.dev",
+      url: SITE_URL,
     },
   ],
 };
@@ -77,7 +78,7 @@ export default function HomePage() {
         employer="healthwarehouse"
         kicker="Product and UX"
         title="A partner portal, shaped before it was built."
-        body="Pharmacy partners ran orders, reports, and API changes through email and engineers. I wrote the pitch for a self-service portal, reviewed it with frontend and backend engineers, and am building it, with the UX decided around the operations staff who'll use it."
+        body="Pharmacy partners ran orders, reports, and API changes through email and engineers. I wrote the pitch for a self-service portal, reviewed it with frontend and backend engineers, and am building it, with the UX decided around the operations staff who’ll use it."
         tags={["Product shaping", "UX", "Next.js", "TypeScript", "GraphQL"]}
         href="/work/partner-portal"
         linkLabel="Read the case study"
@@ -94,7 +95,7 @@ export default function HomePage() {
         employer="healthwarehouse"
         kicker="Quality"
         title="Accessibility issues, fixed and re-checked."
-        body="Audits kept finding problems: forms that failed silently for screen readers, controls a keyboard couldn't operate, dialogs nested inside dialogs. I fixed most of them on the way to a third-party accessibility seal on HealthWarehouse, then wrote the automated tests that re-check it."
+        body="Audits kept finding problems: forms that failed silently for screen readers, controls a keyboard couldn’t operate, dialogs nested inside dialogs. I fixed most of them on the way to a third-party accessibility seal on HealthWarehouse, then wrote the automated tests that re-check it."
         tags={["WCAG 2.2", "Playwright", "axe-core", "Screen readers"]}
         href="/work/healthwarehouse#evidence"
         linkLabel="See the evidence"
@@ -105,21 +106,21 @@ export default function HomePage() {
         evidence={<AccessibilityTrail />}
       />
 
-      <NarrativeTeaser
+      <NarrativeSection
         kicker="How this happened"
         title="Different rooms, same habit."
-        body="Design, development, consulting, architecture: in every role, I notice how something
-          gets used, then build toward that instead of around it."
-        href="/about"
-        linkLabel="More about me"
+        body="Design, development, consulting, architecture: in every role, I notice how something gets used, then build toward that instead of around it."
       >
-        <RevealOnScroll className="mt-space-5">
-          <EmployerMarquee
-            label="Where I’ve worked"
-            employers={["healthwarehouse", "ingage", "kroger", "cbts", "cincinnati-bell", "trivantis", "ginghamsburg"]}
-          />
-        </RevealOnScroll>
-      </NarrativeTeaser>
+        <EmployerMarquee
+          label="Where I’ve worked"
+          employers={["healthwarehouse", "ingage", "kroger", "cbts", "cincinnati-bell", "trivantis", "ginghamsburg"]}
+        />
+        <div className="mt-space-4">
+          <Button href="/about" variant="bordered">
+            More about me
+          </Button>
+        </div>
+      </NarrativeSection>
 
       <AiBanner />
 

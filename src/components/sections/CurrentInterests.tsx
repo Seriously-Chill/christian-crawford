@@ -1,7 +1,6 @@
-import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { NarrativeSection } from "@/components/sections/NarrativeSection";
 import { Button } from "@/components/ui/Button";
-import { EvidenceCard } from "@/components/ui/EvidenceCard";
-import { textH2 } from "@/lib/type";
+import { EvidenceGrid } from "@/components/ui/EvidenceGrid";
 
 const interests = [
   {
@@ -19,33 +18,21 @@ const interests = [
 ];
 
 /**
- * "What I'm interested in now": forward-looking, not a solved problem.
+ * "What I’m interested in now": forward-looking, not a solved problem.
  * Links on to `/ai`, where one of these interests is shown in practice.
  */
 export function CurrentInterests() {
   return (
-    <section className="bg-surface">
-      <div className="mx-auto max-w-5xl px-space-3 py-space-7">
-        <RevealOnScroll>
-          <h2 className={`text-accent ${textH2}`}>I&apos;m interested in what&apos;s next.</h2>
-          <p className="mt-space-3 max-w-xl text-body lg:mt-space-4 text-ink/72">
-            AI is changing how software gets built. I&apos;m most interested in what that means
-            for architecture, testing, and the people working in large codebases.
-          </p>
-        </RevealOnScroll>
-        <RevealOnScroll className="mt-space-5 grid gap-space-3 sm:grid-cols-3">
-          {interests.map((item) => (
-            <EvidenceCard key={item.title} title={item.title}>
-              {item.body}
-            </EvidenceCard>
-          ))}
-        </RevealOnScroll>
-        <RevealOnScroll className="mt-space-5">
-          <Button href="/ai" variant="bordered">
-            See how I work with AI
-          </Button>
-        </RevealOnScroll>
+    <NarrativeSection
+      title="I’m interested in what’s next."
+      body="AI is changing how software gets built. I’m most interested in what that means for architecture, testing, and the people working in large codebases."
+    >
+      <EvidenceGrid items={interests} />
+      <div className="mt-space-5">
+        <Button href="/ai" variant="bordered">
+          See how I work with AI
+        </Button>
       </div>
-    </section>
+    </NarrativeSection>
   );
 }

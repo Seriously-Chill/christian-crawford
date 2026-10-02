@@ -1,29 +1,14 @@
 import { textH5 } from "@/lib/type";
-
-function Arrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 24"
-      className="my-1 h-6 w-4 shrink-0 text-ink/40 sm:my-0 sm:-rotate-90"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 2v18M3 15l5 5 5-5" />
-    </svg>
-  );
-}
+import { FlowArrow } from "@/components/visuals/FlowArrow";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 // Each path's example is a real one from the codebase.
 const paths = [
   {
     kind: "A value",
-    detail: "A color, a feature flag, the pharmacist's hours",
-    destination: "The brand's config",
-    example: "Pharmacist hours: one shared component reads each brand's hours string.",
+    detail: "A color, a feature flag, the pharmacist’s hours",
+    destination: "The brand’s config",
+    example: "Pharmacist hours: one shared component reads each brand’s hours string.",
   },
   {
     kind: "Markup",
@@ -62,7 +47,7 @@ export function DifferenceRouting() {
               <p className="mt-1 text-body text-ink/72">{path.detail}</p>
             </div>
             <div className="flex justify-center">
-              <Arrow />
+              <FlowArrow className="my-1 sm:my-0 sm:-rotate-90" />
               <span className="sr-only">goes to</span>
             </div>
             <div className="rounded-lg border border-accent bg-surface p-space-2">
@@ -72,10 +57,10 @@ export function DifferenceRouting() {
           </li>
         ))}
       </ul>
-      <figcaption id="difference-routing-caption" className="mt-space-3 max-w-xl text-body text-ink/72">
+      <FigureCaption id="difference-routing-caption">
         Where a difference between brands goes. Config and components are both picked when a brand is
         built, never while it runs.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

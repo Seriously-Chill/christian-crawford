@@ -1,8 +1,7 @@
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { Button } from "@/components/ui/Button";
+import { GOVERNED_FILES } from "@/components/sections/GovernanceOverview";
 import { textH2 } from "@/lib/type";
-
-const governed = [".claude/settings.json", ".claude/hooks/*.sh", "CLAUDE.md", "AGENTS.md"];
 
 /**
  * Points Home visitors to /ai, which Home otherwise never mentions. The
@@ -19,15 +18,15 @@ export function AiBanner() {
               AI helps write the code. I protect the rules it follows.
             </h2>
             <p className="mt-space-3 max-w-md text-body text-surface/80">
-              This site&apos;s own repository runs Claude Code with hooks that flag every change
-              to the agent&apos;s rules for my review.
+              This site’s own repository runs Claude Code with hooks that flag every change
+              to the agent’s rules for my review.
             </p>
             <div className="mt-space-4">
               <Button href="/ai">See how it works</Button>
             </div>
           </div>
           <ul aria-label="Files the hooks protect" className="flex flex-wrap gap-space-1 md:justify-end">
-            {governed.map((file) => (
+            {GOVERNED_FILES.map((file) => (
               <li
                 key={file}
                 className="rounded-pill border border-surface/30 px-space-2 py-1 text-label text-surface"

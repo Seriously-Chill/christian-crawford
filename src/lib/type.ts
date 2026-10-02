@@ -1,9 +1,9 @@
 /**
  * Responsive type-scale class strings for headings (the steps are listed
- * in docs/design-system/tokens.json). The flat text-display / text-h2 /
- * etc. Tailwind utilities in globals.css hold the base (desktop) values
- * for non-headline uses; these hold the full responsive stack for actual
- * headings. body/label are excluded: both stay fixed at every breakpoint.
+ * in docs/design-system/tokens.json). Only h5, body and label also exist
+ * as flat Tailwind utilities in globals.css: `text-h5` for the footer's
+ * column headings and the hero tagline, which hold 20px on phones, and
+ * body/label, which stay fixed at every breakpoint.
  *
  * Tailwind is mobile-first (unprefixed = smallest): base is the smallest
  * step, 2xl the largest. h5 has 4 steps, not 6 — the two skipped
@@ -36,3 +36,10 @@ export const textH4 =
 
 export const textH5 =
   "text-[14px] sm:text-[17px] lg:text-[19px] 2xl:text-[20px] leading-[1.35] tracking-[-0.005em] font-medium text-balance";
+
+/**
+ * The name set as a wordmark: a heading step at light weight. The h3 step
+ * is the footer's and the transition overlay's; the header uses h4.
+ */
+export const textWordmark = textH3.replace("font-medium", "font-light");
+export const textWordmarkSm = textH4.replace("font-medium", "font-light");

@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { ExternalLink } from "@/components/ui/ExternalLink";
 import { LineIcon } from "@/components/ui/LineIcon";
-import { textH2, textH3 } from "@/lib/type";
-import { RESUME_PDF, SOURCE_REPO } from "@/lib/links";
+import { textH2, textWordmark } from "@/lib/type";
+import { EMAIL, LINKEDIN_URL, NAV_LINKS, RESUME_PDF, SOURCE_REPO } from "@/lib/links";
+
+const link = "inline-flex items-center gap-space-1 py-1 hover:underline focus-visible:underline";
 
 /**
  * A flat `primary` band with `on-header` text: a closing statement with its
@@ -19,24 +22,14 @@ import { RESUME_PDF, SOURCE_REPO } from "@/lib/links";
  * The closing statement also appears on `/contact`, as the footer's contact
  * links do. That repetition is intentional.
  */
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
-  { href: "/ai", label: "AI" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
-
-const link = "inline-flex items-center gap-space-1 py-1 hover:underline focus-visible:underline";
-
 export function Footer() {
   return (
     <footer className="bg-primary text-on-header">
       <div className="mx-auto grid max-w-6xl gap-space-4 px-space-3 py-space-7 md:grid-cols-[3fr_2fr] md:items-end">
-        <p className={textH2}>Working through something difficult? I&apos;d like to hear about it.</p>
+        <p className={textH2}>Working through something difficult? I’d like to hear about it.</p>
         <div className="flex flex-wrap gap-space-2 md:justify-end">
           <Button href="/contact">Get in touch</Button>
-          <Button href="mailto:christian.crawford@pm.me" variant="bordered-inverse">
+          <Button href={`mailto:${EMAIL}`} variant="bordered-inverse">
             Email me
           </Button>
         </div>
@@ -46,7 +39,7 @@ export function Footer() {
         <div className="mx-auto grid max-w-6xl gap-space-5 px-space-3 py-space-6 sm:grid-cols-[2fr_1fr_1fr]">
           <div>
             <Link href="/" className="rounded-sm focus-visible:outline-offset-4" aria-label="Christian Crawford — home">
-              <span className={textH3.replace("font-medium", "font-light")}>Christian Crawford</span>
+              <span className={textWordmark}>Christian Crawford</span>
             </Link>
             <p className="mt-space-3 max-w-xs text-body">
               Based in Cincinnati. Open to remote roles, or hybrid locally.
@@ -57,21 +50,16 @@ export function Footer() {
             <p className="text-h5">Contact</p>
             <ul className="mt-space-2 space-y-space-1 text-body">
               <li>
-                <a href="mailto:christian.crawford@pm.me" className={link}>
+                <a href={`mailto:${EMAIL}`} className={link}>
                   <LineIcon name="mail" />
-                  christian.crawford@pm.me
+                  {EMAIL}
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.linkedin.com/in/christiancrawford"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={link}
-                >
+                <ExternalLink href={LINKEDIN_URL} className={link}>
                   <LineIcon name="external" />
                   LinkedIn
-                </a>
+                </ExternalLink>
               </li>
               <li>
                 <a href={RESUME_PDF} className={link}>
@@ -85,7 +73,7 @@ export function Footer() {
           <nav aria-label="Footer">
             <p className="text-h5">Site</p>
             <ul className="mt-space-2 space-y-space-1 text-body">
-              {links.map(({ href, label }) => (
+              {NAV_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link href={href} className={link}>
                     {label}
@@ -104,15 +92,9 @@ export function Footer() {
             <Link href="/ai#built" className="hover:underline focus-visible:underline">
               How this site is built
             </Link>
-            <a
-              href={SOURCE_REPO}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Source on GitHub (opens in a new tab)"
-              className="hover:underline focus-visible:underline"
-            >
+            <ExternalLink href={SOURCE_REPO} className="hover:underline focus-visible:underline">
               Source on GitHub
-            </a>
+            </ExternalLink>
           </div>
         </div>
       </div>

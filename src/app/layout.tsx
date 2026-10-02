@@ -6,8 +6,9 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { themeInitScript } from "@/lib/theme";
-import { revealArrivalScript, revealInitScript } from "@/lib/motion";
-import { textH3 } from "@/lib/type";
+import { PRELOADER_ID, preloaderScript, revealArrivalScript, revealInitScript } from "@/lib/motion";
+import { SITE_URL } from "@/lib/links";
+import { textWordmark } from "@/lib/type";
 
 // Self-hosted rather than loaded from Google Fonts: no runtime fetch and no
 // third-party request. One variable file (wght 200–800) covers every weight
@@ -20,7 +21,7 @@ const jakarta = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://christiancrawford.dev"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Christian Crawford — Frontend Architecture & Complex Product Systems",
     template: "%s — Christian Crawford",
@@ -94,23 +95,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           If hydration still fails somewhere, React replaces this div with a
           fresh one the script never touched. So the script looks the element
-          up again each time it acts, and sets `window.__ccPreloaderDone` once
-          it's gone; PageTransition hides any replacement after that.
+          up again each time it acts, and sets `PRELOADER_DONE_FLAG` once it's
+          gone; PageTransition hides any replacement after that.
         */}
         <div
-          id="cc-preloader"
+          id={PRELOADER_ID}
           aria-hidden="true"
           suppressHydrationWarning
           className="fixed inset-0 z-10000 flex items-center justify-center bg-page-transition-gradient motion-reduce:hidden"
         >
-          <p className={`px-space-2 text-center text-on-header-fade ${textH3.replace("font-medium", "font-light")}`}>Christian Crawford</p>
+          <p className={`px-space-2 text-center text-on-header-fade ${textWordmark}`}>Christian Crawford</p>
         </div>
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "(function(){try{var k='cc-entered',d=document.documentElement;function $(){return document.getElementById('cc-preloader')||{style:{}};}if(!document.getElementById('cc-preloader'))return;if(sessionStorage.getItem(k)||matchMedia('(prefers-reduced-motion: reduce)').matches){window.__ccPreloaderDone=true;$().style.display='none';return;}sessionStorage.setItem(k,'1');d.setAttribute('data-page-covered','');var lifted=false;function lift(){if(lifted)return;lifted=true;d.removeAttribute('data-page-covered');window.dispatchEvent(new Event('cc:page-reveal'));$().style.animation='page-transition-out var(--duration-page-reveal) ease forwards';setTimeout(function(){window.__ccPreloaderDone=true;$().style.display='none';},500);}function ready(){(document.fonts?document.fonts.ready:Promise.resolve()).then(lift);setTimeout(lift,1000);}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();}catch(e){}})();",
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: preloaderScript }} />
 
         <PageTransition />
 

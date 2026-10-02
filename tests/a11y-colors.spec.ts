@@ -1,5 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { ROUTES } from "./routes";
 
 // Every color the picker (src/components/ui/ColorPicker.tsx) can produce,
 // seeded through its own localStorage key before load. Hues are sampled
@@ -16,8 +17,6 @@ const POSITIONS: { name: string; value: number }[] = [
   { name: "white", value: 420 },
   { name: "black", value: 460 },
 ];
-
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/work/partner-portal", "/ai", "/about", "/contact"];
 
 // The picker applies its colors at hydration. Under reduced motion every
 // property still gets a 0.01ms transition (globals.css), and a transition

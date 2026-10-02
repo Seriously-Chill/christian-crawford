@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { NAV_LINKS } from "@/lib/links";
 import { textH3 } from "@/lib/type";
+
+function isActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 /**
  * Below the header breakpoint the nav collapses behind a toggle into a
@@ -13,19 +19,6 @@ import { textH3 } from "@/lib/type";
  * current route and hover/focus go fully opaque. The case studies are
  * reached from `/work`, not the top-level nav.
  */
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
-  { href: "/ai", label: "AI" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
-
-function isActive(pathname: string, href: string) {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -66,7 +59,7 @@ export function Nav() {
     // with its panel are the same navigation, shown two ways.
     <nav aria-label="Main" className="flex items-center">
       <ul className="hidden items-center gap-space-4 lg:flex">
-        {links.map(({ href, label }) => {
+        {NAV_LINKS.map(({ href, label }) => {
           const active = isActive(pathname, href);
           return (
             <li key={href}>
@@ -114,10 +107,10 @@ export function Nav() {
         data-nav-open={open ? "" : undefined}
         data-lenis-prevent
         inert={!open}
-        className={`mobile-nav-panel absolute left-0 top-full max-h-[calc(100dvh-100%)] w-full overflow-y-auto overscroll-contain lg:hidden ${open ? "" : "pointer-events-none"}`}
+        className={`mobile-nav-panel bg-header-gradient absolute left-0 top-full max-h-[calc(100dvh-100%)] w-full overflow-y-auto overscroll-contain lg:hidden ${open ? "" : "pointer-events-none"}`}
       >
         <ul className="mx-auto flex max-w-6xl flex-col px-space-3 pt-space-2 pb-space-6">
-          {links.map(({ href, label }, i) => {
+          {NAV_LINKS.map(({ href, label }, i) => {
             const active = isActive(pathname, href);
             return (
               <li
@@ -138,7 +131,7 @@ export function Nav() {
                 >
                   <span
                     aria-hidden="true"
-                    className={`h-2 w-2 shrink-0 rounded-full bg-on-header transition-transform duration-400 ${
+                    className={`h-2 w-2 shrink-0 rounded-circle bg-on-header transition-transform duration-400 ${
                       active ? "scale-100" : "scale-0"
                     }`}
                   />

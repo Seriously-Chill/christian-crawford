@@ -1,6 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
-
-const ROUTES = ["/", "/work", "/work/healthwarehouse", "/work/partner-portal", "/ai", "/about", "/contact"];
+import { ROUTES } from "./routes";
 
 // WCAG 1.4.12's test values: the spacing a visitor's own stylesheet or
 // extension may apply, which the page has to absorb without losing content.

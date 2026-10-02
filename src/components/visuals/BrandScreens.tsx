@@ -2,7 +2,9 @@ import Image, { type StaticImageData } from "next/image";
 import healthwarehouse from "@/assets/work/healthwarehouse.webp";
 import springmeds from "@/assets/work/springmeds.webp";
 import pharmcorx from "@/assets/work/pharmcorx.webp";
+import { ExternalLink } from "@/components/ui/ExternalLink";
 import { textH5 } from "@/lib/type";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 // `site` is left out where the public URL isn't settled yet; the card shows TBD.
 const brands: {
@@ -51,26 +53,23 @@ export function BrandScreens() {
             />
             <h3 className={`mt-space-2 text-ink ${textH5}`}>{brand.name}</h3>
             {brand.site ? (
-              <a
+              <ExternalLink
                 href={brand.site.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="mt-1 inline-block break-all text-body text-ink/72 underline underline-offset-4 hover:text-accent"
               >
                 {brand.site.host}
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
+              </ExternalLink>
             ) : (
               <p className="mt-1 text-body text-ink/72">TBD</p>
             )}
           </li>
         ))}
       </ul>
-      <figcaption id="brand-screens-caption" className="mt-space-3 max-w-2xl text-body text-ink/72">
+      <FigureCaption id="brand-screens-caption">
         The homepages, September 2026. HealthWarehouse and SpringMeds are live and differ mostly by
         config. PharmcoRx is built but not launched yet; its header, footer, and homepage are
         per-brand components on the same platform.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

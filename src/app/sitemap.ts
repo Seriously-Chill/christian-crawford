@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const base = "https://christiancrawford.dev";
+import { SITE_URL as base } from "@/lib/links";
 
 // No `lastModified`: stamping every entry with the build time tells crawlers
 // nothing, and Google ignores lastmod once it proves unreliable.

@@ -13,26 +13,6 @@
   /* Typography — Plus Jakarta Sans variable comes from next/font in layout.tsx */
   --font-sans: var(--font-jakarta), sans-serif;
 
-  --text-display: 80px;
-  --text-display--line-height: 1.05;
-  --text-display--letter-spacing: -0.012em;
-  --text-display--font-weight: 400;
-
-  --text-h2: 56px;
-  --text-h2--line-height: 1.1;
-  --text-h2--letter-spacing: -0.01em;
-  --text-h2--font-weight: 400;
-
-  --text-h3: 32px;
-  --text-h3--line-height: 1.25;
-  --text-h3--letter-spacing: -0.005em;
-  --text-h3--font-weight: 500;
-
-  --text-h4: 28px;
-  --text-h4--line-height: 1.25;
-  --text-h4--letter-spacing: -0.005em;
-  --text-h4--font-weight: 500;
-
   --text-h5: 20px;
   --text-h5--line-height: 1.35;
   --text-h5--letter-spacing: -0.005em;
@@ -72,7 +52,6 @@
   --color-ink: #1b1b1d;
   --color-surface: #ffffff;
   --color-surface-raised: #f8f8fa;
-  --color-surface-muted: #f0f0f2;
   --color-on-header: var(--on-header, #ffffff);
   /* Edge for the surface-filled primary button — invisible (transparent)
      on colored grounds, ink on the picker's white stop, where a white
@@ -375,13 +354,9 @@ details[open] > .color-panel {
 .header-bg {
   clip-path: url(#header-curve-clip);
 }
+/* Its background is `bg-header-gradient`, set on the element. */
 .mobile-nav-panel {
   clip-path: url(#mobile-nav-curve-clip);
-  background-image: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--color-primary) 90%, transparent) 0%,
-    color-mix(in srgb, var(--color-secondary) 90%, transparent) 100%
-  );
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
   transition:

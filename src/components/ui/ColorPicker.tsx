@@ -66,6 +66,8 @@ const STOP_TOKENS: Record<
   black: { s: [3.6, 3], l: [11, 24], onHeader: "#ffffff", panelShade: "#000000" },
 };
 
+const stopLabel = (stop: Stop) => stop[0].toUpperCase() + stop.slice(1);
+
 function stopAt(position: number): Stop | null {
   if (position < HUE_END) return null;
   return STOPS[Math.min(STOPS.length - 1, Math.floor((position - HUE_END) / STOP_WIDTH))];
@@ -160,7 +162,7 @@ const SWATCHES: {
   },
   ...STOPS.map((stop) => ({
     id: stop,
-    label: stop[0].toUpperCase() + stop.slice(1),
+    label: stopLabel(stop),
     position: stopPosition(stop),
     background: stopGradient(stop),
   })),
@@ -235,7 +237,7 @@ function persist(position: number) {
 function describePosition(position: number) {
   if (position === AQUA_HUE) return "Aqua";
   const stop = stopAt(position);
-  return stop ? stop[0].toUpperCase() + stop.slice(1) : `Hue ${position}°`;
+  return stop ? stopLabel(stop) : `Hue ${position}°`;
 }
 
 /**
@@ -320,17 +322,17 @@ export function ColorPicker() {
     <details ref={detailsRef} className="group relative" onKeyDown={handleKeyDown}>
       <summary
         ref={summaryRef}
-        className="relative flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-full transition-transform duration-300 hover:scale-105 [&::-webkit-details-marker]:hidden"
-        aria-label="Personalize the site's color"
+        className="relative flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-circle transition-transform duration-300 hover:scale-105 [&::-webkit-details-marker]:hidden"
+        aria-label="Personalize the site’s color"
       >
         <span
           aria-hidden="true"
-          className="absolute inset-0 rounded-full bg-(image:--ring) transition-transform duration-700 ease-accordion group-open:rotate-180"
+          className="absolute inset-0 rounded-circle bg-(image:--ring) transition-transform duration-700 ease-accordion group-open:rotate-180"
           style={{ "--ring": RING_GRADIENT } as CSSProperties}
         />
         <span
           aria-hidden="true"
-          className="relative h-6.5 w-6.5 rounded-full border-2 border-white shadow-sm"
+          className="relative h-6.5 w-6.5 rounded-circle border-2 border-white shadow-sm"
           style={{
             background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
           }}
@@ -372,7 +374,7 @@ export function ColorPicker() {
               aria-label={swatch.label}
               title={swatch.label}
               onClick={() => choose(swatch.position)}
-              className="color-swatch h-9 w-9 rounded-full"
+              className="color-swatch h-9 w-9 rounded-circle"
               style={{ "--swatch": swatch.background } as CSSProperties}
             />
           ))}

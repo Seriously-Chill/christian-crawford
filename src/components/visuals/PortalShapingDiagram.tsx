@@ -1,22 +1,7 @@
 import type { ReactNode } from "react";
 import { textH5 } from "@/lib/type";
-
-function Arrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 16 24"
-      className="mx-auto my-space-1 h-6 w-4 shrink-0 text-ink/40 md:mx-space-1 md:my-auto md:-rotate-90"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 2v18M3 15l5 5 5-5" />
-    </svg>
-  );
-}
+import { FlowArrow } from "@/components/visuals/FlowArrow";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 const requests = ["Look up an order", "Correct a patient record", "Pull a report", "Rotate an API key"];
 
@@ -97,7 +82,7 @@ export function PortalShapingDiagram() {
           </Stage>
         </li>
         <li className="flex flex-col md:flex-1 md:flex-row">
-          <Arrow />
+          <FlowArrow className="mx-auto my-space-1 md:mx-space-1 md:my-auto md:-rotate-90" />
           <Stage step="Shaped" title="A written pitch">
             <ol className="grid gap-1.5">
               {pitch.map((item) => (
@@ -110,7 +95,7 @@ export function PortalShapingDiagram() {
           </Stage>
         </li>
         <li className="flex flex-col md:flex-1 md:flex-row">
-          <Arrow />
+          <FlowArrow className="mx-auto my-space-1 md:mx-space-1 md:my-auto md:-rotate-90" />
           <Stage step="Built" title="Working screens">
             <PortalScreen />
             <p className="mt-space-2 text-body text-ink/72">
@@ -119,9 +104,9 @@ export function PortalShapingDiagram() {
           </Stage>
         </li>
       </ol>
-      <figcaption id="portal-shaping-caption" className="mt-space-3 text-label leading-normal text-ink/72">
-        The screen is drawn from the portal&apos;s orders list, without its data.
-      </figcaption>
+      <FigureCaption id="portal-shaping-caption">
+        The screen is drawn from the portal’s orders list, without its data.
+      </FigureCaption>
     </figure>
   );
 }

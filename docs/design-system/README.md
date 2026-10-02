@@ -19,6 +19,7 @@ Write the way the site already reads:
 - **First person and plain.** Use short, direct sentences.
 - **Lead with the outcome, then the evidence.** Back claims with specifics: "One codebase serving three pharmacy brands, with configuration instead of forks." "Playwright and axe-core across 40+ routes, keyboard paths, and checkout flows."
 - **Name the real tools and numbers,** not adjectives. Leave out superlatives and buzzwords.
+- **Typographic punctuation:** curly apostrophes and quotes (’ “ ”) in all visible copy, aria labels included, never `'` or `&apos;`.
 - **Headings are short statements,** e.g. "Simple is the hard part." "Different rooms, same habit."
 
 Content comes from Christian's own work and résumé. Don't invent roles, figures or quotes.

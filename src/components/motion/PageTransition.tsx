@@ -2,7 +2,14 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { textH3 } from "@/lib/type";
+import {
+  PAGE_COVERED_ATTR,
+  PAGE_REVEAL_EVENT,
+  PRELOADER_DONE_FLAG,
+  PRELOADER_ID,
+  REDUCED_MOTION_QUERY,
+} from "@/lib/motion";
+import { textWordmark } from "@/lib/type";
 
 /**
  * Pause between the new route rendering and the reveal starting, so the
@@ -14,11 +21,6 @@ const HOLD_MS = 100;
 const ROUTE_TIMEOUT_MS = 8000;
 /** Fallback in case `animationend` never fires (e.g. a backgrounded tab). */
 const ANIMATION_SLACK_MS = 150;
-
-/** Set on <html> while the overlay covers the page; see RevealOnScroll. */
-export const PAGE_COVERED_ATTR = "data-page-covered";
-/** Fired on window as the overlay starts lifting; see RevealOnScroll. */
-export const PAGE_REVEAL_EVENT = "cc:page-reveal";
 
 /**
  * cover  — fading in over the current page
@@ -38,7 +40,7 @@ function durationMs(token: "--duration-page-cover" | "--duration-page-reveal", f
 }
 
 function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
 }
 
 /**
@@ -75,8 +77,8 @@ function transitionTarget(e: MouseEvent): string | null {
  * While covered, `<html data-page-covered>` is set, and the new page's
  * entrances (RevealOnScroll) wait for `PAGE_REVEAL_EVENT`, so they play
  * where they can be seen instead of underneath the overlay. The
- * first-visit preloader in layout.tsx sets and fires the same two, by
- * their literal names.
+ * first-visit preloader (`preloaderScript` in lib/motion.ts) sets and
+ * fires the same two.
  */
 export function PageTransition() {
   const router = useRouter();
@@ -115,8 +117,8 @@ export function PageTransition() {
   // that script already finished, hide the replacement so it can't cover
   // the page for good.
   useLayoutEffect(() => {
-    if (!(window as { __ccPreloaderDone?: boolean }).__ccPreloaderDone) return;
-    const el = document.getElementById("cc-preloader");
+    if (!(window as unknown as Record<string, boolean>)[PRELOADER_DONE_FLAG]) return;
+    const el = document.getElementById(PRELOADER_ID);
     if (el) el.style.display = "none";
   }, []);
 
@@ -181,7 +183,7 @@ export function PageTransition() {
         phase === "cover" ? "animate-page-transition-in" : phase === "reveal" ? "animate-page-transition-out" : ""
       }`}
     >
-      <p className={`px-space-2 text-center text-on-header-fade ${textH3.replace("font-medium", "font-light")}`}>Christian Crawford</p>
+      <p className={`px-space-2 text-center text-on-header-fade ${textWordmark}`}>Christian Crawford</p>
     </div>
   );
 }

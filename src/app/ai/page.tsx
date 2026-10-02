@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { GovernanceOverview } from "@/components/sections/GovernanceOverview";
-import { CaseStudySection } from "@/components/sections/CaseStudySection";
+import { NarrativeSection } from "@/components/sections/NarrativeSection";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { GovernanceFlow } from "@/components/visuals/GovernanceFlow";
 import { WorkShiftDiagram } from "@/components/visuals/WorkShiftDiagram";
-import { textH2, textH3, textH4 } from "@/lib/type";
+import { textH3, textH4 } from "@/lib/type";
 import { Button } from "@/components/ui/Button";
 import { FeaturePanel } from "@/components/ui/FeaturePanel";
+import { StatList } from "@/components/ui/StatList";
 import { Tags } from "@/components/ui/Tags";
 import { SOURCE_REPO } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "AI in practice",
   description:
-    "How I use AI in engineering work, and the Claude Code hooks I added to this portfolio site's own repository to protect the rules the agent works within.",
+    "How I use AI in engineering work, and the Claude Code hooks I added to this portfolio site’s own repository to protect the rules the agent works within.",
 };
 
 const siteStack = [
@@ -54,33 +55,33 @@ export default function AiPage() {
       />
       <CurveDivider above="gradient-page" below="surface" />
 
-      <CaseStudySection
+      <NarrativeSection
         kicker="Where the work went"
         title="Implementation got faster. The judgment moved to either side of it."
         body="An agent writes code quickly, so less of my time goes to typing it. More goes to setting up what the agent works within, and to proving what it produced is right."
       >
         <WorkShiftDiagram />
-      </CaseStudySection>
+      </NarrativeSection>
 
       <CurveDivider above="surface" below="gradient-page" />
       <GovernanceOverview />
       <CurveDivider above="gradient-page" below="surface" />
 
-      <CaseStudySection
+      <NarrativeSection
         kicker="How it works"
         title="Two paths to the same files"
-        body="Claude Code can change a file with its Edit and Write tools or with a shell command. Each path gets its own check, and they share one record of what's already been reviewed."
+        body="Claude Code can change a file with its Edit and Write tools or with a shell command. Each path gets its own check, and they share one record of what’s already been reviewed."
       >
         <GovernanceFlow />
-      </CaseStudySection>
+      </NarrativeSection>
 
-      <CaseStudySection
+      <NarrativeSection
         kicker="Why governance files"
         title="Rules need a different check than code"
-        body="A bug in a component shows up in tests, review, or on the page. A change to the agent's rules can quietly remove the check that would catch the next problem. So those changes stop and wait for me."
+        body="A bug in a component shows up in tests, review, or on the page. A change to the agent’s rules can quietly remove the check that would catch the next problem. So those changes stop and wait for me."
       />
 
-      <CaseStudySection
+      <NarrativeSection
         kicker="Why this subset"
         title="Only the checks this repo needs"
         body="These hooks are trimmed down from a larger set in another project that also covers branding, APIs, auth, quality gates, docs, and accessibility. This small site only needs the governance checks."
@@ -89,49 +90,43 @@ export default function AiPage() {
           The decision log records what I kept, what I dropped, and why, so the setup can be
           questioned rather than taken on trust.
         </p>
-      </CaseStudySection>
+      </NarrativeSection>
 
       <CurveDivider above="surface" below="gradient-page" />
 
-      <section className="bg-page-gradient">
-        <div className="mx-auto max-w-5xl px-space-3 py-space-7">
-          <RevealOnScroll>
-            <p className="text-label text-on-header/80">Scope</p>
-            <h2 className={`mt-space-2 text-on-header lg:mt-space-3 ${textH2}`}>A focused safeguard, not a safety net</h2>
-          </RevealOnScroll>
-          <RevealOnScroll className="mt-space-5 grid gap-space-3 sm:grid-cols-2">
-            <EvidenceCard title="What it covers" onGradient>
-              Changes to the selected governance files in this repository, whether they come from a
-              direct edit or a shell command.
+      <NarrativeSection onGradient kicker="Scope" title="A focused safeguard, not a safety net">
+        <div className="grid gap-space-3 sm:grid-cols-2">
+          <EvidenceCard title="What it covers" onGradient>
+            Changes to the selected governance files in this repository, whether they come from a
+            direct edit or a shell command.
+          </EvidenceCard>
+          <EvidenceCard title="What it doesn’t" onGradient>
+            Whether AI-generated application code is correct. That still takes tests and my own
+            review.
+          </EvidenceCard>
+          <div className="sm:col-span-2">
+            <EvidenceCard title="Trade-offs" onGradient>
+              <ul className="max-w-2xl list-disc space-y-space-2 pl-space-3">
+                {tradeOffs.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </EvidenceCard>
-            <EvidenceCard title="What it doesn’t" onGradient>
-              Whether AI-generated application code is correct. That still takes tests and my own
-              review.
-            </EvidenceCard>
-            <div className="sm:col-span-2">
-              <EvidenceCard title="Trade-offs" onGradient>
-                <ul className="max-w-2xl list-disc space-y-space-2 pl-space-3">
-                  {tradeOffs.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </EvidenceCard>
-            </div>
-          </RevealOnScroll>
+          </div>
         </div>
-      </section>
+      </NarrativeSection>
 
       <CurveDivider above="gradient-page" below="surface" />
 
-      <CaseStudySection
+      <NarrativeSection
         id="built"
         kicker="How this site is built"
-        title="Built the way I'd build it for a team"
+        title="Built the way I’d build it for a team"
         body="The same habits as the case study, at a smaller scale: a design system turned into tokens, Server Components by default, and accessibility checked by tests rather than by eye."
       >
         <FeaturePanel>
           <div>
-            <p className={`text-ink ${textH4}`}>Every hue the color picker can make is tested.</p>
+            <h3 className={`text-ink ${textH4}`}>Every hue the color picker can make is tested.</h3>
             <p className="mt-space-3 text-body text-ink/72">
               The picker in the header can put the site on any color, gray, white, or black, so
               the contrast suite checks every page at each of them. The suites run in CI on every
@@ -141,33 +136,20 @@ export default function AiPage() {
             </p>
             <Tags items={siteStack} />
             <div className="mt-space-4">
-              <Button
-                href={SOURCE_REPO}
-                variant="bordered"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View the source on GitHub (opens in a new tab)"
-              >
+              <Button href={SOURCE_REPO} variant="bordered" external>
                 View the source on GitHub
               </Button>
             </div>
           </div>
-          <ul className="grid gap-space-4">
-            {siteChecks.map((item) => (
-              <li key={item.label}>
-                <span className={`block text-accent ${textH2}`}>{item.value}</span>
-                <span className="mt-1 block text-body text-ink/72">{item.label}</span>
-              </li>
-            ))}
-          </ul>
+          <StatList items={siteChecks} />
         </FeaturePanel>
-      </CaseStudySection>
+      </NarrativeSection>
 
       <section className="bg-surface">
         <div className="mx-auto max-w-5xl px-space-3 py-space-7">
           <RevealOnScroll>
             <p className={`mx-auto max-w-2xl text-center text-ink ${textH3}`}>
-              The tools will keep changing. The responsibility won&apos;t.
+              The tools will keep changing. The responsibility won’t.
             </p>
           </RevealOnScroll>
         </div>

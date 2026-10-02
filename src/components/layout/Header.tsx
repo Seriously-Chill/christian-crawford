@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Nav } from "@/components/layout/Nav";
 import { ColorPicker } from "@/components/ui/ColorPicker";
-import { textH4 } from "@/lib/type";
+import { textWordmarkSm } from "@/lib/type";
 
 /**
  * The header's gradient, wordmark, and sticky positioning. The nav lives in
@@ -56,7 +56,7 @@ export function Header() {
           className="min-w-0 rounded-sm focus-visible:outline-offset-4"
           aria-label="Christian Crawford — home"
         >
-          <span className={`text-on-header ${textH4.replace("font-medium", "font-light")}`}>Christian Crawford</span>
+          <span className={`text-on-header ${textWordmarkSm}`}>Christian Crawford</span>
         </Link>
 
         <div className="flex items-center gap-space-2">

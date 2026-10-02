@@ -1,4 +1,5 @@
 import { textH5 } from "@/lib/type";
+import { FigureCaption } from "@/components/visuals/FigureCaption";
 
 type Stage = { name: string; weight: number; swatch: string; text: string };
 
@@ -98,9 +99,9 @@ export function WorkShiftDiagram() {
           </section>
         ))}
       </div>
-      <figcaption id="work-shift-caption" className="mt-space-3 text-label text-ink/72">
+      <FigureCaption id="work-shift-caption">
         Widths show rough share of the work, not measurements.
-      </figcaption>
+      </FigureCaption>
     </figure>
   );
 }

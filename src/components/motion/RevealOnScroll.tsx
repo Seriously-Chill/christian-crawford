@@ -1,8 +1,14 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { PAGE_COVERED_ATTR, PAGE_REVEAL_EVENT } from "@/components/motion/PageTransition";
-import { MAX_STAGGER_STEPS, REVEAL_LINE, REVEAL_READY_FLAG, STAGGER_MS } from "@/lib/motion";
+import {
+  MAX_STAGGER_STEPS,
+  PAGE_COVERED_ATTR,
+  PAGE_REVEAL_EVENT,
+  REVEAL_LINE,
+  REVEAL_READY_FLAG,
+  STAGGER_MS,
+} from "@/lib/motion";
 
 /**
  * Every section on every page enters through this one component: a fade
