@@ -37,8 +37,9 @@ const stopPosition = (stop: Stop) => HUE_END + STOPS.indexOf(stop) * STOP_WIDTH 
 const DEFAULT_POSITION = stopPosition("gray");
 
 // Fixed tokens per neutral stop. Gray and black are the only dark grounds,
-// so they flip on-header to white (46.53% is the lightest gray that keeps
-// white at ≥4.5:1) and shade the picker panel with black instead of white.
+// so they flip on-header to white (46.27%, which renders as #767676, is the
+// lightest gray that keeps white at ≥4.5:1 after 8-bit rounding) and shade
+// the picker panel with black instead of white.
 // That leaves gray no headroom, so its transition name stays fully opaque.
 // White sets accent to ink, since primary itself is white there, and gives
 // the white primary button an ink edge so it doesn't vanish.
@@ -55,7 +56,7 @@ const STOP_TOKENS: Record<
     fadeAlpha?: string;
   }
 > = {
-  gray: { s: [0, 0], l: [32, 46.53], onHeader: "#ffffff", panelShade: "#000000", fadeAlpha: "100%" },
+  gray: { s: [0, 0], l: [32, 46.27], onHeader: "#ffffff", panelShade: "#000000", fadeAlpha: "100%" },
   white: {
     s: [0, 3],
     l: [100, 85.5],

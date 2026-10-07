@@ -14,7 +14,7 @@ The shared building blocks, grouped by folder under `src/components/`. Use these
 ## UI (`ui/`)
 
 - **`Button`**: the only button shape, a pill with the `label` text style.
-  - **Variants:** `primary` (surface fill, accent label) on white or gradient; `bordered` on white; `bordered-inverse` on a gradient.
+  - **Variants:** `primary` (surface fill, accent label) on a gradient or other colored ground, never a white section, where it has no visible edge; `bordered` on white; `bordered-inverse` on a gradient.
   - **Always a link:** every button on the site navigates. `external` opens it in a new tab through `ExternalLink`.
 - **`CircleButton`**: a round, icon-only control: the logo strip's back, pause and forward. `label` is required and becomes the accessible name.
 - **`ExternalLink`**: a link to another site, opened in a new tab. It adds a visually hidden "(opens in a new tab)" after the visible text, so the accessible name still starts with what's on screen. Use it for every new-tab link.

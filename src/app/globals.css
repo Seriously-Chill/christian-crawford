@@ -31,7 +31,7 @@
   /* Colors — primary/secondary in HSL, driven by `--hue-*`/`--l-*` custom
      properties so ColorPicker.tsx can rotate them live. The fallbacks below
      are the default gray stop (hsl(240 0% 32%) = #525252 to
-     hsl(240 0% 46.53%) = #777777, white on-header, accent #525252 on white),
+     hsl(240 0% 46.27%) = #767676, white on-header, accent #525252 on white),
      matching what ColorPicker.tsx applies so first paint matches
      post-hydration; every other stop sets the tokens it differs on
      explicitly. Hue grounds are light, so `on-header` is ink there; the gray
@@ -43,7 +43,7 @@
   );
   --color-secondary: hsl(
     var(--hue-secondary, 240) var(--s-secondary, 0%)
-      var(--l-secondary, 46.53%)
+      var(--l-secondary, 46.27%)
   );
   --color-accent: var(
     --accent,

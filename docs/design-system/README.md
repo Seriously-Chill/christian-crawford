@@ -28,7 +28,7 @@ Content comes from Christian's own work and résumé. Don't invent roles, figure
 
 Every color is a token, and every token follows the visitor's choice in the color picker (`src/components/ui/ColorPicker.tsx`). Never hard-code a color in a component. If a color bypasses the tokens, it breaks as soon as someone picks another theme.
 
-- **The default theme is charcoal gray.** Primary is `#525252`, secondary is `#777777`, and the default text on colored surfaces (`on-header`) is white. The fallbacks in `globals.css` match it, so the first paint never flashes another color.
+- **The default theme is charcoal gray.** Primary is `#525252`, secondary is `#767676`, and the default text on colored surfaces (`on-header`) is white. The fallbacks in `globals.css` match it, so the first paint never flashes another color.
 - **Hue themes** work around the whole color wheel.
   - The picker solves each hue's lightness for a fixed brightness (relative luminance), so every hue reads equally light.
   - On a hue theme, colored surfaces are light, so the text on them (`on-header`) switches to ink.
