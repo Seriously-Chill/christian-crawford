@@ -21,7 +21,7 @@ const progression = ["Design", "Multimedia", "Creative Management", "Software De
 const projects: Project[] = [
   {
     employers: ["healthwarehouse"],
-    title: "One pharmacy platform. Three brands.",
+    title: "One pharmacy platform for three brands.",
     body: "A team-built React and Next.js platform. I built the system that serves three brands from one shared core, and the accessibility testing around it.",
     tags: ["Architecture", "React", "Next.js", "GraphQL", "Accessibility"],
     link: { href: "/work/healthwarehouse", label: "Explore the case study" },

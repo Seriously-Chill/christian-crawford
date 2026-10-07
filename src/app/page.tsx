@@ -59,7 +59,7 @@ export default function HomePage() {
       <ProofFeature
         employer="healthwarehouse"
         kicker="Architecture"
-        title="Three pharmacy brands. One codebase. No forks."
+        title="Three pharmacy brands on one codebase."
         body="Every new brand brought requirements of its own: the kind that usually splits a product into separate apps. I built the multi-brand system that lets them all run on one shared core, with configuration and a few per-brand components carrying the differences."
         tags={["Next.js", "React", "GraphQL", "Zustand", "MUI"]}
         href="/work/healthwarehouse#architecture"
@@ -107,7 +107,6 @@ export default function HomePage() {
       />
 
       <NarrativeSection
-        kicker="How this happened"
         title="Different rooms, same habit."
         body="Design, development, consulting, architecture: in every role, I notice how something gets used, then build toward that instead of around it."
       >

@@ -167,13 +167,12 @@ export default function HealthWarehousePage() {
       />
       <CurveDivider above="gradient-page" below="surface" />
 
-      <NarrativeSection kicker="What changed" title="Three brands that stay one platform.">
+      <NarrativeSection title="Three brands that stay one platform.">
         <BrandScreens />
         <EvidenceGrid items={changed} className="mt-space-5" />
       </NarrativeSection>
 
       <NarrativeSection
-        kicker="The problem"
         title="Three brands, different in real ways."
         body="Each brand has its own colors, typefaces, corners, features, and legal copy. The easy way to handle that is to copy a page and change it. Do that often enough and you have three apps."
       >
@@ -187,7 +186,6 @@ export default function HealthWarehousePage() {
 
       <NarrativeSection
         id="architecture"
-        kicker="The rule"
         title="Fork at the smallest unit."
         body="A difference between brands goes to the smallest place that can hold it. Config holds data only. Anything that truly differs lives in the smallest per-brand component that can carry it."
       >
@@ -196,7 +194,6 @@ export default function HealthWarehousePage() {
       </NarrativeSection>
 
       <NarrativeSection
-        kicker="Where it bent"
         title="The rule had boundaries."
         body="PharmcoRx needed more than small forks could carry. These are the costs I accepted, and why."
       >
@@ -204,7 +201,6 @@ export default function HealthWarehousePage() {
       </NarrativeSection>
 
       <NarrativeSection
-        kicker="The test"
         title="PharmcoRx was the test."
         body="It arrived in June 2026 as a config file, env files, and build scripts, with no structural change. Its redesign in September needed its own typefaces, corners, header, footer, and homepage, and the other two brands had to come out unchanged."
       >
@@ -227,7 +223,6 @@ export default function HealthWarehousePage() {
 
       <NarrativeSection
         id="evidence"
-        kicker="Accessibility"
         title="What screen readers were actually told."
         body="Audits kept finding markup that looked fine and told a screen reader something wrong. Two examples, from the fixes themselves."
       >
@@ -253,14 +248,13 @@ export default function HealthWarehousePage() {
       </NarrativeSection>
 
       <NarrativeSection
-        kicker="Next"
         title="What I’d change now."
         body="Each of these was a deliberate call at the time. With another pass:"
       >
         <TileList items={next} />
       </NarrativeSection>
 
-      <NarrativeSection kicker="Role" title="What was mine">
+      <NarrativeSection title="What was mine">
         <TileList items={role} accent />
       </NarrativeSection>
 

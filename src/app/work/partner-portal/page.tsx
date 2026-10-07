@@ -117,7 +117,6 @@ export default function PartnerPortalPage() {
       <CurveDivider above="gradient-page" below="surface" />
 
       <NarrativeSection
-        kicker="The problem"
         title="Everything went through email."
         body="Pharmacy partners had no tool of their own. Looking up an order, correcting a patient record, pulling a report, or rotating an API key meant emailing support and waiting for someone to query the database. Partners couldn’t check status, requests had no priority or history, and engineers were in the path of routine work."
       >
@@ -125,7 +124,6 @@ export default function PartnerPortalPage() {
       </NarrativeSection>
 
       <NarrativeSection
-        kicker="Shaping"
         title="A written pitch before any code."
         body="The team shapes work as a written pitch before building it. I wrote this one: the problem, a proposed solution for each area, the rabbit holes, and what was out of scope. Frontend and backend engineers reviewed it before work started."
       >
@@ -134,8 +132,7 @@ export default function PartnerPortalPage() {
 
       <NarrativeSection
         id="decision"
-        kicker="The key decision"
-        title="Labeled filters, not a search box."
+        title="Each filter says what it searches."
         body="Stripe, Linear, and Shopify Admin filter with one search bar and removable chips. I weighed three versions of that pattern and kept plain labeled fields, because of who uses this portal."
       >
         <EvidenceGrid items={filters} />
@@ -143,7 +140,6 @@ export default function PartnerPortalPage() {
 
       <NarrativeSection
         id="architecture"
-        kicker="Architecture"
         title="Open a record, share the link."
         body="Records open as panels over the list instead of on a new page, so people keep their place. The address bar holds which panels are open."
       >
@@ -152,7 +148,6 @@ export default function PartnerPortalPage() {
       </NarrativeSection>
 
       <NarrativeSection
-        kicker="The hard part"
         title="Rows you could click but not reach."
         body="Every list opened a record when you clicked a row, and none of that worked from a keyboard. The two quick fixes were both wrong."
       >
@@ -160,7 +155,6 @@ export default function PartnerPortalPage() {
       </NarrativeSection>
 
       <NarrativeSection
-        kicker="Where it stands"
         title="Still being built."
         body="Screens for every area in the pitch exist but one. API keys, and the choice of a multi-factor sign-in provider, wait on decisions the pitch flagged at the start."
       >
@@ -170,7 +164,7 @@ export default function PartnerPortalPage() {
         </div>
       </NarrativeSection>
 
-      <NarrativeSection kicker="Role" title="What I actually did">
+      <NarrativeSection title="What I actually did">
         <TileList items={role} accent />
       </NarrativeSection>
 

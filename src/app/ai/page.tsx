@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { GovernanceOverview } from "@/components/sections/GovernanceOverview";
 import { NarrativeSection } from "@/components/sections/NarrativeSection";
-import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EvidenceCard } from "@/components/ui/EvidenceCard";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { GovernanceFlow } from "@/components/visuals/GovernanceFlow";
 import { WorkShiftDiagram } from "@/components/visuals/WorkShiftDiagram";
-import { textH3, textH4 } from "@/lib/type";
+import { textH4 } from "@/lib/type";
 import { Button } from "@/components/ui/Button";
 import { FeaturePanel } from "@/components/ui/FeaturePanel";
 import { StatList } from "@/components/ui/StatList";
@@ -56,7 +55,6 @@ export default function AiPage() {
       <CurveDivider above="gradient-page" below="surface" />
 
       <NarrativeSection
-        kicker="Where the work went"
         title="Implementation got faster. The judgment moved to either side of it."
         body="An agent writes code quickly, so less of my time goes to typing it. More goes to setting up what the agent works within, and to proving what it produced is right."
       >
@@ -68,7 +66,6 @@ export default function AiPage() {
       <CurveDivider above="gradient-page" below="surface" />
 
       <NarrativeSection
-        kicker="How it works"
         title="Two paths to the same files"
         body="Claude Code can change a file with its Edit and Write tools or with a shell command. Each path gets its own check, and they share one record of what’s already been reviewed."
       >
@@ -76,13 +73,11 @@ export default function AiPage() {
       </NarrativeSection>
 
       <NarrativeSection
-        kicker="Why governance files"
         title="Rules need a different check than code"
         body="A bug in a component shows up in tests, review, or on the page. A change to the agent’s rules can quietly remove the check that would catch the next problem. So those changes stop and wait for me."
       />
 
       <NarrativeSection
-        kicker="Why this subset"
         title="Only the checks this repo needs"
         body="These hooks are trimmed down from a larger set in another project that also covers branding, APIs, auth, quality gates, docs, and accessibility. This small site only needs the governance checks."
       >
@@ -94,7 +89,7 @@ export default function AiPage() {
 
       <CurveDivider above="surface" below="gradient-page" />
 
-      <NarrativeSection onGradient kicker="Scope" title="A focused safeguard, not a safety net">
+      <NarrativeSection onGradient title="What the hooks catch, and what they don’t">
         <div className="grid gap-space-3 sm:grid-cols-2">
           <EvidenceCard title="What it covers" onGradient>
             Changes to the selected governance files in this repository, whether they come from a
@@ -120,7 +115,6 @@ export default function AiPage() {
 
       <NarrativeSection
         id="built"
-        kicker="How this site is built"
         title="Built the way I’d build it for a team"
         body="The same habits as the case study, at a smaller scale: a design system turned into tokens, Server Components by default, and accessibility checked by tests rather than by eye."
       >
@@ -144,16 +138,6 @@ export default function AiPage() {
           <StatList items={siteChecks} />
         </FeaturePanel>
       </NarrativeSection>
-
-      <section className="bg-surface">
-        <div className="mx-auto max-w-5xl px-space-3 py-space-7">
-          <RevealOnScroll>
-            <p className={`mx-auto max-w-2xl text-center text-ink ${textH3}`}>
-              The tools will keep changing. The responsibility won’t.
-            </p>
-          </RevealOnScroll>
-        </div>
-      </section>
 
       <CurveDivider above="surface" below="primary" />
     </>

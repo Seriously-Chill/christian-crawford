@@ -38,7 +38,7 @@ Page sections, each owning its own background and padding:
 
 - **`Opening`**: the home hero, with the display headline, tagline, two calls to action, and an "at a glance" panel.
 - **`PageIntro`**: the top of every inner page, with a breadcrumb, kicker, h1, and optional tagline, `meta` row and logo. It sits on the gradient.
-- **`NarrativeSection`**: an optional kicker, an h2, optional body, and a slot for diagrams, cards or a call to action. White by default; `onGradient` puts it on the page gradient. Every part of both case studies, most of `/ai`, and the teasers on Home and `/about` are built with it. Reach for it before writing a new section.
+- **`NarrativeSection`**: an h2, optional body, and a slot for diagrams, cards or a call to action. White by default; `onGradient` puts it on the page gradient. Every part of both case studies, most of `/ai`, and the teasers on Home and `/about` are built with it. Reach for it before writing a new section.
 - **`Contact`**: the contact page, with its h1 and the Email, LinkedIn, Résumé and location tiles.
 - **Page-specific sections:**
   - Home: `ProofFeature` and `AiBanner`

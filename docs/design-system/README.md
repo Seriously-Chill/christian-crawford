@@ -20,7 +20,9 @@ Write the way the site already reads:
 - **Lead with the outcome, then the evidence.** Back claims with specifics: "One codebase serving three pharmacy brands, with configuration instead of forks." "Playwright and axe-core across 40+ routes, keyboard paths, and checkout flows."
 - **Name the real tools and numbers,** not adjectives. Leave out superlatives and buzzwords.
 - **Typographic punctuation:** curly apostrophes and quotes (’ “ ”) in all visible copy, aria labels included, never `'` or `&apos;`.
-- **Headings are short statements,** e.g. "Simple is the hard part." "Different rooms, same habit."
+- **Headings are short statements,** e.g. "Simple is the hard part." "Different rooms, same habit." One plain sentence, not a run of fragments ("X. Y. No Z.") or an "X, not Y" slogan.
+- **No section kickers.** A small label sits above the h1 in `PageIntro` and above each proof on Home, and nowhere else: a section's heading carries it.
+- **Ideas go in sentences, not tiles.** Don't turn a paragraph's points into a row of icon cards. Cards are for evidence: a real result, a real artifact.
 
 Content comes from Christian's own work and résumé. Don't invent roles, figures or quotes.
 

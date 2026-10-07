@@ -3,8 +3,9 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { textH2 } from "@/lib/type";
 
 /**
- * One narrative beat: an optional kicker, an h2, optional body copy, and a
- * slot for diagrams, cards or a call to action, revealed after the text.
+ * One narrative beat: an h2, optional body copy, and a slot for diagrams,
+ * cards or a call to action, revealed after the text. No kicker: the
+ * heading carries the section on its own.
  * Every part of both case studies is one, as is most of `/ai` and the
  * teaser sections on Home and `/about`.
  *
@@ -12,14 +13,12 @@ import { textH2 } from "@/lib/type";
  * `on-header` text; children on it pass their own `onGradient`.
  */
 export function NarrativeSection({
-  kicker,
   title,
   body,
   children,
   id,
   onGradient = false,
 }: {
-  kicker?: string;
   title: string;
   body?: string;
   children?: ReactNode;
@@ -31,10 +30,7 @@ export function NarrativeSection({
     <section id={id} className={onGradient ? "bg-page-gradient" : "bg-surface"}>
       <div className="mx-auto max-w-5xl px-space-3 py-space-6">
         <RevealOnScroll>
-          {kicker ? <p className={`text-label ${onGradient ? "text-on-header/80" : "text-accent"}`}>{kicker}</p> : null}
-          <h2
-            className={`${kicker ? "mt-space-2 lg:mt-space-3" : ""} ${onGradient ? "text-on-header" : "text-accent"} ${textH2}`}
-          >
+          <h2 className={`${onGradient ? "text-on-header" : "text-accent"} ${textH2}`}>
             {title}
           </h2>
           {body ? <p className={`mt-space-3 max-w-xl text-body lg:mt-space-4 ${muted}`}>{body}</p> : null}
