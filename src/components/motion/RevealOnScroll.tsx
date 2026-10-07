@@ -11,9 +11,10 @@ import {
 } from "@/lib/motion";
 
 /**
- * Every section on every page enters through this one component: a fade
- * plus a short rise, one duration, one curve (the `--*-entrance` tokens and
- * `.reveal` rule in globals.css).
+ * Diagrams and evidence enter through this one component: a fade plus a
+ * short rise, one duration, one curve (the `--*-entrance` tokens and
+ * `.reveal` rule in globals.css). Headings and running text don't use it;
+ * they're on the page from the start.
  *
  * Staggering is automatic. All reveals share one IntersectionObserver, and
  * whatever it reports visible in the same callback is revealed as one

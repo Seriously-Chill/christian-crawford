@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/Button";
-import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { LineIcon } from "@/components/ui/LineIcon";
 import { RESUME_PDF } from "@/lib/links";
@@ -15,9 +14,8 @@ const now = [
 
 /**
  * The home hero, with an "at a glance" panel beside it. Near full viewport:
- * `min-height: calc(100dvh - 64px)`, 64px being the header's height. The
- * headline, tagline, and CTAs are separate `RevealOnScroll`s so they stagger
- * in that order.
+ * `min-height: calc(100dvh - 64px)`, 64px being the header's height. It
+ * doesn't animate in: the first thing on the site is there when it loads.
  *
  * `bg-page-gradient` sits on the full-width `<section>`, not the
  * `max-w-5xl` column: a gradient spans whatever element carries it, so on
@@ -29,19 +27,14 @@ export function Opening() {
     <section className="relative overflow-hidden bg-page-gradient">
       <div className="relative mx-auto grid min-h-[calc(100dvh-64px)] max-w-5xl content-center gap-space-6 px-space-3 py-space-6 md:grid-cols-[3fr_2fr] md:items-center md:gap-space-5">
         <div>
-          <RevealOnScroll>
             <h1 className={`max-w-[11em] text-on-header ${textDisplay}`}>
               I make complicated software simple.
             </h1>
-          </RevealOnScroll>
-          <RevealOnScroll>
             <p className="mt-space-4 max-w-xl text-h5 lg:mt-space-5 text-on-header/80">
               I’m a senior frontend engineer who came up through design. I take product
               problems from “what should this be?” to a shipped, tested interface on an
               architecture other engineers can live with.
             </p>
-          </RevealOnScroll>
-          <RevealOnScroll>
             <div className="mt-space-5 flex flex-wrap gap-space-2">
               <Button href="/work">See the work</Button>
               <Button href="/contact" variant="bordered-inverse">
@@ -59,9 +52,7 @@ export function Opening() {
               <LineIcon name="download" />
               Download résumé (PDF)
             </a>
-          </RevealOnScroll>
         </div>
-        <RevealOnScroll>
           <div className="rounded-xl border border-on-header/10 bg-on-header/10 p-space-3 sm:p-space-4">
             <p className="text-label text-on-header/80">Now</p>
             <div className="mt-space-2 flex text-on-header [--logo-h:1.75rem]">
@@ -81,7 +72,6 @@ export function Opening() {
               Kroger, CBTS, and Trivantis.
             </p>
           </div>
-        </RevealOnScroll>
       </div>
     </section>
   );

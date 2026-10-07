@@ -1,4 +1,3 @@
-import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { Button } from "@/components/ui/Button";
 import { GOVERNED_FILES } from "@/components/sections/GovernanceOverview";
 import { textH2 } from "@/lib/type";
@@ -11,7 +10,7 @@ export function AiBanner() {
   return (
     <section className="bg-surface">
       <div className="mx-auto max-w-5xl px-space-3 pb-space-7">
-        <RevealOnScroll className="grid gap-space-4 rounded-xl bg-accent p-space-3 sm:p-space-5 md:grid-cols-[3fr_2fr] md:items-center">
+        <div className="grid gap-space-4 rounded-xl bg-accent p-space-3 sm:p-space-5 md:grid-cols-[3fr_2fr] md:items-center">
           <div>
             <p className="text-label text-surface/80">AI in practice</p>
             <h2 className={`mt-space-2 text-surface lg:mt-space-3 ${textH2}`}>
@@ -35,7 +34,7 @@ export function AiBanner() {
               </li>
             ))}
           </ul>
-        </RevealOnScroll>
+        </div>
       </div>
     </section>
   );

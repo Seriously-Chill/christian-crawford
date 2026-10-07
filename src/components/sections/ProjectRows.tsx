@@ -76,7 +76,7 @@ export function ProjectRows() {
     <section className="bg-surface">
       <div className="mx-auto max-w-5xl space-y-space-7 px-space-3 py-space-7">
         {projects.map((project, i) => (
-          <RevealOnScroll key={project.title} className="grid items-center gap-space-4 md:grid-cols-2 md:gap-space-5">
+          <div key={project.title} className="grid items-center gap-space-4 md:grid-cols-2 md:gap-space-5">
             <div className={i % 2 ? "md:order-2" : ""}>
               <div className="flex flex-wrap items-center gap-x-space-4 gap-y-space-2 text-ink/60 [--logo-h:2rem]">
                 {project.employers.map((employer) => (
@@ -94,8 +94,8 @@ export function ProjectRows() {
                 </div>
               ) : null}
             </div>
-            <div className="rounded-xl bg-surface-raised p-space-3 sm:p-space-5">{project.panel}</div>
-          </RevealOnScroll>
+            <RevealOnScroll className="rounded-xl bg-surface-raised p-space-3 sm:p-space-5">{project.panel}</RevealOnScroll>
+          </div>
         ))}
       </div>
     </section>

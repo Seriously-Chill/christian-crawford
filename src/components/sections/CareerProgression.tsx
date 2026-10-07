@@ -1,4 +1,3 @@
-import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EmployerLogo, type Employer } from "@/components/ui/EmployerLogo";
 import { textH4 } from "@/lib/type";
 
@@ -58,7 +57,6 @@ export function CareerProgression() {
         <ol className="space-y-space-5 border-l border-ink/10 pl-space-4">
           {eras.map((era) => (
             <li key={era.range}>
-              <RevealOnScroll>
                 <div className="mb-space-2 flex flex-wrap items-center gap-x-space-3 gap-y-space-2 text-ink/60 [--logo-h:1.5rem]">
                   {era.logos.map((employer) => (
                     <EmployerLogo key={employer} employer={employer} />
@@ -69,7 +67,6 @@ export function CareerProgression() {
                 </p>
                 <h2 className={`mt-space-1 text-ink ${textH4}`}>{era.role}</h2>
                 <p className="mt-space-2 max-w-xl text-body text-ink/72">{era.body}</p>
-              </RevealOnScroll>
             </li>
           ))}
         </ol>

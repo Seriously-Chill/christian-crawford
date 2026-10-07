@@ -19,7 +19,7 @@ The shared building blocks, grouped by folder under `src/components/`. Use these
 - **`CircleButton`**: a round, icon-only control: the logo strip's back, pause and forward. `label` is required and becomes the accessible name.
 - **`ExternalLink`**: a link to another site, opened in a new tab. It adds a visually hidden "(opens in a new tab)" after the visible text, so the accessible name still starts with what's on screen. Use it for every new-tab link.
 - **`ColorPicker`**: the theme control in the header, a `<details>` popover with a hue slider and four swatches (Aqua, Gray, White, Black). It rewrites the color custom properties and stores the choice in `localStorage` (`cc-hue`). The slider reports its value as "Hue N°", and the swatches are toggle buttons.
-- **`EvidenceCard`**: a card with a title (`h4`) and body. Use `onGradient` on colored sections: that variant gets a glass tint and the hover ripple. The default variant is for white sections.
+- **`EvidenceCard`**: a card with a title (`h4`) and body. Use `onGradient` on colored sections: that variant gets a glass tint and the hover ripple. The default variant is `surface-raised` with no border, for white sections.
 - **`EvidenceGrid`**: a row of `EvidenceCard`s from `{ title, body }` items. Three sit three across; two or four sit two across.
 - **`FeaturePanel`**: a large `surface-raised` panel with two columns from `md` up, used to lift one idea above the text around it.
 - **`DetailGrid`**: a grid of small `surface-raised` tiles for short lists like tech stack or workflows.
@@ -51,7 +51,7 @@ Page sections, each owning its own background and padding:
 These are covered in `motion.md`:
 - **`SmoothScrollProvider`**: Lenis smooth scrolling
 - **`PageTransition`**: the gradient overlay between pages
-- **`RevealOnScroll`**: wraps anything that should fade in on scroll
+- **`RevealOnScroll`**: fades a diagram or piece of evidence in on scroll. Never wrap headings or body text in it
 
 ## Visuals (`visuals/`)
 

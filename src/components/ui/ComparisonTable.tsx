@@ -34,7 +34,7 @@ export function ComparisonTable({
         <div
           key={row.label}
           role="row"
-          className={`grid gap-space-1 rounded-lg border border-ink/10 bg-surface p-space-2 sm:gap-space-3 sm:rounded-none sm:border-x-0 sm:border-b-0 sm:bg-transparent sm:px-0 sm:py-space-2 ${columnsClass}`}
+          className={`grid gap-space-1 rounded-lg bg-surface-raised p-space-2 sm:gap-space-3 sm:rounded-none sm:border-t sm:border-ink/10 sm:bg-transparent sm:px-0 sm:py-space-2 ${columnsClass}`}
         >
           <span role="rowheader" className="text-body text-ink">
             {row.label}

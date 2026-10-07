@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { textH1 } from "@/lib/type";
 
 /**
@@ -27,7 +26,6 @@ export function PageIntro({
   return (
     <section className="bg-page-gradient">
       <div className="mx-auto max-w-5xl px-space-3 py-space-6">
-        <RevealOnScroll>
           <nav aria-label="Breadcrumb">
             <ol className="flex items-center gap-space-1 text-label text-on-header/80">
               <li>
@@ -55,7 +53,6 @@ export function PageIntro({
               ))}
             </dl>
           ) : null}
-        </RevealOnScroll>
       </div>
     </section>
   );

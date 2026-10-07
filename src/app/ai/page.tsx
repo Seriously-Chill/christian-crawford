@@ -79,13 +79,20 @@ export default function AiPage() {
 
       <NarrativeSection
         title="Only the checks this repo needs"
-        body="These hooks are trimmed down from a larger set in another project that also covers branding, APIs, auth, quality gates, docs, and accessibility. This small site only needs the governance checks."
-      >
-        <p className="max-w-xl text-body text-ink/72">
-          The decision log records what I kept, what I dropped, and why, so the setup can be
-          questioned rather than taken on trust.
-        </p>
-      </NarrativeSection>
+        body={
+          <>
+            <p>
+              These hooks are trimmed down from a larger set in another project that also covers
+              branding, APIs, auth, quality gates, docs, and accessibility. This small site only
+              needs the governance checks.
+            </p>
+            <p>
+              The decision log records what I kept, what I dropped, and why, so the setup can be
+              questioned rather than taken on trust.
+            </p>
+          </>
+        }
+      />
 
       <CurveDivider above="surface" below="gradient-page" />
 

@@ -15,7 +15,9 @@ Lenis runs sitewide (`src/components/motion/SmoothScrollProvider.tsx`) with `tou
 
 ## Entrances
 
-Sections fade in and rise 20px as they scroll into view (`RevealOnScroll`, `--duration-entrance` 700ms on `--ease-entrance`). Most of the movement is done by the time the eye lands.
+Diagrams and evidence fade in and rise 20px as they scroll into view (`RevealOnScroll`, `--duration-entrance` 700ms on `--ease-entrance`). Most of the movement is done by the time the eye lands.
+
+Headings, body copy and the home hero don't animate: they're on the page from the first frame. In `NarrativeSection` only the children slot fades in; in `ProofFeature` the outcomes and the evidence figure; in `ProjectRows` each row's evidence panel. Motion marks the proof, so it shouldn't touch every line of text.
 
 - Elements that arrive together play one after another, 70ms apart, for at most 5 steps.
 - A reveal starts once the element's top edge is 88% of the way down the viewport (`REVEAL_LINE` in `src/lib/motion.ts`).
@@ -57,6 +59,7 @@ Nothing else on the site loops.
 ## Adding motion
 
 - **Reuse** an existing timing token before adding a new one.
+- **Don’t reveal text.** Wrap a diagram or a piece of evidence in `RevealOnScroll`, never a heading or paragraph.
 - **Keep it modest:** don't spread the ripple to other cards or buttons.
 - **Give it an off switch:** anything that moves on its own needs a way to pause it, and must stop under reduced motion.
 - **Test it:** check it with the tests' reduced-motion runs and with the page transition running (`tests/navigation.spec.ts`).

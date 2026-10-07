@@ -80,7 +80,7 @@
      arrives rather than pops. */
   --duration-page-cover: 300ms;
   --duration-page-reveal: 400ms;
-  /* Entrances: every section reveal on every page (RevealOnScroll).
+  /* Entrances: diagrams and evidence fading in on scroll (RevealOnScroll).
      Common guidance puts scroll reveals at 400–700ms with a 20–30px rise,
      on a strong ease-out, so the move is mostly done by the time the eye
      lands. */

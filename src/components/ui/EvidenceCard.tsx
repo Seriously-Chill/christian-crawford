@@ -4,8 +4,8 @@ import { textH4 } from "@/lib/type";
 /**
  * `onGradient` is for colored sections: a translucent white glass tint plus
  * the ripple hover (docs/design-system/motion.md), on hover-capable pointers
- * only. The default variant, for white sections, gets the same tint in ink
- * and no ripple.
+ * only. The default variant, for white sections, is `surface-raised` with
+ * no border and no ripple.
  *
  * The ripple's texture, `public/ripple.png`, carries its ring shape almost
  * entirely in its alpha channel (its RGB is nearly pure white), so painting
@@ -40,7 +40,7 @@ export function EvidenceCard({
                after:scale-0 after:opacity-0 after:content-[''] after:bg-ink/25 after:blur-xl
                after:mask-[url('/ripple.png')] after:mask-center after:mask-contain after:mask-no-repeat
                after:mix-blend-multiply hover:after:animate-ripple`
-            : "border border-ink/10 bg-ink/3"
+            : "bg-surface-raised"
         }`}
     >
       <h3 className={`${onGradient ? "text-on-header" : "text-ink"} ${textH4}`}>{title}</h3>

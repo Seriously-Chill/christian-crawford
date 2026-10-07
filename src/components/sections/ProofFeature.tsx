@@ -47,37 +47,37 @@ export function ProofFeature({
   return (
     <section className={onGradient ? "bg-page-gradient" : "bg-surface"}>
       <div className="mx-auto max-w-5xl px-space-3 py-space-6">
-        <RevealOnScroll>
-          <FeaturePanel>
-            <div className={flip ? "md:order-2" : undefined}>
-              <div className="flex text-ink/60">
-                <EmployerLogo employer={employer} labelled className="[--logo-h:2rem]" />
-              </div>
-              <p className="mt-space-2 text-label text-accent">{kicker}</p>
-              <h2 className={`mt-space-2 max-w-xl text-accent ${textH2}`}>{title}</h2>
-              <p className="mt-space-3 max-w-md text-body lg:mt-space-4 text-ink/72">{body}</p>
-              <Tags items={tags} />
-              <div className="mt-space-4">
-                <Button href={href} variant="bordered">
-                  {linkLabel}
-                </Button>
-              </div>
+        <FeaturePanel>
+          <div className={flip ? "md:order-2" : undefined}>
+            <div className="flex text-ink/60">
+              <EmployerLogo employer={employer} labelled className="[--logo-h:2rem]" />
             </div>
-            <ul aria-label="What came of it" className="space-y-space-2">
+            <p className="mt-space-2 text-label text-accent">{kicker}</p>
+            <h2 className={`mt-space-2 max-w-xl text-accent ${textH2}`}>{title}</h2>
+            <p className="mt-space-3 max-w-md text-body lg:mt-space-4 text-ink/72">{body}</p>
+            <Tags items={tags} />
+            <div className="mt-space-4">
+              <Button href={href} variant="bordered">
+                {linkLabel}
+              </Button>
+            </div>
+          </div>
+          <RevealOnScroll>
+            <ul aria-label="What came of it" className="space-y-space-4">
               {outcomes.map((item) => (
-                <li key={item.value} className="rounded-lg border border-ink/10 bg-surface p-space-2 sm:p-space-3">
+                <li key={item.value}>
                   <p className={`text-accent ${textH3}`}>{item.value}</p>
                   <p className="mt-1 text-body text-ink/72">{item.label}</p>
                 </li>
               ))}
             </ul>
-            {evidence ? (
-              <RevealOnScroll className="border-t border-ink/10 pt-space-4 md:order-3 md:col-span-2 md:pt-space-5">
-                {evidence}
-              </RevealOnScroll>
-            ) : null}
-          </FeaturePanel>
-        </RevealOnScroll>
+          </RevealOnScroll>
+          {evidence ? (
+            <RevealOnScroll className="border-t border-ink/10 pt-space-4 md:order-3 md:col-span-2 md:pt-space-5">
+              {evidence}
+            </RevealOnScroll>
+          ) : null}
+        </FeaturePanel>
       </div>
     </section>
   );
