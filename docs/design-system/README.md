@@ -36,6 +36,7 @@ Every color is a token, and every token follows the visitor's choice in the colo
   - On a hue theme, colored surfaces are light, so the text on them (`on-header`) switches to ink.
   - `accent` is a deep shade of the same hue. It's used for text and focus rings on white.
 - **Neutral stops:** gray (the default), white and black. Each sets its own values for `on-header`, `accent` and the button edge.
+- **Strengths are tokens too.** Secondary text is `text-muted` (`text-on-header-muted` on a colored ground), quieter meta text and logos `text-subtle`, decorative arrows `text-faint`. Lines are `border-hairline` (dividers, rules, diagram frames) or `border-line` (boxes in diagrams, pills, round controls), with `on-header-hairline` and `on-header-line` on colored grounds. Never type an opacity inline (`text-ink/72`); change the token instead. Only one-off details inside an illustration keep their own.
 - **Contrast is tested, not assumed.** Every page is checked for WCAG 2.2 AA at 28 picker settings (`tests/a11y-colors.spec.ts`). A new color pairing has to pass there too.
 
 ## Type
@@ -53,8 +54,9 @@ Headings follow the page outline: one h1 per page, and no skipped levels. The te
 - **The header** uses `bg-header-gradient`, the same gradient at 90% opacity. The page-transition overlay uses a steeper version of it (`bg-page-transition-gradient`).
 - **Where two tones meet,** use a shallow curve (`CurveDivider`), not a straight edge.
 - **Spacing** uses the `space-1`…`space-7` scale (8px to 80px), and corners use the radius tokens. Cards are `radius-lg` and buttons are `radius-pill`.
+- **Width:** sections sit in `max-w-content` (64rem) through `Section`; the header, footer and mobile menu use `max-w-chrome` (72rem), a step wider so the frame sits outside the content.
 - **Fills, not borders, on white.** A card on a white section is set apart by `surface-raised` alone, with no hairline border. Borders belong to diagrams, pills and controls, and a rule (`border-t`) can divide a list.
-- **Glass on the gradient.** Cards and panels on a colored ground are glass: `on-header` at 10% with a 10% `on-header` edge, so the gradient shows through. It pairs with the ripple and is part of the look; keep it to colored grounds. Backdrop blur is only for layers that float over content: the color picker's panel and the open mobile menu.
+- **Glass on the gradient.** Cards and panels on a colored ground use the `glass` utility: `on-header` at 10% with a 10% `on-header` edge, so the gradient shows through. It pairs with the ripple and is part of the look; keep it to colored grounds. Backdrop blur is only for layers that float over content: the color picker's panel and the open mobile menu.
 
 ## Icons and images
 

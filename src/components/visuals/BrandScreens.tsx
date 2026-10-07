@@ -49,18 +49,18 @@ export function BrandScreens() {
               src={brand.image}
               alt={brand.alt}
               sizes="(min-width: 640px) 33vw, 100vw"
-              className="h-auto w-full rounded-lg border border-ink/15"
+              className="h-auto w-full rounded-lg border border-line"
             />
             <h3 className={`mt-space-2 text-ink ${textH5}`}>{brand.name}</h3>
             {brand.site ? (
               <ExternalLink
                 href={brand.site.href}
-                className="mt-1 inline-block break-all text-body text-ink/72 underline underline-offset-4 hover:text-accent"
+                className="mt-1 inline-block break-all text-body text-muted underline underline-offset-4 hover:text-accent"
               >
                 {brand.site.host}
               </ExternalLink>
             ) : (
-              <p className="mt-1 text-body text-ink/72">TBD</p>
+              <p className="mt-1 text-body text-muted">TBD</p>
             )}
           </li>
         ))}

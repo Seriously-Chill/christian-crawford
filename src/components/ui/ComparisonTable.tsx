@@ -25,7 +25,7 @@ export function ComparisonTable({
     <div role="table" aria-label={label} className="grid gap-space-1 sm:gap-0">
       <div role="row" className={`sr-only sm:not-sr-only sm:grid sm:gap-space-3 sm:pb-space-2 ${columnsClass}`}>
         {columns.map((column) => (
-          <span key={column} role="columnheader" className="text-label leading-snug text-ink/72">
+          <span key={column} role="columnheader" className="text-label leading-snug text-muted">
             {column}
           </span>
         ))}
@@ -34,14 +34,14 @@ export function ComparisonTable({
         <div
           key={row.label}
           role="row"
-          className={`grid gap-space-1 rounded-lg bg-surface-raised p-space-2 sm:gap-space-3 sm:rounded-none sm:border-t sm:border-ink/10 sm:bg-transparent sm:px-0 sm:py-space-2 ${columnsClass}`}
+          className={`grid gap-space-1 rounded-lg bg-surface-raised p-space-2 sm:gap-space-3 sm:rounded-none sm:border-t sm:border-hairline sm:bg-transparent sm:px-0 sm:py-space-2 ${columnsClass}`}
         >
           <span role="rowheader" className="text-body text-ink">
             {row.label}
           </span>
           {row.cells.map((cell, i) => (
-            <div key={i} role="cell" className="text-body text-ink sm:text-ink/72">
-              <span aria-hidden="true" className="block text-label leading-snug text-ink/72 sm:hidden">
+            <div key={i} role="cell" className="text-body text-ink sm:text-muted">
+              <span aria-hidden="true" className="block text-label leading-snug text-muted sm:hidden">
                 {columns[i + 1]}
               </span>
               <span className="mt-1 block sm:mt-0">{cell}</span>

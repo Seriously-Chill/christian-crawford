@@ -6,6 +6,7 @@ import { EmployerLogo, type Employer } from "@/components/ui/EmployerLogo";
 import { StatList } from "@/components/ui/StatList";
 import { StepChain } from "@/components/ui/StepChain";
 import { textH3 } from "@/lib/type";
+import { Section } from "@/components/layout/Section";
 
 type Project = {
   employers: Employer[];
@@ -73,31 +74,29 @@ const projects: Project[] = [
  */
 export function ProjectRows() {
   return (
-    <section className="bg-surface">
-      <div className="mx-auto max-w-5xl space-y-space-7 px-space-3 py-space-7">
-        {projects.map((project, i) => (
-          <div key={project.title} className="grid items-center gap-space-4 md:grid-cols-2 md:gap-space-5">
-            <div className={i % 2 ? "md:order-2" : ""}>
-              <div className="flex flex-wrap items-center gap-x-space-4 gap-y-space-2 text-ink/60 [--logo-h:2rem]">
-                {project.employers.map((employer) => (
-                  <EmployerLogo key={employer} employer={employer} labelled />
-                ))}
-              </div>
-              <h2 className={`mt-space-2 text-accent ${textH3}`}>{project.title}</h2>
-              <p className="mt-space-2 text-body text-ink/72">{project.body}</p>
-              <Tags items={project.tags} />
-              {project.link ? (
-                <div className="mt-space-4">
-                  <Button href={project.link.href} variant="bordered">
-                    {project.link.label}
-                  </Button>
-                </div>
-              ) : null}
+    <Section spacing="lg" innerClassName="space-y-space-7">
+      {projects.map((project, i) => (
+        <div key={project.title} className="grid items-center gap-space-4 md:grid-cols-2 md:gap-space-5">
+          <div className={i % 2 ? "md:order-2" : ""}>
+            <div className="flex flex-wrap items-center gap-x-space-4 gap-y-space-2 text-subtle [--logo-h:2rem]">
+              {project.employers.map((employer) => (
+                <EmployerLogo key={employer} employer={employer} labelled />
+              ))}
             </div>
-            <RevealOnScroll className="rounded-xl bg-surface-raised p-space-3 sm:p-space-5">{project.panel}</RevealOnScroll>
+            <h2 className={`mt-space-2 text-accent ${textH3}`}>{project.title}</h2>
+            <p className="mt-space-2 text-body text-muted">{project.body}</p>
+            <Tags items={project.tags} />
+            {project.link ? (
+              <div className="mt-space-4">
+                <Button href={project.link.href} variant="bordered">
+                  {project.link.label}
+                </Button>
+              </div>
+            ) : null}
           </div>
-        ))}
-      </div>
-    </section>
+          <RevealOnScroll className="rounded-xl bg-surface-raised p-space-3 sm:p-space-5">{project.panel}</RevealOnScroll>
+        </div>
+      ))}
+    </Section>
   );
 }

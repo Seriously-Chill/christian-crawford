@@ -40,10 +40,11 @@ Details:
 
 ## Hover and state changes
 
-- **Buttons** change color over 300ms.
-- **Nav links** change opacity over 400ms.
+- **Buttons, tiles and round controls** change color over `duration-hover` (300ms).
+- **Nav links** change opacity over `duration-nav` (400ms), the same as the mobile menu sliding open.
 - **Evidence cards on a gradient** get a soft ripple on hover (`EvidenceCard`, 800ms ease-out, growing from 1× to 3.5× while fading out). It only plays for pointers that can hover, and only on the gradient variant, never on white sections.
-- **Open/close motion** (the color picker panel, the mobile menu, the menu toggle's bars) uses `--ease-accordion`, a standard ease-in-out, at 300–700ms.
+- **Open/close motion** uses `--ease-accordion`, a standard ease-in-out: the menu toggle's bars over `duration-toggle` (300ms), the color picker's panel over `duration-popover` (320ms) and its ring over `duration-spin` (700ms). A swatch or the slider thumb grows over `duration-press` (200ms).
+- **Never type a duration** (`duration-300`, `400ms`). Use the token for the role, or add one in `globals.css`.
 
 ## Ambient motion
 

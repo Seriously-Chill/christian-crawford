@@ -50,7 +50,7 @@ export function Header() {
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-space-2 px-space-2 pt-space-2 pb-space-4 sm:px-space-3">
+      <div className="relative mx-auto flex max-w-chrome items-center justify-between gap-space-2 px-space-2 pt-space-2 pb-space-4 sm:px-space-3">
         <Link
           href="/"
           className="min-w-0 rounded-sm focus-visible:outline-offset-4"

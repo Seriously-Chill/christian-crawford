@@ -1,6 +1,7 @@
 import { textH5 } from "@/lib/type";
 import { FlowArrow } from "@/components/visuals/FlowArrow";
 import { FigureCaption } from "@/components/visuals/FigureCaption";
+import { DiagramBox } from "@/components/visuals/DiagramBox";
 
 const steps = [
   {
@@ -34,15 +35,11 @@ export function SheetStackDiagram() {
         {steps.map((step, i) => (
           <li key={step.url}>
             {i > 0 ? <FlowArrow /> : null}
-            <div
-              className={`rounded-lg border bg-surface-raised p-space-2 sm:p-space-3 ${
-                i === steps.length - 1 ? "border-accent" : "border-ink/15"
-              }`}
-            >
-              <p className="break-all text-label text-ink/72">{step.url}</p>
+            <DiagramBox tone={i === steps.length - 1 ? "highlight" : "item"} raised>
+              <p className="break-all text-label text-muted">{step.url}</p>
               <h3 className={`mt-space-1 text-ink ${textH5}`}>{step.title}</h3>
-              <p className="mt-1 text-body text-ink/72">{step.body}</p>
-            </div>
+              <p className="mt-1 text-body text-muted">{step.body}</p>
+            </DiagramBox>
           </li>
         ))}
       </ol>

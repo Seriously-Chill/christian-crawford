@@ -1,5 +1,6 @@
 import { textH5 } from "@/lib/type";
 import { FigureCaption } from "@/components/visuals/FigureCaption";
+import { DiagramBox } from "@/components/visuals/DiagramBox";
 
 type Stage = { name: string; weight: number; swatch: string; text: string };
 
@@ -68,11 +69,7 @@ export function WorkShiftDiagram() {
     <figure aria-labelledby="work-shift-caption" className="max-w-4xl">
       <div className="grid gap-space-4">
         {rows.map((row) => (
-          <section
-            key={row.id}
-            aria-labelledby={`shift-${row.id}`}
-            className="rounded-lg border border-ink/10 bg-surface p-space-2 sm:p-space-3"
-          >
+          <DiagramBox as="section" key={row.id} tone="frame" aria-labelledby={`shift-${row.id}`}>
             <h3 id={`shift-${row.id}`} className={`text-ink ${textH5}`}>
               {row.title}
             </h3>
@@ -92,11 +89,11 @@ export function WorkShiftDiagram() {
                     <span aria-hidden="true" className={`size-3 shrink-0 rounded-circle ${stage.swatch}`} />
                     {stage.name}
                   </p>
-                  <p className="mt-space-1 text-body text-ink/72">{stage.text}</p>
+                  <p className="mt-space-1 text-body text-muted">{stage.text}</p>
                 </li>
               ))}
             </ol>
-          </section>
+          </DiagramBox>
         ))}
       </div>
       <FigureCaption id="work-shift-caption">

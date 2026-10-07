@@ -9,7 +9,7 @@ export function FlowArrow({ className = "mx-auto my-space-1" }: { className?: st
     <svg
       aria-hidden="true"
       viewBox="0 0 16 24"
-      className={`h-6 w-4 shrink-0 text-ink/40 ${className}`}
+      className={`h-6 w-4 shrink-0 text-faint ${className}`}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"

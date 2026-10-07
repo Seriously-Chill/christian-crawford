@@ -58,6 +58,33 @@
      button would otherwise vanish into a white-to-gray gradient. */
   --color-button-edge: var(--button-edge, transparent);
 
+  /* Text and line strengths. Use these, never an opacity typed inline
+     (`text-ink/72`), so a strength changes in one place.
+       muted: secondary text on white (body under a heading, labels)
+       subtle: quieter meta text and logos (dates, employer marks)
+       faint: decorative marks only, never text (arrows between steps)
+       hairline: dividers, rules and diagram frames
+       line: boxes inside diagrams, pills, round controls
+     The on-header ones are the same roles on a colored ground. */
+  --color-muted: color-mix(in srgb, var(--color-ink) 72%, transparent);
+  --color-subtle: color-mix(in srgb, var(--color-ink) 60%, transparent);
+  --color-faint: color-mix(in srgb, var(--color-ink) 40%, transparent);
+  --color-hairline: color-mix(in srgb, var(--color-ink) 10%, transparent);
+  --color-line: color-mix(in srgb, var(--color-ink) 15%, transparent);
+  --color-on-header-muted: color-mix(in srgb, var(--color-on-header) 80%, transparent);
+  --color-on-header-hairline: color-mix(in srgb, var(--color-on-header) 15%, transparent);
+  --color-on-header-line: color-mix(in srgb, var(--color-on-header) 30%, transparent);
+  /* The same roles on an `accent` fill (the AI banner), where text is
+     `surface`. */
+  --color-on-accent-muted: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  --color-on-accent-line: color-mix(in srgb, var(--color-surface) 30%, transparent);
+
+  /* Column widths: `max-w-content` for every section's text and figures,
+     `max-w-chrome` for the header, footer and mobile menu, a step wider so
+     the frame sits outside the content. */
+  --container-content: 64rem;
+  --container-chrome: 72rem;
+
   --spacing-space-1: 8px;
   --spacing-space-2: 16px;
   --spacing-space-3: 24px;
@@ -73,7 +100,21 @@
   --radius-pill: 100px;
   --radius-circle: 50%;
 
-  /* Motion timing (docs/design-system/motion.md). */
+  /* Motion timing (docs/design-system/motion.md). The transition
+     durations are Tailwind theme keys, so each is a `duration-*` class
+     (`duration-hover`) as well as a variable for the CSS below.
+       hover: color and scale feedback on buttons, tiles, round controls
+       toggle: the menu icon's bars turning into an X and back
+       nav: nav links, and the mobile menu sliding open
+       popover: the color picker's panel growing out of its trigger
+       press: a swatch or slider thumb growing under the pointer
+       spin: the color picker's ring turning as it opens */
+  --transition-duration-hover: 300ms;
+  --transition-duration-toggle: 300ms;
+  --transition-duration-nav: 400ms;
+  --transition-duration-popover: 320ms;
+  --transition-duration-press: 200ms;
+  --transition-duration-spin: 700ms;
   --ease-ripple: ease-out;
   --duration-ripple: 800ms;
   /* Page transition: cover fast, reveal a touch slower so the new page
@@ -100,6 +141,15 @@
     color-mix(in srgb, var(--color-primary) 90%, transparent) 0%,
     color-mix(in srgb, var(--color-secondary) 90%, transparent) 100%
   );
+}
+
+/* Glass: cards and panels on a colored ground (EvidenceCard on a gradient,
+   the hero's "Now" panel, the contact tiles). A 10% on-header tint the
+   gradient shows through, with an edge of the same strength. One recipe,
+   so the look changes here for all of them. */
+@utility glass {
+  background-color: color-mix(in srgb, var(--color-on-header) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-on-header) 10%, transparent);
 }
 
 /* The page's canvas: the header's gradient at full opacity, underneath
@@ -269,7 +319,7 @@
     0 24px 48px -16px rgb(0 0 0 / 0.4);
 }
 details[open] > .color-panel {
-  animation: color-panel-in 320ms var(--ease-accordion) both;
+  animation: color-panel-in var(--transition-duration-popover) var(--ease-accordion) both;
 }
 @keyframes color-panel-in {
   from {
@@ -298,7 +348,7 @@ details[open] > .color-panel {
   background: var(--color-primary);
   border: 3px solid #ffffff;
   box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
-  transition: scale 200ms ease-out;
+  transition: scale var(--transition-duration-press) ease-out;
 }
 .color-slider::-moz-range-thumb {
   width: 18px;
@@ -330,8 +380,8 @@ details[open] > .color-panel {
     inset 0 0 0 1px rgb(0 0 0 / 0.15),
     0 1px 3px rgb(0 0 0 / 0.25);
   transition:
-    scale 200ms ease-out,
-    box-shadow 200ms ease-out;
+    scale var(--transition-duration-press) ease-out,
+    box-shadow var(--transition-duration-press) ease-out;
   cursor: pointer;
 }
 .color-swatch:hover {
@@ -360,8 +410,8 @@ details[open] > .color-panel {
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
   transition:
-    opacity 400ms var(--ease-accordion),
-    translate 400ms var(--ease-accordion);
+    opacity var(--transition-duration-nav) var(--ease-accordion),
+    translate var(--transition-duration-nav) var(--ease-accordion);
 }
 .mobile-nav-panel:not([data-nav-open]) {
   opacity: 0;

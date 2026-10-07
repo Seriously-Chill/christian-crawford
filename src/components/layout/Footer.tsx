@@ -25,7 +25,7 @@ const link = "inline-flex items-center gap-space-1 py-1 hover:underline focus-vi
 export function Footer() {
   return (
     <footer className="bg-primary text-on-header">
-      <div className="mx-auto grid max-w-6xl gap-space-4 px-space-3 py-space-7 md:grid-cols-[3fr_2fr] md:items-end">
+      <div className="mx-auto grid max-w-chrome gap-space-4 px-space-3 py-space-7 md:grid-cols-[3fr_2fr] md:items-end">
         <p className={textH2}>Working through something difficult? I’d like to hear about it.</p>
         <div className="flex flex-wrap gap-space-2 md:justify-end">
           <Button href="/contact">Get in touch</Button>
@@ -35,8 +35,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-on-header/20">
-        <div className="mx-auto grid max-w-6xl gap-space-5 px-space-3 py-space-6 sm:grid-cols-[2fr_1fr_1fr]">
+      <div className="border-t border-on-header-hairline">
+        <div className="mx-auto grid max-w-chrome gap-space-5 px-space-3 py-space-6 sm:grid-cols-[2fr_1fr_1fr]">
           <div>
             <Link href="/" className="rounded-sm focus-visible:outline-offset-4" aria-label="Christian Crawford — home">
               <span className={textWordmark}>Christian Crawford</span>
@@ -85,8 +85,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-on-header/20">
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-space-2 px-space-3 py-space-3 text-label">
+      <div className="border-t border-on-header-hairline">
+        <div className="mx-auto flex max-w-chrome flex-wrap justify-between gap-space-2 px-space-3 py-space-3 text-label">
           <p>© {new Date().getFullYear()} Christian Crawford.</p>
           <div className="flex flex-wrap gap-space-3">
             <Link href="/ai#built" className="hover:underline focus-visible:underline">

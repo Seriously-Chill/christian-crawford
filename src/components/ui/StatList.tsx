@@ -10,7 +10,7 @@ export function StatList({ items }: { items: { value: string; label: string }[] 
       {items.map((item) => (
         <li key={item.label}>
           <span className={`block text-accent ${textH2}`}>{item.value}</span>
-          <span className="mt-1 block text-body text-ink/72">{item.label}</span>
+          <span className="mt-1 block text-body text-muted">{item.label}</span>
         </li>
       ))}
     </ul>

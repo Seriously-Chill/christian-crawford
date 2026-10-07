@@ -16,7 +16,7 @@ import { ExternalLink } from "@/components/ui/ExternalLink";
 type Variant = "primary" | "bordered" | "bordered-inverse";
 
 const base =
-  "inline-flex items-center justify-center rounded-pill px-[23px] py-[11px] text-label transition-colors duration-300";
+  "inline-flex items-center justify-center rounded-pill px-[23px] py-[11px] text-label transition-colors duration-hover";
 
 const variants: Record<Variant, string> = {
   primary: "bg-surface text-accent border border-button-edge hover:bg-accent hover:text-surface",

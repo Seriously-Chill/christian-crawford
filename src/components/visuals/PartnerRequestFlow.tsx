@@ -1,6 +1,7 @@
 import { textH5 } from "@/lib/type";
 import { FlowArrow } from "@/components/visuals/FlowArrow";
 import { FigureCaption } from "@/components/visuals/FigureCaption";
+import { DiagramBox } from "@/components/visuals/DiagramBox";
 
 const flows = [
   {
@@ -37,15 +38,14 @@ export function PartnerRequestFlow() {
               {flow.steps.map((step, i) => (
                 <li key={step}>
                   {i > 0 ? <FlowArrow /> : null}
-                  <div
-                    className={`rounded-lg border bg-surface-raised p-space-2 text-body text-ink/72 ${
-                      f === flows.length - 1 && i === flow.steps.length - 1
-                        ? "border-accent"
-                        : "border-ink/15"
-                    }`}
+                  <DiagramBox
+                    tone={f === flows.length - 1 && i === flow.steps.length - 1 ? "highlight" : "item"}
+                    raised
+                    compact
+                    className="text-body text-muted"
                   >
                     {step}
-                  </div>
+                  </DiagramBox>
                 </li>
               ))}
             </ol>

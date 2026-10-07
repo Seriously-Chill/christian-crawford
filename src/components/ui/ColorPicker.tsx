@@ -323,12 +323,12 @@ export function ColorPicker() {
     <details ref={detailsRef} className="group relative" onKeyDown={handleKeyDown}>
       <summary
         ref={summaryRef}
-        className="relative flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-circle transition-transform duration-300 hover:scale-105 [&::-webkit-details-marker]:hidden"
+        className="relative flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-circle transition-transform duration-hover hover:scale-105 [&::-webkit-details-marker]:hidden"
         aria-label="Personalize the site’s color"
       >
         <span
           aria-hidden="true"
-          className="absolute inset-0 rounded-circle bg-(image:--ring) transition-transform duration-700 ease-accordion group-open:rotate-180"
+          className="absolute inset-0 rounded-circle bg-(image:--ring) transition-transform duration-spin ease-accordion group-open:rotate-180"
           style={{ "--ring": RING_GRADIENT } as CSSProperties}
         />
         <span
@@ -344,7 +344,7 @@ export function ColorPicker() {
           <label htmlFor="hue-picker-input" className="text-label text-on-header">
             Color
           </label>
-          <span ref={nameRef} className="text-sm text-on-header/80" aria-live="polite">
+          <span ref={nameRef} className="text-sm text-on-header-muted" aria-live="polite">
             Gray
           </span>
         </div>
@@ -363,7 +363,7 @@ export function ColorPicker() {
         <div
           role="group"
           aria-label="Presets"
-          className="mt-space-3 flex items-center justify-between border-t border-on-header/15 pt-space-3"
+          className="mt-space-3 flex items-center justify-between border-t border-on-header-hairline pt-space-3"
         >
           {SWATCHES.map((swatch, i) => (
             <button

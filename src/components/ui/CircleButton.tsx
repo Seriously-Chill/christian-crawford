@@ -24,7 +24,7 @@ export function CircleButton({
       onClick={onClick}
       aria-label={label}
       aria-pressed={pressed}
-      className="flex size-10 items-center justify-center rounded-circle border border-ink/15 bg-surface text-ink/70 transition-colors duration-300 hover:border-accent hover:bg-accent hover:text-surface"
+      className="flex size-10 items-center justify-center rounded-circle border border-line bg-surface text-muted transition-colors duration-hover hover:border-accent hover:bg-accent hover:text-surface"
     >
       <LineIcon name={icon} className="size-5" />
     </button>

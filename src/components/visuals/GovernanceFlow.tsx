@@ -1,6 +1,7 @@
 import { textH5 } from "@/lib/type";
 import { FlowArrow } from "@/components/visuals/FlowArrow";
 import { FigureCaption } from "@/components/visuals/FigureCaption";
+import { DiagramBox } from "@/components/visuals/DiagramBox";
 
 type Step = { stage: string; text: string; outcome?: boolean };
 
@@ -66,10 +67,12 @@ export function GovernanceFlow() {
     <figure aria-labelledby="governance-flow-caption" className="max-w-4xl">
       <div className="grid gap-space-3 md:grid-cols-2">
         {paths.map((path) => (
-          <section
+          <DiagramBox
+            as="section"
             key={path.id}
+            tone="frame"
             aria-labelledby={`flow-${path.id}`}
-            className="flex flex-col rounded-lg border border-ink/10 bg-surface p-space-2 sm:p-space-3"
+            className="flex flex-col"
           >
             <p className="text-label text-accent">{path.tool}</p>
             <h3 id={`flow-${path.id}`} className={`mt-space-1 text-ink ${textH5}`}>
@@ -79,31 +82,27 @@ export function GovernanceFlow() {
               {path.steps.map((step, i) => (
                 <li key={step.stage}>
                   {i > 0 ? <FlowArrow /> : null}
-                  <div
-                    className={`rounded-md border bg-surface-raised px-space-2 py-space-2 ${
-                      step.outcome ? "border-accent" : "border-ink/10"
-                    }`}
-                  >
-                    <p className="text-label text-ink/72">
+                  <DiagramBox tone={step.outcome ? "highlight" : "frame"} raised compact small>
+                    <p className="text-label text-muted">
                       <span className="sr-only">Step {i + 1}: </span>
                       {step.stage}
                     </p>
                     <p className="mt-space-1 text-body text-ink">{step.text}</p>
-                  </div>
+                  </DiagramBox>
                 </li>
               ))}
             </ol>
-            <div className="mt-space-3 border-t border-ink/10 pt-space-2">
+            <div className="mt-space-3 border-t border-hairline pt-space-2">
               <p className="text-label text-ink">{path.scope}</p>
-              <p className="mt-space-1 text-body text-ink/72">{path.scopeNote}</p>
+              <p className="mt-space-1 text-body text-muted">{path.scopeNote}</p>
             </div>
-          </section>
+          </DiagramBox>
         ))}
       </div>
 
       <div className="mt-space-3 rounded-lg border border-dashed border-ink/20 px-space-2 py-space-2 sm:px-space-3">
         <p className="text-label text-ink">Shared session state</p>
-        <p className="mt-space-1 text-body text-ink/72">
+        <p className="mt-space-1 text-body text-muted">
           A SessionStart hook records a baseline time. The Edit / Write path adds a review marker
           for each approved file, and the Bash check reads both, so it only flags changes made
           since the session began that nobody has reviewed.

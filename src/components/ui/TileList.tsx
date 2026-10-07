@@ -17,7 +17,7 @@ export function TileList({
       {items.map((item) => (
         <li key={item.body} className="rounded-lg bg-surface-raised p-space-2 sm:p-space-3">
           <span className={`block ${accent ? "text-accent" : "text-ink"} ${textH5}`}>{item.title}</span>
-          <span className="mt-1 block text-body text-ink/72">{item.body}</span>
+          <span className="mt-1 block text-body text-muted">{item.body}</span>
         </li>
       ))}
     </ul>

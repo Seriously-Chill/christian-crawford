@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { textH2 } from "@/lib/type";
+import { Section } from "@/components/layout/Section";
 
 /**
  * One narrative beat: an h2, optional body copy, and a slot for diagrams,
@@ -28,18 +29,16 @@ export function NarrativeSection({
   id?: string;
   onGradient?: boolean;
 }) {
-  const muted = onGradient ? "text-on-header/80" : "text-ink/72";
+  const muted = onGradient ? "text-on-header-muted" : "text-muted";
   return (
-    <section id={id} className={onGradient ? "bg-page-gradient" : "bg-surface"}>
-      <div className="mx-auto max-w-5xl px-space-3 py-space-6">
-        <h2 className={`${onGradient ? "text-on-header" : "text-accent"} ${textH2}`}>{title}</h2>
-        {typeof body === "string" ? (
-          <p className={`mt-space-3 max-w-xl text-body lg:mt-space-4 ${muted}`}>{body}</p>
-        ) : body ? (
-          <div className={`mt-space-3 max-w-xl space-y-space-3 text-body lg:mt-space-4 ${muted}`}>{body}</div>
-        ) : null}
-        {children ? <RevealOnScroll className="mt-space-5">{children}</RevealOnScroll> : null}
-      </div>
-    </section>
+    <Section id={id} ground={onGradient ? "gradient" : "surface"}>
+      <h2 className={`${onGradient ? "text-on-header" : "text-accent"} ${textH2}`}>{title}</h2>
+      {typeof body === "string" ? (
+        <p className={`mt-space-3 max-w-xl text-body lg:mt-space-4 ${muted}`}>{body}</p>
+      ) : body ? (
+        <div className={`mt-space-3 max-w-xl space-y-space-3 text-body lg:mt-space-4 ${muted}`}>{body}</div>
+      ) : null}
+      {children ? <RevealOnScroll className="mt-space-5">{children}</RevealOnScroll> : null}
+    </Section>
   );
 }

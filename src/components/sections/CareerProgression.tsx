@@ -1,5 +1,6 @@
 import { EmployerLogo, type Employer } from "@/components/ui/EmployerLogo";
 import { textH4 } from "@/lib/type";
+import { Section } from "@/components/layout/Section";
 
 /**
  * The design → implementation → systems → architecture arc, told as a
@@ -52,25 +53,23 @@ const eras: { range: string; role: string; org: string; logos: Employer[]; body:
 
 export function CareerProgression() {
   return (
-    <section id="evolution" className="bg-surface">
-      <div className="mx-auto max-w-5xl px-space-3 py-space-7">
-        <ol className="space-y-space-5 border-l border-ink/10 pl-space-4">
-          {eras.map((era) => (
-            <li key={era.range}>
-                <div className="mb-space-2 flex flex-wrap items-center gap-x-space-3 gap-y-space-2 text-ink/60 [--logo-h:1.5rem]">
-                  {era.logos.map((employer) => (
-                    <EmployerLogo key={employer} employer={employer} />
-                  ))}
-                </div>
-                <p className="text-label text-ink/60">
-                  {era.range} · {era.org}
-                </p>
-                <h2 className={`mt-space-1 text-ink ${textH4}`}>{era.role}</h2>
-                <p className="mt-space-2 max-w-xl text-body text-ink/72">{era.body}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
+    <Section id="evolution" spacing="lg">
+      <ol className="space-y-space-5 border-l border-hairline pl-space-4">
+        {eras.map((era) => (
+          <li key={era.range}>
+            <div className="mb-space-2 flex flex-wrap items-center gap-x-space-3 gap-y-space-2 text-subtle [--logo-h:1.5rem]">
+              {era.logos.map((employer) => (
+                <EmployerLogo key={employer} employer={employer} />
+              ))}
+            </div>
+            <p className="text-label text-subtle">
+              {era.range} · {era.org}
+            </p>
+            <h2 className={`mt-space-1 text-ink ${textH4}`}>{era.role}</h2>
+            <p className="mt-space-2 max-w-xl text-body text-muted">{era.body}</p>
+          </li>
+        ))}
+      </ol>
+    </Section>
   );
 }

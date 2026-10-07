@@ -5,6 +5,7 @@ import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { EmployerLogo, type Employer } from "@/components/ui/EmployerLogo";
 import { FeaturePanel } from "@/components/ui/FeaturePanel";
 import { textH2, textH3 } from "@/lib/type";
+import { Section } from "@/components/layout/Section";
 
 /**
  * One piece of evidence on Home: a contained feature panel on white, with
@@ -45,40 +46,38 @@ export function ProofFeature({
   evidence?: ReactNode;
 }) {
   return (
-    <section className={onGradient ? "bg-page-gradient" : "bg-surface"}>
-      <div className="mx-auto max-w-5xl px-space-3 py-space-6">
-        <FeaturePanel>
-          <div className={flip ? "md:order-2" : undefined}>
-            <div className="flex text-ink/60">
-              <EmployerLogo employer={employer} labelled className="[--logo-h:2rem]" />
-            </div>
-            <p className="mt-space-2 text-label text-accent">{kicker}</p>
-            <h2 className={`mt-space-2 max-w-xl text-accent ${textH2}`}>{title}</h2>
-            <p className="mt-space-3 max-w-md text-body lg:mt-space-4 text-ink/72">{body}</p>
-            <Tags items={tags} />
-            <div className="mt-space-4">
-              <Button href={href} variant="bordered">
-                {linkLabel}
-              </Button>
-            </div>
+    <Section ground={onGradient ? "gradient" : "surface"}>
+      <FeaturePanel>
+        <div className={flip ? "md:order-2" : undefined}>
+          <div className="flex text-subtle">
+            <EmployerLogo employer={employer} labelled className="[--logo-h:2rem]" />
           </div>
-          <RevealOnScroll>
-            <ul aria-label="What came of it" className="space-y-space-4">
-              {outcomes.map((item) => (
-                <li key={item.value}>
-                  <p className={`text-accent ${textH3}`}>{item.value}</p>
-                  <p className="mt-1 text-body text-ink/72">{item.label}</p>
-                </li>
-              ))}
-            </ul>
+          <p className="mt-space-2 text-label text-accent">{kicker}</p>
+          <h2 className={`mt-space-2 max-w-xl text-accent ${textH2}`}>{title}</h2>
+          <p className="mt-space-3 max-w-md text-body lg:mt-space-4 text-muted">{body}</p>
+          <Tags items={tags} />
+          <div className="mt-space-4">
+            <Button href={href} variant="bordered">
+              {linkLabel}
+            </Button>
+          </div>
+        </div>
+        <RevealOnScroll>
+          <ul aria-label="What came of it" className="space-y-space-4">
+            {outcomes.map((item) => (
+              <li key={item.value}>
+                <p className={`text-accent ${textH3}`}>{item.value}</p>
+                <p className="mt-1 text-body text-muted">{item.label}</p>
+              </li>
+            ))}
+          </ul>
+        </RevealOnScroll>
+        {evidence ? (
+          <RevealOnScroll className="border-t border-hairline pt-space-4 md:order-3 md:col-span-2 md:pt-space-5">
+            {evidence}
           </RevealOnScroll>
-          {evidence ? (
-            <RevealOnScroll className="border-t border-ink/10 pt-space-4 md:order-3 md:col-span-2 md:pt-space-5">
-              {evidence}
-            </RevealOnScroll>
-          ) : null}
-        </FeaturePanel>
-      </div>
-    </section>
+        ) : null}
+      </FeaturePanel>
+    </Section>
   );
 }

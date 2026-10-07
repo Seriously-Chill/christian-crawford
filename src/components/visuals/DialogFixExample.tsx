@@ -1,5 +1,6 @@
 import { textH4, textH5 } from "@/lib/type";
 import { FigureCaption } from "@/components/visuals/FigureCaption";
+import { DiagramBox } from "@/components/visuals/DiagramBox";
 
 type Node = { role: string; name: string; children?: Node[] };
 
@@ -30,12 +31,12 @@ const after: Node = {
 function Tree({ node }: { node: Node }) {
   return (
     <li>
-      <p className="flex flex-wrap items-baseline gap-x-space-1 text-body text-ink/72">
+      <p className="flex flex-wrap items-baseline gap-x-space-1 text-body text-muted">
         {node.role ? <span className="rounded-pill border border-ink/20 px-space-1 text-label leading-6 text-ink">{node.role}</span> : null}
         {node.name}
       </p>
       {node.children ? (
-        <ul className="mt-space-1 grid gap-space-1 border-l border-ink/15 pl-space-2">
+        <ul className="mt-space-1 grid gap-space-1 border-l border-line pl-space-2">
           {node.children.map((child, i) => (
             <Tree key={i} node={child} />
           ))}
@@ -55,18 +56,18 @@ export function DialogFixExample() {
     <figure aria-labelledby="dialog-fix-caption">
       <h3 className={`text-ink ${textH4}`}>The cart drawer, before and after</h3>
       <div className="mt-space-3 grid gap-space-3 sm:grid-cols-2">
-        <div className="rounded-lg border border-ink/15 bg-surface p-space-2 sm:p-space-3">
+        <DiagramBox>
           <p className={`text-ink ${textH5}`}>Before: four dialogs for one drawer</p>
           <ul aria-label="Before" className="mt-space-2">
             <Tree node={before} />
           </ul>
-        </div>
-        <div className="rounded-lg border border-accent bg-surface p-space-2 sm:p-space-3">
+        </DiagramBox>
+        <DiagramBox tone="highlight">
           <p className={`text-ink ${textH5}`}>After: one dialog, named once</p>
           <ul aria-label="After" className="mt-space-2">
             <Tree node={after} />
           </ul>
-        </div>
+        </DiagramBox>
       </div>
       <FigureCaption id="dialog-fix-caption">
         The shopping cart drawer, as a screen reader was told about it. The add-to-cart state, with

@@ -213,7 +213,7 @@ export default function HealthWarehousePage() {
             rows={results}
           />
         </div>
-        <p className="mt-space-4 max-w-xl text-body text-ink/72">
+        <p className="mt-space-4 max-w-xl text-body text-muted">
           Big swings in the sweep were re-run on their own before I trusted them, and none held up.
           One gap was real, and it predated the redesign: in that measurement, PharmcoRx’s mobile
           homepage took about 7 seconds to show its main image, against a 2.5-second target. The
@@ -233,13 +233,13 @@ export default function HealthWarehousePage() {
         <FeaturePanel className="mt-space-6">
           <div>
             <h3 className={`text-ink ${textH4}`}>Checked by tests, run by hand.</h3>
-            <p className="mt-space-3 text-body text-ink/72">
+            <p className="mt-space-3 text-body text-muted">
               Playwright and axe-core scan every listed route, plus the states people reach through
               forms, dialogs, and checkout. The suites run by hand, not in CI, and the route script
               exits successfully even when a scan fails. Today they report problems; they don’t
               block them.
             </p>
-            <p className="mt-space-3 text-body text-ink/72">
+            <p className="mt-space-3 text-body text-muted">
               The HealthWarehouse site also carries a third-party WCAG 2.2 accessibility seal.
             </p>
           </div>

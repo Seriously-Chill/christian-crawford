@@ -263,7 +263,7 @@ export function EmployerMarquee({ employers, label }: { employers: Employer[]; l
       {employers.map((employer) => (
         <li
           key={employer}
-          className="flex h-20 w-44 shrink-0 items-center justify-center rounded-lg border border-ink/10 bg-surface-raised text-ink/70 [--logo-h:1.75rem]"
+          className="flex h-20 w-44 shrink-0 items-center justify-center rounded-lg border border-hairline bg-surface-raised text-muted [--logo-h:1.75rem]"
         >
           <EmployerLogo employer={employer} labelled={!hidden} />
         </li>

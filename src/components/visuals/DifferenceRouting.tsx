@@ -1,6 +1,7 @@
 import { textH5 } from "@/lib/type";
 import { FlowArrow } from "@/components/visuals/FlowArrow";
 import { FigureCaption } from "@/components/visuals/FigureCaption";
+import { DiagramBox } from "@/components/visuals/DiagramBox";
 
 // Each path's example is a real one from the codebase.
 const paths = [
@@ -35,25 +36,25 @@ export function DifferenceRouting() {
   return (
     <figure aria-labelledby="difference-routing-caption" className="max-w-4xl">
       <div aria-hidden="true" className="hidden gap-space-2 pb-space-2 sm:grid sm:grid-cols-[1fr_1rem_1.25fr]">
-        <p className="text-label text-ink/72">When this differs</p>
+        <p className="text-label text-muted">When this differs</p>
         <span />
-        <p className="text-label text-ink/72">it goes to</p>
+        <p className="text-label text-muted">it goes to</p>
       </div>
       <ul className="grid gap-space-3">
         {paths.map((path) => (
           <li key={path.kind} className="grid items-center sm:grid-cols-[1fr_1rem_1.25fr] sm:gap-space-2">
-            <div className="rounded-lg border border-ink/15 bg-surface p-space-2">
+            <DiagramBox compact>
               <p className={`text-ink ${textH5}`}>{path.kind}</p>
-              <p className="mt-1 text-body text-ink/72">{path.detail}</p>
-            </div>
+              <p className="mt-1 text-body text-muted">{path.detail}</p>
+            </DiagramBox>
             <div className="flex justify-center">
               <FlowArrow className="my-1 sm:my-0 sm:-rotate-90" />
               <span className="sr-only">goes to</span>
             </div>
-            <div className="rounded-lg border border-accent bg-surface p-space-2">
+            <DiagramBox tone="highlight" compact>
               <p className={`text-ink ${textH5}`}>{path.destination}</p>
-              <p className="mt-1 text-body text-ink/72">{path.example}</p>
-            </div>
+              <p className="mt-1 text-body text-muted">{path.example}</p>
+            </DiagramBox>
           </li>
         ))}
       </ul>

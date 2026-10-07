@@ -34,7 +34,7 @@ export function EvidenceCard({
       className={`group relative overflow-hidden rounded-lg p-space-2 sm:p-space-3
         ${
           onGradient
-            ? `border border-on-header/10 bg-on-header/10
+            ? `glass
                after:pointer-events-none after:absolute after:left-1/2 after:top-1/2 after:z-10
                after:aspect-square after:h-full after:-translate-x-1/2 after:-translate-y-1/2
                after:scale-0 after:opacity-0 after:content-[''] after:bg-ink/25 after:blur-xl
@@ -44,7 +44,7 @@ export function EvidenceCard({
         }`}
     >
       <h3 className={`${onGradient ? "text-on-header" : "text-ink"} ${textH4}`}>{title}</h3>
-      <div className={`mt-space-2 text-body ${onGradient ? "text-on-header/80" : "text-ink/72"}`}>{children}</div>
+      <div className={`mt-space-2 text-body ${onGradient ? "text-on-header-muted" : "text-muted"}`}>{children}</div>
     </div>
   );
 }

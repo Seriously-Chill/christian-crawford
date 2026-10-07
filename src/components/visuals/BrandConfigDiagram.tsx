@@ -1,5 +1,7 @@
 import { textH5 } from "@/lib/type";
 import { FigureCaption } from "@/components/visuals/FigureCaption";
+import { DiagramBox } from "@/components/visuals/DiagramBox";
+import { Pill } from "@/components/ui/Pill";
 
 // The 18 feature flags every brand config declares, in the configs' own
 // order, as each brand sets them (1 = on). Same keys, different values: the
@@ -31,7 +33,7 @@ const perBrand = ["Colors", "Typefaces", "Corner radius", "18 feature flags", "L
 
 function BrandSite({ brand }: { brand: (typeof brands)[number] }) {
   return (
-    <div className="flex flex-col gap-1.5 rounded-md border border-ink/15 bg-surface p-2 sm:gap-2 sm:p-space-2">
+    <div className="flex flex-col gap-1.5 rounded-md border border-line bg-surface p-2 sm:gap-2 sm:p-space-2">
       <span className={`h-2 w-1/2 rounded-pill ${brand.logo}`} />
       <span className={`mt-1 text-[22px] leading-none text-ink sm:text-[30px] ${brand.face}`}>Aa</span>
       <span className="h-1 w-full rounded-pill bg-ink/10" />
@@ -56,7 +58,7 @@ function BrandSite({ brand }: { brand: (typeof brands)[number] }) {
 export function BrandConfigDiagram() {
   return (
     <figure aria-labelledby="brand-config-caption">
-      <p className="text-label text-ink/72">Three brands</p>
+      <p className="text-label text-muted">Three brands</p>
       <p className="sr-only">
         Three brand sites. Two share a typeface and square corners; the third has its own
         typefaces, pill buttons and rounder corners. Each has its own colors, and each switches
@@ -78,23 +80,23 @@ export function BrandConfigDiagram() {
       >
         <path d="M50 0C50 24 150 16 150 40M150 0v40M250 0C250 24 150 16 150 40" vectorEffect="non-scaling-stroke" />
       </svg>
-      <div className="rounded-lg border border-ink/10 bg-surface p-space-2 sm:p-space-3">
+      <DiagramBox tone="frame">
         <p className="text-label text-ink">What each brand’s config carries</p>
         <ul className="mt-space-2 flex flex-wrap gap-space-1">
           {perBrand.map((item) => (
-            <li key={item} className="rounded-pill border border-ink/15 px-space-2 py-1 text-label text-ink/72">
+            <Pill as="li" key={item}>
               {item}
-            </li>
+            </Pill>
           ))}
         </ul>
-      </div>
-      <div className="mt-space-1 rounded-lg border border-accent bg-surface p-space-2 sm:p-space-3">
+      </DiagramBox>
+      <DiagramBox tone="highlight" className="mt-space-1">
         <p className={`text-ink ${textH5}`}>One shared codebase</p>
-        <p className="mt-1 text-body text-ink/72">
+        <p className="mt-1 text-body text-muted">
           Every form and checkout step. Seven components pick a per-brand version; the other ~270
           are shared.
         </p>
-      </div>
+      </DiagramBox>
       <FigureCaption id="brand-config-caption">
         Drawn from the three brand configs: the same keys, set differently. Dots are the flags, on
         or off.

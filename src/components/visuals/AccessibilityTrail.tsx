@@ -27,7 +27,7 @@ export function AccessibilityTrail() {
           </div>
           <div className="pb-space-3 sm:mt-space-2 sm:pb-0 sm:pr-space-2">
             <p className={`text-ink ${textH5}`}>{step.name}</p>
-            <p className="mt-1 text-body text-ink/72">{step.detail}</p>
+            <p className="mt-1 text-body text-muted">{step.detail}</p>
           </div>
         </li>
       ))}

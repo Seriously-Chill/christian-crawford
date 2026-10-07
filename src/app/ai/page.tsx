@@ -128,7 +128,7 @@ export default function AiPage() {
         <FeaturePanel>
           <div>
             <h3 className={`text-ink ${textH4}`}>Every hue the color picker can make is tested.</h3>
-            <p className="mt-space-3 text-body text-ink/72">
+            <p className="mt-space-3 text-body text-muted">
               The picker in the header can put the site on any color, gray, white, or black, so
               the contrast suite checks every page at each of them. The suites run in CI on every
               push, so a change that breaks contrast at any setting fails the build, whether I

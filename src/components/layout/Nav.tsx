@@ -48,7 +48,7 @@ export function Nav() {
   }, [open]);
 
   const linkClasses = (active: boolean) =>
-    `text-label transition-opacity duration-400 ${
+    `text-label transition-opacity duration-nav ${
       active
         ? "text-on-header opacity-100 font-medium"
         : "text-on-header opacity-80 hover:opacity-100 focus-visible:opacity-100"
@@ -82,15 +82,15 @@ export function Nav() {
       >
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-transform duration-300 ease-accordion ${open ? "translate-y-1.75 rotate-45" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-transform duration-toggle ease-accordion ${open ? "translate-y-1.75 rotate-45" : ""}`}
         />
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-opacity duration-300 ease-accordion ${open ? "opacity-0" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-opacity duration-toggle ease-accordion ${open ? "opacity-0" : ""}`}
         />
         <span
           aria-hidden="true"
-          className={`h-0.5 w-6 bg-on-header transition-transform duration-300 ease-accordion ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
+          className={`h-0.5 w-6 bg-on-header transition-transform duration-toggle ease-accordion ${open ? "-translate-y-1.75 -rotate-45" : ""}`}
         />
       </button>
 
@@ -109,13 +109,13 @@ export function Nav() {
         inert={!open}
         className={`mobile-nav-panel bg-header-gradient absolute left-0 top-full max-h-[calc(100dvh-100%)] w-full overflow-y-auto overscroll-contain lg:hidden ${open ? "" : "pointer-events-none"}`}
       >
-        <ul className="mx-auto flex max-w-6xl flex-col px-space-3 pt-space-2 pb-space-6">
+        <ul className="mx-auto flex max-w-chrome flex-col px-space-3 pt-space-2 pb-space-6">
           {NAV_LINKS.map(({ href, label }, i) => {
             const active = isActive(pathname, href);
             return (
               <li
                 key={href}
-                className="transition-[opacity,translate] duration-400 ease-accordion"
+                className="transition-[opacity,translate] duration-nav ease-accordion"
                 style={{
                   opacity: open ? 1 : 0,
                   translate: open ? "0 0" : "0 -8px",
@@ -125,13 +125,13 @@ export function Nav() {
                 <Link
                   href={href}
                   aria-current={active ? "page" : undefined}
-                  className={`flex items-center gap-space-2 py-space-1 text-on-header transition-opacity duration-400 ${textH3} ${
+                  className={`flex items-center gap-space-2 py-space-1 text-on-header transition-opacity duration-nav ${textH3} ${
                     active ? "opacity-100" : "opacity-70 hover:opacity-100 focus-visible:opacity-100"
                   }`}
                 >
                   <span
                     aria-hidden="true"
-                    className={`h-2 w-2 shrink-0 rounded-circle bg-on-header transition-transform duration-400 ${
+                    className={`h-2 w-2 shrink-0 rounded-circle bg-on-header transition-transform duration-nav ${
                       active ? "scale-100" : "scale-0"
                     }`}
                   />

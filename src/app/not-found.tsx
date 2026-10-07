@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
 import { textH1 } from "@/lib/type";
+import { Section } from "@/components/layout/Section";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -15,20 +16,18 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <section className="bg-page-gradient">
-        <div className="mx-auto max-w-5xl px-space-3 py-space-7">
-          <p className="text-label text-on-header/80">404</p>
-          <h1 className={`mt-space-2 max-w-[15em] text-on-header lg:mt-space-3 ${textH1}`}>
-            This page doesn’t exist, but the work does.
-          </h1>
-          <div className="mt-space-5 flex flex-wrap gap-space-2">
-            <Button href="/">Go home</Button>
-            <Button href="/work" variant="bordered-inverse">
-              See the work
-            </Button>
-          </div>
+      <Section ground="gradient" spacing="lg">
+        <p className="text-label text-on-header-muted">404</p>
+        <h1 className={`mt-space-2 max-w-[15em] text-on-header lg:mt-space-3 ${textH1}`}>
+          This page doesn’t exist, but the work does.
+        </h1>
+        <div className="mt-space-5 flex flex-wrap gap-space-2">
+          <Button href="/">Go home</Button>
+          <Button href="/work" variant="bordered-inverse">
+            See the work
+          </Button>
         </div>
-      </section>
+      </Section>
       <CurveDivider above="gradient-page" below="primary" />
     </>
   );
