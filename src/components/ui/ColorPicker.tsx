@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, type CSSProperties, type KeyboardEvent } from "react";
-import { THEME_STORAGE_KEY } from "@/lib/theme";
+import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
 
 const STORAGE_KEY = "cc-hue";
 // The blue-leaning aqua preset.
@@ -56,7 +56,13 @@ const STOP_TOKENS: Record<
     fadeAlpha?: string;
   }
 > = {
-  gray: { s: [0, 0], l: [32, 46.27], onHeader: "#ffffff", panelShade: "#000000", fadeAlpha: "100%" },
+  gray: {
+    s: [0, 0],
+    l: [DEFAULT_THEME.primaryLightness, DEFAULT_THEME.secondaryLightness],
+    onHeader: DEFAULT_THEME.onHeader,
+    panelShade: "#000000",
+    fadeAlpha: "100%",
+  },
   white: {
     s: [0, 3],
     l: [100, 85.5],

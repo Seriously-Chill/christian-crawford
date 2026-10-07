@@ -6,7 +6,7 @@ import { textH1, textH5 } from "@/lib/type";
 import { Section } from "@/components/layout/Section";
 
 const tile = "rounded-lg glass p-space-3 text-left";
-const linkTile = `${tile} block transition-colors duration-hover hover:bg-on-header/20`;
+const linkTile = `${tile} block transition-colors duration-hover hover:glass-lit`;
 
 /**
  * On the header's gradient. Each contact detail is its own glass tile; the

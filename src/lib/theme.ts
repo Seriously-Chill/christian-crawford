@@ -1,4 +1,21 @@
 /**
+ * The default (gray) theme, for the places CSS can't reach: the share image,
+ * the web manifest, and the color picker's gray stop all read it from here.
+ * Two copies can't import it and have to be kept in step by hand: the
+ * first-paint fallbacks in globals.css (the lightness values) and
+ * src/app/icon.svg (the hex values).
+ */
+export const DEFAULT_THEME = {
+  /** HSL lightness of primary and secondary; hue 240, saturation 0. */
+  primaryLightness: 32,
+  secondaryLightness: 46.27,
+  /** The same two colors as they render. */
+  primary: "#525252",
+  secondary: "#767676",
+  onHeader: "#ffffff",
+} as const;
+
+/**
  * localStorage key holding the color picker's chosen custom properties as a
  * `{ "--name": "value" }` JSON object. ColorPicker writes it; the inline
  * script below applies it to <html> while the document is still parsing, so

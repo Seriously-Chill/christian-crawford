@@ -32,7 +32,8 @@
      properties so ColorPicker.tsx can rotate them live. The fallbacks below
      are the default gray stop (hsl(240 0% 32%) = #525252 to
      hsl(240 0% 46.27%) = #767676, white on-header, accent #525252 on white),
-     matching what ColorPicker.tsx applies so first paint matches
+     matching DEFAULT_THEME in src/lib/theme.ts, which ColorPicker.tsx, the
+     share image and the manifest read, so first paint matches
      post-hydration; every other stop sets the tokens it differs on
      explicitly. Hue grounds are light, so `on-header` is ink there; the gray
      and black stops use white. `accent` is primary as foreground on white
@@ -150,6 +151,11 @@
 @utility glass {
   background-color: color-mix(in srgb, var(--color-on-header) 10%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-on-header) 10%, transparent);
+}
+
+/* A glass tile that's a link brightens to 20% on hover (`hover:glass-lit`). */
+@utility glass-lit {
+  background-color: color-mix(in srgb, var(--color-on-header) 20%, transparent);
 }
 
 /* The page's canvas: the header's gradient at full opacity, underneath

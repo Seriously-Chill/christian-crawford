@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { DEFAULT_THEME } from "@/lib/theme";
 
 /**
  * The share card shown when a link to the site is pasted into LinkedIn,
@@ -28,8 +29,8 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "linear-gradient(90deg, #525252 0%, #767676 100%)",
-          color: "#ffffff",
+          background: `linear-gradient(90deg, ${DEFAULT_THEME.primary} 0%, ${DEFAULT_THEME.secondary} 100%)`,
+          color: DEFAULT_THEME.onHeader,
           fontFamily: "Plus Jakarta Sans",
         }}
       >
