@@ -21,7 +21,7 @@ wording. Screen readers phrase things differently.
 - [ ] **Skip link.** The first Tab reads "Skip to main content, link". Activating it moves the reading position to the page's h1.
 - [ ] **Landmarks** (VO rotor or NVDA's D key): one banner, a navigation named "Main", one main, a navigation named "Footer", and one content info. None of them is unnamed or repeated.
 - [ ] **Headings** (VO rotor or NVDA's H key): exactly one level-1 heading, which makes sense on its own, and no gaps in the heading levels.
-- [ ] **Decorative art** (logo strip, curves, illustrations) is silent. Nothing reads as "image" or "group" with no name.
+- [ ] **Decorative art** (curves, illustrations, the hero’s miniature brand sites) is silent. Nothing reads as "image" or "group" with no name.
 
 ## Navigation
 
@@ -33,8 +33,7 @@ wording. Screen readers phrase things differently.
 
 ## Controls
 
-- [ ] **Color picker.** The toggle names what it does. The hue slider reads its value as "Hue N°" and updates as you adjust it. The Aqua, Gray, White and Black buttons read as toggle buttons with their pressed state. The name of the chosen color is announced politely, without interrupting.
-- [ ] **Logo strip** (home page). The logos are read once, as a list named "Where I've worked", not twice. "Scroll logos back" and "Scroll logos forward" read as buttons, and "Pause logo scroll" reads as a toggle button with its pressed state.
+- [ ] **Color picker.** The toggle names what it does. The hue slider reads its value as "Hue N°" and updates as you adjust it. The panel’s explanation and its “How it’s tested” link are read first. The Spruce, Aqua, Gray, White and Black buttons read as toggle buttons with their pressed state. The name of the chosen color is announced politely, without interrupting.
 - [ ] **External links** (LinkedIn, GitHub source) say they open in a new tab.
 - [ ] **Résumé link** makes clear it's a PDF download.
 - [ ] **Email links** read the address, not only "Email".

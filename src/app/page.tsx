@@ -2,12 +2,12 @@ import { Opening } from "@/components/sections/Opening";
 import { ProofFeature } from "@/components/sections/ProofFeature";
 import { NarrativeSection } from "@/components/sections/NarrativeSection";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
-import { EmployerMarquee } from "@/components/ui/EmployerMarquee";
 import { AiBanner } from "@/components/sections/AiBanner";
 import { Button } from "@/components/ui/Button";
-import { BrandConfigDiagram } from "@/components/visuals/BrandConfigDiagram";
+import { DifferenceRouting } from "@/components/visuals/DifferenceRouting";
 import { PortalShapingDiagram } from "@/components/visuals/PortalShapingDiagram";
-import { AccessibilityTrail } from "@/components/visuals/AccessibilityTrail";
+import { DialogFixExample } from "@/components/visuals/DialogFixExample";
+import { CareerArc } from "@/components/visuals/CareerArc";
 import { EMAIL, LINKEDIN_URL, SITE_URL } from "@/lib/links";
 
 const structuredData = {
@@ -59,33 +59,25 @@ export default function HomePage() {
       <ProofFeature
         employer="healthwarehouse"
         kicker="Architecture"
-        title="Three pharmacy brands on one codebase."
-        body="Every new brand brought requirements of its own: the kind that usually splits a product into separate apps. I built the multi-brand system that lets them all run on one shared core, with configuration and a few per-brand components carrying the differences."
-        tags={["Next.js", "React", "GraphQL", "Zustand", "MUI"]}
+        title="Each difference goes to the smallest place that can hold it."
+        body="Three pharmacy brands needed their own colors, typefaces, features, and legal copy: the kind of requirements that usually split a product into separate apps. I built the multi-brand system that keeps them on one shared core, and the rule the team follows when a brand needs something new."
+        result="PharmcoRx joined as a config file, env files, and build scripts. Its redesign got its own typefaces, header, and homepage, and the other two brands came out unchanged."
         href="/work/healthwarehouse#architecture"
         linkLabel="See the architecture"
-        outcomes={[
-          { value: "PharmcoRx", label: "added with a config file, env files, and build scripts, then given its own fonts, colors, and corners while the other two kept their existing theme exactly." },
-        ]}
-        evidence={<BrandConfigDiagram />}
+        evidence={<DifferenceRouting />}
       />
 
       <CurveDivider above="surface" below="gradient-page" />
 
       <ProofFeature
-        flip
         onGradient
         employer="healthwarehouse"
         kicker="Product and UX"
         title="A partner portal, shaped before it was built."
-        body="Pharmacy partners ran orders, reports, and API changes through email and engineers. I wrote the pitch for a self-service portal, reviewed it with frontend and backend engineers, and am building it, with the UX decided around the operations staff who’ll use it."
-        tags={["Product shaping", "UX", "Next.js", "TypeScript", "GraphQL"]}
+        body="Pharmacy partners ran orders, reports, and API changes through email and engineers. I wrote the pitch for a self-service portal, reviewed it with frontend and backend engineers, and am building it around the operations staff who’ll use it."
+        result="Working screens for 9 of the pitch’s 10 areas. API keys wait on a decision the pitch flagged at the start."
         href="/work/partner-portal"
         linkLabel="Read the case study"
-        outcomes={[
-          { value: "Labeled filters", label: "chosen over a search box with chips, because of who uses it." },
-          { value: "9 areas", label: "with working screens so far. Still in progress." },
-        ]}
         evidence={<PortalShapingDiagram />}
       />
 
@@ -93,27 +85,20 @@ export default function HomePage() {
 
       <ProofFeature
         employer="healthwarehouse"
-        kicker="Quality"
-        title="Accessibility issues, fixed and re-checked."
-        body="Audits kept finding problems: forms that failed silently for screen readers, controls a keyboard couldn’t operate, dialogs nested inside dialogs. I fixed most of them on the way to a third-party accessibility seal on HealthWarehouse, then wrote the automated tests that re-check it."
-        tags={["WCAG 2.2", "Playwright", "axe-core", "Screen readers"]}
+        kicker="Accessibility"
+        title="Fixed for what a screen reader hears, not for how it looks."
+        body="Audits kept finding markup that looked fine and told a screen reader something wrong: forms that failed silently, controls a keyboard couldn’t reach, dialogs nested inside dialogs. I fixed most of them on the way to a third-party accessibility seal, then wrote the Playwright and axe-core suites that re-check them."
+        result="210 of 210 axe-core scans clean: 42 routes in five browser and device profiles. The suites run by hand, not yet in CI."
         href="/work/healthwarehouse#evidence"
         linkLabel="See the evidence"
-        outcomes={[
-          { value: "Announced", label: "Form errors and confirmations now reach screen readers across checkout, payments, and account forms." },
-          { value: "40+ routes", label: "re-checked by axe-core in five browser and device profiles." },
-        ]}
-        evidence={<AccessibilityTrail />}
+        evidence={<DialogFixExample />}
       />
 
       <NarrativeSection
         title="Different rooms, same habit."
-        body="Design, development, consulting, architecture: in every role, I notice how something gets used, then build toward that instead of around it."
+        body="Design, development, consulting, architecture: in every role, I notice how something gets used, then build toward that instead of around it. Each one left a habit the next one still uses."
       >
-        <EmployerMarquee
-          label="Where I’ve worked"
-          employers={["healthwarehouse", "ingage", "kroger", "cbts", "cincinnati-bell", "trivantis", "ginghamsburg"]}
-        />
+        <CareerArc />
         <div className="mt-space-4">
           <Button href="/about" variant="bordered">
             More about me

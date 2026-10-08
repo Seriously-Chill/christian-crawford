@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
+import { CaseSummary } from "@/components/sections/CaseSummary";
 import { NarrativeSection } from "@/components/sections/NarrativeSection";
 import { FeaturePanel } from "@/components/ui/FeaturePanel";
 import { EvidenceGrid } from "@/components/ui/EvidenceGrid";
@@ -167,12 +168,31 @@ export default function HealthWarehousePage() {
       />
       <CurveDivider above="gradient-page" below="surface" />
 
+      <CaseSummary
+        problem={{
+          text: "Three brands, each with its own colors, typefaces, corners, features, and legal copy. Copy a page often enough to handle that and you have three apps.",
+          href: "#differences",
+          linkLabel: "How the brands differ",
+        }}
+        rule={{
+          text: "Fork at the smallest unit. A value goes to the brand’s config, markup to the smallest per-brand component, and shared behavior stays in a hook.",
+          href: "#architecture",
+          linkLabel: "Where each difference goes",
+        }}
+        proof={{
+          text: "PharmcoRx arrived as a config file, env files, and build scripts. After its redesign, the other two brands reproduced their themes exactly, and its own axe scans came back 210 of 210 clean.",
+          href: "#pharmcorx",
+          linkLabel: "What was measured",
+        }}
+      />
+
       <NarrativeSection title="Three brands that stay one platform.">
         <BrandScreens />
         <EvidenceGrid items={changed} className="mt-space-5" />
       </NarrativeSection>
 
       <NarrativeSection
+        id="differences"
         title="Three brands, different in real ways."
         body="Each brand has its own colors, typefaces, corners, features, and legal copy. The easy way to handle that is to copy a page and change it. Do that often enough and you have three apps."
       >
@@ -201,6 +221,7 @@ export default function HealthWarehousePage() {
       </NarrativeSection>
 
       <NarrativeSection
+        id="pharmcorx"
         title="PharmcoRx was the test."
         body="It arrived in June 2026 as a config file, env files, and build scripts, with no structural change. Its redesign in September needed its own typefaces, corners, header, footer, and homepage, and the other two brands had to come out unchanged."
       >

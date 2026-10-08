@@ -30,14 +30,15 @@ Content comes from Christian's own work and résumé. Don't invent roles, figure
 
 Every color is a token, and every token follows the visitor's choice in the color picker (`src/components/ui/ColorPicker.tsx`). Never hard-code a color in a component. If a color bypasses the tokens, it breaks as soon as someone picks another theme.
 
-- **The default theme is charcoal gray.** Primary is `#525252`, secondary is `#767676`, and the default text on colored surfaces (`on-header`) is white. The fallbacks in `globals.css` match it, so the first paint never flashes another color.
+- **The default theme is spruce, the site's signature color.** A deep green-teal: primary is `#1b3d41`, secondary is `#295b53`, accent is `#2c666d`, and the default text on colored surfaces (`on-header`) is white. The fallbacks in `globals.css` match it, so the first paint never flashes another color. Gray stays available in the picker.
+- **Accent means something.** On white, `accent` marks only what matters: a decision, an outcome (a proof's result, a case study's proof), the step a diagram leads to, an active control, a focus ring. Headings and running text are ink, never accent, so the color keeps its meaning. On a colored ground the same job falls to the strongest `on-header` edge.
 - **Hue themes** work around the whole color wheel.
   - The picker solves each hue's lightness for a fixed brightness (relative luminance), so every hue reads equally light.
   - On a hue theme, colored surfaces are light, so the text on them (`on-header`) switches to ink.
   - `accent` is a deep shade of the same hue. It's used for text and focus rings on white.
 - **Neutral stops:** gray (the default), white and black. Each sets its own values for `on-header`, `accent` and the button edge.
 - **Strengths are tokens too.** Secondary text is `text-muted` (`text-on-header-muted` on a colored ground), quieter meta text and logos `text-subtle`, decorative arrows `text-faint`. Lines are `border-hairline` (dividers, rules, diagram frames) or `border-line` (boxes in diagrams, pills, round controls), with `on-header-hairline` and `on-header-line` on colored grounds. Never type an opacity inline (`text-ink/72`); change the token instead. Only one-off details inside an illustration keep their own.
-- **Contrast is tested, not assumed.** Every page is checked for WCAG 2.2 AA at 28 picker settings (`tests/a11y-colors.spec.ts`). A new color pairing has to pass there too.
+- **Contrast is tested, not assumed.** Every page is checked for WCAG 2.2 AA at 29 picker settings (`tests/a11y-colors.spec.ts`). A new color pairing has to pass there too.
 
 ## Type
 

@@ -1,48 +1,54 @@
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
-import { EmployerLogo } from "@/components/ui/EmployerLogo";
 import { LineIcon } from "@/components/ui/LineIcon";
+import { BrandConfigDiagram } from "@/components/visuals/BrandConfigDiagram";
 import { RESUME_PDF } from "@/lib/links";
 import { textDisplay } from "@/lib/type";
 
-// What the current role actually covers, in the About page's own words:
-// sentences rather than loose figures, which read as résumé filler here.
-const now = [
-  "Leading frontend architecture for healthcare products",
-  "A configurable pharmacy platform in Next.js, React, and GraphQL",
-  "Accessibility, automated testing, and standards for AI-assisted development",
-];
-
 /**
- * The home hero, with an "at a glance" panel beside it. Near full viewport:
- * `min-height: calc(100dvh - 64px)`, 64px being the header's height. It
- * doesn't animate in: the first thing on the site is there when it loads.
+ * The home hero: the belief as a full-width statement, then on glass, the
+ * proof of it, drawn from real work (`BrandConfigDiagram`), beside the
+ * introduction. What I'm doing now is one line under the calls to action,
+ * not a panel of its own; on phones it comes after the figure, so the
+ * figure starts inside the first screen.
+ *
+ * From `md` up it fills the first viewport (`100dvh - 64px`, 64px being the
+ * header's height). On phones it takes only the height it needs rather
+ * than a forced full screen. It doesn't animate in: the first thing on the
+ * site is there when it loads.
  */
 export function Opening() {
   return (
     <Section
       ground="gradient"
       className="relative overflow-hidden"
-      innerClassName="relative grid min-h-[calc(100dvh-64px)] content-center gap-space-6 md:grid-cols-[3fr_2fr] md:items-center md:gap-space-5"
+      innerClassName="relative grid gap-space-4 pt-space-4 md:min-h-[calc(100dvh-64px)] md:grid-cols-[1fr_1fr] md:grid-rows-[auto_auto_1fr] md:content-center md:gap-x-space-6 md:gap-y-space-5 md:pt-space-5"
     >
-      <div>
-        <h1 className={`max-w-[11em] text-on-header ${textDisplay}`}>
-          I make complicated software simple.
-        </h1>
-        <p className="mt-space-4 max-w-xl text-h5 lg:mt-space-5 text-on-header-muted">
-          I’m a senior frontend engineer who came up through design. I take product
-          problems from “what should this be?” to a shipped, tested interface on an
-          architecture other engineers can live with.
+      <h1 className={`max-w-[17em] text-on-header md:col-span-2 ${textDisplay}`}>
+        I make complicated software simple,{" "}
+        <span className="text-on-header-muted">without losing what makes it work.</span>
+      </h1>
+      <div className="md:col-start-1 md:row-start-2">
+        <p className="max-w-xl text-h5 text-on-header-muted">
+          I’m a senior frontend engineer who came up through design. I take product problems from
+          “what should this be?” to a shipped, tested interface on an architecture other engineers
+          can live with.
         </p>
-        <div className="mt-space-5 flex flex-wrap gap-space-2">
+        <div className="mt-space-4 flex flex-wrap gap-space-2">
           <Button href="/work">See the work</Button>
           <Button href="/contact" variant="bordered-inverse">
             Get in touch
           </Button>
         </div>
-        <p className="mt-space-3 text-body text-on-header-muted">
-          Open to senior frontend and frontend architecture roles: remote, or hybrid in
-          Cincinnati.
+      </div>
+      <div className="rounded-xl glass p-space-3 sm:p-space-4 md:col-start-2 md:row-span-2 md:row-start-2 md:self-start">
+        <BrandConfigDiagram />
+      </div>
+      <div className="md:col-start-1 md:row-start-3">
+        <p className="max-w-xl text-body text-on-header-muted">
+          <span className="text-on-header">Now:</span> Senior Software Engineer at HealthWarehouse,
+          leading frontend architecture. Open to senior frontend and architecture roles, remote or
+          hybrid in Cincinnati.
         </p>
         <a
           href={RESUME_PDF}
@@ -51,25 +57,6 @@ export function Opening() {
           <LineIcon name="download" />
           Download résumé (PDF)
         </a>
-      </div>
-      <div className="rounded-xl glass p-space-3 sm:p-space-4">
-        <p className="text-label text-on-header-muted">Now</p>
-        <div className="mt-space-2 flex text-on-header [--logo-h:1.75rem]">
-          <EmployerLogo employer="healthwarehouse" labelled />
-        </div>
-        <p className="mt-space-2 text-body text-on-header">Senior Software Engineer</p>
-        <ul className="mt-space-3 space-y-space-2 border-t border-on-header-hairline pt-space-3">
-          {now.map((item) => (
-            <li key={item} className="flex gap-space-2 text-body text-on-header">
-              <span aria-hidden="true" className="mt-[0.55em] size-1.5 shrink-0 rounded-circle bg-on-header/60" />
-              {item}
-            </li>
-          ))}
-        </ul>
-        <p className="mt-space-3 border-t border-on-header-hairline pt-space-3 text-body text-on-header-muted">
-          Twenty years of experience, from design and consulting to enterprise UI at Ingage,
-          Kroger, CBTS, and Trivantis.
-        </p>
       </div>
     </Section>
   );

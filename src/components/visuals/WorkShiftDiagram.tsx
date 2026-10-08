@@ -50,7 +50,7 @@ const rows: { id: string; title: string; stages: Stage[] }[] = [
         name: "Testing and verification",
         weight: 5,
         swatch: swatch.verification,
-        text: "Automated tests of every page in two browsers, at all 28 color settings. The counts are further down.",
+        text: "Automated tests of every page in two browsers, at all 29 color settings. The counts are further down.",
       },
     ],
   },

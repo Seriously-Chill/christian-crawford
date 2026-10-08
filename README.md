@@ -26,10 +26,9 @@ npm run test:lighthouse  # production build + Lighthouse CI budgets
 
 The Playwright suite builds and serves the site on port 4310. It covers:
 
-- **Accessibility**: axe-core on every route, plus WCAG 2.2 AA contrast on every route at each of the 28 settings the header's color picker can produce (`tests/a11y-colors.spec.ts`)
+- **Accessibility**: axe-core on every route, plus WCAG 2.2 AA contrast on every route at each of the 29 settings the header's color picker can produce (`tests/a11y-colors.spec.ts`)
 - **Keyboard**: navigation, menus and the color picker (`tests/keyboard.spec.ts`)
 - **Reflow and text spacing**: content at 320px and under WCAG text-spacing overrides (`tests/reflow.spec.ts`)
-- **Logo strip**: it drifts, pauses, follows a mouse drag, steps one logo at a time, and stays still under reduced motion (`tests/marquee.spec.ts`)
 - **Navigation**: page titles, and that client-side page changes are announced and keep focus in the right place (`tests/navigation.spec.ts`)
 
 Screen-reader passes are manual; the checklist is in [`docs/screen-reader-checklist.md`](docs/screen-reader-checklist.md).

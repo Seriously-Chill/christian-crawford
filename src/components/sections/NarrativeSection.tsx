@@ -32,7 +32,7 @@ export function NarrativeSection({
   const muted = onGradient ? "text-on-header-muted" : "text-muted";
   return (
     <Section id={id} ground={onGradient ? "gradient" : "surface"}>
-      <h2 className={`${onGradient ? "text-on-header" : "text-accent"} ${textH2}`}>{title}</h2>
+      <h2 className={`${onGradient ? "text-on-header" : "text-ink"} ${textH2}`}>{title}</h2>
       {typeof body === "string" ? (
         <p className={`mt-space-3 max-w-xl text-body lg:mt-space-4 ${muted}`}>{body}</p>
       ) : body ? (

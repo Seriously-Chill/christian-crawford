@@ -213,6 +213,9 @@ test.describe("keyboard", () => {
       await page.keyboard.press("Enter");
       await expect(details).toHaveJSProperty("open", true);
 
+      // The panel's explanation links to how the themes are tested first.
+      await page.keyboard.press(tabKey(page));
+      await expect(page.locator("header details").getByRole("link", { name: "How it’s tested" })).toBeFocused();
       await page.keyboard.press(tabKey(page));
       const slider = page.locator("#hue-picker-input");
       await expect(slider).toBeFocused();
@@ -220,6 +223,8 @@ test.describe("keyboard", () => {
       expect(await hue(page)).toBe("198");
       await expect(slider).toHaveAttribute("aria-valuetext", "Hue 198°");
 
+      await page.keyboard.press(tabKey(page));
+      await expect(page.getByRole("button", { name: "Spruce" })).toBeFocused();
       await page.keyboard.press(tabKey(page));
       await expect(page.getByRole("button", { name: "Aqua" })).toBeFocused();
       await page.keyboard.press(tabKey(page));

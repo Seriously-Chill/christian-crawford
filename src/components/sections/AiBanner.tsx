@@ -5,8 +5,9 @@ import { textH2 } from "@/lib/type";
 import { Section } from "@/components/layout/Section";
 
 /**
- * Points Home visitors to /ai, which Home otherwise never mentions. The
- * right side lists the real files that page's hooks protect.
+ * Points Home visitors to /ai, which Home otherwise never mentions. Its
+ * heading is its own, not /ai's h1 repeated. The right side lists the real
+ * files that page's hooks protect, set as identifiers.
  */
 export function AiBanner() {
   return (
@@ -15,11 +16,11 @@ export function AiBanner() {
         <div>
           <p className="text-label text-on-accent-muted">AI in practice</p>
           <h2 className={`mt-space-2 text-surface lg:mt-space-3 ${textH2}`}>
-            AI helps write the code. I protect the rules it follows.
+            This site’s own repository is the evidence.
           </h2>
           <p className="mt-space-3 max-w-md text-body text-on-accent-muted">
-            This site’s own repository runs Claude Code with hooks that flag every change
-            to the agent’s rules for my review.
+            I build it with Claude Code. Hooks stop every change to the agent’s own rules and
+            wait for my review, whether it came from an edit or a shell command.
           </p>
           <div className="mt-space-4">
             <Button href="/ai">See how it works</Button>
@@ -27,7 +28,7 @@ export function AiBanner() {
         </div>
         <ul aria-label="Files the hooks protect" className="flex flex-wrap gap-space-1 md:justify-end">
           {GOVERNED_FILES.map((file) => (
-            <Pill as="li" key={file} tone="on-accent">
+            <Pill as="li" key={file} tone="on-accent" mono>
               {file}
             </Pill>
           ))}

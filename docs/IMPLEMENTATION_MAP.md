@@ -19,24 +19,23 @@ Every route sits on the gradient canvas. White sections paint their own `bg-surf
 
 | Route | Sections, in order | Purpose |
 |---|---|---|
-| `/` | `Opening` → three `ProofFeature`s, each with an evidence figure (Architecture → HealthWarehouse, `BrandConfigDiagram`; Product and UX → partner portal, `PortalShapingDiagram`; Quality → accessibility evidence, `AccessibilityTrail`) → `NarrativeSection` with `EmployerMarquee` → `AiBanner` | Says what Christian does, then shows one piece of evidence for each part of it, then points to `/about` and `/ai` |
-| `/work` | `PageIntro` → `ProjectRows` | HealthWarehouse, the partner portal, Ingage, Kroger and earlier work as alternating rows, HealthWarehouse first |
-| `/work/healthwarehouse` | `PageIntro` (with `tagline`, `meta`) → `NarrativeSection`s: What changed (`BrandScreens`, `EvidenceGrid`) → The problem (`ComparisonTable`) → The rule (`DifferenceRouting`, `EvidenceGrid`) → Where it bent (`EvidenceGrid`) → The test (`StepChain`, `ComparisonTable`) → Accessibility (`DialogFixExample`, `MenuAnnouncementExample`, `FeaturePanel` with `StatList`) → What I'd change (`TileList`) → Role (`TileList`) | The in-depth case study: the forking rule, its costs, and the brand that tested it |
-| `/work/partner-portal` | `PageIntro` (with `meta`) → `NarrativeSection`s: The problem (`PartnerRequestFlow`) → Shaping (`EvidenceGrid`) → The key decision (`EvidenceGrid`) → Architecture (`SheetStackDiagram`, `EvidenceGrid`) → The hard part (`EvidenceGrid`) → Where it stands (`DetailGrid`) → Role (`TileList`) | The product-shaping and UX case study |
+| `/` | `Opening` (with `BrandConfigDiagram` on glass) → three `ProofFeature`s, each built around an evidence figure (Architecture → the forking rule, `DifferenceRouting`; Product and UX → partner portal, `PortalShapingDiagram`; Accessibility → `DialogFixExample`) → `NarrativeSection` with `CareerArc` → `AiBanner` | States the thesis and proves it in the first screen, then shows one piece of evidence for each part of the work, then points to `/about` and `/ai` |
+| `/work` | `PageIntro` → `ProjectRows` | The two case studies as alternating rows with their figures, then Ingage, Kroger and earlier work as a plain list |
+| `/work/healthwarehouse` | `PageIntro` (with `tagline`, `meta`) → `CaseSummary` → `NarrativeSection`s: What changed (`BrandScreens`, `EvidenceGrid`) → The problem (`ComparisonTable`) → The rule (`DifferenceRouting`, `EvidenceGrid`) → Where it bent (`EvidenceGrid`) → The test (`StepChain`, `ComparisonTable`) → Accessibility (`DialogFixExample`, `MenuAnnouncementExample`, `FeaturePanel` with `StatList`) → What I'd change (`TileList`) → Role (`TileList`) | The in-depth case study: the forking rule, its costs, and the brand that tested it |
+| `/work/partner-portal` | `PageIntro` (with `meta`) → `CaseSummary` → `NarrativeSection`s: The problem (`PartnerRequestFlow`) → Shaping (`EvidenceGrid`) → The key decision (`EvidenceGrid`) → Architecture (`SheetStackDiagram`, `EvidenceGrid`) → The hard part (`EvidenceGrid`) → Where it stands (`DetailGrid`) → Role (`TileList`) | The product-shaping and UX case study |
 | `/ai` | `PageIntro` → `WorkShiftDiagram` → `GovernanceOverview` → `GovernanceFlow` → why governance files → why this subset → what the hooks catch (`NarrativeSection onGradient`, `EvidenceCard onGradient` ×3) → how this site is built (`FeaturePanel` with `StatList`) | How AI fits the workflow, told through this repo's Claude Code governance hooks |
 | `/about` | `PageIntro` → `CareerProgression` → `DesignBackground` → `CurrentInterests` | Career timeline, the path from design to engineering, current interests |
 | `/contact` | `Contact` | Contact tiles; the page is its own closing band |
 
 ## Client/Server boundary
 
-Everything renders as a Server Component except these six Client Components:
+Everything renders as a Server Component except these five Client Components:
 
 1. `Nav`: the current route, and the mobile menu's open state
 2. `SmoothScrollProvider`: Lenis
 3. `PageTransition`: intercepting clicks and tracking the pathname
 4. `RevealOnScroll`: IntersectionObserver. Content stays visible under reduced motion or without JS.
 5. `ColorPicker`: the slider and the stored choice
-6. `EmployerMarquee`: the drift, dragging and swiping, the back/forward steps, and the pause toggle
 
 ## Other pieces
 

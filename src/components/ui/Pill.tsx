@@ -17,12 +17,15 @@ const tones: Record<Tone, string> = {
  *    `on-accent` on an `accent` fill (the AI banner)
  *  - `filled`: a `surface` fill, for pills that sit on a tinted panel
  *  - `compact`: `space-1` side padding, for long labels in a narrow column
+ *  - `mono`: set in the system monospace, for a real identifier (a file
+ *    path, an ARIA role, a config key), never for an ordinary label
  */
 export function Pill({
   as: Tag = "span",
   tone = "default",
   filled = false,
   compact = false,
+  mono = false,
   className = "",
   children,
 }: {
@@ -30,6 +33,7 @@ export function Pill({
   tone?: Tone;
   filled?: boolean;
   compact?: boolean;
+  mono?: boolean;
   className?: string;
   children: ReactNode;
 }) {
@@ -37,7 +41,7 @@ export function Pill({
     <Tag
       className={`rounded-pill border ${tones[tone]} ${filled ? "bg-surface" : ""} ${
         compact ? "px-space-1" : "px-space-2"
-      } py-1 text-label ${className}`}
+      } py-1 ${mono ? "font-mono text-sm" : "text-label"} ${className}`}
     >
       {children}
     </Tag>

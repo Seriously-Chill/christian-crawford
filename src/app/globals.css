@@ -30,25 +30,29 @@
 
   /* Colors — primary/secondary in HSL, driven by `--hue-*`/`--l-*` custom
      properties so ColorPicker.tsx can rotate them live. The fallbacks below
-     are the default gray stop (hsl(240 0% 32%) = #525252 to
-     hsl(240 0% 46.27%) = #767676, white on-header, accent #525252 on white),
-     matching DEFAULT_THEME in src/lib/theme.ts, which ColorPicker.tsx, the
-     share image and the manifest read, so first paint matches
-     post-hydration; every other stop sets the tokens it differs on
-     explicitly. Hue grounds are light, so `on-header` is ink there; the gray
-     and black stops use white. `accent` is primary as foreground on white
-     (kickers, button labels, focus rings), a deep shade at `--l-accent`,
-     except in the white stop, where primary is white and accent is ink. */
+     are the default spruce stop (hsl(186 42% 18%) = #1b3d41 to
+     hsl(170 38% 26%) = #295b53, white on-header, accent hsl(186 42% 30%) =
+     #2c666d on white), matching DEFAULT_THEME in src/lib/theme.ts, which
+     ColorPicker.tsx, the share image and the manifest read, so first paint
+     matches post-hydration; every other stop sets the tokens it differs on
+     explicitly. Hue grounds are light, so `on-header` is ink there; the
+     spruce, gray and black stops use white.
+
+     `accent` is the one signal color. On white it marks what matters: a
+     decision, an outcome, the step a diagram leads to, an active control,
+     a focus ring. Headings and running text are ink, never accent, so the
+     color keeps its meaning. It's a deep shade at `--l-accent`, except in
+     the white stop, where primary is white and accent is ink. */
   --color-primary: hsl(
-    var(--hue-primary, 240) var(--s-primary, 0%) var(--l-primary, 32%)
+    var(--hue-primary, 186) var(--s-primary, 42%) var(--l-primary, 18%)
   );
   --color-secondary: hsl(
-    var(--hue-secondary, 240) var(--s-secondary, 0%)
-      var(--l-secondary, 46.27%)
+    var(--hue-secondary, 170) var(--s-secondary, 38%)
+      var(--l-secondary, 26%)
   );
   --color-accent: var(
     --accent,
-    hsl(var(--hue-primary, 240) var(--s-primary, 0%) var(--l-accent, 32%))
+    hsl(var(--hue-primary, 186) var(--s-primary, 42%) var(--l-accent, 30%))
   );
   --color-ink: #1b1b1d;
   --color-surface: #ffffff;
@@ -236,9 +240,29 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--focus-ring, var(--color-accent));
     outline-offset: 3px;
     border-radius: 4px;
+  }
+
+  /* Accent is a ring on white, but on a colored ground it can be the
+     ground's own color (spruce accent on a spruce gradient). So each ground
+     names its ring, and the nearest one wins: on-header on the gradients,
+     header and footer, accent again on any white panel inside them, and
+     surface on an accent fill. */
+  .bg-page-gradient,
+  .bg-header-gradient,
+  .bg-primary,
+  header,
+  footer {
+    --focus-ring: var(--color-on-header);
+  }
+  .bg-surface,
+  .bg-surface-raised {
+    --focus-ring: var(--color-accent);
+  }
+  .bg-accent {
+    --focus-ring: var(--color-surface);
   }
 
   @media (prefers-reduced-motion: reduce) {

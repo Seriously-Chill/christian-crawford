@@ -32,7 +32,7 @@ function Tree({ node }: { node: Node }) {
   return (
     <li>
       <p className="flex flex-wrap items-baseline gap-x-space-1 text-body text-muted">
-        {node.role ? <span className="rounded-pill border border-ink/20 px-space-1 text-label leading-6 text-ink">{node.role}</span> : null}
+        {node.role ? <span className="rounded-pill border border-ink/20 px-space-1 font-mono text-sm leading-6 text-ink">{node.role}</span> : null}
         {node.name}
       </p>
       {node.children ? (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
+import { CaseSummary } from "@/components/sections/CaseSummary";
 import { NarrativeSection } from "@/components/sections/NarrativeSection";
 import { EvidenceGrid } from "@/components/ui/EvidenceGrid";
 import { DetailGrid } from "@/components/ui/DetailGrid";
@@ -116,7 +117,26 @@ export default function PartnerPortalPage() {
       />
       <CurveDivider above="gradient-page" below="surface" />
 
+      <CaseSummary
+        problem={{
+          text: "Partners had no tool of their own. Orders, record fixes, reports, and API keys went through email, and engineers were in the path of routine work.",
+          href: "#email",
+          linkLabel: "How requests worked",
+        }}
+        rule={{
+          text: "Design for the operations staff who use it: labeled filters instead of a search box with chips, records that open over the list with a link to share, and every list usable from a keyboard.",
+          href: "#decision",
+          linkLabel: "The decisions, and their costs",
+        }}
+        proof={{
+          text: "Screens for 9 of the pitch’s 10 areas, reviewed and tested against mock data before their API existed. API keys wait on decisions the pitch flagged at the start.",
+          href: "#status",
+          linkLabel: "What’s built so far",
+        }}
+      />
+
       <NarrativeSection
+        id="email"
         title="Everything went through email."
         body="Pharmacy partners had no tool of their own. Looking up an order, correcting a patient record, pulling a report, or rotating an API key meant emailing support and waiting for someone to query the database. Partners couldn’t check status, requests had no priority or history, and engineers were in the path of routine work."
       >
@@ -155,6 +175,7 @@ export default function PartnerPortalPage() {
       </NarrativeSection>
 
       <NarrativeSection
+        id="status"
         title="Still being built."
         body="Screens for every area in the pitch exist but one. API keys, and the choice of a multi-factor sign-in provider, wait on decisions the pitch flagged at the start."
       >

@@ -8,7 +8,7 @@ import { DEFAULT_THEME } from "@/lib/theme";
  * Slack, or a message. Generated at build time from the site's own type and
  * default colours (the picker's first-paint hue, see globals.css), so it
  * stays in step with the design rather than being a separate asset: the
- * default gray, with white text.
+ * default spruce, with white text.
  */
 export const alt = "Christian Crawford — I make complicated software simple.";
 export const size = { width: 1200, height: 630 };

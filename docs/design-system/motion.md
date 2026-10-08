@@ -48,14 +48,7 @@ Details:
 
 ## Ambient motion
 
-The employer logo strip drifts one full set of logos every 60s, linearly. Because it moves on its own:
-- it pauses on hover and while being dragged
-- it has a pause button (WCAG 2.2.2)
-- it stays still under reduced motion
-
-People can also move it themselves instead of waiting: drag with a mouse, swipe on touch or a trackpad, or step one logo at a time with the back and forward buttons (a 450ms ease-out step that lands on a tile edge). The drift picks up again 2s after they stop. The timing lives in `EmployerMarquee.tsx`, since it's driven by an animation-frame loop rather than CSS.
-
-Nothing else on the site loops.
+Nothing on the site moves on its own or loops. (Home's drifting logo strip was removed: logos in motion read as a client list, and it was the one thing that moved without being asked.) Motion marks evidence arriving and responds to what a visitor does, such as choosing a theme.
 
 ## Adding motion
 

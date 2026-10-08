@@ -32,8 +32,8 @@ const siteStack = [
 ];
 
 const siteChecks = [
-  { value: "303", label: "automated Playwright tests across every page, run in Chromium and WebKit" },
-  { value: "28", label: "color settings each page is checked at for WCAG 2.2 AA contrast" },
+  { value: "307", label: "automated Playwright tests across every page, run in Chromium and WebKit" },
+  { value: "29", label: "color settings each page is checked at for WCAG 2.2 AA contrast" },
   { value: "22", label: "keyboard tests for navigation, menus, and the color picker" },
 ];
 
@@ -132,7 +132,7 @@ export default function AiPage() {
               The picker in the header can put the site on any color, gray, white, or black, so
               the contrast suite checks every page at each of them. The suites run in CI on every
               push, so a change that breaks contrast at any setting fails the build, whether I
-              wrote it or an agent did. Only six components run in the browser; everything else
+              wrote it or an agent did. Only five components run in the browser; everything else
               renders on the server.
             </p>
             <Tags items={siteStack} />

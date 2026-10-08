@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, type CSSProperties, type KeyboardEvent } from "react";
 import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
 
@@ -22,33 +23,39 @@ const Y_PRIMARY = 0.44;
 const Y_SECONDARY = 0.52;
 const Y_ACCENT = 0.09;
 
-// Stored positions 0–359 are hues; past the wheel, three neutral stops,
-// each a 40-wide zone (gray 360–399, white 400–439, black 440–479). The
-// slider only covers hues (the neutrals are swatch buttons), but the
-// encoding keeps them so saved choices and tests keep working.
+// Stored positions 0–359 are hues; past the wheel, fixed stops, each a
+// 40-wide zone (gray 360–399, white 400–439, black 440–479, spruce
+// 480–519). The slider only covers hues (the stops are swatch buttons), but
+// the encoding keeps them so saved choices and tests keep working.
 const HUE_END = 360;
 const STOP_WIDTH = 40;
-const STOPS = ["gray", "white", "black"] as const;
+const STOPS = ["gray", "white", "black", "spruce"] as const;
 type Stop = (typeof STOPS)[number];
 const SLIDER_MAX = HUE_END + STOPS.length * STOP_WIDTH - 1;
 const stopPosition = (stop: Stop) => HUE_END + STOPS.indexOf(stop) * STOP_WIDTH + STOP_WIDTH / 2;
-// The site's default look: charcoal gray. globals.css's first-paint
-// fallbacks match it, so a first visit paints gray with no flash.
-const DEFAULT_POSITION = stopPosition("gray");
+// The site's default look: spruce, the signature color. globals.css's
+// first-paint fallbacks match it, so a first visit paints spruce with no
+// flash.
+const DEFAULT_POSITION = stopPosition("spruce");
 
-// Fixed tokens per neutral stop. Gray and black are the only dark grounds,
-// so they flip on-header to white (46.27%, which renders as #767676, is the
-// lightest gray that keeps white at ≥4.5:1 after 8-bit rounding) and shade
-// the picker panel with black instead of white.
-// That leaves gray no headroom, so its transition name stays fully opaque.
+// Fixed tokens per stop. Gray, black and spruce are the dark grounds, so
+// they flip on-header to white and shade the picker panel with black
+// instead of white. Gray's lighter end (46.27%, which renders as #767676)
+// is the lightest gray that keeps white at ≥4.5:1 after 8-bit rounding,
+// which leaves it no headroom, so its transition name stays fully opaque.
 // White sets accent to ink, since primary itself is white there, and gives
-// the white primary button an ink edge so it doesn't vanish.
+// the white primary button an ink edge so it doesn't vanish. Spruce is the
+// only stop with a hue of its own (`h`), and the only one whose accent is
+// lighter than its primary (`lAccent`): a deep teal that still reads as a
+// color, not as ink, on white.
 const INK = "#1b1b1d";
 const STOP_TOKENS: Record<
   Stop,
   {
+    h?: [number, number];
     s: [number, number];
     l: [number, number];
+    lAccent?: number;
     onHeader?: string;
     accent?: string;
     buttonEdge?: string;
@@ -56,10 +63,19 @@ const STOP_TOKENS: Record<
     fadeAlpha?: string;
   }
 > = {
+  spruce: {
+    h: [DEFAULT_THEME.primaryHue, DEFAULT_THEME.secondaryHue],
+    s: [DEFAULT_THEME.primarySaturation, DEFAULT_THEME.secondarySaturation],
+    l: [DEFAULT_THEME.primaryLightness, DEFAULT_THEME.secondaryLightness],
+    lAccent: DEFAULT_THEME.accentLightness,
+    onHeader: DEFAULT_THEME.onHeader,
+    panelShade: "#000000",
+    fadeAlpha: "100%",
+  },
   gray: {
     s: [0, 0],
-    l: [DEFAULT_THEME.primaryLightness, DEFAULT_THEME.secondaryLightness],
-    onHeader: DEFAULT_THEME.onHeader,
+    l: [32, 46.27],
+    onHeader: "#ffffff",
     panelShade: "#000000",
     fadeAlpha: "100%",
   },
@@ -134,7 +150,8 @@ const round = (n: number) => Math.round(n * 100) / 100;
 
 function stopGradient(stop: Stop) {
   const t = STOP_TOKENS[stop];
-  return `linear-gradient(135deg, hsl(240 ${t.s[0]}% ${t.l[0]}%), hsl(240 ${t.s[1]}% ${t.l[1]}%))`;
+  const [h0, h1] = t.h ?? [240, 240];
+  return `linear-gradient(135deg, hsl(${h0} ${t.s[0]}% ${t.l[0]}%), hsl(${h1} ${t.s[1]}% ${t.l[1]}%))`;
 }
 
 function hueGradient(hue: number) {
@@ -162,12 +179,18 @@ const SWATCHES: {
   background: string;
 }[] = [
   {
+    id: "spruce",
+    label: "Spruce",
+    position: stopPosition("spruce"),
+    background: stopGradient("spruce"),
+  },
+  {
     id: "aqua",
     label: "Aqua",
     position: AQUA_HUE,
     background: hueGradient(AQUA_HUE),
   },
-  ...STOPS.map((stop) => ({
+  ...STOPS.filter((stop) => stop !== "spruce").map((stop) => ({
     id: stop,
     label: stopLabel(stop),
     position: stopPosition(stop),
@@ -176,8 +199,8 @@ const SWATCHES: {
 ];
 
 // The custom properties a position sets on <html>; `null` means "remove, fall
-// back to globals.css". The fallbacks there are the gray default's, so
-// anything gray differs on (hues' ink text, white panel shade, faded
+// back to globals.css". The fallbacks there are the spruce default's, so
+// anything spruce differs on (hues' ink text, white panel shade, faded
 // transition name) is set explicitly rather than left to fall back. Also
 // persisted as-is (see `THEME_STORAGE_KEY`) so the
 // pre-paint script in layout.tsx can restore them without this math.
@@ -185,14 +208,15 @@ function themeVars(position: number): Record<string, string | null> {
   const stop = stopAt(position);
   if (stop) {
     const t = STOP_TOKENS[stop];
+    const [h0, h1] = t.h ?? [240, 240];
     return {
-      "--hue-primary": "240",
-      "--hue-secondary": "240",
+      "--hue-primary": String(h0),
+      "--hue-secondary": String(h1),
       "--s-primary": `${t.s[0]}%`,
       "--s-secondary": `${t.s[1]}%`,
       "--l-primary": `${t.l[0]}%`,
       "--l-secondary": `${t.l[1]}%`,
-      "--l-accent": `${t.l[0]}%`,
+      "--l-accent": `${t.lAccent ?? t.l[0]}%`,
       "--on-header": t.onHeader ?? null,
       "--accent": t.accent ?? null,
       "--button-edge": t.buttonEdge ?? null,
@@ -248,12 +272,14 @@ function describePosition(position: number) {
 }
 
 /**
- * A small, playful color picker, not a theme switch. The hue slider rotates
+ * The site's theme config, shown as evidence rather than as a toy: the same
+ * idea as the pharmacy platform, where one codebase reads each brand's
+ * colors from config. The hue slider rotates
  * `--color-primary`/`--color-secondary` together, solving lightness per hue
  * (see `Y_PRIMARY`) so every hue is equally light and ink text keeps 4.5:1.
- * A swatch row covers aqua and the gray/white/black stops as presets. Built
- * on native `<details>/<summary>` for keyboard and screen-reader disclosure
- * semantics.
+ * A swatch row covers spruce (the default), aqua and the gray/white/black
+ * stops as presets. Built on native `<details>/<summary>` for keyboard and
+ * screen-reader disclosure semantics.
  */
 export function ColorPicker() {
   // Uncontrolled on purpose: the slider value, the swatches' pressed state
@@ -330,7 +356,7 @@ export function ColorPicker() {
       <summary
         ref={summaryRef}
         className="relative flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-circle transition-transform duration-hover hover:scale-105 [&::-webkit-details-marker]:hidden"
-        aria-label="Personalize the site’s color"
+        aria-label="Site theme: one system, several expressions"
       >
         <span
           aria-hidden="true"
@@ -345,13 +371,27 @@ export function ColorPicker() {
           }}
         />
       </summary>
-      <div className="color-panel absolute right-0 top-[calc(100%+12px)] z-50 w-64 origin-top-right rounded-lg p-space-3">
-        <div className="flex items-baseline justify-between gap-space-2">
+      <div className="color-panel absolute right-0 top-[calc(100%+12px)] z-50 w-72 origin-top-right rounded-lg p-space-3">
+        <p className="text-label leading-snug text-on-header">One system, several expressions.</p>
+        <p className="mt-space-1 text-sm leading-snug text-on-header">
+          This site reads its colors from one config, like the pharmacy platform reads each
+          brand’s. Every page is contrast-tested at every preset and at hues around the wheel.{" "}
+          <Link
+            href="/ai#built"
+            onClick={() => {
+              if (detailsRef.current) detailsRef.current.open = false;
+            }}
+            className="underline underline-offset-2"
+          >
+            How it’s tested
+          </Link>
+        </p>
+        <div className="mt-space-3 flex items-baseline justify-between gap-space-2 border-t border-on-header-hairline pt-space-3">
           <label htmlFor="hue-picker-input" className="text-label text-on-header">
             Color
           </label>
           <span ref={nameRef} className="text-sm text-on-header-muted" aria-live="polite">
-            Gray
+            Spruce
           </span>
         </div>
         <input
