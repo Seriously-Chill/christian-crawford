@@ -23,7 +23,9 @@ export function AiBanner() {
             wait for my review, whether it came from an edit or a shell command.
           </p>
           <div className="mt-space-4">
-            <Button href="/ai">See how it works</Button>
+            <Button href="/ai" variant="on-accent">
+              See how it works
+            </Button>
           </div>
         </div>
         <ul aria-label="Files the hooks protect" className="flex flex-wrap gap-space-1 md:justify-end">

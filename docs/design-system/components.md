@@ -15,7 +15,7 @@ The shared building blocks, grouped by folder under `src/components/`. Use these
 ## UI (`ui/`)
 
 - **`Button`**: the only button shape, a pill with the `label` text style.
-  - **Variants:** `primary` (surface fill, accent label) on a gradient or other colored ground, never a white section, where it has no visible edge; `bordered` on white; `bordered-inverse` on a gradient.
+  - **Variants:** `primary` (surface fill, accent label) on a gradient or other colored ground, never a white section, where it has no visible edge; `bordered` on white; `bordered-inverse` on a gradient; `on-accent` on an `accent` fill (the AI banner), where primary's accent hover would vanish into the ground, so it inverts to a surface outline instead.
   - **Always a link:** every button on the site navigates. `external` opens it in a new tab through `ExternalLink`.
 - **`Pill`**: the one label pill (a tag, a step, a file name), never a control. `tone` is `default`, `on-gradient` or `on-accent`; `filled` adds a `surface` fill and `compact` narrows the padding. `mono` sets it in the system monospace, only for a real identifier (a file path, an ARIA role, a config key), never as decoration. Tags, StepChain, the AI banner and every diagram pill use it.
 - **`ExternalLink`**: a link to another site, opened in a new tab. It adds a visually hidden "(opens in a new tab)" after the visible text, so the accessible name still starts with what's on screen. Use it for every new-tab link.
