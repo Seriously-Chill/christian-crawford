@@ -61,9 +61,7 @@ export default function AiPage() {
         <WorkShiftDiagram />
       </NarrativeSection>
 
-      <CurveDivider above="surface" below="gradient-page" />
       <GovernanceOverview />
-      <CurveDivider above="gradient-page" below="surface" />
 
       <NarrativeSection
         title="Two paths to the same files"
@@ -94,8 +92,6 @@ export default function AiPage() {
         }
       />
 
-      <CurveDivider above="surface" below="gradient-page" />
-
       <NarrativeSection onGradient title="What the hooks catch, and what they don’t">
         <div className="grid gap-space-3 sm:grid-cols-2">
           <EvidenceCard title="What it covers" onGradient>
@@ -117,8 +113,6 @@ export default function AiPage() {
           </div>
         </div>
       </NarrativeSection>
-
-      <CurveDivider above="gradient-page" below="surface" />
 
       <NarrativeSection
         id="built"

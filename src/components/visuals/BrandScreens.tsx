@@ -49,7 +49,7 @@ export function BrandScreens() {
               src={brand.image}
               alt={brand.alt}
               sizes="(min-width: 640px) 33vw, 100vw"
-              className="h-auto w-full rounded-lg border border-line"
+              className="h-auto w-full rounded-md border border-line"
             />
             <h3 className={`mt-space-2 text-ink ${textH5}`}>{brand.name}</h3>
             {brand.site ? (

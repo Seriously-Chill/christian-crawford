@@ -14,7 +14,7 @@ const tones: Record<Tone, string> = {
  * on it, and so is every pill in a diagram, so the shape changes here.
  *
  *  - `tone`: `default` on white, `on-gradient` on the page gradient,
- *    `on-accent` on an `accent` fill (the AI banner)
+ *    `on-accent` on an `accent` fill
  *  - `filled`: a `surface` fill, for pills that sit on a tinted panel
  *  - `compact`: `space-1` side padding, for long labels in a narrow column
  *  - `mono`: set in the system monospace, for a real identifier (a file

@@ -85,16 +85,16 @@ export function BrandConfigDiagram() {
       </svg>
       <div className="rounded-lg border border-on-header-line px-space-2 py-space-2">
         <p className="text-label text-on-header">Each brand’s config</p>
-        <p className="mt-1 text-sm leading-snug text-on-header-muted">{perBrand.join(" · ")}</p>
+        <p className="mt-1 text-base leading-snug text-on-header-muted">{perBrand.join(" · ")}</p>
       </div>
       <span aria-hidden="true" className="mx-auto block h-space-2 w-px bg-on-header-line" />
       <div className="rounded-lg border-2 border-on-header px-space-2 py-space-2">
         <p className={`text-on-header ${textH5}`}>One shared codebase</p>
-        <p className="mt-1 text-sm leading-snug text-on-header">
+        <p className="mt-1 text-base leading-snug text-on-header">
           Every form and checkout step. 7 components pick a per-brand version; ~270 are shared.
         </p>
       </div>
-      <figcaption id="brand-config-caption" className="mt-space-2 text-sm leading-snug text-on-header-muted">
+      <figcaption id="brand-config-caption" className="mt-space-2 text-base leading-snug text-on-header-muted">
         From the HealthWarehouse platform’s three brand configs: the same keys, set differently.
         Dots are the flags.{" "}
         <Link href="/work/healthwarehouse#architecture" className="text-on-header underline underline-offset-2">

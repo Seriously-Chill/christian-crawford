@@ -33,7 +33,7 @@ wording. Screen readers phrase things differently.
 
 ## Controls
 
-- [ ] **Color picker.** The toggle names what it does. The hue slider reads its value as "Hue N°" and updates as you adjust it. The panel’s explanation and its “How it’s tested” link are read first. The Spruce, Aqua, Gray, White and Black buttons read as toggle buttons with their pressed state. The name of the chosen color is announced politely, without interrupting.
+- [ ] **Color picker.** The toggle names what it does. The hue slider reads its value as "Hue N°" and updates as you adjust it. The panel’s explanation and its “How it’s tested” link are read first. The Aqua, Clay, Gray, White and Black buttons read as toggle buttons with their pressed state. The name of the chosen color is announced politely, without interrupting.
 - [ ] **External links** (LinkedIn, GitHub source) say they open in a new tab.
 - [ ] **Résumé link** makes clear it's a PDF download.
 - [ ] **Email links** read the address, not only "Email".

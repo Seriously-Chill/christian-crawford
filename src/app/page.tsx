@@ -2,12 +2,12 @@ import { Opening } from "@/components/sections/Opening";
 import { ProofFeature } from "@/components/sections/ProofFeature";
 import { NarrativeSection } from "@/components/sections/NarrativeSection";
 import { CurveDivider } from "@/components/visuals/CurveDivider";
-import { AiBanner } from "@/components/sections/AiBanner";
+import { AIWorkflowNote } from "@/components/sections/AIWorkflowNote";
 import { Button } from "@/components/ui/Button";
-import { DifferenceRouting } from "@/components/visuals/DifferenceRouting";
 import { PortalShapingDiagram } from "@/components/visuals/PortalShapingDiagram";
 import { DialogFixExample } from "@/components/visuals/DialogFixExample";
 import { CareerArc } from "@/components/visuals/CareerArc";
+import { BrandConfigDiagram } from "@/components/visuals/BrandConfigDiagram";
 import { EMAIL, LINKEDIN_URL, SITE_URL } from "@/lib/links";
 
 const structuredData = {
@@ -59,15 +59,13 @@ export default function HomePage() {
       <ProofFeature
         employer="healthwarehouse"
         kicker="Architecture"
-        title="Each difference goes to the smallest place that can hold it."
-        body="Three pharmacy brands needed their own colors, typefaces, features, and legal copy: the kind of requirements that usually split a product into separate apps. I built the multi-brand system that keeps them on one shared core, and the rule the team follows when a brand needs something new."
-        result="PharmcoRx joined as a config file, env files, and build scripts. Its redesign got its own typefaces, header, and homepage, and the other two brands came out unchanged."
+        title="Three pharmacy brands, one shared platform."
+        body="Each brand needed its own look, features, and legal copy. I built a system that lets them feel distinct without turning them into three separate apps."
+        result="PharmcoRx got its own type, header, and homepage. The other two brands stayed as they were."
         href="/work/healthwarehouse#architecture"
         linkLabel="See the architecture"
-        evidence={<DifferenceRouting />}
+        evidence={<BrandConfigDiagram />}
       />
-
-      <CurveDivider above="surface" below="gradient-page" />
 
       <ProofFeature
         onGradient
@@ -80,8 +78,6 @@ export default function HomePage() {
         linkLabel="Read the case study"
         evidence={<PortalShapingDiagram />}
       />
-
-      <CurveDivider above="gradient-page" below="surface" />
 
       <ProofFeature
         employer="healthwarehouse"
@@ -106,7 +102,7 @@ export default function HomePage() {
         </div>
       </NarrativeSection>
 
-      <AiBanner />
+      <AIWorkflowNote />
 
       <CurveDivider above="surface" below="primary" />
     </>

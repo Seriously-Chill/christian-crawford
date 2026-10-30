@@ -8,27 +8,19 @@ import { Button } from "@/components/ui/Button";
 export function CurrentInterests() {
   return (
     <NarrativeSection
-      title="I’m interested in what’s next."
+      title="What I’m exploring now."
       body={
         <>
           <p>
-            AI is changing how software gets built. I’m most interested in what that means for
-            architecture, testing, and the people working in large codebases.
-          </p>
-          <p>
-            As code gets easier to generate, shared context matters more. Repository guidance
-            and decision records help people and AI tools make consistent changes.
-          </p>
-          <p>
-            A change can look right and still break something, so AI-generated code needs tests
-            that catch what review misses. And the workflow around it should keep every change
-            easy to review, whoever or whatever wrote it.
+            I’m experimenting with AI coding tools and paying attention to how they change the work
+            around code: setting shared context, reviewing decisions, and checking the result. I’ve
+            added a small example here in this site’s own repo.
           </p>
         </>
       }
     >
       <Button href="/ai" variant="bordered">
-        See how I work with AI
+        See the example
       </Button>
     </NarrativeSection>
   );

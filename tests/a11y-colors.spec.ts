@@ -8,15 +8,15 @@ import { ROUTES } from "./routes";
 // catches any band that dips under contrast — plus the aqua preset (197) and
 // the fixed stops past the wheel. Stop positions mirror the component's
 // HUE_END/STOP_WIDTH layout: gray 360–399, white 400–439, black 440–479,
-// spruce 480–519.
+// clay 480–519.
 const HUES = Array.from({ length: 24 }, (_, i) => i * 15);
 const POSITIONS: { name: string; value: number }[] = [
   ...HUES.map((h) => ({ name: `hue ${h}`, value: h })),
-  { name: "aqua (hue 197)", value: 197 },
+  { name: "aqua (default)", value: 197 },
   { name: "gray", value: 380 },
   { name: "white", value: 420 },
   { name: "black", value: 460 },
-  { name: "spruce (default)", value: 500 },
+  { name: "clay", value: 500 },
 ];
 
 // The picker applies its colors at hydration. Under reduced motion every

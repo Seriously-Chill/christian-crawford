@@ -14,12 +14,12 @@ The shared building blocks, grouped by folder under `src/components/`. Use these
 
 ## UI (`ui/`)
 
-- **`Button`**: the only button shape, a pill with the `label` text style.
-  - **Variants:** `primary` (surface fill, accent label) on a gradient or other colored ground, never a white section, where it has no visible edge; `bordered` on white; `bordered-inverse` on a gradient; `on-accent` on an `accent` fill (the AI banner), where primary's accent hover would vanish into the ground, so it inverts to a surface outline instead.
+- **`Button`**: a compact, softly rounded rectangle with the `label` text style. Pill shapes are reserved for tags and compact status details.
+  - **Variants:** `primary` (surface fill, accent label) on a gradient or other colored ground, never a white section, where it has no visible edge; `bordered` on white; `bordered-inverse` on a gradient; `on-accent` on an `accent` fill, where primary's accent hover would vanish into the ground, so it inverts to a surface outline instead.
   - **Always a link:** every button on the site navigates. `external` opens it in a new tab through `ExternalLink`.
-- **`Pill`**: the one label pill (a tag, a step, a file name), never a control. `tone` is `default`, `on-gradient` or `on-accent`; `filled` adds a `surface` fill and `compact` narrows the padding. `mono` sets it in the system monospace, only for a real identifier (a file path, an ARIA role, a config key), never as decoration. Tags, StepChain, the AI banner and every diagram pill use it.
+- **`Pill`**: the one label pill (a tag, a step, a file name), never a control. `tone` is `default`, `on-gradient` or `on-accent`; `filled` adds a `surface` fill and `compact` narrows the padding. `mono` sets it in the system monospace, only for a real identifier (a file path, an ARIA role, a config key), never as decoration. Tags, StepChain and diagram pills use it.
 - **`ExternalLink`**: a link to another site, opened in a new tab. It adds a visually hidden "(opens in a new tab)" after the visible text, so the accessible name still starts with what's on screen. Use it for every new-tab link.
-- **`ColorPicker`**: the theme control in the header, a `<details>` popover framed as evidence ("One system, several expressions": the site reads its colors from one config, like the pharmacy platform's brands), with a hue slider and five swatches (Spruce, Aqua, Gray, White, Black). It rewrites the color custom properties and stores the choice in `localStorage` (`cc-hue`). The slider reports its value as "Hue N°", and the swatches are toggle buttons.
+- **`ColorPicker`**: the theme control in the header, a `<details>` popover framed as evidence ("One system, several expressions": the site reads its colors from one config, like the pharmacy platform's brands), with a hue slider and five swatches (Aqua, Clay, Gray, White, Black). It rewrites the color custom properties and stores the choice in `localStorage` (`cc-hue`). The slider reports its value as "Hue N°", and the swatches are toggle buttons.
 - **`EvidenceCard`**: a card with a title (`h4`) and body. Use `onGradient` on colored sections: that variant uses `glass` and gets the hover ripple. The default variant is `surface-raised` with no border, for white sections.
 - **`EvidenceGrid`**: a row of `EvidenceCard`s from `{ title, body }` items. Three sit three across; two or four sit two across.
 - **`FeaturePanel`**: a large `surface-raised` panel with two columns from `md` up, used to lift one idea above the text around it.
@@ -42,7 +42,7 @@ Page sections, each owning its own background and padding:
 - **`NarrativeSection`**: an h2, optional body, and a slot for diagrams, cards or a call to action. White by default; `onGradient` puts it on the page gradient. Every part of both case studies, most of `/ai`, and the teasers on Home and `/about` are built with it. Reach for it before writing a new section.
 - **`Contact`**: the contact page, with its h1 and the Email, LinkedIn, Résumé and location tiles.
 - **Page-specific sections:**
-  - Home: `ProofFeature` (statement → figure → explanation beside the result → case study link) and `AiBanner`
+  - Home: `ProofFeature` (statement → figure → explanation beside the result → case study link) and `AIWorkflowNote`
   - `/work`: `ProjectRows`
   - `/about`: `CareerProgression` (each era with the habit it carried forward; its `eras` also feed Home's `CareerArc`), `DesignBackground` and `CurrentInterests`
   - `/ai`: `GovernanceOverview`
@@ -56,7 +56,7 @@ These are covered in `motion.md`:
 
 ## Visuals (`visuals/`)
 
-- **`CurveDivider`**: the shallow curve where two section tones meet. Set `above` and `below` to the two tones (`surface`, `primary`, `gradient-page` or `gradient-header`).
+- **`CurveDivider`**: the shallow curve reserved for page openings and closings. Set `above` and `below` to the two tones (`surface`, `primary`, `gradient-page` or `gradient-header`).
 - **`DiagramBox`**: the bordered box every HTML diagram is built from. `tone` is `frame` (a container), `item` (a step or node) or `highlight` (the step the diagram leads to, in `accent`); `raised`, `compact` and `small` cover the variations. Build new diagram boxes with it, not with inline borders. Drawings of a screen are the exception.
 - **`FigureCaption`**: the caption under every diagram and evidence figure, one style for all of them.
 - **`FlowArrow`**: the down arrow between steps in the HTML diagrams. Pass `className` to place or rotate it.

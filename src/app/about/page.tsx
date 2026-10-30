@@ -18,13 +18,11 @@ export default function AboutPage() {
         breadcrumb="About"
         kicker="How this happened"
         title="A career shaped by changing perspectives."
-        tagline="Designer, then developer, then consultant and architect. The job stayed the same: take the tangled thing and make it simple, without losing what makes it work."
+        tagline="I started out building websites, moved through multimedia, product development, and consulting, and eventually found myself working on frontend architecture. I still enjoy the moment a team turns a fuzzy problem into something people can use."
       />
       <CurveDivider above="gradient-page" below="surface" />
       <CareerProgression />
-      <CurveDivider above="surface" below="gradient-page" />
       <DesignBackground />
-      <CurveDivider above="gradient-page" below="surface" />
       <CurrentInterests />
       <CurveDivider above="surface" below="primary" />
     </>

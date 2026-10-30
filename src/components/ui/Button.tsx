@@ -3,13 +3,13 @@ import type { ReactNode } from "react";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 
 /**
- * The site's one button shape is a pill. Don't add a square or radius-lg
- * variant.
+ * Buttons use a modest corner radius; pill shapes are reserved for tags and
+ * compact status details.
  *
  *  - primary: surface fill, accent label; hover inverts
  *  - bordered: for a light ground
  *  - bordered-inverse: for a gradient or other colored ground
- *  - on-accent: primary's look on an `accent` fill (the AI banner).
+ *  - on-accent: primary's look on an `accent` fill.
  *    Primary's hover fill is `accent` itself, so there the pill would
  *    vanish into the ground; this one inverts to a surface outline
  *    instead, keeping its shape like every other button's hover.
@@ -20,7 +20,7 @@ import { ExternalLink } from "@/components/ui/ExternalLink";
 type Variant = "primary" | "bordered" | "bordered-inverse" | "on-accent";
 
 const base =
-  "inline-flex items-center justify-center rounded-pill px-[23px] py-[11px] text-label transition-colors duration-hover";
+  "inline-flex items-center justify-center rounded-md px-5 py-2.5 text-label transition-colors duration-hover";
 
 const variants: Record<Variant, string> = {
   primary: "bg-surface text-accent border border-button-edge hover:bg-accent hover:text-surface",

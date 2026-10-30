@@ -5,12 +5,12 @@ import { EMAIL, LINKEDIN_URL, RESUME_PDF } from "@/lib/links";
 import { textH1, textH5 } from "@/lib/type";
 import { Section } from "@/components/layout/Section";
 
-const tile = "rounded-lg glass p-space-3 text-left";
-const linkTile = `${tile} block transition-colors duration-hover hover:glass-lit`;
+const row = "flex items-start gap-space-2 py-space-3 text-left";
+const linkRow = `${row} underline-offset-4 transition-colors duration-hover hover:underline`;
 
 /**
- * On the header's gradient. Each contact detail is its own glass tile; the
- * three reachable ones link straight through.
+ * On the header's gradient. Contact routes sit in an open list with rules,
+ * rather than four matching tiles; the three reachable ones link straight through.
  */
 export function Contact() {
   return (
@@ -25,42 +25,44 @@ export function Contact() {
       <p className="mt-space-3 max-w-xl text-body text-on-header-muted">
         Open to senior frontend and frontend architecture roles: remote, or hybrid in Cincinnati.
       </p>
-      <ul className="mt-space-5 grid gap-space-3 sm:grid-cols-2 lg:grid-cols-4">
-        <li>
-          <a href={`mailto:${EMAIL}`} className={linkTile}>
-            <span className={`flex items-center gap-space-1 text-on-header ${textH5}`}>
-              <LineIcon name="mail" />
-              Email
-            </span>
-            <span className="mt-space-1 block text-body text-on-header-muted wrap-break-word">
-              christian.crawford<wbr />@pm.me
+      <ul className="mt-space-5 grid border-t border-on-header-line sm:grid-cols-2 sm:gap-x-space-5">
+        <li className="border-b border-on-header-line">
+          <a href={`mailto:${EMAIL}`} className={linkRow}>
+            <LineIcon name="mail" />
+            <span>
+              <span className={`block text-on-header ${textH5}`}>Email</span>
+              <span className="mt-1 block text-body text-on-header-muted wrap-break-word">
+                christian.crawford<wbr />@pm.me
+              </span>
             </span>
           </a>
         </li>
-        <li>
-          <ExternalLink href={LINKEDIN_URL} className={linkTile}>
-            <span className={`flex items-center gap-space-1 text-on-header ${textH5}`}>
-              <LineIcon name="external" />
-              LinkedIn
+        <li className="border-b border-on-header-line">
+          <ExternalLink href={LINKEDIN_URL} className={linkRow}>
+            <LineIcon name="external" />
+            <span>
+              <span className={`block text-on-header ${textH5}`}>LinkedIn</span>
+              <span className="mt-1 block text-body text-on-header-muted">in/christiancrawford</span>
             </span>
-            <span className="mt-space-1 block text-body text-on-header-muted">in/christiancrawford</span>
           </ExternalLink>
         </li>
-        <li>
-          <a href={RESUME_PDF} className={linkTile}>
-            <span className={`flex items-center gap-space-1 text-on-header ${textH5}`}>
-              <LineIcon name="download" />
-              Résumé
+        <li className="border-b border-on-header-line">
+          <a href={RESUME_PDF} className={linkRow}>
+            <LineIcon name="download" />
+            <span>
+              <span className={`block text-on-header ${textH5}`}>Résumé</span>
+              <span className="mt-1 block text-body text-on-header-muted">Download the PDF</span>
             </span>
-            <span className="mt-space-1 block text-body text-on-header-muted">Download the PDF</span>
           </a>
         </li>
-        <li className={tile}>
-          <span className={`flex items-center gap-space-1 text-on-header ${textH5}`}>
+        <li className="border-b border-on-header-line">
+          <div className={row}>
             <LineIcon name="pin" />
-            Based in
-          </span>
-          <span className="mt-space-1 block text-body text-on-header-muted">Cincinnati, Ohio</span>
+            <span>
+              <span className={`block text-on-header ${textH5}`}>Based in</span>
+              <span className="mt-1 block text-body text-on-header-muted">Cincinnati, Ohio</span>
+            </span>
+          </div>
         </li>
       </ul>
     </Section>

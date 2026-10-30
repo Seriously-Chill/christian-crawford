@@ -52,7 +52,7 @@ export function Footer() {
               <li>
                 <a href={`mailto:${EMAIL}`} className={link}>
                   <LineIcon name="mail" />
-                  {EMAIL}
+                  <span className="min-w-0 wrap-anywhere">{EMAIL}</span>
                 </a>
               </li>
               <li>

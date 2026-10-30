@@ -16,7 +16,7 @@
  * its line breaks (`text-balance`) so no line is left with a lone word.
  */
 export const textDisplay =
-  "text-[30px] sm:text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] 2xl:text-[80px] leading-[1.05] tracking-[-0.012em] font-normal text-balance";
+  "text-[30px] sm:text-[36px] md:text-[42px] lg:text-[48px] xl:text-[52px] 2xl:text-[56px] leading-[1.08] tracking-[-0.012em] font-normal text-balance";
 
 /**
  * Inner-page titles (PageIntro, Contact): a step between display and h2, so

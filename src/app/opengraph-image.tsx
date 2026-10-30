@@ -8,9 +8,9 @@ import { DEFAULT_THEME } from "@/lib/theme";
  * Slack, or a message. Generated at build time from the site's own type and
  * default colours (the picker's first-paint hue, see globals.css), so it
  * stays in step with the design rather than being a separate asset: the
- * default spruce, with white text.
+ * default Aqua hue, with ink text.
  */
-export const alt = "Christian Crawford — I make complicated software simple.";
+export const alt = "Christian Crawford — I came to software through design. I still care how it feels to use.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -36,7 +36,7 @@ export default async function Image() {
       >
         <div style={{ fontSize: 36, letterSpacing: "-0.01em" }}>Christian Crawford</div>
         <div style={{ fontSize: 84, lineHeight: 1.05, letterSpacing: "-0.02em", maxWidth: 900 }}>
-          I make complicated software simple.
+          I came to software through design. I still care how it feels to use.
         </div>
         <div style={{ fontSize: 27 }}>
           Senior Frontend Engineer  ·  Frontend architecture  ·  React, Next.js, GraphQL

@@ -103,7 +103,7 @@ export function ProjectRows() {
                 </Button>
               </div>
             </div>
-            <RevealOnScroll className="rounded-xl bg-surface-raised p-space-3 sm:p-space-5">{project.panel}</RevealOnScroll>
+            <RevealOnScroll className="rounded-md bg-surface-raised p-space-3 sm:p-space-5">{project.panel}</RevealOnScroll>
           </div>
         ))}
       </div>

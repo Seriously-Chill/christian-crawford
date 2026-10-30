@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, type CSSProperties, type KeyboardEvent } from "react";
-import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 
 const STORAGE_KEY = "cc-hue";
 // The blue-leaning aqua preset.
 const AQUA_HUE = 197;
 const HUE_OFFSET = 211.68 - 194.37; // gap between the primary and secondary hues
 const SAT_PRIMARY = 69.7;
-const SAT_SECONDARY = 73.96;
+const SAT_SECONDARY = 74;
 // Hues are light grounds with ink text (like the white stop), so lightness
 // is solved per hue for a target relative luminance rather than clamped
 // under white text's ceiling — equal luminance reads as equally light
@@ -24,29 +24,28 @@ const Y_SECONDARY = 0.52;
 const Y_ACCENT = 0.09;
 
 // Stored positions 0–359 are hues; past the wheel, fixed stops, each a
-// 40-wide zone (gray 360–399, white 400–439, black 440–479, spruce
+// 40-wide zone (gray 360–399, white 400–439, black 440–479, clay
 // 480–519). The slider only covers hues (the stops are swatch buttons), but
 // the encoding keeps them so saved choices and tests keep working.
 const HUE_END = 360;
 const STOP_WIDTH = 40;
-const STOPS = ["gray", "white", "black", "spruce"] as const;
+const STOPS = ["gray", "white", "black", "clay"] as const;
 type Stop = (typeof STOPS)[number];
 const SLIDER_MAX = HUE_END + STOPS.length * STOP_WIDTH - 1;
 const stopPosition = (stop: Stop) => HUE_END + STOPS.indexOf(stop) * STOP_WIDTH + STOP_WIDTH / 2;
-// The site's default look: spruce, the signature color. globals.css's
-// first-paint fallbacks match it, so a first visit paints spruce with no
-// flash.
-const DEFAULT_POSITION = stopPosition("spruce");
+// The site's default look is the Aqua hue. globals.css's first-paint
+// fallbacks match it, so a first visit paints Aqua with no flash.
+const DEFAULT_POSITION = AQUA_HUE;
 
-// Fixed tokens per stop. Gray, black and spruce are the dark grounds, so
+// Fixed tokens per stop. Gray, black and clay are the dark grounds, so
 // they flip on-header to white and shade the picker panel with black
 // instead of white. Gray's lighter end (46.27%, which renders as #767676)
 // is the lightest gray that keeps white at ≥4.5:1 after 8-bit rounding,
 // which leaves it no headroom, so its transition name stays fully opaque.
 // White sets accent to ink, since primary itself is white there, and gives
-// the white primary button an ink edge so it doesn't vanish. Spruce is the
+// the white primary button an ink edge so it doesn't vanish. Clay is the
 // only stop with a hue of its own (`h`), and the only one whose accent is
-// lighter than its primary (`lAccent`): a deep teal that still reads as a
+// lighter than its primary (`lAccent`): a warm rust that still reads as a
 // color, not as ink, on white.
 const INK = "#1b1b1d";
 const STOP_TOKENS: Record<
@@ -63,12 +62,12 @@ const STOP_TOKENS: Record<
     fadeAlpha?: string;
   }
 > = {
-  spruce: {
-    h: [DEFAULT_THEME.primaryHue, DEFAULT_THEME.secondaryHue],
-    s: [DEFAULT_THEME.primarySaturation, DEFAULT_THEME.secondarySaturation],
-    l: [DEFAULT_THEME.primaryLightness, DEFAULT_THEME.secondaryLightness],
-    lAccent: DEFAULT_THEME.accentLightness,
-    onHeader: DEFAULT_THEME.onHeader,
+  clay: {
+    h: [14, 355],
+    s: [38, 34],
+    l: [19, 27],
+    lAccent: 30,
+    onHeader: "#ffffff",
     panelShade: "#000000",
     fadeAlpha: "100%",
   },
@@ -179,18 +178,18 @@ const SWATCHES: {
   background: string;
 }[] = [
   {
-    id: "spruce",
-    label: "Spruce",
-    position: stopPosition("spruce"),
-    background: stopGradient("spruce"),
-  },
-  {
     id: "aqua",
     label: "Aqua",
     position: AQUA_HUE,
     background: hueGradient(AQUA_HUE),
   },
-  ...STOPS.filter((stop) => stop !== "spruce").map((stop) => ({
+  {
+    id: "clay",
+    label: "Clay",
+    position: stopPosition("clay"),
+    background: stopGradient("clay"),
+  },
+  ...STOPS.filter((stop) => stop !== "clay").map((stop) => ({
     id: stop,
     label: stopLabel(stop),
     position: stopPosition(stop),
@@ -199,9 +198,8 @@ const SWATCHES: {
 ];
 
 // The custom properties a position sets on <html>; `null` means "remove, fall
-// back to globals.css". The fallbacks there are the spruce default's, so
-// anything spruce differs on (hues' ink text, white panel shade, faded
-// transition name) is set explicitly rather than left to fall back. Also
+// back to globals.css". The fallbacks there match the Aqua default. The
+// theme's ink text, white panel shade, and faded transition name are also
 // persisted as-is (see `THEME_STORAGE_KEY`) so the
 // pre-paint script in layout.tsx can restore them without this math.
 function themeVars(position: number): Record<string, string | null> {
@@ -277,7 +275,7 @@ function describePosition(position: number) {
  * colors from config. The hue slider rotates
  * `--color-primary`/`--color-secondary` together, solving lightness per hue
  * (see `Y_PRIMARY`) so every hue is equally light and ink text keeps 4.5:1.
- * A swatch row covers spruce (the default), aqua and the gray/white/black
+ * A swatch row covers Aqua (the default), Clay and the gray/white/black
  * stops as presets. Built on native `<details>/<summary>` for keyboard and
  * screen-reader disclosure semantics.
  */
@@ -391,7 +389,7 @@ export function ColorPicker() {
             Color
           </label>
           <span ref={nameRef} className="text-sm text-on-header-muted" aria-live="polite">
-            Spruce
+            Aqua
           </span>
         </div>
         <input
